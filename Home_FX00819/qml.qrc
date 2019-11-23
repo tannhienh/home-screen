@@ -1,0 +1,23 @@
+<RCC>
+    <qresource prefix="/">
+        <file>Qml/main.qml</file>
+        <file>Qml/StatusBar.qml</file>
+        <file>Qml/Common/Button.qml</file>
+        <file>Qml/MainArea.qml</file>
+        <file>Apps/MusicPlayer/qml/AppHeader.qml</file>
+        <file>Apps/MusicPlayer/qml/ButtonControl.qml</file>
+        <file>Apps/MusicPlayer/qml/MediaInfoControl.qml</file>
+        <file>Apps/MusicPlayer/qml/MusicPlayer.qml</file>
+        <file>Apps/MusicPlayer/qml/PlaylistView.qml</file>
+        <file>Apps/MusicPlayer/qml/SwitchButton.qml</file>
+        <file>Qml/MapWidget.qml</file>
+        <file>Qml/ClimateWidget.qml</file>
+        <file>Qml/MusicWidget.qml</file>
+        <file>Qml/WidgetHighlight.qml</file>
+        <file>Apps/Phone/Phone.qml</file>
+        <file>Apps/Radio/Radio.qml</file>
+        <file>Apps/Settings/Settings.qml</file>
+        <file>Apps/Videos/Videos.qml</file>
+        <file>Apps/Map/Map.qml</file>
+    </qresource>
+</RCC>

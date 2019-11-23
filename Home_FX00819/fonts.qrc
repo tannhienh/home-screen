@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>Font/Cantarell-Regular.ttf</file>
+        <file>Font/FiraSans-Regular.ttf</file>
+        <file>Font/Helvetica-Neue-Regular.ttf</file>
+        <file>Font/Ubuntu-Regular.ttf</file>
+    </qresource>
+</RCC>
