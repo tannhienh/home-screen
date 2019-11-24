@@ -190,7 +190,12 @@ Item {
 
             Text {
                 id: driverTemp
-                text: climateModel.driver_temp + "\xB0C"
+                text: if (climateModel.driver_temp == 16.5)
+                          return "LOW"
+                      else if (climateModel.driver_temp == 31.5)
+                          return "HIGH"
+                      else
+                          return (climateModel.driver_temp + "\xB0C")
                 color: "White"
                 font.pixelSize: 55
                 font.family: ubuntu.name
@@ -217,7 +222,13 @@ Item {
 
             Text {
                 id: passengerTemp
-                text: climateModel.passenger_temp + "\xB0C"
+                text: if (climateModel.passenger_temp == 16.5)
+                          return "LOW"
+                      else if (climateModel.passenger_temp == 31.5)
+                          return "HIGH"
+                      else
+                          return (climateModel.passenger_temp + "\xB0C")
+
                 color: "White"
                 font.pixelSize: 55
                 font.family: ubuntu.name

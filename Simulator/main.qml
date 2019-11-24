@@ -102,7 +102,7 @@ ApplicationWindow {
     SpinBox {
         id: driverTemper
         from: 165
-        to: 310
+        to: 315
         stepSize: 5
         anchors {
             top: driverWindFoot.bottom
@@ -237,7 +237,7 @@ ApplicationWindow {
     SpinBox {
         id: passengerTemper
         from: 165
-        to: 310
+        to: 315
         stepSize: 5
         anchors {
             top: passengerWindFoot.bottom
