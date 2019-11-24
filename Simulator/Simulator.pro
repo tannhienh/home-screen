@@ -1,4 +1,4 @@
-QT += quick dbus
+QT += quick dbus xml
 
 CONFIG += c++11
 

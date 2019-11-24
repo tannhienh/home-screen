@@ -19,6 +19,8 @@ public slots:
 
     double get_driver_temp();
 
+    int get_fan_level();
+
     int get_passenger_wind_face();
 
     int get_passenger_wind_foot();
@@ -34,6 +36,7 @@ public slots:
     void set_data(int driver_wind_face,
                   int driver_wind_foot,
                   double driver_temp,
+                  int fan_level,
                   int passenger_wind_face,
                   int passenger_wind_foot,
                   double passenger_temp,
@@ -45,12 +48,15 @@ private:
     int m_driver_wind_face;
     int m_driver_wind_foot;
     double m_driver_temp;
+    int m_fan_level;
     int m_passenger_wind_face;
     int m_passenger_wind_foot;
     double m_passenger_temp;
     bool m_auto_mode;
     bool m_sync_mode;
     double m_outside_temp;
+
+    ClimateAdaptor *m_climateAdaptor;
 
 signals:
     void dataChanged();

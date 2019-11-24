@@ -12,6 +12,9 @@
     <method name="get_driver_temp">
       <arg type="d" direction="out"/>
     </method>
+    <method name="get_fan_level">
+      <arg type="i" direction="out"/>
+    </method>
     <method name="get_passenger_wind_face">
       <arg type="i" direction="out"/>
     </method>
@@ -34,6 +37,7 @@
       <arg name="driver_wind_face" type="i" direction="in"/>
       <arg name="driver_wind_foot" type="i" direction="in"/>
       <arg name="driver_temp" type="d" direction="in"/>
+      <arg name="fan_level" type="i" direction="in"/>
       <arg name="passenger_wind_face" type="i" direction="in"/>
       <arg name="passenger_wind_foot" type="i" direction="in"/>
       <arg name="passenger_temp" type="d" direction="in"/>

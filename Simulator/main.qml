@@ -8,6 +8,19 @@ ApplicationWindow {
     height: 600
     title: qsTr("Simulator - Home Screen")
 
+    function saveData() {
+        climate.set_data(driverWindFace.currentIndex,
+                         driverWindFoot.currentIndex,
+                         driverTemper.realValue,
+                         fanLevel.value,
+                         passengerWindFace.currentIndex,
+                         passengerWindFoot.currentIndex,
+                         passengerTemper.realValue,
+                         autoMode.position,
+                         syncMode.position,
+                         outsideValueText.outsideTemp)
+    }
+
     ListModel {
         id: windModeModel
         ListElement { key: "Off"; value: 0 }
@@ -42,6 +55,8 @@ ApplicationWindow {
             left: parent.left
             leftMargin: parent.width / 2
         }
+
+        onCurrentIndexChanged: saveData()
     }
     //------------------------------------------------------------------------//
 
@@ -66,6 +81,8 @@ ApplicationWindow {
             left: parent.left
             leftMargin: parent.width / 2
         }
+
+        onCurrentIndexChanged: saveData()
     }
     //------------------------------------------------------------------------//
 
@@ -108,6 +125,8 @@ ApplicationWindow {
         valueFromText: function(text, locale) {
             return Number.fromLocaleString(locale, text)
         }
+
+        onRealValueChanged: saveData()
     }
     //------------------------------------------------------------------------//
 
@@ -144,6 +163,8 @@ ApplicationWindow {
             left: parent.left
             leftMargin: parent.width / 2
         }
+
+        onValueChanged: saveData()
     }
 
     //------------------------------------------------------------------------//
@@ -169,6 +190,8 @@ ApplicationWindow {
             left: parent.left
             leftMargin: parent.width / 2
         }
+
+        onCurrentIndexChanged: saveData()
     }
     //------------------------------------------------------------------------//
 
@@ -193,6 +216,8 @@ ApplicationWindow {
             left: parent.left
             leftMargin: parent.width / 2
         }
+
+        onCurrentIndexChanged: saveData()
     }
     //------------------------------------------------------------------------//
 
@@ -235,6 +260,8 @@ ApplicationWindow {
         valueFromText: function(text, locale) {
             return Number.fromLocaleString(locale, text)
         }
+
+        onRealValueChanged: saveData()
     }
     //------------------------------------------------------------------------//
 
@@ -258,6 +285,10 @@ ApplicationWindow {
             leftMargin: parent.width / 2
         }
         text: position == 1.0 ? "ON" : "OFF"
+
+        onPositionChanged: {saveData()
+            console.log("autoMode: " + autoMode.position)
+        }
     }
 
     //------------------------------------------------------------------------//
@@ -282,6 +313,10 @@ ApplicationWindow {
             leftMargin: parent.width / 2
         }
         text: position == 1.0 ? "ON" : "OFF"
+
+        onPositionChanged: {saveData()
+            console.log("syncMode: " + syncMode.position)
+        }
     }
     //------------------------------------------------------------------------//
 
@@ -298,7 +333,10 @@ ApplicationWindow {
 
     Text {
         id: outsideValueText
-        text: (Math.random() * 50).toFixed(1)
+
+        property double outsideTemp: (Math.random() * 50).toFixed(1)
+
+        text: outsideTemp
 
         anchors {
             top: syncMode.bottom
@@ -306,6 +344,8 @@ ApplicationWindow {
             left: parent.left
             leftMargin: parent.width / 2
         }
+
+        onTextChanged: saveData()
     }
     //------------------------------------------------------------------------//
 }
