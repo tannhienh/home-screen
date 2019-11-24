@@ -30,7 +30,7 @@ Item {
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
-        height: 125 // parent.height * 0.13
+        height: 125 // parent.height * 0.13 = 129.35
 
         onClickedPlaylistButton: {
             if (playlistStatus) {
@@ -41,40 +41,12 @@ Item {
         }
     }
 
-    // Playlist View
-//    Item {
-//        width: playerItem.width * 0.35
-////        height: playlistView.height
-//        anchors {
-//            top: header.bottom
-//            left: playerItem.left
-//            bottom: playerItem.bottom
-//        }
-
-        PlaylistView {
-            id: playlistView
-            topMargin: 85 + header.height // 85 + 125 = 210
-            width: 672 // playerItem.width * 0.35 = 672
-//            height: playerItem.height - header.height
-
-//            x: header.x
-//            transform: Translate {
-//                x: header.x
-//            }
-//            transform: Translate {
-//                x: (1.0 - this.position)
-//            }
-
-//            exit: Transition {
-//                NumberAnimation {
-//                    property: "position"
-//                    from: 1
-//                    to: 0
-//                    duration: 2000
-//                }
-//            }
-        }
-//    }
+    PlaylistView {
+        id: playlistView
+        topMargin: 85 + header.height // 85 + 125 = 210
+        width: 672 // playerItem.width * 0.35 = 672
+        height: playerItem.height - header.height // 995 - 125 = 870
+    }
 
     // Main Media
     // width: 1920

@@ -4,67 +4,308 @@ import QtQuick.Controls 2.13
 ApplicationWindow {
     id: rootWindow
     visible: true
-    width: 800
-    height: 800
+    width: 450
+    height: 600
     title: qsTr("Simulator - Home Screen")
 
-    color: "LightGray"
+    ListModel {
+        id: windModeModel
+        ListElement { key: "Off"; value: 0 }
+        ListElement { key: "Cold"; value: 1 }
+        ListElement { key: "Warm"; value: 2 }
+    }
 
-    Item {
-        id: climateArea
+    ListModel {
+        id: autoSyncModeModel
+        ListElement { key: "ON"; value: 0 }
+        ListElement { key: "OFF"; value: 1 }
+    }
+
+    //------------------------------------------------------------------------//
+    Text {
+        id: driverFaceText
+        text: "Driver Wind On Face"
+        anchors {
+            left: parent.left
+            leftMargin: 20
+            verticalCenter: driverWindFace.verticalCenter
+        }
+    }
+
+    ComboBox {
+        id: driverWindFace
+        textRole: "key"
+        model: windModeModel
         anchors {
             top: parent.top
             topMargin: 10
             left: parent.left
-            leftMargin: 10
-            right: parent.right
-            rightMargin: 10
+            leftMargin: parent.width / 2
         }
-        height: (rootWindow.height / 2) - 20
+    }
+    //------------------------------------------------------------------------//
 
-        Rectangle {
-            color: "White"
-            anchors.fill: parent
-        }
-
-        Column {
-            spacing: 20
-            anchors.centerIn: parent
-            Row {
-                id: tempDriverItem
-                Text {
-                    id: tempDriverText
-                    text: "Temperature Driver: "
-                    anchors.verticalCenter: tempDriverSpinBox.verticalCenter
-                }
-
-                SpinBox {
-                    id: tempDriverSpinBox
-                    anchors.leftMargin:
-                }
-            }
-
-            Item {
-                id: tempPassengerItem
-            }
+    //------------------------------------------------------------------------//
+    Text {
+        id: driverFootText
+        text: "Driver Wind On Foot"
+        anchors {
+            left: parent.left
+            leftMargin: 20
+            verticalCenter: driverWindFoot.verticalCenter
         }
     }
 
-    Item {
-        id: controlArea
+    ComboBox {
+        id: driverWindFoot
+        textRole: "key"
+        model: windModeModel
         anchors {
-            top: climateArea.bottom
+            top: driverWindFace.bottom
             topMargin: 10
             left: parent.left
-            leftMargin: 10
-            right: parent.right
-            rightMargin: 10
-        }
-        height: (rootWindow.height / 2) - 10
-
-        Rectangle {
-            color: "White"
-            anchors.fill: parent
+            leftMargin: parent.width / 2
         }
     }
+    //------------------------------------------------------------------------//
+
+    //------------------------------------------------------------------------//
+    Text {
+        id: driverTemperText
+        text: "Temperature driver"
+        anchors {
+            left: parent.left
+            leftMargin: 20
+            verticalCenter: driverTemper.verticalCenter
+        }
+    }
+
+    SpinBox {
+        id: driverTemper
+        from: 165
+        to: 310
+        stepSize: 5
+        anchors {
+            top: driverWindFoot.bottom
+            topMargin: 10
+            left: parent.left
+            leftMargin: parent.width / 2
+        }
+
+        property int decimals: 1
+        property real realValue: value / 10
+
+        validator: DoubleValidator {
+            bottom: Math.min(driverTemper.from, driverTemper.to)
+            top:  Math.max(driverTemper.from, driverTemper.to)
+        }
+
+        textFromValue: function(value, locale) {
+            return Number(value / 10).toLocaleString(locale, 'f',
+                                                     driverTemper.decimals)
+        }
+
+        valueFromText: function(text, locale) {
+            return Number.fromLocaleString(locale, text)
+        }
+    }
+    //------------------------------------------------------------------------//
+
+    //------------------------------------------------------------------------//
+    Text {
+        id: fanText
+        text: "Fan: "
+        anchors {
+            left: parent.left
+            leftMargin: 20
+            verticalCenter: fanLevel.verticalCenter
+        }
+    }
+
+    Text {
+        id: fanValueText
+        text: fanLevel.value
+        anchors {
+            left: fanText.right
+            leftMargin: 20
+            verticalCenter: fanLevel.verticalCenter
+        }
+    }
+
+    Slider {
+        id: fanLevel
+        from: 0
+        to: 10
+        stepSize: 1
+        value: 0
+        anchors {
+            top: driverTemper.bottom
+            topMargin: 20
+            left: parent.left
+            leftMargin: parent.width / 2
+        }
+    }
+
+    //------------------------------------------------------------------------//
+
+    //------------------------------------------------------------------------//
+    Text {
+        id: passengerFaceText
+        text: "Passenger Wind On Face"
+        anchors {
+            left: parent.left
+            leftMargin: 20
+            verticalCenter: passengerWindFace.verticalCenter
+        }
+    }
+
+    ComboBox {
+        id: passengerWindFace
+        textRole: "key"
+        model: windModeModel
+        anchors {
+            top: fanLevel.bottom
+            topMargin: 20
+            left: parent.left
+            leftMargin: parent.width / 2
+        }
+    }
+    //------------------------------------------------------------------------//
+
+    //------------------------------------------------------------------------//
+    Text {
+        id: passengerFootText
+        text: "Passenger Wind On Foot"
+        anchors {
+            left: parent.left
+            leftMargin: 20
+            verticalCenter: passengerWindFoot.verticalCenter
+        }
+    }
+
+    ComboBox {
+        id: passengerWindFoot
+        textRole: "key"
+        model: windModeModel
+        anchors {
+            top: passengerWindFace.bottom
+            topMargin: 10
+            left: parent.left
+            leftMargin: parent.width / 2
+        }
+    }
+    //------------------------------------------------------------------------//
+
+    //------------------------------------------------------------------------//
+    Text {
+        id: passengerTemperText
+        text: "Temperature driver"
+        anchors {
+            left: parent.left
+            leftMargin: 20
+            verticalCenter: passengerTemper.verticalCenter
+        }
+    }
+
+    SpinBox {
+        id: passengerTemper
+        from: 165
+        to: 310
+        stepSize: 5
+        anchors {
+            top: passengerWindFoot.bottom
+            topMargin: 10
+            left: parent.left
+            leftMargin: parent.width / 2
+        }
+
+        property int decimals: 1
+        property real realValue: value / 10
+
+        validator: DoubleValidator {
+            bottom: Math.min(passengerTemper.from, passengerTemper.to)
+            top:  Math.max(passengerTemper.from, passengerTemper.to)
+        }
+
+        textFromValue: function(value, locale) {
+            return Number(value / 10).toLocaleString(locale, 'f',
+                                                     passengerTemper.decimals)
+        }
+
+        valueFromText: function(text, locale) {
+            return Number.fromLocaleString(locale, text)
+        }
+    }
+    //------------------------------------------------------------------------//
+
+    //------------------------------------------------------------------------//
+    Text {
+        id: autoModeText
+        text: "Auto Mode"
+        anchors {
+            left: parent.left
+            leftMargin: 20
+            verticalCenter: autoMode.verticalCenter
+        }
+    }
+
+    Switch {
+        id: autoMode
+        anchors {
+            top: passengerTemper.bottom
+            topMargin: 20
+            left: parent.left
+            leftMargin: parent.width / 2
+        }
+        text: position == 1.0 ? "ON" : "OFF"
+    }
+
+    //------------------------------------------------------------------------//
+
+    //------------------------------------------------------------------------//
+    Text {
+        id: syncModeText
+        text: "Sync Mode"
+        anchors {
+            left: parent.left
+            leftMargin: 20
+            verticalCenter: syncMode.verticalCenter
+        }
+    }
+
+    Switch {
+        id: syncMode
+        anchors {
+            top: autoMode.bottom
+            topMargin: 10
+            left: parent.left
+            leftMargin: parent.width / 2
+        }
+        text: position == 1.0 ? "ON" : "OFF"
+    }
+    //------------------------------------------------------------------------//
+
+    //------------------------------------------------------------------------//
+    Text {
+        id: outsideText
+        text: "OUTSIDE Temp (Random): "
+        anchors {
+            left: parent.left
+            leftMargin: 20
+            verticalCenter: outsideValueText.verticalCenter
+        }
+    }
+
+    Text {
+        id: outsideValueText
+        text: (Math.random() * 50).toFixed(1)
+
+        anchors {
+            top: syncMode.bottom
+            topMargin: 20
+            left: parent.left
+            leftMargin: parent.width / 2
+        }
+    }
+    //------------------------------------------------------------------------//
 }

@@ -37,7 +37,7 @@ Item {
         Text {
             id: title
             text: "USB Music"
-            color: "White"
+            color: "#FFFFFF"
             font.pixelSize: 30
             font.family: ubuntu.name
             anchors.centerIn: parent
@@ -72,7 +72,7 @@ Item {
               else
                   return ""
 
-        color: "White"
+        color: "#FFFFFF"
         font.pixelSize: 30
         font.family: cantarell.name
         anchors {
@@ -96,7 +96,7 @@ Item {
               else
                   return ""
 
-        color: "White"
+        color: "#FFFFFF"
         font.pixelSize: 40
         font.family: cantarell.name
         anchors {
@@ -123,7 +123,7 @@ Item {
         contentItem: Rectangle {
             width: progressBar.visualPosition * parent.width
             height: parent.height
-            color: "#7deef8"
+            color: "#7DEEF8"
             radius: 5
         }
 

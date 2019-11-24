@@ -6,6 +6,7 @@
 #include "Apps/MusicPlayer/cpp/playlistmodel.h"
 #include "Cpp/applicationsmodel.h"
 #include "Cpp/xmlreader.h"
+#include "Cpp/climatemodel.h"
 
 #define XML_APPLICATIONS_PATH_FILE "../Home_FX00819/Xml/applications.xml"
 
@@ -17,6 +18,7 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
 
+    //------------------------------------------------------------------------//
     // Applications model
     ApplicationsModel appsModel;
 
@@ -24,6 +26,13 @@ int main(int argc, char *argv[])
     XmlReader xmlReader(XML_APPLICATIONS_PATH_FILE, appsModel);
 
     engine.rootContext()->setContextProperty("appsModel", &appsModel);
+    //------------------------------------------------------------------------//
+
+    //------------------------------------------------------------------------//
+    // Applications model
+    ClimateModel climateModel;
+    engine.rootContext()->setContextProperty("climateModel", &climateModel);
+    //------------------------------------------------------------------------//
 
     //------------------------------------------------------------------------//
     // Media Player

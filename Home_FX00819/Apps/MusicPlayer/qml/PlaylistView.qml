@@ -19,10 +19,11 @@ Drawer {
         id: mediaPlaylist
         anchors.fill: parent
         model: playlistModel
-        spacing: playlistBg.height / 260
+        spacing: 6 // playlistBg.height / 260 = 3.34...
         currentIndex: playlist.currentIndex
         clip: true
         snapMode: ListView.SnapToItem
+
         delegate: MouseArea {
             id: mouseAreaItem
             width: playlistItem.width
@@ -49,22 +50,29 @@ Drawer {
             Image {
                 id: speakerImage
                 source: "qrc:/Apps/MusicPlayer/images/playing.png"
-                width: playlistItem.height * 0.2
-                height: width
+//                width: playlistItem.height * 0.2
+//                height: width
                 anchors.left: playlistItem.left
-                anchors.leftMargin: playlistItem.width / 50
+                anchors.leftMargin: 10 // playlistItem.width / 50  // 13.44
                 anchors.verticalCenter: playlistItem.verticalCenter
                 visible: checkPlaying()
+
+                Component.onCompleted:
+                    console.log("Test: " + playlistItem.width / 50)
             }
 
             Text {
                 id: nameSong
                 text: title == "" ? "Unknown" : title
-                color: "white"
-                font.pixelSize: playlistItem.height * 0.2
-                anchors.left: speakerImage.right
-                anchors.leftMargin: playlistItem.width / 50
-                anchors.verticalCenter: playlistItem.verticalCenter
+                color: "#FFFFFF"
+                font.pixelSize: playlistItem.height * 0.2   // 28
+                font.family: cantarell.name
+
+                anchors {
+                    left: speakerImage.right
+                    leftMargin: 10 //playlistItem.width / 50 // 13.44
+                    verticalCenter: playlistItem.verticalCenter
+                }
                 opacity: mouseAreaItem.ListView.isCurrentItem ? 1 : 0.5
             }
 
@@ -119,6 +127,7 @@ Drawer {
             anchors.top: mediaPlaylist.top
             anchors.left: mediaPlaylist.right
             anchors.bottom: mediaPlaylist.bottom
+            width: 10
         }
 
         Connections {

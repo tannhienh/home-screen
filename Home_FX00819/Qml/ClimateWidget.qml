@@ -150,7 +150,8 @@ Item {
             anchors.left: parent.left
 
             Text {
-                text: "25" + "\xB0C"
+                id: driverTemp
+                text: climateModel.driver_temp + "\xB0C"
                 color: "White"
                 font.pixelSize: 55
                 font.family: ubuntu.name
@@ -176,7 +177,8 @@ Item {
             anchors.right: parent.right
 
             Text {
-                text: "24.5" + "\xB0C"
+                id: passengerTemp
+                text: climateModel.passenger_temp + "\xB0C"
                 color: "White"
                 font.pixelSize: 55
                 font.family: ubuntu.name

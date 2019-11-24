@@ -41,12 +41,9 @@ Item {
                   else
                     return ""
 
-            color: "#ffffff"
+            color: "#FFFFFF"
             font.pixelSize: 33 // mediaInfo.height * 0.32 = 33.28
             font.family: cantarell.name
-
-            Component.onCompleted:
-                console.log("playerItem.width * 0.35: " + playerItem.height - header.height)
 
             anchors{
                 top: parent.top
@@ -65,7 +62,7 @@ Item {
                   else
                     return ""
 
-            color: "#d3d3d3"
+            color: "#D3D3D3"
             font.pixelSize: 28 // mediaInfo.height * 0.27
             font.family: cantarell.name
             anchors {
@@ -92,7 +89,7 @@ Item {
         Text {
             id: songAmount
             text: albumArtView.count
-            color: "#ffffff"
+            color: "#FFFFFF"
             font.pixelSize: 37 // mediaInfo.height * 0.35 = 36.4
             font.family: cantarell.name
             anchors {
@@ -113,11 +110,6 @@ Item {
             right: parent.right
             bottom: progressBarItem.top
         }
-
-//        Rectangle {
-//            anchors.fill: parent
-//            color: "LightBlue"
-//        }
 
         // Delegate for album art view
         Component {
@@ -227,16 +219,11 @@ Item {
             right: parent.right
         }
 
-//        Rectangle {
-//            anchors.fill: parent
-//            color: "LightYellow"
-//        }
-
         // Current time playing
         Text {
             id: currentTime
             text: utility.getTimeInfo(player.position)
-            color: "#ffffff"
+            color: "#FFFFFF"
             font.pixelSize: 17 // parent.height * 0.4 = 17
             font.family: cantarell.name
             anchors {
@@ -271,7 +258,7 @@ Item {
                 Rectangle {
                     width: progressBar.visualPosition * parent.width
                     height: parent.height
-                    color: "#ffffff"
+                    color: "#FFFFFF"
                     radius: 6
                 }
             }
@@ -305,7 +292,7 @@ Item {
             id: totalTime
             text: utility.getTimeInfo(player.duration)
             font.family: cantarell.name
-            color: "#ffffff"
+            color: "#FFFFFF"
             font.pixelSize: parent.height * 0.4
             anchors {
                 right: progressBarItem.right
@@ -325,11 +312,6 @@ Item {
             right: parent.right
             bottomMargin: 35 // parent.height / 25
         }
-
-//        Rectangle {
-//            anchors.fill: parent
-//            color: "LightBlue"
-//        }
 
         // Previous button
         ButtonControl {

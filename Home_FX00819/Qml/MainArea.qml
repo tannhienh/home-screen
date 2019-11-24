@@ -117,8 +117,8 @@ Item {
                 Item {
                     id: icon
                     property int visualIndex: 0
-                    width: appButton.width
-                    height: appButton.height
+                    width: appButton.implicitWidth
+                    height: appButton.implicitHeight
                     anchors {
                         horizontalCenter: parent.horizontalCenter;
                         verticalCenter: parent.verticalCenter
@@ -169,14 +169,18 @@ Item {
                 }
             }
         }
+        //--------------------------------------------------------------------//
         // End Component Delegate
+        //--------------------------------------------------------------------//
 
-        // Listview for apps menu
+        //--------------------------------------------------------------------//
+        // Start Listview for apps menu
+        //--------------------------------------------------------------------//
         ListView {
             id: menu
 
             orientation: ListView.Horizontal
-            interactive: false
+//            interactive: false
             clip: true
             snapMode: ListView.SnapToItem
             spacing: 22

@@ -30,7 +30,7 @@ Item {
     Button {
         id: editButton
         icon_src: "qrc:/Images/StatusBar/btn_edit"
-        visible: true
+        visible: false
         anchors {
             left: parent.left
             leftMargin: 22

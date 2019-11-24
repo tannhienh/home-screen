@@ -39,9 +39,4 @@
         <URL>qrc:/Apps/Radio/Radio.qml</URL>
         <ICON_PATH>qrc:/Images/Menu/btn_menu_radio</ICON_PATH>
     </APP>
-    <APP ID="006">
-        <TITLE>Settings</TITLE>
-        <URL>qrc:/Apps/Settings/Settings.qml</URL>
-        <ICON_PATH>qrc:/Images/Menu/btn_menu_settings</ICON_PATH>
-    </APP>
 </APPLICATIONS>
