@@ -15,6 +15,8 @@ class ClimateModel : public QObject
 
     Q_PROPERTY(double driver_temp READ GetDriverTemp NOTIFY dataChanged)
 
+    Q_PROPERTY(int fan_level READ GetFanLevel NOTIFY dataChanged)
+
     Q_PROPERTY(int passenger_wind_face READ GetPassengerWindFace NOTIFY dataChanged)
 
     Q_PROPERTY(int passenger_wind_foot READ GetPassengerWindFoot NOTIFY dataChanged)
@@ -36,6 +38,8 @@ private:
     int GetDriverWindFoot();
 
     double GetDriverTemp();
+
+    int GetFanLevel();
 
     int GetPassengerWindFace();
 

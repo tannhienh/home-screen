@@ -90,12 +90,18 @@ Item {
     }
 
     Image {
-        source: "qrc:/Images/Climate/widget_climate_wind_level_4.png"
+        id: fanLevel
+
+        // Get
+        property var path: "qrc:/Images/Climate/widget_climate_wind_level_"
+                           + climateModel.fan_level + ".png"
+        source: path
         anchors.centerIn: parent
     }
 
     Image {
         id: seatDriver
+
         source: "qrc:/Images/Climate/widget_climate_arrow_seat.png"
         x: 91
         y: 215
@@ -103,16 +109,32 @@ Item {
 
     Image {
         id: faceArrowDriver
-        source: "qrc:/Images/Climate/widget_climate_arrow_face_cold.png"
-        x: 60//52
+
+        property var path: "qrc:/Images/Climate/widget_climate_arrow_face_"
+
+        x: 60
         y: 238
+        source: if (climateModel.driver_wind_face == 0)
+                    return (path + "off.png")
+                else if (climateModel.driver_wind_face == 1)
+                    return (path + "cold.png")
+                else if (climateModel.driver_wind_face == 2)
+                    return (path + "warm.png")
     }
 
     Image {
         id: footArrowDriver
-        source: "qrc:/Images/Climate/widget_climate_arrow_foot_cold.png"
+
+        property var path: "qrc:/Images/Climate/widget_climate_arrow_foot_"
+
         x: 35 //28
         y: 250 //257
+        source: if (climateModel.driver_wind_foot == 0)
+                    return (path + "off.png")
+                else if (climateModel.driver_wind_foot == 1)
+                    return (path + "cold.png")
+                else if (climateModel.driver_wind_foot == 2)
+                    return (path + "warm.png")
     }
 
     Image {
@@ -124,16 +146,33 @@ Item {
 
     Image {
         id: faceArrowPassenger
-        source: "qrc:/Images/Climate/widget_climate_arrow_face_cold.png"
+
+        property var path: "qrc:/Images/Climate/widget_climate_arrow_face_"
+
         x: 458 //450
         y: 238
+
+        source: if (climateModel.passenger_wind_face == 0)
+                    return (path + "off.png")
+                else if (climateModel.passenger_wind_face == 1)
+                    return (path + "cold.png")
+                else if (climateModel.passenger_wind_face == 2)
+                    return (path + "warm.png")
     }
 
     Image {
         id: footArrowPassenger
-        source: "qrc:/Images/Climate/widget_climate_arrow_foot_cold.png"
+
+        property var path: "qrc:/Images/Climate/widget_climate_arrow_foot_"
+
         x: 433 // 426
         y: 250 // 257
+        source: if (climateModel.passenger_wind_foot == 0)
+                    return (path + "off.png")
+                else if (climateModel.passenger_wind_foot == 1)
+                    return (path + "cold.png")
+                else if (climateModel.passenger_wind_foot == 2)
+                    return (path + "warm.png")
     }
 
     Item {
@@ -201,7 +240,7 @@ Item {
 
             Text {
                 text: "AUTO"
-                color: "White"
+                color: climateModel.auto_mode === true ? "White" : "Gray"
                 font.pixelSize: 48
                 font.family: cantarell.name
                 anchors.centerIn: parent
@@ -225,7 +264,7 @@ Item {
                 }
 
                 Text {
-                    text: "27.5" + "\xB0C"
+                    text: climateModel.outside_temp + "\xB0C"
                     color: "White"
                     font.pixelSize: 38
                     font.family: ubuntu.name
@@ -241,7 +280,7 @@ Item {
 
             Text {
                 text: "SYNC"
-                color: "White"
+                color: climateModel.sync_mode === true ? "White" : "Gray"
                 font.pixelSize: 48
                 font.family: cantarell.name
                 anchors.centerIn: parent

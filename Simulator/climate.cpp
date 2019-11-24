@@ -82,5 +82,12 @@ void Climate::set_data(int driver_wind_face,
     m_sync_mode = sync_mode;
     m_outside_temp = outside_temp;
 
+    if (sync_mode) {
+        if (m_driver_temp < m_passenger_temp)
+            m_passenger_temp = m_driver_temp;
+        else
+            m_driver_temp = m_passenger_temp;
+    }
+
     emit m_climateAdaptor->dataChanged();
 }

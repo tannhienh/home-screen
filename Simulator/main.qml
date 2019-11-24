@@ -56,7 +56,9 @@ ApplicationWindow {
             leftMargin: parent.width / 2
         }
 
-        onCurrentIndexChanged: saveData()
+        onCurrentIndexChanged: {
+            saveData()
+        }
     }
     //------------------------------------------------------------------------//
 

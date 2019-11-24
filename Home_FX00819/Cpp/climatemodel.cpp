@@ -28,6 +28,11 @@ double ClimateModel::GetDriverTemp()
     return m_climate->get_driver_temp();
 }
 
+int ClimateModel::GetFanLevel()
+{
+    return m_climate->get_fan_level();
+}
+
 int ClimateModel::GetPassengerWindFace()
 {
     return m_climate->get_passenger_wind_face();
