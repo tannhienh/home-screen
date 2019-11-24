@@ -56,9 +56,6 @@ Drawer {
                 anchors.leftMargin: 10 // playlistItem.width / 50  // 13.44
                 anchors.verticalCenter: playlistItem.verticalCenter
                 visible: checkPlaying()
-
-                Component.onCompleted:
-                    console.log("Test: " + playlistItem.width / 50)
             }
 
             Text {
