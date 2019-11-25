@@ -1,10 +1,10 @@
 import QtQuick 2.13
 import QtQuick.Controls 2.13
-
-//import "../../../Qml/"
+import Qt.labs.settings 1.1
 
 Item {
     id: playerItem
+
     implicitHeight: 995 // 1080 - 85
 
     //-----------------------------------------------------------------------//
@@ -17,6 +17,11 @@ Item {
     }
     //-----------------------------------------------------------------------//
 
+    Settings {
+        id: settings
+        property alias playlistVisible: header.checker
+    }
+
     // Background of Application
     Image {
         id: bgImage
@@ -28,23 +33,24 @@ Item {
     // Header
     AppHeader {
         id: header
+
+        property bool checker: false
+
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
         height: 125 // parent.height * 0.13 = 129.35
+        statusPlaylistButton: settings.playlistVisible
 
         onClickedPlaylistButton: {
             if (playlistStatus) {
                 playlistView.open()
-
-            } else
+                checker = true
+            } else {
                 playlistView.close()
+                checker = false
+            }
         }
-    }
-
-    Connections {
-        target: statusBar
-        onBackButtonClicked: playlistView.close()
     }
 
     PlaylistView {
@@ -64,5 +70,15 @@ Item {
         anchors.bottom: parent.bottom
         anchors.leftMargin: 0
         width: parent.width - (playlistView.position * playlistView.width)
+    }
+
+    Connections {
+        target: statusBar
+        onBackButtonClicked: playlistView.close()
+    }
+
+    Component.onCompleted: {
+        if (settings.playlistVisible)
+                               playlistView.open()
     }
 }

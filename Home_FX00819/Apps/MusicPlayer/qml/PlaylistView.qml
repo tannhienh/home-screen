@@ -15,6 +15,8 @@ Drawer {
 
     }
 
+    enter: Transition { SmoothedAnimation { velocity: 2 } }
+
     exit: Transition { SmoothedAnimation { velocity: 2 } }
 
     ListView {

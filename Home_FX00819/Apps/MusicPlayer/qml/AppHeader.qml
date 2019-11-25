@@ -3,6 +3,8 @@ import QtQuick 2.13
 Image {
     id: headerImage
 
+    property alias statusPlaylistButton: playlistButton.status
+
     signal clickedPlaylistButton(bool playlistStatus)
 
     source: "qrc:/Apps/MusicPlayer/images/header.png"

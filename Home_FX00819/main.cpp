@@ -16,6 +16,9 @@ int main(int argc, char *argv[])
 
     QGuiApplication app(argc, argv);
 
+    app.setOrganizationName("Automotive - Funix");
+    app.setOrganizationDomain("tannhienh.github.com");
+
     QQmlApplicationEngine engine;
 
     //------------------------------------------------------------------------//
