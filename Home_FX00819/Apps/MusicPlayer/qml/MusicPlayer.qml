@@ -1,6 +1,7 @@
 import QtQuick 2.13
-import QtQuick.Window 2.13
 import QtQuick.Controls 2.13
+
+//import "../../../Qml/"
 
 Item {
     id: playerItem
@@ -41,6 +42,11 @@ Item {
         }
     }
 
+    Connections {
+        target: statusBar
+        onBackButtonClicked: playlistView.close()
+    }
+
     PlaylistView {
         id: playlistView
         topMargin: 85 + header.height // 85 + 125 = 210
@@ -57,6 +63,6 @@ Item {
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         anchors.leftMargin: 0
-        width: parent.width - playlistView.position * playlistView.width
+        width: parent.width - (playlistView.position * playlistView.width)
     }
 }

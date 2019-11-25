@@ -1,6 +1,8 @@
 import QtQuick 2.13
 import QtQuick.Controls 2.13
 
+import "../Apps/MusicPlayer/qml/"
+
 ApplicationWindow {
     id: root
 

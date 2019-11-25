@@ -15,6 +15,8 @@ Drawer {
 
     }
 
+    exit: Transition { SmoothedAnimation { velocity: 2 } }
+
     ListView {
         id: mediaPlaylist
         anchors.fill: parent
@@ -61,7 +63,7 @@ Drawer {
             Text {
                 id: nameSong
                 text: title == "" ? "Unknown" : title
-                color: "#FFFFFF"
+                color: "#FFFFFF"    // White
                 font.pixelSize: playlistItem.height * 0.2   // 28
                 font.family: cantarell.name
 

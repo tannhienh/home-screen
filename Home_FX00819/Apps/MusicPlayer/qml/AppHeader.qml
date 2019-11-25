@@ -2,7 +2,9 @@ import QtQuick 2.13
 
 Image {
     id: headerImage
+
     signal clickedPlaylistButton(bool playlistStatus)
+
     source: "qrc:/Apps/MusicPlayer/images/header.png"
 
     // Open/close Playlist button
