@@ -18,7 +18,7 @@ ApplicationWindow {
                          passengerTemper.realValue,
                          autoMode.position,
                          syncMode.position,
-                         outsideValueText.outsideTemp)
+                         outsideTemper.realValue)
     }
 
     ListModel {
@@ -58,6 +58,7 @@ ApplicationWindow {
 
         onCurrentIndexChanged: {
             saveData()
+            console.log("Driver Wind On Face: " + driverWindFace.currentIndex)
         }
     }
     //------------------------------------------------------------------------//
@@ -84,7 +85,10 @@ ApplicationWindow {
             leftMargin: parent.width / 2
         }
 
-        onCurrentIndexChanged: saveData()
+        onCurrentIndexChanged: {
+            saveData()
+            console.log("Driver Wind On Foot: " + driverWindFoot.currentIndex)
+        }
     }
     //------------------------------------------------------------------------//
 
@@ -104,6 +108,7 @@ ApplicationWindow {
         from: 165
         to: 315
         stepSize: 5
+        value: 250
         anchors {
             top: driverWindFoot.bottom
             topMargin: 10
@@ -128,14 +133,17 @@ ApplicationWindow {
             return Number.fromLocaleString(locale, text)
         }
 
-        onRealValueChanged: saveData()
+        onRealValueChanged: {
+            saveData()
+            console.log("Temperature driver: " + driverTemper.realValue)
+        }
     }
     //------------------------------------------------------------------------//
 
     //------------------------------------------------------------------------//
     Text {
         id: fanText
-        text: "Fan: "
+        text: "Fan Level: "
         anchors {
             left: parent.left
             leftMargin: 20
@@ -158,7 +166,7 @@ ApplicationWindow {
         from: 0
         to: 10
         stepSize: 1
-        value: 0
+        value: 5
         anchors {
             top: driverTemper.bottom
             topMargin: 20
@@ -166,7 +174,10 @@ ApplicationWindow {
             leftMargin: parent.width / 2
         }
 
-        onValueChanged: saveData()
+        onValueChanged: {
+            saveData()
+            console.log("Fan Level: " + fanLevel.value)
+        }
     }
 
     //------------------------------------------------------------------------//
@@ -193,7 +204,10 @@ ApplicationWindow {
             leftMargin: parent.width / 2
         }
 
-        onCurrentIndexChanged: saveData()
+        onCurrentIndexChanged: {
+            saveData()
+            console.log("Passenger Wind On Face: " + passengerWindFace.currentIndex)
+        }
     }
     //------------------------------------------------------------------------//
 
@@ -219,14 +233,17 @@ ApplicationWindow {
             leftMargin: parent.width / 2
         }
 
-        onCurrentIndexChanged: saveData()
+        onCurrentIndexChanged: {
+            saveData()
+            console.log("Passenger Wind On Foot: " + passengerWindFoot.currentIndex)
+        }
     }
     //------------------------------------------------------------------------//
 
     //------------------------------------------------------------------------//
     Text {
         id: passengerTemperText
-        text: "Temperature driver"
+        text: "Temperature Passenger"
         anchors {
             left: parent.left
             leftMargin: 20
@@ -239,6 +256,7 @@ ApplicationWindow {
         from: 165
         to: 315
         stepSize: 5
+        value: 250
         anchors {
             top: passengerWindFoot.bottom
             topMargin: 10
@@ -263,7 +281,10 @@ ApplicationWindow {
             return Number.fromLocaleString(locale, text)
         }
 
-        onRealValueChanged: saveData()
+        onRealValueChanged: {
+            saveData()
+            console.log("Temperature Passenger: " + passengerTemper.realValue)
+        }
     }
     //------------------------------------------------------------------------//
 
@@ -288,8 +309,9 @@ ApplicationWindow {
         }
         text: position == 1.0 ? "ON" : "OFF"
 
-        onPositionChanged: {saveData()
-            console.log("autoMode: " + autoMode.position)
+        onPositionChanged: {
+            saveData()
+            console.log("Auto Mode: " + autoMode.position)
         }
     }
 
@@ -316,8 +338,9 @@ ApplicationWindow {
         }
         text: position == 1.0 ? "ON" : "OFF"
 
-        onPositionChanged: {saveData()
-            console.log("syncMode: " + syncMode.position)
+        onPositionChanged: {
+            saveData()
+            console.log("Sync Mode: " + syncMode.position)
         }
     }
     //------------------------------------------------------------------------//
@@ -325,21 +348,20 @@ ApplicationWindow {
     //------------------------------------------------------------------------//
     Text {
         id: outsideText
-        text: "OUTSIDE Temp (Random): "
+        text: "Outside Temp: "
         anchors {
             left: parent.left
             leftMargin: 20
-            verticalCenter: outsideValueText.verticalCenter
+            verticalCenter: outsideTemper.verticalCenter
         }
     }
 
-    Text {
-        id: outsideValueText
-
-        property double outsideTemp: (Math.random() * 50).toFixed(1)
-
-        text: outsideTemp
-
+    SpinBox {
+        id: outsideTemper
+        from: -100
+        to: 500
+        stepSize: 5
+        value: 270
         anchors {
             top: syncMode.bottom
             topMargin: 20
@@ -347,7 +369,27 @@ ApplicationWindow {
             leftMargin: parent.width / 2
         }
 
-        onTextChanged: saveData()
+        property int decimals: 1
+        property real realValue: value / 10
+
+        validator: DoubleValidator {
+            bottom: Math.min(outsideTemper.from, outsideTemper.to)
+            top:  Math.max(outsideTemper.from, outsideTemper.to)
+        }
+
+        textFromValue: function(value, locale) {
+            return Number(value / 10).toLocaleString(locale, 'f',
+                                                     outsideTemper.decimals)
+        }
+
+        valueFromText: function(text, locale) {
+            return Number.fromLocaleString(locale, text)
+        }
+
+        onRealValueChanged: {
+            saveData()
+            console.log("Outside Temp: " + outsideTemper.realValue)
+        }
     }
     //------------------------------------------------------------------------//
 }
