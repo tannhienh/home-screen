@@ -186,6 +186,8 @@ Item {
             }
 
             onCurrentIndexChanged: {
+                albumArtView.currentIndex = currentIndex
+                player.playlist.currentIndex = currentIndex
                 changeText.targets = [songTitle, songSinger]
                 changeText.restart()
             }
