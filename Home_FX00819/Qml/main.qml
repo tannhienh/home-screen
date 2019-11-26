@@ -19,25 +19,25 @@ ApplicationWindow {
     // Font Cantarell
     FontLoader {
         id: cantarell
-        source: "qrc:/Font/Cantarell-Regular.ttf"
+        source: "qrc:/Fonts/Cantarell-Regular.ttf"
     }
 
     // Font FiraSans
     FontLoader {
         id: firaSans
-        source: "qrc:/Font/FiraSans-Regular.ttf"
+        source: "qrc:/Fonts/FiraSans-Regular.ttf"
     }
 
     // Font Helvetica
     FontLoader {
         id: helvetica
-        source: "qrc:/Font/Helvetica-Neue-Regular.ttf"
+        source: "qrc:/Fonts/Helvetica-Neue-Regular.ttf"
     }
 
     // Font Ubuntu
     FontLoader {
         id: ubuntu
-        source: "qrc:/Font/Ubuntu-Regular.ttf"
+        source: "qrc:/Fonts/Ubuntu-Regular.ttf"
     }
     //-----------------------------------------------------------------------//
 

@@ -8,18 +8,17 @@ Item {
     implicitHeight: 995 // 1080 - 85
 
     //-----------------------------------------------------------------------//
-    // Load Font from attached resource font.qrc
-
+    // Load Font from attached resource fonts.qrc
     // Font Cantarell
     FontLoader {
         id: cantarell
-        source: "qrc:/Font/Cantarell-Regular.ttf"
+        source: "qrc:/Fonts/Cantarell-Regular.ttf"
     }
     //-----------------------------------------------------------------------//
 
     Settings {
         id: settings
-        property alias playlistVisible: header.checker
+        property alias playlistVisible: header.statusPlaylist
     }
 
     // Background of Application
@@ -34,21 +33,23 @@ Item {
     AppHeader {
         id: header
 
-        property bool checker: false
+        property bool statusPlaylist: false
 
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
         height: 125 // parent.height * 0.13 = 129.35
+
+        // assign status of playlist to status of playlist button
         statusPlaylistButton: settings.playlistVisible
 
         onClickedPlaylistButton: {
             if (playlistStatus) {
                 playlistView.open()
-                checker = true
+                statusPlaylist = true
             } else {
                 playlistView.close()
-                checker = false
+                statusPlaylist = false
             }
         }
     }
@@ -77,8 +78,6 @@ Item {
         onBackButtonClicked: playlistView.close()
     }
 
-    Component.onCompleted: {
-        if (settings.playlistVisible)
+    Component.onCompleted: if (settings.playlistVisible)
                                playlistView.open()
-    }
 }
