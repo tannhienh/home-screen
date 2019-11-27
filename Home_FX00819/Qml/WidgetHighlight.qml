@@ -8,8 +8,10 @@ MouseArea {
     Image {
         id: iconApp
         source: ""
+        anchors.fill: parent
     }
 
+    // States: Normal, Focus, and Pressed
     states: [
         State {
             name: "Normal"
@@ -40,7 +42,6 @@ MouseArea {
     ]
 
     onPressed: {
-//        rootWidgetHighlight.focus = true
         if (disable == false)
             rootWidgetHighlight.state = "Pressed"
     }

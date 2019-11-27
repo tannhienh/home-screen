@@ -7,7 +7,7 @@ Image {
     // to show matching playlist button
     property alias statusPlaylistButton: playlistButton.status
 
-    //
+    // signal when clicked on playlist button
     signal clickedPlaylistButton(bool playlistStatus)
 
     source: "qrc:/Apps/MusicPlayer/images/header.png"

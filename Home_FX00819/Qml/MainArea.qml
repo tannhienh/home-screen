@@ -6,7 +6,6 @@ import "Common"
 // Main Area
 // Width: 1920
 // height: 995
-
 Item {
     id: rootMainArea
 
@@ -17,8 +16,8 @@ Item {
         parent.push(url)
     }
 
-    FocusScope {
-        anchors.fill: parent
+//    FocusScope {
+//        anchors.fill: parent
 
         //--------------------------------------------------------------------//
         // Start widgetsArea
@@ -50,7 +49,8 @@ Item {
                     onClicked: openApplication("qrc:/Apps/Map/Map.qml")
                 }
 
-                Keys.onRightPressed: console.log("tested")
+                // Key navigation
+                Keys.onRightPressed: climateWidget
             }
 
             // Climate Widget
@@ -65,9 +65,12 @@ Item {
                 WidgetHighlight {
                     id: climateFocus
                     anchors.fill: parent
-                    focus: true
                     disable: true
                 }
+
+                // Key navigation
+                Keys.onLeftPressed: mapWidget
+                Keys.onRightPressed: musicFocus
             }
 
             // Music player Widget
@@ -84,8 +87,12 @@ Item {
                 WidgetHighlight {
                     id: musicFocus
                     anchors.fill: parent
-                    onClicked: openApplication("qrc:/Apps/MusicPlayer/qml/MusicPlayer.qml")
+                    onClicked:
+                        openApplication("qrc:/Apps/MusicPlayer/qml/MusicPlayer.qml")
                 }
+
+                // Key navigation
+                Keys.onLeftPressed: climateWidget
             }
         }
         //--------------------------------------------------------------------//
@@ -97,6 +104,7 @@ Item {
         //--------------------------------------------------------------------//
         Component {
             id: appsDelegate
+
             DropArea {
                 id: delegateRoot
                 width: icon.width
@@ -229,5 +237,5 @@ Item {
         //--------------------------------------------------------------------//
         // End Menu area
         //--------------------------------------------------------------------//
-    }
+//    }
 }

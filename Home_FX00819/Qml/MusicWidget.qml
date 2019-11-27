@@ -1,30 +1,54 @@
 import QtQuick 2.13
 import QtQuick.Controls 2.13
-import QtQuick.Controls.Styles 1.4
+//import QtQuick.Controls.Styles 1.4
 import QtGraphicalEffects 1.13
 import QtMultimedia 5.13
 
 Item {
     id: musicPlayerItem
 
+    // Get Single name of song playing
+    // SingerRole: 258
+    // If has no song in playlist model return empty string
+    // Else, if get a empty string from single name, return "Unknown"
+    function getSingleName() {
+        if (playlistModel.rowCount() > 0)
+            if (playlistModel.data(playlistModel.index(
+                                       playlist.currentIndex, 0), 258) === "")
+                return "Unknow"
+            else
+                return (playlistModel.data(playlistModel.index(
+                                               playlist.currentIndex, 0), 258))
+        else
+            return ""
+    }
+
+    // Get Album art of song playing
+    // AlbumArtRole: 260
+    // If has no song in playlist model return album art default
+    function getAlbumArt() {
+        if (playlistModel.rowCount() > 0)
+            return playlistModel.data(playlistModel.index(
+                                          playlist.currentIndex, 0), 260)
+        else
+            return "qrc:/Images/MusicPlayer/cover_art.png"
+    }
+
+    // Album art background
     Image {
         id: albumArtBg
         anchors.fill: parent
-
-        // AlbumArtRole: 260
-        source: if (playlistModel.rowCount() > 0)
-                    return playlistModel.data(playlistModel.index(
-                                            playlist.currentIndex, 0), 260)
-                else
-                    return "qrc:/Images/MusicPlayer/cover_art.png"
+        source: getAlbumArt()
     }
 
+    // Blue effect for album art background
     FastBlur {
         anchors.fill: albumArtBg
         source: albumArtBg
         radius: 10
     }
 
+    // Title music widget: source audios
     Item {
         id: titleItem
         anchors {
@@ -60,18 +84,7 @@ Item {
 
     Text {
         id: single
-
-        // SingerRole: 258
-        text: if (playlistModel.rowCount() > 0)
-                  if (playlistModel.data(playlistModel.index(
-                                        playlist.currentIndex, 0), 258) === "")
-                      return "Unknow"
-                  else
-                      return (playlistModel.data(playlistModel.index(
-                                                playlist.currentIndex, 0), 258))
-              else
-                  return ""
-
+        text: getSingleName()
         color: "#FFFFFF"
         font.pixelSize: 30
         font.family: cantarell.name

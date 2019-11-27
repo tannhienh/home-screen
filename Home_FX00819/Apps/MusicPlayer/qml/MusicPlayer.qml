@@ -19,6 +19,7 @@ Item {
     Settings {
         id: settings
         property alias playlistVisible: header.statusPlaylist
+        property bool checkBackToMain: false
     }
 
     // Background of Application
@@ -29,7 +30,7 @@ Item {
         opacity: 0.7
     }
 
-    // Header
+    // Music Player Header
     AppHeader {
         id: header
 
@@ -43,6 +44,7 @@ Item {
         // assign status of playlist to status of playlist button
         statusPlaylistButton: settings.playlistVisible
 
+        // Open playlist view
         onClickedPlaylistButton: {
             if (playlistStatus) {
                 playlistView.open()
@@ -75,7 +77,10 @@ Item {
 
     Connections {
         target: statusBar
-        onBackButtonClicked: playlistView.close()
+        onBackButtonClicked: {
+            settings.checkBackToMain = true
+            playlistView.close()
+        }
     }
 
     Component.onCompleted: if (settings.playlistVisible)

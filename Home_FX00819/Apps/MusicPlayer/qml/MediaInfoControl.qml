@@ -4,6 +4,7 @@ import QtMultimedia 5.13
 import QtGraphicalEffects 1.13
 
 Item {
+
     // Media Info
     Item {
         id: mediaInfo
@@ -158,6 +159,9 @@ Item {
         // AlbumArt View
         PathView {
             id: albumArtView
+
+            property int playingIndex
+
             anchors.leftMargin: (albumArtItem.width -
                                  (albumArtItem.height * 1.8)) / 2
             anchors.fill: albumArtItem
@@ -186,12 +190,13 @@ Item {
             }
 
             onCurrentIndexChanged: {
-                albumArtView.currentIndex = currentIndex
-                player.playlist.currentIndex = currentIndex
+                if (settings.checkBackToMain) {
+                    albumArtView.currentIndex = currentIndex
+                    player.playlist.currentIndex = currentIndex
+                }
                 changeText.targets = [songTitle, songSinger]
                 changeText.restart()
             }
-
 
             PropertyAnimation {
                 id: changeText
