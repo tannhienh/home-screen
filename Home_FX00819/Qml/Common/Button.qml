@@ -73,8 +73,11 @@ MouseArea {
 
     // Change state to Pressed when pressed behavior
     onPressed: {
-//        button.focus = true
+        button.focus = true
         button.state = "Pressed"
+        if (onFlicEnded)
+            console.log("Ended")
+
     }
 
     // Change state to Pressed when focus behavior
@@ -83,10 +86,17 @@ MouseArea {
         button.state = "Focus"
     }
 
+    onCanceled: {
+        button.focus = true
+        button.state = "Focus"
+    }
+
     // When focus changed
     // If which button not focusing, change state to Normal
     onFocusChanged: {
-        if (!button.focus)
+        if (button.focus == true )
+            button.state = "Focus"
+        else
             button.state = "Normal"
     }
 }

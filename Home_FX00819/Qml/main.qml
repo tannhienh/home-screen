@@ -80,5 +80,45 @@ ApplicationWindow {
         onCurrentItemChanged: {
             currentItem.forceActiveFocus()
         }
+
+        pushExit: Transition {
+            PropertyAnimation {
+                property: "x"
+                from: 0
+                to: -1920
+                duration: 500
+                easing.type: Easing.OutQuad
+            }
+        }
+
+        pushEnter: Transition {
+            PropertyAnimation {
+                property: "x"
+                from: 1920
+                to: 0
+                duration: 500
+                easing.type: Easing.OutQuad
+            }
+        }
+
+        popExit: Transition {
+            PropertyAnimation {
+                property: "x"
+                from: 0
+                to: 1920
+                duration: 500
+                easing.type: Easing.OutQuad
+            }
+        }
+
+        popEnter: Transition {
+            PropertyAnimation {
+                property: "x"
+                from: -1920
+                to: 0
+                duration: 500
+                easing.type: Easing.OutQuad
+            }
+        }
     }
 }

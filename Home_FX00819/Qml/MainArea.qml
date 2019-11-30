@@ -134,46 +134,48 @@ Item {
 
                     Button{
                         id: appButton
-                        anchors.fill: parent
+//                        anchors.fill: parent
                         button_title: appsModel.data(appsModel.index(icon.visualIndex, 0), 257)
                         icon_src: appsModel.data(appsModel.index
                                                  (icon.visualIndex, 0), 259)
+
                         onClicked: {
                             openApplication(appsModel.data(appsModel.index(icon.visualIndex, 0), 258))
                         }
 
-                        onReleased: {
-                            appButton.focus = true
-                            appButton.state = "Focus"
-                            for (var index = 0; index < visualModel.items.count;index++){
-                                if (index !== icon.visualIndex)
-                                    visualModel.items.get(index).focus = false
-                                else
-                                    visualModel.items.get(index).focus = true
-                            }
-                        }
+//                        onReleased: {
+//                            for (var index = 0; index < visualModel.items.count;index++){
+//                                if (index !== icon.visualIndex)
+//                                    visualModel.items.get(index).focus = false
+//                                else
+//                                    visualModel.items.get(index).focus = true
+//                            }
+//                        }
                     }
 
-                    onFocusChanged: appButton.focus = icon.focus
+//                    Connections {
+//                        target: menu
+//                        onFlickEnded: console.log("Ended")
+//                    }
 
-                    Drag.active: appButton.drag.active
-                    Drag.keys: "Button"
+//                    Drag.active: appButton.drag.active
+//                    Drag.keys: "Button"
 
-                    states: [
-                        State {
-                            when: icon.Drag.active
-                            ParentChange {
-                                target: icon
-                                parent: root
-                            }
+//                    states: [
+//                        State {
+//                            when: icon.Drag.active
+//                            ParentChange {
+//                                target: icon
+//                                parent: root
+//                            }
 
-                            AnchorChanges {
-                                target: icon
-                                anchors.horizontalCenter: undefined
-                                anchors.verticalCenter: undefined
-                            }
-                        }
-                    ]
+//                            AnchorChanges {
+//                                target: icon
+//                                anchors.horizontalCenter: undefined
+//                                anchors.verticalCenter: undefined
+//                            }
+//                        }
+//                    ]
                 }
             }
         }
@@ -188,7 +190,6 @@ Item {
             id: menu
 
             orientation: ListView.Horizontal
-//            interactive: false
             clip: true
             snapMode: ListView.SnapToItem
             spacing: 22
