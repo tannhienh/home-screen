@@ -198,7 +198,7 @@ Item {
                     }
 
                     onEntered: visualModel.items.move(drag.source.visualIndex,
-                                                      appButton.visualIndex)
+                                                      appIcon.visualIndex)
 
                 }
             }
