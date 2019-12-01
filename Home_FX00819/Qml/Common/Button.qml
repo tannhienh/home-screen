@@ -75,8 +75,6 @@ MouseArea {
     onPressed: {
         button.focus = true
         button.state = "Pressed"
-        if (onFlicEnded)
-            console.log("Ended")
 
     }
 
