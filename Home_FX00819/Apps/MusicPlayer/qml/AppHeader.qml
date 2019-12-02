@@ -15,6 +15,9 @@ Image {
     // Open/close Playlist button
     SwitchButton {
         id: playlistButton
+
+        onClicked: headerImage.clickedPlaylistButton(status)
+
         anchors.left: parent.left
         anchors.leftMargin: 20 // parent.width / 100 = 19.2
         anchors.verticalCenter: parent.verticalCenter
@@ -22,10 +25,6 @@ Image {
         icon_off: "qrc:/Apps/MusicPlayer/images/drawer.png"
 //        m_width: 40 // parent.height * 0.32 = 40
 //        m_height: m_width
-
-        onClicked: {
-            headerImage.clickedPlaylistButton(status)
-        }
     }
 
     // Playlist text

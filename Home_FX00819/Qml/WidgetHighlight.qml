@@ -11,6 +11,23 @@ MouseArea {
         anchors.fill: parent
     }
 
+    onPressed: {
+        if (disable == false)
+            rootWidgetHighlight.state = "Pressed"
+    }
+
+    onReleased: {
+        rootWidgetHighlight.focus = true
+        rootWidgetHighlight.state = "Focus"
+    }
+
+    onFocusChanged: {
+        if (rootWidgetHighlight.focus)
+            rootWidgetHighlight.state = "Focus"
+        else
+            rootWidgetHighlight.state = "Normal"
+    }
+
     // States: Normal, Focus, and Pressed
     states: [
         State {
@@ -40,21 +57,4 @@ MouseArea {
             }
         }
     ]
-
-    onPressed: {
-        if (disable == false)
-            rootWidgetHighlight.state = "Pressed"
-    }
-
-    onReleased: {
-        rootWidgetHighlight.focus = true
-        rootWidgetHighlight.state = "Focus"
-    }
-
-    onFocusChanged: {
-        if (rootWidgetHighlight.focus)
-            rootWidgetHighlight.state = "Focus"
-        else
-            rootWidgetHighlight.state = "Normal"
-    }
 }

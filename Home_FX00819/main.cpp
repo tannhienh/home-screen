@@ -43,7 +43,8 @@ int main(int argc, char *argv[])
 
     qRegisterMetaType<QMediaPlaylist*>("QMediaPlaylist*");
 
-    engine.rootContext()->setContextProperty("playlistModel", player.m_playlistModel);
+    engine.rootContext()->setContextProperty("playlistModel",
+                                             player.m_playlistModel);
     engine.rootContext()->setContextProperty("player", player.m_player);
     engine.rootContext()->setContextProperty("playlist", player.m_playlist);
     engine.rootContext()->setContextProperty("utility", &player);

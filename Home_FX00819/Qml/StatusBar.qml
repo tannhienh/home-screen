@@ -10,7 +10,7 @@ Item {
     id: statusBarItem
 
     property bool isShowBackButton: false
-    property alias visibleEditButton: editButton.visible
+    property alias visibleEditButton: doneButton.visible
     signal backButtonClicked
 
     height: 85
@@ -30,7 +30,7 @@ Item {
 
     // Edit button
     Button {
-        id: editButton
+        id: doneButton
         property bool statusDone: false
         icon_src: "qrc:/Images/StatusBar/btn_done"
         visible: false
@@ -41,10 +41,10 @@ Item {
         }
 
         onClicked: {
-            if (statusDone) {
-                console.log("Hide")
+//            if (statusDone) {
+//                console.log("Hide")
                 visible = false
-            }
+//            }
         }
 
 //        onReleased: {

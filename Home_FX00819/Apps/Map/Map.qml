@@ -3,6 +3,8 @@ import QtLocation 5.13
 import QtPositioning 5.13
 
 Item {
+    id: mapItem
+
     Plugin {
         id: mapPlugin
         name: "mapboxgl"
@@ -13,7 +15,6 @@ Item {
         anchorPoint.x: carIcon.width / 2
         anchorPoint.y: carIcon.height / 2
         coordinate: QtPositioning.coordinate(10.78, 106.703)
-
         sourceItem: Image {
             id: carIcon
             source: "qrc:/Images/Map/car_icon.png"

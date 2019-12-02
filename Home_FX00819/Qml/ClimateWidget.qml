@@ -92,7 +92,7 @@ Item {
     Image {
         id: fanLevel
 
-        // Get
+        // Hold path fan image corresponding level
         property var path: "qrc:/Images/Climate/widget_climate_wind_level_"
                            + climateModel.fan_level + ".png"
         source: path
@@ -101,7 +101,6 @@ Item {
 
     Image {
         id: seatDriver
-
         source: "qrc:/Images/Climate/widget_climate_arrow_seat.png"
         x: 91
         y: 215
@@ -114,12 +113,14 @@ Item {
 
         x: 60
         y: 238
-        source: if (climateModel.driver_wind_face == 0)
+        source: {
+            if (climateModel.driver_wind_face == 0)
                     return (path + "off.png")
                 else if (climateModel.driver_wind_face == 1)
                     return (path + "cold.png")
                 else if (climateModel.driver_wind_face == 2)
                     return (path + "warm.png")
+        }
     }
 
     Image {
@@ -129,12 +130,14 @@ Item {
 
         x: 35 //28
         y: 250 //257
-        source: if (climateModel.driver_wind_foot == 0)
+        source: {
+            if (climateModel.driver_wind_foot == 0)
                     return (path + "off.png")
                 else if (climateModel.driver_wind_foot == 1)
                     return (path + "cold.png")
                 else if (climateModel.driver_wind_foot == 2)
                     return (path + "warm.png")
+        }
     }
 
     Image {
@@ -151,13 +154,14 @@ Item {
 
         x: 458 //450
         y: 238
-
-        source: if (climateModel.passenger_wind_face == 0)
+        source: {
+            if (climateModel.passenger_wind_face == 0)
                     return (path + "off.png")
                 else if (climateModel.passenger_wind_face == 1)
                     return (path + "cold.png")
                 else if (climateModel.passenger_wind_face == 2)
                     return (path + "warm.png")
+        }
     }
 
     Image {
@@ -167,12 +171,14 @@ Item {
 
         x: 433 // 426
         y: 250 // 257
-        source: if (climateModel.passenger_wind_foot == 0)
+        source: {
+            if (climateModel.passenger_wind_foot == 0)
                     return (path + "off.png")
                 else if (climateModel.passenger_wind_foot == 1)
                     return (path + "cold.png")
                 else if (climateModel.passenger_wind_foot == 2)
                     return (path + "warm.png")
+        }
     }
 
     Item {
@@ -182,7 +188,6 @@ Item {
         anchors.right: parent.right
         height: parent.height * 0.14 // 71.5
 
-
         Item {
             width: parent.width * 0.35
             height: parent.height
@@ -190,16 +195,18 @@ Item {
 
             Text {
                 id: driverTemp
-                text: if (climateModel.driver_temp == 16.5)
+                color: "White"
+                font.pixelSize: 55
+                font.family: ubuntu.name
+                anchors.centerIn: parent
+                text: {
+                    if (climateModel.driver_temp == 16.5)
                           return "LOW"
                       else if (climateModel.driver_temp == 31.5)
                           return "HIGH"
                       else
                           return (climateModel.driver_temp + "\xB0C")
-                color: "White"
-                font.pixelSize: 55
-                font.family: ubuntu.name
-                anchors.centerIn: parent
+                }
             }
         }
 
@@ -214,7 +221,6 @@ Item {
             }
         }
 
-
         Item {
             width: parent.width * 0.35
             height: parent.height
@@ -222,17 +228,18 @@ Item {
 
             Text {
                 id: passengerTemp
-                text: if (climateModel.passenger_temp == 16.5)
+                color: "White"
+                font.pixelSize: 55
+                font.family: ubuntu.name
+                anchors.centerIn: parent
+                text: {
+                    if (climateModel.passenger_temp == 16.5)
                           return "LOW"
                       else if (climateModel.passenger_temp == 31.5)
                           return "HIGH"
                       else
                           return (climateModel.passenger_temp + "\xB0C")
-
-                color: "White"
-                font.pixelSize: 55
-                font.family: ubuntu.name
-                anchors.centerIn: parent
+                }
             }
         }
     }
@@ -266,6 +273,7 @@ Item {
             Column {
                 anchors.centerIn: parent
                 spacing: 4
+
                 Text {
                     text: "OUTSIDE"
                     color: "White"

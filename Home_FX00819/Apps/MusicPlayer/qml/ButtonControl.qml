@@ -9,6 +9,12 @@ MouseArea {
     property variant m_width    // Width visual of button
     property variant m_height   // Height visual of button
 
+    // When event pressed emitted, change source image to icon_pressed
+    onPressed: image.source = icon_pressed
+
+    // When event released emitted, change source image to icon_released
+    onReleased: image.source = icon_released
+
     implicitWidth: image.width      // Implicit with of mouse area
     implicitHeight: image.height    // Implicit height of mouse are
 
@@ -18,15 +24,5 @@ MouseArea {
         source: icon_default
         width: m_width
         height: m_height
-    }
-
-    // When event pressed emitted, change source image to icon_pressed
-    onPressed: {
-        image.source = icon_pressed
-    }
-
-    // When event released emitted, change source image to icon_released
-    onReleased: {
-        image.source = icon_released
     }
 }

@@ -35,18 +35,19 @@ Item {
         // Song title
         Text {
             id: songTitle
-
-            text: if (playlistModel.rowCount() > 0)
-                    return (albumArtView.currentItem.getData.title === ""
-                            ? "Unknown" : albumArtView.currentItem.getData.title)
-                  else
-                    return ""
-
             color: "#FFFFFF"
             font.pixelSize: 33 // mediaInfo.height * 0.32 = 33.28
             font.family: cantarell.name
 
-            anchors{
+            text: {
+                if (playlistModel.rowCount() > 0)
+                    return (albumArtView.currentItem.getData.title === ""
+                            ? "Unknown" : albumArtView.currentItem.getData.title)
+                  else
+                    return ""
+            }
+
+            anchors {
                 top: parent.top
                 topMargin: 14 // mediaInfo.height * 0.14 = 14.56
                 left: parent.left
@@ -57,15 +58,19 @@ Item {
         // Singer
         Text {
             id: songSinger
-            text: if (playlistModel.rowCount() > 0)
-                    return (albumArtView.currentItem.getData.singer === ""
-                            ? "Unknown" : albumArtView.currentItem.getData.singer)
-                  else
-                    return ""
 
             color: "#D3D3D3"
             font.pixelSize: 28 // mediaInfo.height * 0.27
             font.family: cantarell.name
+
+            text: {
+                if (playlistModel.rowCount() > 0)
+                    return (albumArtView.currentItem.getData.singer === ""
+                            ? "Unknown" : albumArtView.currentItem.getData.singer)
+                  else
+                    return ""
+            }
+
             anchors {
                 top: songTitle.bottom
                 left: parent.left
@@ -117,7 +122,9 @@ Item {
             id: albumArtDelegate
 
             Item {
+
                 property variant getData: model
+
                 width: albumArtItem.height * 0.65
                 height: width
                 scale:  PathView.iconScale === undefined ? 0 : PathView.iconScale
@@ -162,9 +169,10 @@ Item {
 
             property int playingIndex
 
+
+            anchors.fill: albumArtItem
             anchors.leftMargin: (albumArtItem.width -
                                  (albumArtItem.height * 1.8)) / 2
-            anchors.fill: albumArtItem
             preferredHighlightBegin: 0.5
             preferredHighlightEnd: 0.5
             focus: true
@@ -394,6 +402,10 @@ Item {
         // Shuffle button
         SwitchButton {
             id: shuffleButton
+            icon_on: "qrc:/Apps/MusicPlayer/images/shuffle_hold.png"
+            icon_off: "qrc:/Apps/MusicPlayer/images/shuffle.png"
+            status: playlist.playbackMode === Playlist.Random ? 1 : 0
+
 //            m_height: mediaControl.height * 0.33 // 108
 //            m_width: m_height * 2.04  // 53
             anchors {
@@ -401,9 +413,6 @@ Item {
                 leftMargin: 150
                 verticalCenter: mediaControl.verticalCenter
             }
-            icon_on: "qrc:/Apps/MusicPlayer/images/shuffle_hold.png"
-            icon_off: "qrc:/Apps/MusicPlayer/images/shuffle.png"
-            status: playlist.playbackMode === Playlist.Random ? 1 : 0
 
             onStatusChanged: {
                 if (shuffleButton.status) {
@@ -418,6 +427,11 @@ Item {
         // Repeat button - loops current track
         SwitchButton {
             id: repeatButton
+
+            icon_on: "qrc:/Apps/MusicPlayer/images/repeat_hold.png"
+            icon_off: "qrc:/Apps/MusicPlayer/images/repeat.png"
+            status: playlist.playbackMode === Playlist.Loop ? 1 : 0
+
 //            m_width: shuffleButton.width // 108
 //            m_height: shuffleButton.height // 53
             anchors {
@@ -425,16 +439,12 @@ Item {
                 rightMargin: 150
                 verticalCenter: mediaControl.verticalCenter
             }
-            icon_on: "qrc:/Apps/MusicPlayer/images/repeat_hold.png"
-            icon_off: "qrc:/Apps/MusicPlayer/images/repeat.png"
-            status: playlist.playbackMode === Playlist.Loop ? 1 : 0
 
             onStatusChanged: {
                 if (repeatButton.status) {
                     shuffleButton.status = false
                     utility.loop(player, 1)
-                }
-                else
+                } else
                     utility.loop(player, 0)
             }
         }

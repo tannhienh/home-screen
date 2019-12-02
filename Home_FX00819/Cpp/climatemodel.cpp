@@ -7,7 +7,8 @@ ClimateModel::ClimateModel(QObject *parent) : QObject(parent)
 
     if (m_climate->isValid()) {
         qDebug() << "Climate DBus connect success";
-        QObject::connect(m_climate, &local::Climate::dataChanged, this, &ClimateModel::dataChanged);
+        QObject::connect(m_climate, &local::Climate::dataChanged,
+                         this, &ClimateModel::dataChanged);
     } else {
         qDebug() << "Climate DBus connect error";
     }

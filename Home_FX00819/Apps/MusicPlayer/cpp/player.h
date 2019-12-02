@@ -23,7 +23,7 @@ QT_END_NAMESPACE
 
 class PlaylistModel;    // PlaylistModel class declaration
 
-using namespace TagLib; // using namespace TagLib library
+using namespace TagLib; // TagLib library
 
 class Player : public QObject
 {

@@ -35,6 +35,33 @@ MouseArea {
         }
     }
 
+    // Change state to Pressed when pressed behavior
+    onPressed: {
+        button.focus = true
+        button.state = "Pressed"
+
+    }
+
+    // Change state to Pressed when focus behavior
+    onReleased: {
+        button.focus = true
+        button.state = "Focus"
+    }
+
+    onCanceled: {
+        button.focus = true
+        button.state = "Focus"
+    }
+
+    // When focus changed
+    // If which button not focusing, change state to Normal
+    onFocusChanged: {
+        if (button.focus == true )
+            button.state = "Focus"
+        else
+            button.state = "Normal"
+    }
+
     // States for behavior on button
     states: [
         // State Normal
@@ -70,31 +97,4 @@ MouseArea {
             }
         }
     ]
-
-    // Change state to Pressed when pressed behavior
-    onPressed: {
-        button.focus = true
-        button.state = "Pressed"
-
-    }
-
-    // Change state to Pressed when focus behavior
-    onReleased: {
-        button.focus = true
-        button.state = "Focus"
-    }
-
-    onCanceled: {
-        button.focus = true
-        button.state = "Focus"
-    }
-
-    // When focus changed
-    // If which button not focusing, change state to Normal
-    onFocusChanged: {
-        if (button.focus == true )
-            button.state = "Focus"
-        else
-            button.state = "Normal"
-    }
 }

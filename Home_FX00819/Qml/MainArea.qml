@@ -20,7 +20,7 @@ Item {
 //        anchors.fill: parent
 
         //--------------------------------------------------------------------//
-        // Start widgetsArea
+        // Begin widgetsArea
         //--------------------------------------------------------------------//
         // Widgets Area: Map widget, Climate widget, Music Player widget
         // Width: 1920
@@ -100,7 +100,7 @@ Item {
         //--------------------------------------------------------------------//
 
         //--------------------------------------------------------------------//
-        // Start Menu area
+        // Begin Menu area
         //--------------------------------------------------------------------//
         Item {
             id: menuArea
@@ -113,7 +113,7 @@ Item {
             }
 
             //----------------------------------------------------------------//
-            // Start Component Delegate
+            // Begin Component Delegate
             //----------------------------------------------------------------//
             Component {
                 id: appsDelegate
@@ -123,18 +123,22 @@ Item {
 
                     property int visualIndex: DelegateModel.itemsIndex
 
-                    width: appIcon.width
-                    height: appIcon.height
+                    onEntered: visualModel.items.move(drag.source.visualIndex,
+                                                      appItem.visualIndex)
+
+                    width: (appsMenu.width - (appsMenu.spacing * 5)) / 6 // 295
+                    anchors.top: parent.top
+                    anchors.bottom: parent.bottom
                     keys: "AppButton"
 
                     Binding {
-                        target: appIcon
+                        target: appItem
                         property: "visualIndex"
                         value: visualIndex
                     }
 
                     Item {
-                        id: appIcon
+                        id: appItem
 
                         property int visualIndex: 0
 
@@ -147,10 +151,10 @@ Item {
                         property var urlApp:
                             appsModel.data(appsModel.index(visualIndex, 0), 258)
 
-                        width: appButton.width
-                        height: appButton.height
+                        anchors.fill: dropArea
 
-                        Drag.active: appButton.drag.active
+                        Drag.active: appButton.held
+                        Drag.source: dropArea
                         Drag.keys: "AppButton"
                         Drag.hotSpot.x: appButton.width / 2
 
@@ -159,79 +163,69 @@ Item {
 
                             property bool held: false
 
-                            anchors.fill: parent
+                            icon_src: appItem.iconSrc
+                            button_title: appItem.appName
+                            anchors.fill: appItem
 
-                            icon_src: appIcon.iconSrc
-                            button_title: appIcon.appName
-
-                            drag.target: held ? appIcon : undefined
+                            drag.target: held ? appItem : undefined
                             drag.axis: Drag.XAxis
 
-                            pressAndHoldInterval: 1000
+//                            onClicked: openApplication(appItem.urlApp)
 
                             onPressAndHold: {
                                 statusBar.visibleEditButton = true
                                 held = true
+                                focus = false
                             }
 
                             onReleased: held = false
-
-                            onClicked: openApplication(appIcon.urlApp)
                         }
-
-                        onFocusChanged: appButton.focus = appIcon.focus
 
                         states: State {
                             when: appButton.held
 
                             ParentChange {
-                                target: appIcon
+                                target: appItem
                                 parent: menuArea
                             }
 
                             AnchorChanges {
-                                target: appIcon
+                                target: appItem
                                 anchors.horizontalCenter: undefined
                                 anchors.verticalCenter: undefined
                             }
                         }
                     }
-
-                    onEntered: visualModel.items.move(drag.source.visualIndex,
-                                                      appIcon.visualIndex)
-
                 }
             }
-            //--------------------------------------------------------------------//
+            //----------------------------------------------------------------//
             // End Component Delegate
-            //--------------------------------------------------------------------//
+            //----------------------------------------------------------------//
 
-            //--------------------------------------------------------------------//
-            // Start Listview for apps menu
-            //--------------------------------------------------------------------//
+            // Delegate Model for apps menu
+            DelegateModel {
+                id: visualModel
+                model: appsModel
+                delegate: appsDelegate
+            }
+
+            //----------------------------------------------------------------//
+            // Begin Listview for apps menu
+            //----------------------------------------------------------------//
             ListView {
                 id: appsMenu
 
+                spacing: 22
+                model: visualModel
                 orientation: ListView.Horizontal
                 snapMode: ListView.SnapToItem
-                spacing: 22
 
                 anchors {
                     fill: parent
-                    top: parent.top
                     topMargin: 10
-                    bottom: parent.top
                     bottomMargin: 20
-                    left: parent.left
                     leftMargin: 20
-                    right: parent.right
                     rightMargin: 20
-                }
-
-                model: DelegateModel {
-                    id: visualModel
-                    model: appsModel
-                    delegate: appsDelegate
                 }
 
                 displaced: Transition {
@@ -242,34 +236,38 @@ Item {
                 }
 
                 // Scrollbar
-                ScrollBar.horizontal:  ScrollBar {
-                    id: scrollBar
-                    parent: appsMenu.parent
-                    height: 10
-                    anchors {
-                        left: parent.left
-                        right: parent.right
-                        bottom: parent.bottom
-                    }
-                    orientation: Qt.Horizontal
-                    policy: ScrollBar.AlwaysOn
-                    snapMode: ScrollBar.SnapOnRelease
+                ScrollBar.horizontal: scrollBar
+            }
+            //----------------------------------------------------------------//
+            // End Listview for apps menu
+            //----------------------------------------------------------------//
 
-                    background: Rectangle {
-                        id: bgScrollBar
-                        color: "#808080"
-                    }
+            // Scroll bar
+            ScrollBar {
+                id: scrollBar
+                parent: appsMenu.parent
+                height: 10
+                orientation: Qt.Horizontal
+                policy: ScrollBar.AlwaysOn
+                snapMode: ScrollBar.SnapOnRelease
 
-                    contentItem: Rectangle {
-                        anchors.top: parent.top
-                        anchors.bottom: parent.bottom
-                        color: "#7deef8"
-                    }
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    bottom: parent.bottom
+                }
+
+                background: Rectangle {
+                    id: bgScrollBar
+                    color: "#808080"
+                }
+
+                contentItem: Rectangle {
+                    anchors.top: parent.top
+                    anchors.bottom: parent.bottom
+                    color: "#7deef8"
                 }
             }
-            //--------------------------------------------------------------------//
-            // End Listview for apps menu
-            //--------------------------------------------------------------------//
         }
         //--------------------------------------------------------------------//
         // End Menu area

@@ -19,7 +19,8 @@ SOURCES += \
         Cpp/xmlreader.cpp \
         main.cpp
 
-RESOURCES += qml.qrc \
+RESOURCES += \
+    qml.qrc \
     fonts.qrc \
     images.qrc
 
