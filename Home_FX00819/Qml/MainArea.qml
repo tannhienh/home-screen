@@ -123,13 +123,13 @@ Item {
 
                     property int visualIndex: DelegateModel.itemsIndex
 
+                    width: (appsMenu.width - (appsMenu.spacing * 5)) / 6 // 295
+                    height: appsMenu.height
+                    keys: "AppButton"
+                    anchors.verticalCenter: parent.verticalCenter
+
                     onEntered: visualModel.items.move(drag.source.visualIndex,
                                                       appItem.visualIndex)
-
-                    width: (appsMenu.width - (appsMenu.spacing * 5)) / 6 // 295
-                    anchors.top: parent.top
-                    anchors.bottom: parent.bottom
-                    keys: "AppButton"
 
                     Binding {
                         target: appItem
@@ -148,7 +148,7 @@ Item {
                         property var appName:
                             appsModel.data(appsModel.index(visualIndex, 0), 257)
 
-                        property var urlApp:
+                        property var appUrl:
                             appsModel.data(appsModel.index(visualIndex, 0), 258)
 
                         anchors.fill: dropArea
@@ -165,15 +165,15 @@ Item {
 
                             icon_src: appItem.iconSrc
                             button_title: appItem.appName
-                            anchors.fill: appItem
+                            anchors.verticalCenter: parent.verticalCenter
+                            anchors.horizontalCenter: parent.horizontalCenter
 
                             drag.target: held ? appItem : undefined
                             drag.axis: Drag.XAxis
 
-//                            onClicked: openApplication(appItem.urlApp)
+                            onClicked: openApplication(appItem.appUrl)
 
                             onPressAndHold: {
-                                statusBar.visibleEditButton = true
                                 held = true
                                 focus = false
                             }

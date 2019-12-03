@@ -69,7 +69,7 @@ ApplicationWindow {
     // height: 995
     StackView {
         id: mainAreaStackView
-        initialItem: MainArea{}
+        initialItem: MainArea {}
         anchors {
             top: statusBar.bottom
             left: parent.left

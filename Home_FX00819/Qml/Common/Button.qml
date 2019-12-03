@@ -29,9 +29,9 @@ MouseArea {
             family: cantarell.name
         }
         anchors {
-            bottom: parent.bottom
+            bottom: buttonIcon.bottom
             bottomMargin: 90
-            horizontalCenter: parent.horizontalCenter
+            horizontalCenter: buttonIcon.horizontalCenter
         }
     }
 
