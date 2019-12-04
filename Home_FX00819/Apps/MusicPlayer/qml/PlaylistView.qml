@@ -18,16 +18,10 @@ Drawer {
     enter: Transition { SmoothedAnimation { velocity: 2 } }
     exit: Transition { SmoothedAnimation { velocity: 2 } }
 
-    // Playlist
-    ListView {
-        id: mediaPlaylist
-        anchors.fill: parent
-        model: playlistModel
-        spacing: 6
-        clip: true
-        currentIndex: playlist.currentIndex
-        snapMode: ListView.SnapToItem
-        delegate: MouseArea {
+    Component {
+        id: playlistDelegate
+
+        MouseArea {
             id: mouseAreaItem
 
             // Visible speaker icon when playing
@@ -129,6 +123,18 @@ Drawer {
                 easing.type: Easing.InQuad
             }
         }
+    }
+
+    // Playlist
+    ListView {
+        id: mediaPlaylist
+        anchors.fill: parent
+        model: playlistModel
+        spacing: 6
+        clip: true
+        currentIndex: playlist.currentIndex
+        snapMode: ListView.SnapToItem
+        delegate: playlistDelegate
 
         // Background image for current item song in playlist
         highlight: Image {

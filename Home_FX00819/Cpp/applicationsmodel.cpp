@@ -33,6 +33,12 @@ QVariant ApplicationsModel::data(const QModelIndex &index, int role) const
     }
 }
 
+// Swap position 2 apps icon
+void ApplicationsModel::swap(int index1, int index2)
+{
+    m_data.swapItemsAt(index1, index2);
+}
+
 // Add an application item into list model
 void ApplicationsModel::addApplication(ApplicationItem &item)
 {

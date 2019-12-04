@@ -128,17 +128,46 @@ Item {
                     keys: "AppButton"
                     anchors.verticalCenter: parent.verticalCenter
 
-                    onEntered: visualModel.items.move(drag.source.visualIndex,
-                                                      appItem.visualIndex)
+//                    Rectangle {
+//                        color: 'LightBlue'
+//                        anchors.fill: dropArea
+//                    }
 
+                    onEntered: {
+
+                        // Scroll list view to left or right
+                        // when drag out of bounds
+                        if (appItem.moveRight)
+                            appsMenu.currentIndex = appItem.visualIndex + 1
+                        else
+                            appsMenu.currentIndex = appItem.visualIndex - 1
+
+                        if (drag.source.visualIndex !== appItem.visualIndex) {
+                            // Swap 2 app icon in appsModel when drag
+                            appsModel.swap(drag.source.visualIndex,
+                                           appItem.visualIndex)
+
+                            // Move app icon to new position in visual listview
+                            visualModel.items.move(drag.source.visualIndex,
+                                                          appItem.visualIndex)
+                        }
+                    }
+
+                    // Binding property visualIndex of appItem
+                    // when visualIndex value of Delegate changed
                     Binding {
                         target: appItem
                         property: "visualIndex"
                         value: visualIndex
                     }
 
+                    // App item include button, is object can drag
                     Item {
                         id: appItem
+
+                        property int lastX: 0
+
+                        property bool moveRight: false
 
                         property int visualIndex: 0
 
@@ -158,6 +187,11 @@ Item {
                         Drag.keys: "AppButton"
                         Drag.hotSpot.x: appButton.width / 2
 
+                        onXChanged: {
+                            moveRight = lastX < x
+                            lastX = x
+                        }
+
                         Button {
                             id: appButton
 
@@ -165,20 +199,41 @@ Item {
 
                             icon_src: appItem.iconSrc
                             button_title: appItem.appName
+                            editting: statusBar.editting
                             anchors.verticalCenter: parent.verticalCenter
                             anchors.horizontalCenter: parent.horizontalCenter
 
                             drag.target: held ? appItem : undefined
                             drag.axis: Drag.XAxis
 
-                            onClicked: openApplication(appItem.appUrl)
+                            onClicked: {
+                                if (statusBar.editting == false) {
+                                    statusBar.isShowEditButton = false
+                                    openApplication(appItem.appUrl)
+                                }
+                            }
+
+                            pressAndHoldInterval: statusBar.editting ?
+                                                      500 : 1000
 
                             onPressAndHold: {
-                                held = true
-                                focus = false
+                                if (statusBar.editting == false)
+                                    statusBar.isShowEditButton = true
+
+                                if (statusBar.editting) {
+                                    appButton.focus = false
+                                    held = true
+                                }
                             }
 
                             onReleased: held = false
+
+                            Connections {
+                                target: statusBar
+                                onDoneButtonClicked: {
+                                    appButton.held = false
+                                }
+                            }
                         }
 
                         states: State {
@@ -219,6 +274,7 @@ Item {
                 model: visualModel
                 orientation: ListView.Horizontal
                 snapMode: ListView.SnapToItem
+                cacheBuffer: 295*2
 
                 anchors {
                     fill: parent
@@ -249,6 +305,7 @@ Item {
                 height: 10
                 orientation: Qt.Horizontal
                 policy: ScrollBar.AlwaysOn
+                stepSize: 1.0 / (appsModel.rowCount() - 6)
                 snapMode: ScrollBar.SnapOnRelease
 
                 anchors {

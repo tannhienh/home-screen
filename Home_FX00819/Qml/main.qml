@@ -10,7 +10,7 @@ ApplicationWindow {
     visible: true
     visibility: "FullScreen"
 //    width: 1920
-//    height: 1080
+//    height: 700
     title: qsTr("Home Screen")
 
     //-----------------------------------------------------------------------//

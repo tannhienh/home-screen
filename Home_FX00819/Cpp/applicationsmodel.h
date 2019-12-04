@@ -6,6 +6,8 @@
 
 class ApplicationsModel : public QAbstractListModel
 {
+    Q_OBJECT
+
 public:
     // Constructor function
     ApplicationsModel();
@@ -26,6 +28,11 @@ public:
         UrlRole,
         IconPathRole
     };
+
+public slots:
+
+    // Swap position 2 apps icon
+    void swap(int index1, int index2);
 
 protected:
     // Create hash table for roles an application

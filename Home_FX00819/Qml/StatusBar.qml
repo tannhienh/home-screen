@@ -10,8 +10,13 @@ Item {
     id: statusBarItem
 
     property bool isShowBackButton: false
+    property bool isShowEditButton: false
+//    property bool isShowDoneButton: false
+    property alias editting: doneButton.visible
 
     signal backButtonClicked
+    signal editButtonClicked
+    signal doneButtonClicked
 
     height: 85
     anchors {
@@ -26,6 +31,45 @@ Item {
         anchors.fill: parent
         color: "#000000" // Black color
         opacity: 0.3
+    }
+
+    // Edit button
+    Button {
+        id: editButton
+        icon_src: "qrc:/Images/StatusBar/btn_edit"
+        visible: isShowEditButton
+        anchors {
+            left: parent.left
+            leftMargin: 22
+            verticalCenter: parent.verticalCenter
+        }
+
+        onClicked: {
+            editButtonClicked()
+            isShowEditButton = false
+            doneButton.visible = true
+        }
+
+        onReleased: focus = false
+    }
+
+    // Done button
+    Button {
+        id: doneButton
+        icon_src: "qrc:/Images/StatusBar/btn_done"
+        visible: false
+        anchors {
+            left: parent.left
+            leftMargin: 22
+            verticalCenter: parent.verticalCenter
+        }
+
+        onClicked: {
+            doneButtonClicked()
+            doneButton.visible = false
+        }
+
+        onReleased: focus = false
     }
 
     // Back button

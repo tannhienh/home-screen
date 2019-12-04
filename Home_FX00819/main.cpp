@@ -29,6 +29,7 @@ int main(int argc, char *argv[])
     XmlReader xmlReader(XML_APPLICATIONS_PATH_FILE, appsModel);
 
     engine.rootContext()->setContextProperty("appsModel", &appsModel);
+//    engine.rootContext()->setContextProperty("swap", &appsModel.m_data)
     //------------------------------------------------------------------------//
 
     //------------------------------------------------------------------------//

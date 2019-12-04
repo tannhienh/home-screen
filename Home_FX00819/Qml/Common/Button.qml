@@ -9,6 +9,8 @@ MouseArea {
     // Title for button
     property string button_title
 
+    property bool editting: false
+
     // Mouse area on button icon
     implicitWidth: buttonIcon.implicitWidth
     implicitHeight: buttonIcon.implicitHeight
@@ -38,19 +40,28 @@ MouseArea {
     // Change state to Pressed when pressed behavior
     onPressed: {
         button.focus = true
-        button.state = "Pressed"
+
+        if (!editting) {
+            button.state = "Pressed"
+        }
 
     }
 
     // Change state to Pressed when focus behavior
     onReleased: {
-        button.focus = true
-        button.state = "Focus"
+
+        if (editting)
+            button.focus = false
+
+        if (!editting) {
+            button.focus = true
+            button.state = "Focus"
+        }
     }
 
     onCanceled: {
-        button.focus = true
-        button.state = "Focus"
+            button.focus = true
+            button.state = "Focus"
     }
 
     // When focus changed
