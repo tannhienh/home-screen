@@ -1,14 +1,13 @@
 #include "xmlwriter.h"
 #include <QDebug>
 
-XmlWriter::XmlWriter(QString filePath, ApplicationsModel &appsModel)
+XmlWriter::XmlWriter(QString filePath, ApplicationsModel *appsModel)
 {
     m_filePath = filePath;
-    m_appsModel = new ApplicationsModel;
-    m_appsModel = &appsModel;
+    m_appsModel = appsModel;
 }
 
-void XmlWriter::XmlReadModel(ApplicationsModel *appsModel)
+void XmlWriter::readModel(QDomDocument &doc, ApplicationsModel *appsModel)
 {
     QDomElement root = doc.createElement("APPLICATIONS");
     doc.appendChild(root);
@@ -59,7 +58,8 @@ void XmlWriter::writeToFile()
     QFile file(m_filePath);
 
     if (file.open(QIODevice::WriteOnly)) {
-        XmlReadModel(m_appsModel);
+        QDomDocument doc;
+        readModel(doc, m_appsModel);
         QTextStream textStream(&file);
         textStream << doc.toString();
     } else

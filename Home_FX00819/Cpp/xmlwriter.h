@@ -13,17 +13,16 @@ class XmlWriter : public QObject
 
 public:
 
-    XmlWriter(QString filePath, ApplicationsModel &appsModel);
+    XmlWriter(QString filePath, ApplicationsModel *appsModel);
 
-    void XmlReadModel(ApplicationsModel *appsModel);
+    void readModel(QDomDocument &doc, ApplicationsModel *appsModel);
 
 public slots:
     void writeToFile();
 
 private:
-    QDomDocument doc;
     QString m_filePath;
-    ApplicationsModel *m_appsModel;
+    ApplicationsModel *m_appsModel = nullptr;
 };
 
 #endif // XMLWRITER_H

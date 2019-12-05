@@ -30,7 +30,7 @@ int main(int argc, char *argv[])
     XmlReader xmlReader(XML_APPS_FILE_PATH, appsModel);
 
     // XML Writer
-    XmlWriter xmlWriter(XML_APPS_FILE_PATH, appsModel);
+    XmlWriter xmlWriter(XML_APPS_FILE_PATH, &appsModel);
     engine.rootContext()->setContextProperty("xmlWriter", &xmlWriter);
 
     engine.rootContext()->setContextProperty("appsModel", &appsModel);
