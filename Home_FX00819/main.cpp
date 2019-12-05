@@ -6,9 +6,10 @@
 #include "Apps/MusicPlayer/cpp/playlistmodel.h"
 #include "Cpp/applicationsmodel.h"
 #include "Cpp/xmlreader.h"
+#include "Cpp/xmlwriter.h"
 #include "Cpp/climatemodel.h"
 
-#define XML_APPLICATIONS_PATH_FILE "../Home_FX00819/Xml/applications.xml"
+#define XML_APPS_FILE_PATH "../Home_FX00819/Xml/applications.xml"
 
 int main(int argc, char *argv[])
 {
@@ -26,10 +27,13 @@ int main(int argc, char *argv[])
     ApplicationsModel appsModel;
 
     // XML Reader
-    XmlReader xmlReader(XML_APPLICATIONS_PATH_FILE, appsModel);
+    XmlReader xmlReader(XML_APPS_FILE_PATH, appsModel);
+
+    // XML Writer
+    XmlWriter xmlWriter(XML_APPS_FILE_PATH, appsModel);
+    engine.rootContext()->setContextProperty("xmlWriter", &xmlWriter);
 
     engine.rootContext()->setContextProperty("appsModel", &appsModel);
-//    engine.rootContext()->setContextProperty("swap", &appsModel.m_data)
     //------------------------------------------------------------------------//
 
     //------------------------------------------------------------------------//

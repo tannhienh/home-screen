@@ -1,8 +1,8 @@
 #ifndef XMLREADER_H
 #define XMLREADER_H
 
-#include <QtXml>
 #include <QFile>
+#include <QDomDocument>
 #include "applicationsmodel.h"
 
 class XmlReader

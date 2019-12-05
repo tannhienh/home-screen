@@ -22,6 +22,8 @@ QVariant ApplicationsModel::data(const QModelIndex &index, int role) const
 
     switch (role)
     {
+    case IdRole:
+        return item.id();
     case TitleRole:
         return item.title();
     case UrlRole:
@@ -50,6 +52,7 @@ QHash<int, QByteArray> ApplicationsModel::roleNames() const
 {
     QHash<int, QByteArray> roles;
 
+    roles[IdRole] = "id";
     roles[TitleRole] = "title";
     roles[UrlRole] = "url";
     roles[IconPathRole] = "iconPath";

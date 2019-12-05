@@ -32,19 +32,19 @@ bool XmlReader::ReadXmlFile(QString filePath)
 void XmlReader::ParseXmlFile(ApplicationsModel &appsModel)
 {
     // Extract the root markup
-    QDomElement root=xmlDocument.documentElement();
+    QDomElement root = xmlDocument.documentElement();
 
     // Get the first child of the root (Markup COMPONENT is expected)
-    QDomElement Component=root.firstChild().toElement();
+    QDomElement Component = root.firstChild().toElement();
 
     // Loop while there is a child
     while(!Component.isNull())
     {
         // Check if the child tag name is COMPONENT
-        if (Component.tagName()=="APP")
+        if (Component.tagName() == "APP")
         {
             // Read the component ID
-            QString ID=Component.attribute("ID","No ID");
+            QString id = Component.attribute("ID","No ID");
 
             // Get the first child of the component
             QDomElement Child=Component.firstChild().toElement();
@@ -69,7 +69,7 @@ void XmlReader::ParseXmlFile(ApplicationsModel &appsModel)
             }
 
             // Create application item
-            ApplicationItem item(title,url,iconPath);
+            ApplicationItem item(id, title, url, iconPath);
 
             // Add application item into apps model
             appsModel.addApplication(item);

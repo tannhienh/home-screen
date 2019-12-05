@@ -2,6 +2,7 @@
 #define APPLICATIONSMODEL_H
 
 #include <QAbstractListModel>
+
 #include "applicationitem.h"
 
 class ApplicationsModel : public QAbstractListModel
@@ -24,13 +25,13 @@ public:
 
     // Roles info an application
     enum Roles {
-        TitleRole = Qt::UserRole + 1,
+        IdRole = Qt::UserRole + 1,
+        TitleRole,
         UrlRole,
         IconPathRole
     };
 
 public slots:
-
     // Swap position 2 apps icon
     void swap(int index1, int index2);
 

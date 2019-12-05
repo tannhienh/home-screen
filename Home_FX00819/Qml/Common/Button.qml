@@ -39,29 +39,25 @@ MouseArea {
 
     // Change state to Pressed when pressed behavior
     onPressed: {
-        button.focus = true
-
-        if (!editting) {
+        if (editting == false) {
+            button.focus = true
             button.state = "Pressed"
         }
-
     }
 
     // Change state to Pressed when focus behavior
     onReleased: {
-
-        if (editting)
-            button.focus = false
-
-        if (!editting) {
+        if (editting == false) {
             button.focus = true
             button.state = "Focus"
         }
     }
 
     onCanceled: {
+        if (editting == false) {
             button.focus = true
             button.state = "Focus"
+        }
     }
 
     // When focus changed

@@ -1,11 +1,19 @@
 #include "applicationitem.h"
 
 // Create new application item
-ApplicationItem::ApplicationItem(QString title, QString url, QString iconPath)
+ApplicationItem::ApplicationItem(QString id, QString title, QString url,
+                                 QString iconPath)
 {
+    m_id = id;
     m_title = title;
     m_url = url;
     m_iconPath = iconPath;
+}
+
+// Get Id application
+QString ApplicationItem::id() const
+{
+    return m_id;
 }
 
 // Get title application

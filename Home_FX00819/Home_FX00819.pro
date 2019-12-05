@@ -17,6 +17,7 @@ SOURCES += \
         Cpp/applicationsmodel.cpp \
         Cpp/climatemodel.cpp \
         Cpp/xmlreader.cpp \
+        Cpp/xmlwriter.cpp \
         main.cpp
 
 RESOURCES += \
@@ -35,7 +36,8 @@ HEADERS += \
     Cpp/applicationitem.h \
     Cpp/applicationsmodel.h \
     Cpp/climatemodel.h \
-    Cpp/xmlreader.h \
+    Cpp/xmlreader.h \ \
+    Cpp/xmlwriter.h
 
 # link taglib libraries
 LIBS += -ltag

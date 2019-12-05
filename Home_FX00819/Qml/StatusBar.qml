@@ -11,7 +11,6 @@ Item {
 
     property bool isShowBackButton: false
     property bool isShowEditButton: false
-//    property bool isShowDoneButton: false
     property alias editting: doneButton.visible
 
     signal backButtonClicked
@@ -67,6 +66,7 @@ Item {
         onClicked: {
             doneButtonClicked()
             doneButton.visible = false
+            xmlWriter.writeToFile()
         }
 
         onReleased: focus = false
