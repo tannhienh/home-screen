@@ -19,7 +19,6 @@ public:
 
 public slots:
     void writeToFile();
-    void test();
 
 private:
     QDomDocument doc;

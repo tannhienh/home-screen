@@ -67,8 +67,3 @@ void XmlWriter::writeToFile()
 
     file.close();
 }
-
-void XmlWriter::test()
-{
-    qDebug() << "Tested";
-}
