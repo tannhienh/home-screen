@@ -74,7 +74,6 @@
         <file>Images/StatusBar/indi_wifi_4.png</file>
         <file>Images/WidgetCommon/bg_widget_f.png</file>
         <file>Images/WidgetCommon/bg_widget_p.png</file>
-        <file>Apps/MusicPlayer/images/album_art.png</file>
         <file>Apps/MusicPlayer/images/back.png</file>
         <file>Apps/MusicPlayer/images/background.png</file>
         <file>Apps/MusicPlayer/images/center_point.png</file>
@@ -98,13 +97,12 @@
         <file>Apps/MusicPlayer/images/repeat_hold.png</file>
         <file>Apps/MusicPlayer/images/shuffle.png</file>
         <file>Apps/MusicPlayer/images/shuffle_hold.png</file>
-        <file>Apps/MusicPlayer/images/us_flag.png</file>
-        <file>Apps/MusicPlayer/images/vn_flag.png</file>
         <file>Images/StatusBar/btn_edit_f.png</file>
         <file>Images/StatusBar/btn_edit_n.png</file>
         <file>Images/StatusBar/btn_edit_p.png</file>
         <file>Images/StatusBar/btn_done_f.png</file>
         <file>Images/StatusBar/btn_done_n.png</file>
         <file>Images/StatusBar/btn_done_p.png</file>
+        <file>Apps/MusicPlayer/images/default_cover_art.jpg</file>
     </qresource>
 </RCC>

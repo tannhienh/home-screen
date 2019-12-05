@@ -157,7 +157,7 @@ QString Player::getAlbumArt(QUrl url)
         }
     }
     else
-        return "qrc:/Apps/MusicPlayer/images/album_art.png";
+        return "qrc:/Apps/MusicPlayer/images/default_cover_art.jpg";
 
-    return "qrc:/Apps/MusicPlayer/images/album_art.png";
+    return "qrc:/Apps/MusicPlayer/images/default_cover_art.jpg";
 }
