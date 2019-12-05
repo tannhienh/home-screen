@@ -17,8 +17,16 @@ void XmlWriter::XmlReadModel(ApplicationsModel *appsModel)
         for (int i = 0; i < appsModel->rowCount(); i++) {
             QDomElement app = doc.createElement("APP");
 
+            // Generation id
+            QString id = "";
+            if (i < 9)
+                id = "00";
+            else if (i < 99)
+                id = "0";
+
+            id += QString::number(i+1);
+
             // App Id
-            QString id = appsModel->data(appsModel->index(i, 0), 257).toString();
             app.setAttribute("ID", id);
             root.appendChild(app);
 

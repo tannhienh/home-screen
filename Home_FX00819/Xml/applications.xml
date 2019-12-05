@@ -29,4 +29,34 @@
   <URL>qrc:/Apps/Settings/Settings.qml</URL>
   <ICON_PATH>qrc:/Images/Menu/btn_menu_settings</ICON_PATH>
  </APP>
+ <APP ID="001">
+  <TITLE>Map</TITLE>
+  <URL>qrc:/Apps/Map/Map.qml</URL>
+  <ICON_PATH>qrc:/Images/Menu/btn_menu_map</ICON_PATH>
+ </APP>
+ <APP ID="002">
+  <TITLE>Phone</TITLE>
+  <URL>qrc:/Apps/Phone/Phone.qml</URL>
+  <ICON_PATH>qrc:/Images/Menu/btn_menu_phone</ICON_PATH>
+ </APP>
+ <APP ID="003">
+  <TITLE>Music</TITLE>
+  <URL>qrc:/Apps/MusicPlayer/qml/MusicPlayer.qml</URL>
+  <ICON_PATH>qrc:/Images/Menu/btn_menu_music</ICON_PATH>
+ </APP>
+ <APP ID="004">
+  <TITLE>Videos</TITLE>
+  <URL>qrc:/Apps/Videos/Videos.qml</URL>
+  <ICON_PATH>qrc:/Images/Menu/btn_menu_videos</ICON_PATH>
+ </APP>
+ <APP ID="005">
+  <TITLE>Radio</TITLE>
+  <URL>qrc:/Apps/Radio/Radio.qml</URL>
+  <ICON_PATH>qrc:/Images/Menu/btn_menu_radio</ICON_PATH>
+ </APP>
+ <APP ID="006">
+  <TITLE>Settings</TITLE>
+  <URL>qrc:/Apps/Settings/Settings.qml</URL>
+  <ICON_PATH>qrc:/Images/Menu/btn_menu_settings</ICON_PATH>
+ </APP>
 </APPLICATIONS>
