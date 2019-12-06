@@ -5,6 +5,24 @@ import QtGraphicalEffects 1.13
 
 Item {
 
+    // Get Song title dependent from albumArtView
+    function getSongTitle() {
+        if (playlistModel.rowCount() > 0)
+            return (albumArtView.currentItem.getData.title === ""
+                    ? "Unknown" : albumArtView.currentItem.getData.title)
+          else
+            return ""
+    }
+
+    // Get Single name dependent from albumArtView
+    function getSingleName() {
+        if (playlistModel.rowCount() > 0)
+            return (albumArtView.currentItem.getData.singer === ""
+                    ? "Unknown" : albumArtView.currentItem.getData.singer)
+          else
+            return ""
+    }
+
     // Media Info
     Item {
         id: mediaInfo
@@ -39,13 +57,7 @@ Item {
             font.pixelSize: 33 // mediaInfo.height * 0.32 = 33.28
             font.family: cantarell.name
 
-            text: {
-                if (playlistModel.rowCount() > 0)
-                    return (albumArtView.currentItem.getData.title === ""
-                            ? "Unknown" : albumArtView.currentItem.getData.title)
-                  else
-                    return ""
-            }
+            text: getSongTitle()
 
             anchors {
                 top: parent.top
@@ -57,19 +69,13 @@ Item {
 
         // Singer
         Text {
-            id: songSinger
+            id: singleName
 
             color: "#D3D3D3"
             font.pixelSize: 28 // mediaInfo.height * 0.27
             font.family: cantarell.name
 
-            text: {
-                if (playlistModel.rowCount() > 0)
-                    return (albumArtView.currentItem.getData.singer === ""
-                            ? "Unknown" : albumArtView.currentItem.getData.singer)
-                  else
-                    return ""
-            }
+            text: getSingleName()
 
             anchors {
                 top: songTitle.bottom
@@ -147,13 +153,13 @@ Item {
 
                 DropShadow {
                     anchors.fill: albumPicture
+                    source: albumPicture
                     color: "#aa000000"
                     radius: 80
                     samples: 100
                     horizontalOffset: 20
                     verticalOffset: 80
                     spread: 0
-                    source: albumPicture
                 }
 
                 transform: Scale {
@@ -202,7 +208,7 @@ Item {
                     albumArtView.currentIndex = currentIndex
                     player.playlist.currentIndex = currentIndex
                 }
-                changeText.targets = [songTitle, songSinger]
+                changeText.targets = [songTitle, singleName]
                 changeText.restart()
             }
 

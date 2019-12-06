@@ -6,17 +6,14 @@ MouseArea {
     property string icon_on: ""
     property string icon_off: ""
     property bool status: false
-    property variant m_width
-    property variant m_height
+    property  alias image: image
 
-    implicitWidth: img.width
-    implicitHeight: img.height
+    implicitWidth: image.width
+    implicitHeight: image.height
 
     Image {
-        id: img
+        id: image
         source: root.status === true ? icon_on : icon_off
-        width: m_width
-        height: m_height
     }
 
     onClicked: {
