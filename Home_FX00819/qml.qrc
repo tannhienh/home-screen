@@ -19,5 +19,6 @@
         <file>Apps/Settings/Settings.qml</file>
         <file>Apps/Videos/Videos.qml</file>
         <file>Apps/Map/Map.qml</file>
+        <file>Qml/AppsMenu.qml</file>
     </qresource>
 </RCC>

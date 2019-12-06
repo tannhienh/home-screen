@@ -6,7 +6,8 @@ import QtGraphicalEffects 1.13
 Item {
 
     // Get Song title dependent from albumArtView
-    function getSongTitle() {
+    function getSongTitle()
+    {
         if (playlistModel.rowCount() > 0)
             return (albumArtView.currentItem.getData.title === ""
                     ? "Unknown" : albumArtView.currentItem.getData.title)
@@ -15,7 +16,8 @@ Item {
     }
 
     // Get Single name dependent from albumArtView
-    function getSingleName() {
+    function getSingleName()
+    {
         if (playlistModel.rowCount() > 0)
             return (albumArtView.currentItem.getData.singer === ""
                     ? "Unknown" : albumArtView.currentItem.getData.singer)
