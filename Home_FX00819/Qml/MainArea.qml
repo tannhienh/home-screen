@@ -44,7 +44,7 @@ Item {
                 }
 
                 WidgetHighlight {
-                    id: mapFocus
+                    id: mapHighlight
                     anchors.fill: parent
                     onClicked: {
                         if (statusBar.editting === false) {
@@ -68,14 +68,14 @@ Item {
                 anchors.centerIn: parent
 
                 WidgetHighlight {
-                    id: climateFocus
+                    id: climateHighlight
                     anchors.fill: parent
                     disable: true
                 }
 
                 // Key navigation
                 Keys.onLeftPressed: mapWidget
-                Keys.onRightPressed: musicFocus
+                Keys.onRightPressed: musicHighlight
             }
 
             // Music player Widget
@@ -87,17 +87,6 @@ Item {
                     left: climateWidget.right
                     leftMargin: 22
                     verticalCenter: parent.verticalCenter
-                }
-
-                WidgetHighlight {
-                    id: musicFocus
-                    anchors.fill: parent
-                    onClicked: {
-                        if (statusBar.editting === false) {
-                            statusBar.isShowEditButton = false
-                            openApplication("qrc:/Apps/MusicPlayer/qml/MusicPlayer.qml")
-                        }
-                    }
                 }
 
                 // Key navigation
@@ -345,7 +334,7 @@ Item {
                     from: scrollBar.visualPosition
                     to: scrollBar.visualPosition + scrollBar.stepValue
                     duration: 400
-                    easing.type: Easing.InOutQuad
+                    easing.type: Easing.Linear
                 }
 
                 PropertyAnimation {
@@ -355,13 +344,13 @@ Item {
                     from: scrollBar.visualPosition
                     to: scrollBar.visualPosition - scrollBar.stepValue
                     duration: 400
-                    easing.type: Easing.InOutQuad
+                    easing.type: Easing.Linear
                 }
             }
 
             Timer {
                 id: scrollTimer
-                interval: 500
+                interval: 600
                 repeat: true
                 running: false
                 onTriggered: {
