@@ -114,6 +114,8 @@ Item {
         Item {
             id: menuArea
 
+            property bool moveRight: false
+
             anchors {
                 top: widgetsArea.bottom
                 left: parent.left
@@ -139,13 +141,6 @@ Item {
 
                     onEntered: {
 
-                        // Scroll list view to left or right
-                        // when drag out of bounds
-                        if (appItem.moveRight)
-                            appsMenu.currentIndex = appItem.visualIndex + 1
-                        else
-                            appsMenu.currentIndex = appItem.visualIndex - 1
-
                         if (drag.source.visualIndex !== appItem.visualIndex) {
                             // Swap 2 app icon in appsModel when drag
                             appsModel.swap(drag.source.visualIndex,
@@ -169,10 +164,6 @@ Item {
                     Item {
                         id: appItem
 
-                        property int lastX: 0
-
-                        property bool moveRight: false
-
                         property int visualIndex: 0
 
                         property var iconSrc:
@@ -190,10 +181,17 @@ Item {
                         Drag.source: dropArea
                         Drag.keys: "AppButton"
                         Drag.hotSpot.x: appButton.width / 2
+                        Drag.hotSpot.y: appButton.height / 2
 
                         onXChanged: {
-                            moveRight = lastX < x
-                            lastX = x
+                            if (x < 0) {
+                                menuArea.moveRight = false
+                                scrollTimer.running = true
+                            } else if ((x + appItem.width) > 1920) {
+                                menuArea.moveRight = true
+                                scrollTimer.running = true
+                            } else
+                                scrollTimer.running = false
                         }
 
                         Button {
@@ -226,6 +224,7 @@ Item {
                                     appButton.focus = false
                                     appItem.scale = 0.9
                                     appButton.held = true
+                                    appsMenu.snapMode = ListView.NoSnap
                                 }
                             }
 
@@ -233,6 +232,7 @@ Item {
                                 if (statusBar.editting) {
                                     appItem.scale = 1.0
                                     appButton.held = false
+                                    appsMenu.snapMode = ListView.SnapToItem
                                 }
                             }
 
@@ -294,7 +294,7 @@ Item {
                 displaced: Transition {
                     NumberAnimation {
                         properties: "x"
-                        easing.type: Easing.OutQuad
+                        easing.type: Easing.InOutQuad
                     }
                 }
 
@@ -308,6 +308,8 @@ Item {
             // Scroll bar
             ScrollBar {
                 id: scrollBar
+
+                property var stepValue: (1 - scrollBar.visualSize) / (appsModel.rowCount() - 6)
                 parent: appsMenu.parent
                 height: 10
                 orientation: Qt.Horizontal
@@ -328,9 +330,46 @@ Item {
                 }
 
                 contentItem: Rectangle {
+                    id: contentItem
                     anchors.top: parent.top
                     anchors.bottom: parent.bottom
                     color: "#7deef8"
+                }
+
+                PropertyAnimation {
+                    id: increasePosition
+                    target: scrollBar
+                    property: "position"
+                    from: scrollBar.visualPosition
+                    to: scrollBar.visualPosition + scrollBar.stepValue
+                    duration: 400
+                    easing.type: Easing.InOutQuad
+                }
+
+                PropertyAnimation {
+                    id: decreasePosition
+                    target: scrollBar
+                    property: "position"
+                    from: scrollBar.visualPosition
+                    to: scrollBar.visualPosition - scrollBar.stepValue
+                    duration: 400
+                    easing.type: Easing.InOutQuad
+                }
+            }
+
+            Timer {
+                id: scrollTimer
+                interval: 500
+                repeat: true
+                running: false
+                onTriggered: {
+                    if (menuArea.moveRight && scrollBar.visualPosition
+                            + scrollBar.visualSize < 1) {
+                        increasePosition.restart()
+                    }
+                    else if (!menuArea.moveRight && scrollBar.visualPosition >= scrollBar.stepValue) {
+                        decreasePosition.restart()
+                    }
                 }
             }
         }

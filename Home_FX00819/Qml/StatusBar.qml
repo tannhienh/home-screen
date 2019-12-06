@@ -194,7 +194,7 @@ Item {
         // assign minute current for timeArea.minute - minute format: mm
         // assign date current for dateArea.date - date format: MMM. dd
         Timer {
-            interval: 5
+            interval: 16
             repeat: true
             running: true
             onTriggered: {
