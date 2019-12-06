@@ -309,7 +309,9 @@ Item {
             ScrollBar {
                 id: scrollBar
 
-                property var stepValue: (1 - scrollBar.visualSize) / (appsModel.rowCount() - 6)
+                property var stepValue: (1 - scrollBar.visualSize) /
+                                        (appsModel.rowCount() - 6)
+
                 parent: appsMenu.parent
                 height: 10
                 orientation: Qt.Horizontal
@@ -367,7 +369,8 @@ Item {
                             + scrollBar.visualSize < 1) {
                         increasePosition.restart()
                     }
-                    else if (!menuArea.moveRight && scrollBar.visualPosition >= scrollBar.stepValue) {
+                    else if (!menuArea.moveRight && (scrollBar.visualPosition >=
+                             scrollBar.stepValue)) {
                         decreasePosition.restart()
                     }
                 }
