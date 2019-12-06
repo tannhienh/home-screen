@@ -369,8 +369,8 @@ Item {
                             + scrollBar.visualSize < 1) {
                         increasePosition.restart()
                     }
-                    else if (!menuArea.moveRight && (scrollBar.visualPosition >=
-                             scrollBar.stepValue)) {
+                    else if (!menuArea.moveRight && (scrollBar.visualPosition
+                                                     >= scrollBar.stepValue)) {
                         decreasePosition.restart()
                     }
                 }
