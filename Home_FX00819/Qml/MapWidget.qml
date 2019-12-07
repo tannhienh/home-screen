@@ -15,7 +15,7 @@ Item {
         anchors.fill: parent
         plugin: mapPlugin
         center: QtPositioning.coordinate(10.78, 106.703)
-        zoomLevel: 14
+        zoomLevel: 15
         copyrightsVisible: false
         Component.onCompleted: {
             mapView.addMapItem(marker)
@@ -24,13 +24,21 @@ Item {
 
     MapQuickItem {
         id: marker
-        anchorPoint.x: carIcon.width / 2
-        anchorPoint.y: carIcon.height / 2
+        anchorPoint.x: placeHolder.width / 2
+        anchorPoint.y: placeHolder.height / 2
         coordinate: QtPositioning.coordinate(10.78, 106.703)
-
         sourceItem: Image {
-            id: carIcon
-            source: "qrc:/Images/Map/car_icon.png"
+            id: placeHolder
+            source: "qrc:/Images/Map/place_holder.png"
+            width: implicitWidth * 0.6
+            height: implicitHeight * 0.6
+
+            Image {
+                source: "qrc:/Images/Map/car_icon.png"
+                anchors.centerIn: placeHolder
+                width: implicitWidth * 0.6
+                height: implicitHeight * 0.6
+            }
         }
     }
 }

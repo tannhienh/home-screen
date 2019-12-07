@@ -21,9 +21,6 @@
         <file>Images/Climate/widget_climate_wind_level_8.png</file>
         <file>Images/Climate/widget_climate_wind_level_9.png</file>
         <file>Images/Home/home_bg.png</file>
-        <file>Images/Map/car_icon.png</file>
-        <file>Images/Map/map_full.png</file>
-        <file>Images/Map/map_widget.png</file>
         <file>Images/Menu/btn_menu_map_f.png</file>
         <file>Images/Menu/btn_menu_map_n.png</file>
         <file>Images/Menu/btn_menu_map_p.png</file>
@@ -104,5 +101,9 @@
         <file>Images/StatusBar/btn_done_n.png</file>
         <file>Images/StatusBar/btn_done_p.png</file>
         <file>Apps/MusicPlayer/images/default_cover_art.jpg</file>
+        <file>Images/Map/place_holder.png</file>
+        <file>Images/Map/car_icon.png</file>
+        <file>Images/Map/current_location.png</file>
+        <file>Images/Map/location_sign.png</file>
     </qresource>
 </RCC>
