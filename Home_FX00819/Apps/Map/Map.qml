@@ -1,7 +1,7 @@
-import QtQuick 2.13
-import QtQuick.Controls 2.13
+﻿import QtQuick 2.13
 import QtLocation 5.13
 import QtPositioning 5.13
+import QtQuick.Controls 2.13
 import QtGraphicalEffects 1.13
 
 Item {
@@ -20,14 +20,10 @@ Item {
         sourceItem: Image {
             id: placeHolder
             source: "qrc:/Images/Map/place_holder.png"
-            width: implicitWidth * 0.7
-            height: implicitHeight * 0.7
 
             Image {
                 source: "qrc:/Images/Map/car_icon.png"
                 anchors.centerIn: placeHolder
-                width: implicitWidth * 0.7
-                height: implicitHeight * 0.7
             }
         }
     }
@@ -55,35 +51,60 @@ Item {
             }
         }
 
-        Button {
-            id: zoonIn
+        Rectangle {
+            id: locateButton
             width: 50
             height: 50
-            text: "+"
+            color: "#FFFFFF"
+            radius: 50
+
+            anchors {
+                bottom: zoomIn.top
+                bottomMargin: 20
+                horizontalCenter: zoomIn.horizontalCenter
+            }
+
+            Image {
+                source: "qrc:/Images/Map/current_location.png"
+                anchors.centerIn: locateButton
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                onPressed: locateButton.color = "#d3d3d3"
+                onReleased: locateButton.color = "#FFFFFF"
+            }
+        }
+
+        Button {
+            id: zoomIn
+            width: 50
+            height: 50
+            text: "+" // color: #292A2F
             font.pixelSize: 30
 
             background: Rectangle {
-                color: zoonIn.down ? "#d3d3d3" : "#FFFFFF"
+                color: zoomIn.down ? "#d3d3d3" : "#FFFFFF"
             }
 
             anchors {
-                bottom: zoonOut.top
+                bottom: zoomOut.top
                 bottomMargin: 20
-               horizontalCenter: zoonOut.horizontalCenter
+                horizontalCenter: zoomOut.horizontalCenter
             }
 
             onClicked: zoomInAnimation.restart()
         }
 
         Button {
-            id: zoonOut
+            id: zoomOut
             width: 50
             height: 50
-            text: "-"
+            text: "-" // color: #292A2F
             font.pixelSize: 30
 
             background: Rectangle {
-                color: zoonOut.down ? "#d3d3d3" : "#FFFFFF"
+                color: zoomOut.down ? "#d3d3d3" : "#FFFFFF"
             }
 
             anchors {
@@ -94,6 +115,30 @@ Item {
             }
 
             onClicked: zoomOutAnimation.restart()
+        }
+
+        DropShadow {
+            anchors.fill: locateButton
+            source: locateButton
+            color: "#aa000000"
+            radius: 20
+            samples: 31
+        }
+
+        DropShadow {
+            anchors.fill: zoomIn
+            source: zoomIn
+            color: "#aa000000"
+            radius: 20
+            samples: 31
+        }
+
+        DropShadow {
+            anchors.fill: zoomOut
+            source: zoomOut
+            color: "#aa000000"
+            radius: 20
+            samples: 31
         }
 
         PropertyAnimation {
@@ -116,158 +161,13 @@ Item {
         }
     }
 
-    // Guide Area
-    Item {
+    GuideArea {
         id: guideItem
-        anchors.top: parent.top
-        anchors.left: parent.left
-        anchors.bottom: parent.bottom
         width: parent.width / 3.5
-
-        // Guide background area
-        Rectangle {
-            id: guideBg
-            color: "#FFFFFF"
-            anchors.fill: parent
-        }
-
-        Item {
-            id: placeChooseItem
-            height: parent.height * 0.2
-            anchors {
-                top: parent.top
-                left: parent.left
-                right: parent.right
-            }
-
-            Rectangle {
-                id: placeChooseBg
-                color: "#6065EE"
-                anchors.fill: parent
-            }
-
-            Image {
-                id: currentLocationIcon
-                source: "qrc:/Images/Map/current_location.png"
-                anchors {
-                    top: parent.top
-                    topMargin: 40
-                    left: parent.left
-                    leftMargin: 30
-                }
-            }
-
-            TextField {
-                id: currentText
-                placeholderText: qsTr("Choose starting location")
-                font.pixelSize: 20
-                color: "#515356"
-                height: 50
-                anchors {
-                    left: currentLocationIcon.right
-                    leftMargin: 30
-                    right: parent.right
-                    rightMargin: 30
-                    verticalCenter: currentLocationIcon.verticalCenter
-                }
-
-                background: Rectangle {
-                    color: "#FFFFFF"
-                    border.color: "#D6D6D6"
-                    radius: 4
-                }
-            }
-
-            Image {
-                id: placeHolderIcon
-                source: "qrc:/Images/Map/location_sign.png"
-                width: implicitWidth * 0.5
-                height: implicitHeight * 0.5
-                anchors {
-                    bottom: parent.bottom
-                    bottomMargin: 40
-                    horizontalCenter: currentLocationIcon.horizontalCenter
-                }
-            }
-
-            TextField {
-                id: destinationText
-                placeholderText: qsTr("Choose destination")
-                font.pixelSize: 20
-                color: "#515356"
-                height: 50
-                anchors {
-                    left: placeHolderIcon.right
-                    leftMargin: 30
-                    right: parent.right
-                    rightMargin: 30
-                    verticalCenter: placeHolderIcon.verticalCenter
-                }
-
-                background: Rectangle {
-                    color: "#FFFFFF"
-                    border.color: "#D6D6D6"
-                    radius: 4
-                }
-            }
-
-            Column {
-                id: dotColumn
-                width: 5
-                spacing: height / 5
-                anchors {
-                    top: currentLocationIcon.bottom
-                    topMargin: dotColumn.width
-                    bottom: placeHolderIcon.top
-                    bottomMargin: dotColumn.width
-                    horizontalCenter: currentLocationIcon.horizontalCenter
-                }
-
-                Rectangle {
-                    color: "#CDE2FF"
-                    width: parent.width
-                    height: width
-                    radius: 50
-                }
-                Rectangle {
-                    color: "#CDE2FF"
-                    width: parent.width
-                    height: width
-                    radius: 50
-                }
-                Rectangle {
-                    color: "#CDE2FF"
-                    width: parent.width
-                    height: width
-                    radius: 50
-                }
-            }
-
-            DropShadow {
-                anchors.fill: placeHolderIcon
-                source: placeHolderIcon
-                color: "#aa000000"
-                radius: 10
-                samples: 21
-                verticalOffset: 2
-            }
-        }
-
-        // Shadown for guide area on right edge
-        DropShadow {
-            anchors.fill: guideBg
-            source: guideBg
-            color: "#aa000000"
-            radius: 20
-            samples: 31
-        }
-
-        DropShadow {
-            anchors.fill: placeChooseItem
-            source: placeChooseItem
-            color: "#aa000000"
-            radius: 20
-            samples: 31
+        anchors {
+            top: parent.top
+            left: parent.left
+            bottom: parent.bottom
         }
     }
 }

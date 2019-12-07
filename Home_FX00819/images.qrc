@@ -101,9 +101,23 @@
         <file>Images/StatusBar/btn_done_n.png</file>
         <file>Images/StatusBar/btn_done_p.png</file>
         <file>Apps/MusicPlayer/images/default_cover_art.jpg</file>
-        <file>Images/Map/place_holder.png</file>
-        <file>Images/Map/car_icon.png</file>
         <file>Images/Map/current_location.png</file>
-        <file>Images/Map/location_sign.png</file>
+        <file>Images/Map/arrow_1.png</file>
+        <file>Images/Map/arrow_2.png</file>
+        <file>Images/Map/car_icon.png</file>
+        <file>Images/Map/place_holder.png</file>
+        <file>Images/Map/destination_location.png</file>
+        <file>Images/Map/start_location.png</file>
+        <file>Images/Map/down_arrow.png</file>
+        <file>Images/Map/up_arrow.png</file>
+        <file>Images/Map/bank.png</file>
+        <file>Images/Map/bar.png</file>
+        <file>Images/Map/coffee.png</file>
+        <file>Images/Map/holtel.png</file>
+        <file>Images/Map/hospital.png</file>
+        <file>Images/Map/restaurant.png</file>
+        <file>Images/Map/gas_station.png</file>
+        <file>Images/Map/parking.png</file>
+        <file>Images/Map/supermarket.png</file>
     </qresource>
 </RCC>

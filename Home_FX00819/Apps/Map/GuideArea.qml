@@ -1,0 +1,447 @@
+import QtQuick 2.13
+import QtQuick.Controls 2.13
+import QtGraphicalEffects 1.13
+
+// Guide Area
+Item {
+    id: guideItem
+
+    // Guide background area
+    Rectangle {
+        id: guideBg
+        color: "#FFFFFF"
+        anchors.fill: parent
+    }
+
+    //--------------------------------------------------------------------//
+    // Begin Choose place location
+    //--------------------------------------------------------------------//
+    Item {
+        id: placeChooseItem
+        height: parent.height * 0.2
+        anchors {
+            top: parent.top
+            left: parent.left
+            right: parent.right
+        }
+
+        Rectangle {
+            id: placeChooseBg
+            color: "#6065EE"
+            anchors.fill: parent
+        }
+
+        // current location icon
+        Image {
+            id: startLocationButton
+            source: "qrc:/Images/Map/start_location.png"
+            anchors {
+                top: parent.top
+                topMargin: 40
+                left: parent.left
+                leftMargin: 20
+            }
+        }
+
+        // Text input start location
+        TextField {
+            id: currentText
+            placeholderText: qsTr("Choose starting location")
+            font.pixelSize: 20
+            color: "#515356"
+            height: 50
+            anchors {
+                left: startLocationButton.right
+                leftMargin: 20
+                right: parent.right
+                rightMargin: 40
+                verticalCenter: startLocationButton.verticalCenter
+            }
+
+            background: Rectangle {
+                color: "#FFFFFF"
+                border.color: "#D6D6D6"
+                radius: 4
+            }
+        }
+
+        // destination location icon
+        Image {
+            id: destinationButton
+            source: "qrc:/Images/Map/destination_location.png"
+            anchors {
+                bottom: parent.bottom
+                bottomMargin: 40
+                horizontalCenter: startLocationButton.horizontalCenter
+            }
+        }
+
+        // Text input destination location
+        TextField {
+            id: destinationText
+            placeholderText: qsTr("Choose destination")
+            font.pixelSize: 20
+            color: "#515356"
+            height: 50
+            anchors {
+                left: destinationButton.right
+                leftMargin: 20
+                right: parent.right
+                rightMargin: 40
+                verticalCenter: destinationButton.verticalCenter
+            }
+
+            background: Rectangle {
+                color: "#FFFFFF"
+                border.color: "#D6D6D6"
+                radius: 4
+            }
+        }
+
+        Column {
+            id: dotColumn
+            width: 5
+            spacing: height / 5
+            anchors {
+                top: startLocationButton.bottom
+                topMargin: dotColumn.width
+                bottom: destinationButton.top
+                bottomMargin: dotColumn.width
+                horizontalCenter: startLocationButton.horizontalCenter
+            }
+
+            Rectangle {
+                color: "#CDE2FF"
+                width: parent.width
+                height: width
+                radius: 50
+            }
+
+            Rectangle {
+                color: "#CDE2FF"
+                width: parent.width
+                height: width
+                radius: 50
+            }
+
+            Rectangle {
+                color: "#CDE2FF"
+                width: parent.width
+                height: width
+                radius: 50
+            }
+        }
+
+        // Shadow for placeHolder icon
+        DropShadow {
+            anchors.fill: destinationButton
+            source: destinationButton
+            color: "#aa000000"
+            radius: 10
+            samples: 21
+            verticalOffset: 2
+        }
+
+        // Arrow reverse location and destination
+        Image {
+            id: arrowReverse
+
+            property string src: "qrc:/Images/Map/arrow"
+
+            source: src + "_1.png"
+            anchors {
+                right: parent.right
+                rightMargin: 5
+                verticalCenter: parent.verticalCenter
+            }
+
+            MouseArea {
+                property string temp: ""
+                anchors.fill: parent
+                onPressed:{
+                    parent.source = parent.src + "_2.png"
+                    temp = currentText.text
+                    currentText.text = destinationText.text
+                    destinationText.text = temp
+                }
+                onReleased: parent.source = parent.src + "_1.png"
+            }
+        }
+    }
+    //--------------------------------------------------------------------//
+    // End Choode place location
+    //--------------------------------------------------------------------//
+
+    // Shadown for guide area on right edge
+    DropShadow {
+        anchors.fill: guideBg
+        source: guideBg
+        color: "#aa000000"
+        radius: 20
+        samples: 31
+    }
+
+    DropShadow {
+        anchors.fill: placeChooseItem
+        source: placeChooseItem
+        color: "#aa000000"
+        radius: 20
+        samples: 31
+    }
+
+    // Locations near here
+    Item {
+        id: nearHereItem
+        height: parent.height * 0.2
+        anchors {
+            left: parent.left
+            leftMargin: 10
+            right: parent.right
+            rightMargin: 10
+            bottom: parent.bottom
+            bottomMargin: 10
+        }
+
+        Rectangle {
+            id: nearHereBg
+            color: "#FFFFFF"
+            anchors.fill: parent
+            border.width: 1
+            border.color: "#d3d3d3"
+            radius: 5
+        }
+
+        Text {
+            id: titleText
+            text: qsTr("Explore near here")
+            color: "#515356"
+            font.pixelSize: 20
+            font.bold: true
+            anchors {
+                top: parent.top
+                topMargin: 10
+                left: parent.left
+                leftMargin: 10
+            }
+        }
+
+        Image {
+            id: arrowImage
+            property bool status: true
+            property string down_arrow: "qrc:/Images/Map/down_arrow.png"
+            property string up_arrow: "qrc:/Images/Map/up_arrow.png"
+
+            source: status == true ? down_arrow : up_arrow
+            anchors {
+                top: parent.top
+                topMargin: 10
+                right: parent.right
+                rightMargin: 20
+            }
+
+            MouseArea {
+                anchors.fill: arrowImage
+                onPressed: parent.opacity = 0.6
+                onReleased: parent.opacity = 1.0
+                onClicked: {
+                    if (arrowImage.status) {
+                        arrowImage.status = false
+                        nearHereHide.restart()
+                        swipeExploreHide.restart()
+                        indicatorExploreHide.restart()
+                    }
+                    else {
+                        arrowImage.status = true
+                        nearHereShow.restart()
+                        swipeExploreShow.restart()
+                        indicatorExploreShow.restart()
+                    }
+                }
+            }
+        }
+
+        // List view explore near here
+        SwipeView {
+            id: swipeExplore
+            currentIndex: 1
+            clip: true
+            spacing: 20
+            anchors {
+                top: titleText.bottom
+                left: nearHereItem.left
+                right: nearHereItem.right
+                bottom: nearHereItem.bottom
+                topMargin: 10
+                leftMargin: 20
+                rightMargin: 20
+                bottomMargin: 20
+            }
+
+            // First page of swipe explore
+            Item {
+                id: page1
+                width: swipeExplore.width
+                height: swipeExplore.height
+
+                Row {
+                    spacing: 20
+                    anchors.fill: parent
+
+                    ExploreItem {
+                        color: "#ABB2B9"
+                        src: "qrc:/Images/Map/holtel.png"
+                        title: "Holtels"
+                    }
+
+                    ExploreItem {
+                        color: "#A3E4D7"
+                        src: "qrc:/Images/Map/supermarket.png"
+                        title: "Supermarkets"
+                    }
+
+                    ExploreItem {
+                        color: "#D2B4DE"
+                        src: "qrc:/Images/Map/hospital.png"
+                        title: "Hopitals"
+                    }
+                }
+            }
+
+            // Second page of swipe explore
+            Item {
+                id: page2
+                width: swipeExplore.width
+                height: swipeExplore.height
+
+                Row {
+                    spacing: 20
+                    anchors.fill: parent
+
+                    ExploreItem {
+                        color: "#FAD7A0"
+                        src: "qrc:/Images/Map/restaurant.png"
+                        title: "Restaurants"
+                    }
+
+                    ExploreItem {
+                        color: "#AED6F1"
+                        src: "qrc:/Images/Map/parking.png"
+                        title: "Parking Lots"
+                    }
+
+                    ExploreItem {
+                        color: "#ABEBC6"
+                        src: "qrc:/Images/Map/gas_station.png"
+                        title: "Gas Station"
+                    }
+                }
+            }
+
+            // Third page of swipe explore
+            Item {
+                id: page3
+                width: swipeExplore.width
+                height: swipeExplore.height
+
+                Row {
+                    spacing: 20
+                    anchors.fill: parent
+
+                    ExploreItem {
+                        color: "#EDBB99"
+                        src: "qrc:/Images/Map/coffee.png"
+                        title: "Coffee"
+                    }
+
+                    ExploreItem {
+                        color: "#F5B7B1"
+                        src: "qrc:/Images/Map/bar.png"
+                        title: "Bars"
+                    }
+
+                    ExploreItem {
+                        color: "#F0B27A"
+                        src: "qrc:/Images/Map/bank.png"
+                        title: "Banks"
+                    }
+                }
+            }
+
+            PropertyAnimation {
+                id: nearHereHide
+                target: nearHereItem
+                property: "height"
+                from: nearHereItem.height
+                to: titleText.height + 20
+                duration: 500
+                easing.type: Easing.InOutQuad
+            }
+
+            PropertyAnimation {
+                id: nearHereShow
+                target: nearHereItem
+                property: "height"
+                from: titleText.height + 20
+                to: guideItem.height * 0.2
+                duration: 500
+                easing.type: Easing.InOutQuad
+            }
+
+            PropertyAnimation {
+                id: swipeExploreHide
+                target: swipeExplore
+                property: "opacity"
+                from: 1
+                to: 0
+                duration: 500
+                easing.type: Easing.InOutQuad
+            }
+
+            PropertyAnimation {
+                id: swipeExploreShow
+                target: swipeExplore
+                property: "opacity"
+                from: 0
+                to: 1
+                duration: 500
+                easing.type: Easing.InOutQuad
+            }
+
+            PropertyAnimation {
+                id: indicatorExploreHide
+                target: indicatorExplore
+                property: "opacity"
+                from: 1
+                to: 0
+                duration: 500
+                easing.type: Easing.InOutQuad
+            }
+
+            PropertyAnimation {
+                id: indicatorExploreShow
+                target: indicatorExplore
+                property: "opacity"
+                from: 0
+                to: 1
+                duration: 500
+                easing.type: Easing.InOutQuad
+            }
+        }
+
+        PageIndicator {
+            id: indicatorExplore
+            count: swipeExplore.count
+            currentIndex: swipeExplore.currentIndex
+            anchors.top: swipeExplore.bottom
+            anchors.horizontalCenter: swipeExplore.horizontalCenter
+        }
+    }
+
+    Text {
+        id: textDefault
+        text: qsTr("Where will you go today?")
+        color: "#778899"
+        font.pixelSize: 20
+        anchors.centerIn: guideItem
+    }
+}

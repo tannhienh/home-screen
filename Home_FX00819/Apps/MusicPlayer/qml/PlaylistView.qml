@@ -63,7 +63,7 @@ Drawer {
             // Title assigned with "Unknown" if title get from Taglib library
             // is empty
             Text {
-                id: nameSong
+                id: songTitle
                 text: title == "" ? "Unknown" : title
                 color: "#FFFFFF"    // White
                 font.pixelSize: playlistItem.height * 0.2   // 28
@@ -73,6 +73,20 @@ Drawer {
                     left: speakerImage.right
                     leftMargin: 10 //playlistItem.width / 50 // 13.44
                     verticalCenter: playlistItem.verticalCenter
+                }
+            }
+
+            // Name of single
+            Text {
+                id: singleName
+                text: singer == "" ? "Unknow" : singer
+                color: "#FFFFFF"    // White
+                font.pixelSize: playlistItem.height * 0.15   // 28
+                font.family: cantarell.name
+                opacity: mouseAreaItem.ListView.isCurrentItem ? 1 : 0.5
+                anchors {
+                    left: songTitle.left
+                    top: songTitle.bottom
                 }
             }
 
@@ -106,7 +120,7 @@ Drawer {
             // Animation highlight song name current in playlist
             PropertyAnimation {
                 id: changeTitle
-                target: nameSong
+                target: songTitle
                 property: "opacity"
                 from: 0.5; to: 1
                 duration: 500

@@ -30,14 +30,14 @@ Item {
         sourceItem: Image {
             id: placeHolder
             source: "qrc:/Images/Map/place_holder.png"
-            width: implicitWidth * 0.6
-            height: implicitHeight * 0.6
+            width: implicitWidth * 0.8
+            height: implicitHeight * 0.8
 
             Image {
                 source: "qrc:/Images/Map/car_icon.png"
                 anchors.centerIn: placeHolder
-                width: implicitWidth * 0.6
-                height: implicitHeight * 0.6
+                width: implicitWidth * 0.8
+                height: implicitHeight * 0.8
             }
         }
     }

@@ -20,5 +20,7 @@
         <file>Apps/Videos/Videos.qml</file>
         <file>Apps/Map/Map.qml</file>
         <file>Qml/AppsMenu.qml</file>
+        <file>Apps/Map/ExploreItem.qml</file>
+        <file>Apps/Map/GuideArea.qml</file>
     </qresource>
 </RCC>
