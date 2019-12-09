@@ -13,6 +13,9 @@ ApplicationWindow {
 //    height: 700
     title: qsTr("Home Screen")
 
+    property bool shuffleGlobal: false
+    property int loopGlobal: 0
+
     //-----------------------------------------------------------------------//
     // Load Fonts from attached resource fonts.qrc
 

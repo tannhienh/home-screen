@@ -1,34 +1,17 @@
-import QtQuick 2.13
+﻿import QtQuick 2.13
 import QtQuick.Controls 2.13
 import QtMultimedia 5.13
 import QtGraphicalEffects 1.13
+import Qt.labs.settings 1.1
+import "../../../Js/PlayerControl.js" as PlayerControl
+import "../../../Js/PlayerInfo.js" as PlayerInfo
 
 Item {
-
-    // Get Song title dependent from albumArtView
-    function getSongTitle()
-    {
-        if (playlistModel.rowCount() > 0)
-            return (albumArtView.currentItem.getData.title === ""
-                    ? "Unknown" : albumArtView.currentItem.getData.title)
-          else
-            return ""
-    }
-
-    // Get Single name dependent from albumArtView
-    function getSingleName()
-    {
-        if (playlistModel.rowCount() > 0)
-            return (albumArtView.currentItem.getData.singer === ""
-                    ? "Unknown" : albumArtView.currentItem.getData.singer)
-          else
-            return ""
-    }
 
     // Media Info
     Item {
         id: mediaInfo
-        height: 104 // parent.height * 0.12 // 870 * 0.12 = 104.4
+        height: 104
         anchors {
             top: parent.top
             left: parent.left
@@ -56,16 +39,16 @@ Item {
         Text {
             id: songTitle
             color: "#FFFFFF"
-            font.pixelSize: 33 // mediaInfo.height * 0.32 = 33.28
+            font.pixelSize: 33
             font.family: cantarell.name
 
-            text: getSongTitle()
+            text: PlayerInfo.getSongTitle()
 
             anchors {
                 top: parent.top
-                topMargin: 14 // mediaInfo.height * 0.14 = 14.56
+                topMargin: 14
                 left: parent.left
-                leftMargin: 27 // mediaInfo.width / 70 = 27.4
+                leftMargin: 27
             }
         }
 
@@ -74,15 +57,15 @@ Item {
             id: singleName
 
             color: "#D3D3D3"
-            font.pixelSize: 28 // mediaInfo.height * 0.27
+            font.pixelSize: 28
             font.family: cantarell.name
 
-            text: getSingleName()
+            text: PlayerInfo.getSingleName()
 
             anchors {
                 top: songTitle.bottom
                 left: parent.left
-                leftMargin: 27 // mediaInfo.width / 70
+                leftMargin: 27
             }
         }
 
@@ -90,11 +73,9 @@ Item {
         Image {
             id: counterIcon
             source: "qrc:/Apps/MusicPlayer/images/music.png"
-//            height: 38 //mediaInfo.height * 0.35 = 36.4
-//            width: height
             anchors {
                 right: songAmount.left
-                rightMargin: 10 // mediaInfo.height * 0.1 = 10.4
+                rightMargin: 10
                 verticalCenter: mediaInfo.verticalCenter
             }
         }
@@ -104,11 +85,11 @@ Item {
             id: songAmount
             text: albumArtView.count
             color: "#FFFFFF"
-            font.pixelSize: 37 // mediaInfo.height * 0.35 = 36.4
+            font.pixelSize: 37
             font.family: cantarell.name
             anchors {
                 right: mediaInfo.right
-                rightMargin: 25 // mediaInfo.height * 0.2 = 20.8
+                rightMargin: 25
                 verticalCenter: mediaInfo.verticalCenter
             }
         }
@@ -117,7 +98,6 @@ Item {
     // Album Art Item
     Item {
         id: albumArtItem
-//        height: 543 // parent.height * 0.6 = 522
         anchors {
             top: mediaInfo.bottom
             left: parent.left
@@ -234,9 +214,8 @@ Item {
     // ProgressBar
     Item {
         id: progressBarItem
-        height: 43 // parent.height / 20 = 43.5
+        height: 43
         anchors {
-//            top: albumArtItem.bottom
             left: parent.left
             bottom: mediaControl.top
             right: parent.right
@@ -247,7 +226,7 @@ Item {
             id: currentTime
             text: utility.getTimeInfo(player.position)
             color: "#FFFFFF"
-            font.pixelSize: 17 // parent.height * 0.4 = 17
+            font.pixelSize: 17
             font.family: cantarell.name
             anchors {
                 left: progressBarItem.left
@@ -274,7 +253,7 @@ Item {
                 y: progressBar.topPadding + (progressBar.availableHeight / 2)
                    - (height / 2)
                 width: progressBar.availableWidth
-                height: 6 // progressBarItem.height * 0.127
+                height: 6
                 radius: height
                 color: "#808080"
 
@@ -289,8 +268,6 @@ Item {
             handle: Image {
                 id: point
                 source: "qrc:/Apps/MusicPlayer/images/point.png"
-//                width: progressBarItem.height * 0.5
-//                height: width + 2
                 anchors.verticalCenter: parent.verticalCenter
                 x: progressBar.leftPadding + progressBar.visualPosition *
                    (progressBar.availableWidth - width / 2)
@@ -300,8 +277,6 @@ Item {
                     id: centerPoint
                     anchors.centerIn: parent
                     source: "qrc:/Apps/MusicPlayer/images/center_point.png"
-//                    width: point.width * 0.7
-//                    height: width
                 }
             }
 
@@ -328,37 +303,29 @@ Item {
     // Media Control
     Item {
         id: mediaControl
-        height: 145 // parent.height / 6
+        height: 145
         anchors {
             left: parent.left
             bottom: parent.bottom
             right: parent.right
-            bottomMargin: 35 // parent.height / 25
+            bottomMargin: 35
         }
 
         // Previous button
         ButtonControl {
             id: prevButton
-//            m_height: mediaControl.height * 0.37 // 89
-//            m_width: m_height * 1.51 // 59
             anchors.right: playButton.left
             anchors.verticalCenter: playButton.verticalCenter
             icon_default: "qrc:/Apps/MusicPlayer/images/prev.png"
             icon_pressed: "qrc:/Apps/MusicPlayer/images/prev_hold.png"
             icon_released: "qrc:/Apps/MusicPlayer/images/prev.png"
 
-            onClicked: {
-                if (player.playlist.currentIndex !== 0 || repeatButton.status
-                    || shuffleButton.status)
-                    utility.previous(player);
-            }
+            onClicked: PlayerControl.previousPlayer()
         }
 
         // Play/Pause button
         ButtonControl {
             id: playButton
-//            m_height: mediaControl.height * 0.85 // 132
-//            m_width: m_height - 1 // 133
             anchors.centerIn: mediaControl
 
             status: player.state === MediaPlayer.PlayingState ? true : false
@@ -392,19 +359,13 @@ Item {
         // Next button
         ButtonControl {
             id: nextButton
-//            m_width: prevButton.m_width // 89
-//            m_height: prevButton.m_height // 59
             anchors.left: playButton.right
             anchors.verticalCenter: playButton.verticalCenter
             icon_default: "qrc:/Apps/MusicPlayer/images/next.png"
             icon_pressed: "qrc:/Apps/MusicPlayer/images/next_hold.png"
             icon_released: "qrc:/Apps/MusicPlayer/images/next.png"
 
-            onClicked: {
-                if (player.playlist.currentIndex !== (albumArtView.count - 1)
-                        || repeatButton.status || shuffleButton.status)
-                    utility.next(player);
-            }
+            onClicked: PlayerControl.nextPlayer()
         }
 
         // Shuffle button
@@ -412,10 +373,8 @@ Item {
             id: shuffleButton
             icon_on: "qrc:/Apps/MusicPlayer/images/shuffle_hold.png"
             icon_off: "qrc:/Apps/MusicPlayer/images/shuffle.png"
-            status: playlist.playbackMode === Playlist.Random ? 1 : 0
+            status: shuffleGlobal
 
-//            m_height: mediaControl.height * 0.33 // 108
-//            m_width: m_height * 2.04  // 53
             anchors {
                 left: mediaControl.left
                 leftMargin: 150
@@ -423,25 +382,16 @@ Item {
             }
 
             onStatusChanged: {
-                if (shuffleButton.status) {
-                    repeatButton.status = false
-                    utility.shuffle(player, 1)
-                }
-                else
-                    utility.shuffle(player, 0)
+                shuffleGlobal = shuffleButton.status
+                utility.setPlayerMode(player, shuffleButton.status,
+                                                   loopButton.status)
             }
         }
 
-        // Repeat button - loops current track
-        SwitchButton {
-            id: repeatButton
-
-            icon_on: "qrc:/Apps/MusicPlayer/images/repeat_hold.png"
-            icon_off: "qrc:/Apps/MusicPlayer/images/repeat.png"
-            status: playlist.playbackMode === Playlist.Loop ? 1 : 0
-
-//            m_width: shuffleButton.width // 108
-//            m_height: shuffleButton.height // 53
+        // Repeat button - loops playlist or current track
+        LoopButton {
+            id: loopButton
+            status: loopGlobal
             anchors {
                 right: mediaControl.right
                 rightMargin: 150
@@ -449,11 +399,9 @@ Item {
             }
 
             onStatusChanged: {
-                if (repeatButton.status) {
-                    shuffleButton.status = false
-                    utility.loop(player, 1)
-                } else
-                    utility.loop(player, 0)
+                loopGlobal = loopButton.status
+                utility.setPlayerMode(player, shuffleButton.status,
+                                                   loopButton.status)
             }
         }
     }

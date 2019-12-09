@@ -40,10 +40,6 @@
         <file>Images/Menu/btn_menu_videos_n.png</file>
         <file>Images/Menu/btn_menu_videos_p.png</file>
         <file>Images/MusicPlayer/cover_art.png</file>
-        <file>Images/MusicPlayer/MusicPlayer_0.png</file>
-        <file>Images/MusicPlayer/MusicPlayer_1.png</file>
-        <file>Images/MusicPlayer/Thanh-Xuan-Da-LAB.mp3.jpg</file>
-        <file>Images/MusicPlayer/widget_music_player_album_art_borders.png</file>
         <file>Images/StatusBar/btn_back_f.png</file>
         <file>Images/StatusBar/btn_back_n.png</file>
         <file>Images/StatusBar/btn_back_p.png</file>
@@ -101,23 +97,26 @@
         <file>Images/StatusBar/btn_done_n.png</file>
         <file>Images/StatusBar/btn_done_p.png</file>
         <file>Apps/MusicPlayer/images/default_cover_art.jpg</file>
-        <file>Images/Map/current_location.png</file>
-        <file>Images/Map/arrow_1.png</file>
-        <file>Images/Map/arrow_2.png</file>
-        <file>Images/Map/car_icon.png</file>
         <file>Images/Map/place_holder.png</file>
-        <file>Images/Map/destination_location.png</file>
-        <file>Images/Map/start_location.png</file>
-        <file>Images/Map/down_arrow.png</file>
-        <file>Images/Map/up_arrow.png</file>
-        <file>Images/Map/bank.png</file>
-        <file>Images/Map/bar.png</file>
-        <file>Images/Map/coffee.png</file>
-        <file>Images/Map/holtel.png</file>
-        <file>Images/Map/hospital.png</file>
-        <file>Images/Map/restaurant.png</file>
-        <file>Images/Map/gas_station.png</file>
-        <file>Images/Map/parking.png</file>
-        <file>Images/Map/supermarket.png</file>
+        <file>Images/Map/car_icon.png</file>
+        <file>Images/MusicPlayer/album_art_borders.png</file>
+        <file>Apps/Map/images/arrow_1.png</file>
+        <file>Apps/Map/images/arrow_2.png</file>
+        <file>Apps/Map/images/bank.png</file>
+        <file>Apps/Map/images/bar.png</file>
+        <file>Apps/Map/images/car_icon.png</file>
+        <file>Apps/Map/images/coffee.png</file>
+        <file>Apps/Map/images/current_location.png</file>
+        <file>Apps/Map/images/destination_location.png</file>
+        <file>Apps/Map/images/down_arrow.png</file>
+        <file>Apps/Map/images/gas_station.png</file>
+        <file>Apps/Map/images/holtel.png</file>
+        <file>Apps/Map/images/hospital.png</file>
+        <file>Apps/Map/images/parking.png</file>
+        <file>Apps/Map/images/place_holder.png</file>
+        <file>Apps/Map/images/restaurant.png</file>
+        <file>Apps/Map/images/start_location.png</file>
+        <file>Apps/Map/images/supermarket.png</file>
+        <file>Apps/Map/images/up_arrow.png</file>
     </qresource>
 </RCC>

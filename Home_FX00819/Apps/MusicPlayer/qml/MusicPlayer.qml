@@ -5,7 +5,7 @@ import Qt.labs.settings 1.1
 Item {
     id: playerItem
 
-    implicitHeight: 995 // 1080 - 85
+    implicitHeight: 995
 
     //-----------------------------------------------------------------------//
     // Load Font from attached resource fonts.qrc
@@ -39,7 +39,7 @@ Item {
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
-        height: 125 // parent.height * 0.13 = 129.35
+        height: 125
 
         // assign status of playlist to status of playlist button
         statusPlaylistButton: settings.playlistVisible
@@ -58,9 +58,9 @@ Item {
 
     PlaylistView {
         id: playlistView
-        topMargin: 85 + header.height // 85 + 125 = 210
-        width: 672 // playerItem.width * 0.35 = 672
-        height: playerItem.height - header.height // 995 - 125 = 870
+        topMargin: 85 + header.height
+        width: 672
+        height: playerItem.height - header.height
     }
 
     // Main Media

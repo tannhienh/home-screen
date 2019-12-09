@@ -21,9 +21,10 @@ SOURCES += \
         main.cpp
 
 RESOURCES += \
-    qml.qrc \
+    js.qrc \
     fonts.qrc \
-    images.qrc
+    images.qrc \
+    qml.qrc
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

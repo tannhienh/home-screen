@@ -19,10 +19,10 @@ Item {
         coordinate: QtPositioning.coordinate(10.78, 106.703)
         sourceItem: Image {
             id: placeHolder
-            source: "qrc:/Images/Map/place_holder.png"
+            source: "qrc:/Apps/Map/images/place_holder.png"
 
             Image {
-                source: "qrc:/Images/Map/car_icon.png"
+                source: "qrc:/Apps/Map/images/car_icon.png"
                 anchors.centerIn: placeHolder
             }
         }
@@ -65,7 +65,7 @@ Item {
             }
 
             Image {
-                source: "qrc:/Images/Map/current_location.png"
+                source: "qrc:/Apps/Map/images/current_location.png"
                 anchors.centerIn: locateButton
             }
 

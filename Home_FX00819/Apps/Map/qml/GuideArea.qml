@@ -34,7 +34,7 @@ Item {
         // current location icon
         Image {
             id: startLocationButton
-            source: "qrc:/Images/Map/start_location.png"
+            source: "qrc:/Apps/Map/images/start_location.png"
             anchors {
                 top: parent.top
                 topMargin: 40
@@ -68,7 +68,7 @@ Item {
         // destination location icon
         Image {
             id: destinationButton
-            source: "qrc:/Images/Map/destination_location.png"
+            source: "qrc:/Apps/Map/images/destination_location.png"
             anchors {
                 bottom: parent.bottom
                 bottomMargin: 40
@@ -146,7 +146,7 @@ Item {
         Image {
             id: arrowReverse
 
-            property string src: "qrc:/Images/Map/arrow"
+            property string src: "qrc:/Apps/Map/images/arrow"
 
             source: src + "_1.png"
             anchors {
@@ -228,8 +228,8 @@ Item {
         Image {
             id: arrowImage
             property bool status: true
-            property string down_arrow: "qrc:/Images/Map/down_arrow.png"
-            property string up_arrow: "qrc:/Images/Map/up_arrow.png"
+            property string down_arrow: "qrc:/Apps/Map/images/down_arrow.png"
+            property string up_arrow: "qrc:/Apps/Map/images/up_arrow.png"
 
             source: status == true ? down_arrow : up_arrow
             anchors {
@@ -246,15 +246,19 @@ Item {
                 onClicked: {
                     if (arrowImage.status) {
                         arrowImage.status = false
+
+                        // Hide explore
                         nearHereHide.restart()
+                        swipeExploreHide.targets = [swipeExplore, indicatorExplore]
                         swipeExploreHide.restart()
-                        indicatorExploreHide.restart()
                     }
                     else {
                         arrowImage.status = true
+
+                        // Show explore
                         nearHereShow.restart()
+                        swipeExploreShow.targets = [swipeExplore, indicatorExplore]
                         swipeExploreShow.restart()
-                        indicatorExploreShow.restart()
                     }
                 }
             }
@@ -289,19 +293,19 @@ Item {
 
                     ExploreItem {
                         color: "#ABB2B9"
-                        src: "qrc:/Images/Map/holtel.png"
+                        src: "qrc:/Apps/Map/images/holtel.png"
                         title: "Holtels"
                     }
 
                     ExploreItem {
                         color: "#A3E4D7"
-                        src: "qrc:/Images/Map/supermarket.png"
+                        src: "qrc:/Apps/Map/images/supermarket.png"
                         title: "Supermarkets"
                     }
 
                     ExploreItem {
                         color: "#D2B4DE"
-                        src: "qrc:/Images/Map/hospital.png"
+                        src: "qrc:/Apps/Map/images/hospital.png"
                         title: "Hopitals"
                     }
                 }
@@ -319,19 +323,19 @@ Item {
 
                     ExploreItem {
                         color: "#FAD7A0"
-                        src: "qrc:/Images/Map/restaurant.png"
+                        src: "qrc:/Apps/Map/images/restaurant.png"
                         title: "Restaurants"
                     }
 
                     ExploreItem {
                         color: "#AED6F1"
-                        src: "qrc:/Images/Map/parking.png"
+                        src: "qrc:/Apps/Map/images/parking.png"
                         title: "Parking Lots"
                     }
 
                     ExploreItem {
                         color: "#ABEBC6"
-                        src: "qrc:/Images/Map/gas_station.png"
+                        src: "qrc:/Apps/Map/images/gas_station.png"
                         title: "Gas Station"
                     }
                 }
@@ -349,19 +353,19 @@ Item {
 
                     ExploreItem {
                         color: "#EDBB99"
-                        src: "qrc:/Images/Map/coffee.png"
+                        src: "qrc:/Apps/Map/images/coffee.png"
                         title: "Coffee"
                     }
 
                     ExploreItem {
                         color: "#F5B7B1"
-                        src: "qrc:/Images/Map/bar.png"
+                        src: "qrc:/Apps/Map/images/bar.png"
                         title: "Bars"
                     }
 
                     ExploreItem {
                         color: "#F0B27A"
-                        src: "qrc:/Images/Map/bank.png"
+                        src: "qrc:/Apps/Map/images/bank.png"
                         title: "Banks"
                     }
                 }
@@ -389,7 +393,6 @@ Item {
 
             PropertyAnimation {
                 id: swipeExploreHide
-                target: swipeExplore
                 property: "opacity"
                 from: 1
                 to: 0
@@ -399,27 +402,6 @@ Item {
 
             PropertyAnimation {
                 id: swipeExploreShow
-                target: swipeExplore
-                property: "opacity"
-                from: 0
-                to: 1
-                duration: 500
-                easing.type: Easing.InOutQuad
-            }
-
-            PropertyAnimation {
-                id: indicatorExploreHide
-                target: indicatorExplore
-                property: "opacity"
-                from: 1
-                to: 0
-                duration: 500
-                easing.type: Easing.InOutQuad
-            }
-
-            PropertyAnimation {
-                id: indicatorExploreShow
-                target: indicatorExplore
                 property: "opacity"
                 from: 0
                 to: 1

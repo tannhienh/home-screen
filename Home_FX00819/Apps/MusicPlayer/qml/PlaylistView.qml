@@ -54,7 +54,7 @@ Drawer {
                 visible: checkPlaying()
                 anchors {
                     left: playlistItem.left
-                    leftMargin: 10 // playlistItem.width / 50  // 13.44
+                    leftMargin: 10
                     verticalCenter: playlistItem.verticalCenter
                 }
             }
@@ -66,12 +66,12 @@ Drawer {
                 id: songTitle
                 text: title == "" ? "Unknown" : title
                 color: "#FFFFFF"    // White
-                font.pixelSize: playlistItem.height * 0.2   // 28
+                font.pixelSize: playlistItem.height * 0.2
                 font.family: cantarell.name
                 opacity: mouseAreaItem.ListView.isCurrentItem ? 1 : 0.5
                 anchors {
                     left: speakerImage.right
-                    leftMargin: 10 //playlistItem.width / 50 // 13.44
+                    leftMargin: 10
                     verticalCenter: playlistItem.verticalCenter
                 }
             }
@@ -81,7 +81,7 @@ Drawer {
                 id: singleName
                 text: singer == "" ? "Unknow" : singer
                 color: "#FFFFFF"    // White
-                font.pixelSize: playlistItem.height * 0.15   // 28
+                font.pixelSize: playlistItem.height * 0.15
                 font.family: cantarell.name
                 opacity: mouseAreaItem.ListView.isCurrentItem ? 1 : 0.5
                 anchors {

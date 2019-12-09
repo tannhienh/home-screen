@@ -49,7 +49,7 @@ Item {
                     onClicked: {
                         if (statusBar.editting === false) {
                             statusBar.isShowEditButton = false
-                            openApplication("qrc:/Apps/Map/Map.qml")
+                            openApplication("qrc:/Apps/Map/qml/Map.qml")
                         }
                     }
                 }

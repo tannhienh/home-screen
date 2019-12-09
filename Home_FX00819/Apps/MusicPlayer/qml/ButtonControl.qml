@@ -7,8 +7,6 @@ MouseArea {
     property alias source_default: image.source // Source default alias of image
     property alias image: image
     property bool status        // Status of button
-//    property variant m_width    // Width visual of button
-//    property variant m_height   // Height visual of button
 
     // When event pressed emitted, change source image to icon_pressed
     onPressed: image.source = icon_pressed

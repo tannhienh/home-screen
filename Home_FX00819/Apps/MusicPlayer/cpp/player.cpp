@@ -77,7 +77,14 @@ QString Player::getTimeInfo(qint64 timeInput)
 // Previous song in playlist
 void Player::previous(QMediaPlayer *player)
 {
-    player->playlist()->previous();
+    if (player->playlist()->playbackMode() == QMediaPlaylist::CurrentItemInLoop)
+    {
+        player->playlist()->setPlaybackMode(QMediaPlaylist::Sequential);
+        player->playlist()->previous();
+        player->playlist()->setPlaybackMode(QMediaPlaylist::CurrentItemInLoop);
+    }
+    else
+        player->playlist()->previous();
 }
 
 // Play media process
@@ -95,25 +102,46 @@ void Player::pause(QMediaPlayer *player)
 // Next song in playlist
 void Player::next(QMediaPlayer *player)
 {
-    player->playlist()->next();
+    if (player->playlist()->playbackMode() == QMediaPlaylist::CurrentItemInLoop)
+    {
+        player->playlist()->setPlaybackMode(QMediaPlaylist::Sequential);
+        player->playlist()->next();
+        player->playlist()->setPlaybackMode(QMediaPlaylist::CurrentItemInLoop);
+    } else
+        player->playlist()->next();
 }
 
-// Set shuffle mode for playlist
-void Player::shuffle(QMediaPlayer *player, bool status)
+/*
+ *
+ * Shuffle mode
+ *
+ * Shuffle button +  loop button:        player mode
+ *
+ * Shuffle on    +   loop off (0):       random
+ * Shuffle on    +   loop playlist (1):  random
+ * Shuffle on    +   loop current (2):   loop current
+ * Shuffle off   +   loop off (0):       sequential
+ * Shuffle off   +   loop playlist (1):  loop
+ * Shuffle off   +   loop current (2):   loop current
+ */
+void Player::setPlayerMode(QMediaPlayer *player, bool shuffle_status,
+                           int loop_status)
 {
-    if (status)
-        player->playlist()->setPlaybackMode(QMediaPlaylist::Random);
-    else
-        player->playlist()->setPlaybackMode(QMediaPlaylist::Sequential);
-}
-
-// Set loop mode for playlist
-void Player::loop(QMediaPlayer *player, bool status)
-{
-    if (status)
-        player->playlist()->setPlaybackMode(QMediaPlaylist::Loop);
-    else
-        player->playlist()->setPlaybackMode(QMediaPlaylist::Sequential);
+    if (shuffle_status) {
+        if (loop_status == 2)
+            player->playlist()->setPlaybackMode(QMediaPlaylist::CurrentItemInLoop);
+        else
+            player->playlist()->setPlaybackMode(QMediaPlaylist::Random);
+    }
+    else {
+        if (loop_status == 0)
+            player->playlist()->setPlaybackMode(QMediaPlaylist::Sequential);
+        if (loop_status == 1) {
+            player->playlist()->setPlaybackMode(QMediaPlaylist::Loop);
+        }
+        if (loop_status == 2)
+            player->playlist()->setPlaybackMode(QMediaPlaylist::CurrentItemInLoop);
+    }
 }
 
 // Get album art from audio file

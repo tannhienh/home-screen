@@ -50,13 +50,12 @@ public slots:
 
     void next(QMediaPlayer *);              // Next song in playlist
 
-    void shuffle(QMediaPlayer *, bool);     // Set shuffle mode for playlist
-
-    void loop(QMediaPlayer *, bool);        // Set loop mode for playlist
+    void setPlayerMode(QMediaPlayer *, bool, int);          // Set player mode
 
     QString getAlbumArt(QUrl url);          // Get album art from audio file
 
 public:
+
     QMediaPlayer *m_player = nullptr;           // Pointer for media player
     QMediaPlaylist *m_playlist = nullptr;       // Pointer for media playlist
     PlaylistModel *m_playlistModel = nullptr;   // Pointer for playlist model

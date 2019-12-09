@@ -15,7 +15,7 @@ Item {
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
-        height: parent.height * 0.2 // 110
+        height: parent.height * 0.2
 
         Text {
             text: "Climate"
@@ -31,11 +31,11 @@ Item {
         anchors.top: climateTitle.bottom
         anchors.left: parent.left
         anchors.right: parent.right
-        height: parent.height * 0.12 // 66
+        height: parent.height * 0.12
 
         Item {
             id: driverTextItem
-            width: parent.width * 0.35// / 3 // 205
+            width: parent.width * 0.35
             height: parent.height
             anchors.left: parent.left
 
@@ -51,7 +51,7 @@ Item {
             Image {
                 id: lineDriver
                 source: "qrc:/Images/Climate/widget_climate_line.png"
-                width: driverText.width // 111
+                width: driverText.width
                 anchors.top: driverText.bottom
                 anchors.horizontalCenter: driverText.horizontalCenter
             }
@@ -59,7 +59,7 @@ Item {
 
         Item {
             id: passengerTextItem
-            width: parent.width * 0.35 // / 3 // 205
+            width: parent.width * 0.35
             height: parent.height
             anchors.right: parent.right
 
@@ -75,7 +75,7 @@ Item {
             Image {
                 id: linePassenger
                 source: "qrc:/Images/Climate/widget_climate_line.png"
-                width: passengerText.width // 175
+                width: passengerText.width
                 anchors.top: passengerText.bottom
                 anchors.horizontalCenter: passengerText.horizontalCenter
             }
@@ -128,8 +128,8 @@ Item {
 
         property var path: "qrc:/Images/Climate/widget_climate_arrow_foot_"
 
-        x: 35 //28
-        y: 250 //257
+        x: 35
+        y: 250
         source: {
             if (climateModel.driver_wind_foot == 0)
                     return (path + "off.png")
@@ -152,7 +152,7 @@ Item {
 
         property var path: "qrc:/Images/Climate/widget_climate_arrow_face_"
 
-        x: 458 //450
+        x: 458
         y: 238
         source: {
             if (climateModel.passenger_wind_face == 0)
@@ -169,8 +169,8 @@ Item {
 
         property var path: "qrc:/Images/Climate/widget_climate_arrow_foot_"
 
-        x: 433 // 426
-        y: 250 // 257
+        x: 433
+        y: 250
         source: {
             if (climateModel.passenger_wind_foot == 0)
                     return (path + "off.png")
@@ -186,7 +186,7 @@ Item {
         anchors.top: windBg.bottom
         anchors.left: parent.left
         anchors.right: parent.right
-        height: parent.height * 0.14 // 71.5
+        height: parent.height * 0.14
 
         Item {
             width: parent.width * 0.35
@@ -249,7 +249,7 @@ Item {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: parent.bottom
-        height: parent.height * 0.24 // 132
+        height: parent.height * 0.24
 
         Item {
             width: parent.width * 0.35

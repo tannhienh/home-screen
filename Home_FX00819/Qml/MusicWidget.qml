@@ -3,58 +3,17 @@ import QtQuick.Controls 2.13
 import QtGraphicalEffects 1.13
 import QtMultimedia 5.13
 import "../Apps/MusicPlayer/qml"
+import "../Js/PlayerControl.js" as PlayerControl
+import "../Js/PlayerInfo.js" as PlayerInfo
 
 Item {
     id: musicPlayerItem
-
-    // Get song title
-    // TitleRole: 257
-    // If has no song in playlist model return empty string
-    // Else, if get a empty string from single name, return "Unknown"
-    function getSongTitle() {
-        if (playlistModel.rowCount() > 0)
-            if (playlistModel.data(playlistModel.index(
-                                       playlist.currentIndex, 0), 257) === "")
-                return "Unknow"
-            else
-                return (playlistModel.data(playlistModel.index(
-                                               playlist.currentIndex, 0), 257))
-        else
-            return ""
-    }
-
-    // Get Single name of song playing
-    // SingerRole: 258
-    // If has no song in playlist model return empty string
-    // Else, if get a empty string from single name, return "Unknown"
-    function getSingleName() {
-        if (playlistModel.rowCount() > 0)
-            if (playlistModel.data(playlistModel.index(
-                                       playlist.currentIndex, 0), 258) === "")
-                return "Unknow"
-            else
-                return (playlistModel.data(playlistModel.index(
-                                               playlist.currentIndex, 0), 258))
-        else
-            return ""
-    }
-
-    // Get Album art of song playing
-    // AlbumArtRole: 260
-    // If has no song in playlist model return album art default
-    function getAlbumArt() {
-        if (playlistModel.rowCount() > 0)
-            return playlistModel.data(playlistModel.index(
-                                          playlist.currentIndex, 0), 260)
-        else
-            return "qrc:/Images/MusicPlayer/cover_art.png"
-    }
 
     // Album art background
     Image {
         id: albumArtBg
         anchors.fill: parent
-        source: getAlbumArt()
+        source: PlayerInfo.getAlbumArt()
     }
 
     // Blue effect for album art background
@@ -78,7 +37,7 @@ Item {
         Text {
             id: songTitle
 
-            text: getSongTitle()
+            text: PlayerInfo.getSongTitle()
 
             color: "#FFFFFF"
             font.pixelSize: 40
@@ -93,7 +52,7 @@ Item {
         // Name of single
         Text {
             id: singleName
-            text: getSingleName()
+            text: PlayerInfo.getSingleName()
             color: "#FFFFFF"
             font.pixelSize: 30
             font.family: cantarell.name
@@ -124,20 +83,67 @@ Item {
         }
     }
 
-    Image {
+    // Delegate for album art view
+    Component {
+        id: albumArtDelegate
+
+        Item {
+            id: test
+
+            property variant getData: model
+
+            width: albumArtBoder.width
+            height: albumArtBoder.height
+            scale: PathView.iconScale === undefined ? 0 : PathView.iconScale
+
+            Image {
+                id: albumPicture
+                source: album_art
+                width: albumArtBoder.width
+                height: albumArtBoder.height
+                anchors.centerIn: parent
+            }
+
+            Image {
+                id: albumArtBoder
+                source: "qrc:/Images/MusicPlayer/album_art_borders.png"
+                anchors.centerIn: parent
+            }
+        }
+    }
+
+    // AlbumArt View
+    PathView {
         id: albumArtInner
-        source: albumArtBg.source
-        width: albumArtBoder.width
-        height: albumArtBoder.height
-        anchors.centerIn: parent
+        anchors.fill: parent
+        preferredHighlightBegin: 0.5
+        preferredHighlightEnd: 0.5
+        model: playlistModel
+        delegate: albumArtDelegate
+        pathItemCount: 1
+        currentIndex: playlist.currentIndex
+
+        path: Path {
+
+            startX: 0
+            startY: albumArtInner.height / 2
+            PathAttribute { name: "iconScale"; value: 0.5 }
+
+            PathLine {
+                x: albumArtInner.width * 0.4
+                y: albumArtInner.height / 2
+            }
+            PathAttribute { name: "iconScale"; value: 1.0 }
+
+            PathLine {
+                x: albumArtInner.width
+                y: albumArtInner.height / 2
+            }
+            PathAttribute { name: "iconScale"; value: 0.5 }
+        }
     }
 
-    Image {
-        id: albumArtBoder
-        source: "qrc:/Images/MusicPlayer/widget_music_player_album_art_borders.png"
-        anchors.centerIn: parent
-    }
-
+    // Highlight for music widget
     WidgetHighlight {
         id: musicHighlight
         anchors.fill: parent
@@ -161,11 +167,7 @@ Item {
         icon_pressed: "qrc:/Apps/MusicPlayer/images/prev_hold.png"
         icon_released: "qrc:/Apps/MusicPlayer/images/prev.png"
 
-        onClicked: {
-            if (player.playlist.currentIndex !== 0 || repeatButton.status
-                    || shuffleButton.status)
-                utility.previous(player);
-        }
+        onClicked: PlayerControl.previousPlayer()
     }
 
     // Play/Pause button on Music widget
@@ -218,11 +220,7 @@ Item {
         icon_pressed: "qrc:/Apps/MusicPlayer/images/next_hold.png"
         icon_released: "qrc:/Apps/MusicPlayer/images/next.png"
 
-        onClicked: {
-            if (player.playlist.currentIndex !== (playlistModel.rowCount() - 1)
-                    || repeatButton.status || shuffleButton.status)
-                utility.next(player);
-        }
+        onClicked: PlayerControl.nextPlayer()
     }
 
     // Shuffle button on Music widget
@@ -230,10 +228,9 @@ Item {
         id: shuffleButton
         image.width: image.implicitWidth * 0.6
         image.height: image.implicitHeight * 0.6
-
         icon_on: "qrc:/Apps/MusicPlayer/images/shuffle_hold.png"
         icon_off: "qrc:/Apps/MusicPlayer/images/shuffle.png"
-        status: playlist.playbackMode === Playlist.Random ? 1 : 0
+        status: shuffleGlobal
 
         anchors {
             left: progressBar.left
@@ -241,24 +238,18 @@ Item {
         }
 
         onStatusChanged: {
-            if (shuffleButton.status) {
-                repeatButton.status = false
-                utility.shuffle(player, 1)
-            }
-            else
-                utility.shuffle(player, 0)
+            shuffleGlobal = shuffleButton.status
+            utility.setPlayerMode(player, shuffleButton.status,
+                                               loopButton.status)
         }
     }
 
-    // Repeat button - loops current track
-    SwitchButton {
-        id: repeatButton
+    LoopButton {
+        id: loopButton
         image.width: image.implicitWidth * 0.6
         image.height: image.implicitHeight * 0.6
-
-        icon_on: "qrc:/Apps/MusicPlayer/images/repeat_hold.png"
-        icon_off: "qrc:/Apps/MusicPlayer/images/repeat.png"
-        status: playlist.playbackMode === Playlist.Loop ? 1 : 0
+        sizeNumber: 20
+        status: loopGlobal
 
         anchors {
             right: progressBar.right
@@ -266,11 +257,9 @@ Item {
         }
 
         onStatusChanged: {
-            if (repeatButton.status) {
-                shuffleButton.status = false
-                utility.loop(player, 1)
-            } else
-                utility.loop(player, 0)
+            loopGlobal = loopButton.status
+            utility.setPlayerMode(player, shuffleButton.status,
+                                               loopButton.status)
         }
     }
 
@@ -300,5 +289,11 @@ Item {
             bottom: parent.bottom
             bottomMargin: 35
         }
+    }
+
+    Connections {
+        target: root
+        onShuffleGlobalChanged: shuffleButton.status = shuffleGlobal
+        onLoopGlobalChanged: loopButton.status = loopGlobal
     }
 }

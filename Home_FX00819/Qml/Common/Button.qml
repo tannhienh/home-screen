@@ -1,14 +1,22 @@
 import QtQuick 2.13
 
+/*
+** Mouse area for buttons:
+** - Edit Button
+** - Done Button
+** - Back Button
+** - Apps Button in menu
+**/
 MouseArea {
     id: button
 
-    // Source icon
+    // Source icon for button
     property string icon_src
 
-    // Title for button
+    // Title for button with apps button in menu
     property string button_title
 
+    // This property hold whether editting
     property bool editting: false
 
     // Mouse area on button icon
@@ -84,13 +92,13 @@ MouseArea {
 
         // State Focus
         State {
-          name: "Focus"
+            name: "Focus"
 
-          // Change source buttonIcon focus icon
-          PropertyChanges {
-              target: buttonIcon
-              source: icon_src + "_f.png"
-          }
+            // Change source buttonIcon focus icon
+            PropertyChanges {
+                target: buttonIcon
+                source: icon_src + "_f.png"
+            }
         },
 
         // State Pressed

@@ -91,8 +91,8 @@ Item {
     // Date area right
     Item {
         id: timeDateArea
-        width: parent.width * 0.3   // 576
-        height: parent.height       // 85
+        width: parent.width * 0.3
+        height: parent.height
         anchors.centerIn: parent
 
         // Left divider
@@ -121,14 +121,14 @@ Item {
             property alias hour: hour.text      // Hour of current time
             property alias minute: minute.text  // Minute of current time
 
-            width: parent.width / 2 // 288
-            height: parent.height   // 85
+            width: parent.width / 2
+            height: parent.height
             anchors.left: parent.left
 
             // Hour text
             Text {
                 id: hour
-                color: "#FFFFFF" // White
+                color: "#FFFFFF"    // White
                 font.pixelSize: 60
                 font.family: helvetica.name
                 anchors.right: colon.left
@@ -139,7 +139,7 @@ Item {
             Text {
                 id: colon
                 text: ":"
-                color: "#FFFFFF"// White
+                color: "#FFFFFF"    // White
                 font.pixelSize: 60
                 font.family: helvetica.name
                 anchors.centerIn: parent
@@ -158,7 +158,7 @@ Item {
             // Minute text
             Text {
                 id: minute
-                color: "#FFFFFF" // White
+                color: "#FFFFFF"    // White
                 font.pixelSize: 60
                 font.family: helvetica.name
                 anchors.left: colon.right
@@ -182,7 +182,7 @@ Item {
             // Date text
             Text {
                 id: date
-                color: "#FFFFFF"// White
+                color: "#FFFFFF"    // White
                 font.pixelSize: 60
                 font.family: helvetica.name
                 anchors.centerIn: parent

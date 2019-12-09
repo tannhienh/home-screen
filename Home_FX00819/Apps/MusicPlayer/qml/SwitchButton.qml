@@ -1,7 +1,8 @@
 import QtQuick 2.13
+import QtMultimedia 5.13
 
 MouseArea {
-    id: root
+    id: shuffleButton
 
     property string icon_on: ""
     property string icon_off: ""
@@ -13,13 +14,13 @@ MouseArea {
 
     Image {
         id: image
-        source: root.status === true ? icon_on : icon_off
+        source: shuffleButton.status ? icon_on : icon_off
     }
 
     onClicked: {
-        if (root.status)
-            root.status = false
+        if (shuffleButton.status)
+            shuffleButton.status = false
         else
-            root.status = true
+            shuffleButton.status = true
     }
 }
