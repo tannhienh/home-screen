@@ -115,11 +115,11 @@ Item {
         y: 238
         source: {
             if (climateModel.driver_wind_face == 0)
-                    return (path + "off.png")
-                else if (climateModel.driver_wind_face == 1)
-                    return (path + "cold.png")
-                else if (climateModel.driver_wind_face == 2)
-                    return (path + "warm.png")
+                return (path + "off.png")
+            else if (climateModel.driver_wind_face == 1)
+                return (path + "cold.png")
+            else if (climateModel.driver_wind_face == 2)
+                return (path + "warm.png")
         }
     }
 
@@ -132,11 +132,11 @@ Item {
         y: 250
         source: {
             if (climateModel.driver_wind_foot == 0)
-                    return (path + "off.png")
-                else if (climateModel.driver_wind_foot == 1)
-                    return (path + "cold.png")
-                else if (climateModel.driver_wind_foot == 2)
-                    return (path + "warm.png")
+                return (path + "off.png")
+            else if (climateModel.driver_wind_foot == 1)
+                return (path + "cold.png")
+            else if (climateModel.driver_wind_foot == 2)
+                return (path + "warm.png")
         }
     }
 
@@ -156,11 +156,11 @@ Item {
         y: 238
         source: {
             if (climateModel.passenger_wind_face == 0)
-                    return (path + "off.png")
-                else if (climateModel.passenger_wind_face == 1)
-                    return (path + "cold.png")
-                else if (climateModel.passenger_wind_face == 2)
-                    return (path + "warm.png")
+                return (path + "off.png")
+            else if (climateModel.passenger_wind_face == 1)
+                return (path + "cold.png")
+            else if (climateModel.passenger_wind_face == 2)
+                return (path + "warm.png")
         }
     }
 
@@ -173,11 +173,11 @@ Item {
         y: 250
         source: {
             if (climateModel.passenger_wind_foot == 0)
-                    return (path + "off.png")
-                else if (climateModel.passenger_wind_foot == 1)
-                    return (path + "cold.png")
-                else if (climateModel.passenger_wind_foot == 2)
-                    return (path + "warm.png")
+                return (path + "off.png")
+            else if (climateModel.passenger_wind_foot == 1)
+                return (path + "cold.png")
+            else if (climateModel.passenger_wind_foot == 2)
+                return (path + "warm.png")
         }
     }
 
@@ -201,11 +201,11 @@ Item {
                 anchors.centerIn: parent
                 text: {
                     if (climateModel.driver_temp == 16.5)
-                          return "LOW"
-                      else if (climateModel.driver_temp == 31.5)
-                          return "HIGH"
-                      else
-                          return (climateModel.driver_temp + "\xB0C")
+                        return "LOW"
+                    else if (climateModel.driver_temp == 31.5)
+                        return "HIGH"
+                    else
+                        return (climateModel.driver_temp + "\xB0C")
                 }
             }
         }
@@ -234,11 +234,11 @@ Item {
                 anchors.centerIn: parent
                 text: {
                     if (climateModel.passenger_temp == 16.5)
-                          return "LOW"
-                      else if (climateModel.passenger_temp == 31.5)
-                          return "HIGH"
-                      else
-                          return (climateModel.passenger_temp + "\xB0C")
+                        return "LOW"
+                    else if (climateModel.passenger_temp == 31.5)
+                        return "HIGH"
+                    else
+                        return (climateModel.passenger_temp + "\xB0C")
                 }
             }
         }

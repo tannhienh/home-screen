@@ -61,6 +61,7 @@ MouseArea {
         }
     }
 
+    //
     onCanceled: {
         if (editting == false) {
             button.focus = true

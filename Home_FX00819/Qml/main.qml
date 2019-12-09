@@ -9,14 +9,14 @@ ApplicationWindow {
     // Screen Full HD 1920x1080 pixel
     visible: true
     visibility: "FullScreen"
-//    width: 1920
-//    height: 700
+    //    width: 1920
+    //    height: 700
     title: qsTr("Home Screen")
 
     property bool shuffleGlobal: false
     property int loopGlobal: 0
 
-    //-----------------------------------------------------------------------//
+    //------------------------------------------------------------------------//
     // Load Fonts from attached resource fonts.qrc
 
     // Font Cantarell
@@ -42,7 +42,7 @@ ApplicationWindow {
         id: ubuntu
         source: "qrc:/Fonts/Ubuntu-Regular.ttf"
     }
-    //-----------------------------------------------------------------------//
+    //------------------------------------------------------------------------//
 
     // Background Image
     // 1920x1080
