@@ -1,7 +1,5 @@
 import QtQuick 2.13
 import QtQuick.Controls 2.13
-//import QtQml.Models 2.13
-//import "Common"
 
 // Main Area
 // Width: 1920

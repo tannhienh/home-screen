@@ -2,6 +2,7 @@ import QtQuick 2.13
 import QtQuick.Controls 2.13
 import QtGraphicalEffects 1.13
 import QtMultimedia 5.13
+
 import "../Apps/MusicPlayer/qml"
 import "../Js/PlayerControl.js" as PlayerControl
 import "../Js/PlayerInfo.js" as PlayerInfo

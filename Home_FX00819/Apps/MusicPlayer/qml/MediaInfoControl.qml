@@ -2,7 +2,7 @@
 import QtQuick.Controls 2.13
 import QtMultimedia 5.13
 import QtGraphicalEffects 1.13
-import Qt.labs.settings 1.1
+
 import "../../../Js/PlayerControl.js" as PlayerControl
 import "../../../Js/PlayerInfo.js" as PlayerInfo
 
