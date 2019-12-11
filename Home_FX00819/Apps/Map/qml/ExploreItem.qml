@@ -10,6 +10,11 @@ Rectangle {
     height: parent.height
     radius: 4
 
+    Component.onCompleted: {
+        console.log("Width: " + rectItem.width)
+        console.log("Height: " + rectItem.height)
+    }
+
     Image {
         source: src
         anchors.centerIn: parent

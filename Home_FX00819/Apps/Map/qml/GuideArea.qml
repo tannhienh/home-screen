@@ -33,7 +33,7 @@ Item {
 
         // current location icon
         Image {
-            id: startLocationButton
+            id: startLocationIcon
             source: "qrc:/Apps/Map/images/start_location.png"
             anchors {
                 top: parent.top
@@ -51,11 +51,11 @@ Item {
             color: "#515356"
             height: 50
             anchors {
-                left: startLocationButton.right
-                leftMargin: 20
+                left: parent.left
+                leftMargin: 70
                 right: parent.right
                 rightMargin: 40
-                verticalCenter: startLocationButton.verticalCenter
+                verticalCenter: startLocationIcon.verticalCenter
             }
 
             background: Rectangle {
@@ -66,12 +66,12 @@ Item {
 
         // destination location icon
         Image {
-            id: destinationButton
+            id: destinationIcon
             source: "qrc:/Apps/Map/images/destination_location.png"
             anchors {
                 bottom: parent.bottom
                 bottomMargin: 40
-                horizontalCenter: startLocationButton.horizontalCenter
+                horizontalCenter: startLocationIcon.horizontalCenter
             }
         }
 
@@ -83,11 +83,11 @@ Item {
             color: "#515356"
             height: 50
             anchors {
-                left: destinationButton.right
-                leftMargin: 20
+                left: parent.left
+                leftMargin: 70
                 right: parent.right
                 rightMargin: 40
-                verticalCenter: destinationButton.verticalCenter
+                verticalCenter: destinationIcon.verticalCenter
             }
 
             background: Rectangle {
@@ -101,11 +101,11 @@ Item {
             width: 5
             spacing: 10 // height / 5
             anchors {
-                top: startLocationButton.bottom
+                top: startLocationIcon.bottom
                 topMargin: dotColumn.width
-                bottom: destinationButton.top
+                bottom: destinationIcon.top
                 bottomMargin: dotColumn.width
-                horizontalCenter: startLocationButton.horizontalCenter
+                horizontalCenter: startLocationIcon.horizontalCenter
             }
 
             Rectangle {
@@ -132,8 +132,8 @@ Item {
 
         // Shadow for placeHolder icon
         DropShadow {
-            anchors.fill: destinationButton
-            source: destinationButton
+            anchors.fill: destinationIcon
+            source: destinationIcon
             color: "#aa000000"
             radius: 10
             samples: 21
