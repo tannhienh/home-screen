@@ -105,6 +105,8 @@ Item {
             bottom: progressBarItem.top
         }
 
+        Component.onCompleted: console.log(height)
+
         // Delegate for album art view
         Component {
             id: albumArtDelegate
@@ -303,12 +305,11 @@ Item {
     // Media Control
     Item {
         id: mediaControl
-        height: 145
+        height: 180
         anchors {
             left: parent.left
-            bottom: parent.bottom
             right: parent.right
-            bottomMargin: 35
+            bottom: parent.bottom
         }
 
         // Previous button
@@ -326,7 +327,8 @@ Item {
         // Play/Pause button
         ButtonControl {
             id: playButton
-            anchors.centerIn: mediaControl
+            anchors.horizontalCenter: mediaControl.horizontalCenter
+            anchors.bottomMargin: 35
 
             status: player.state === MediaPlayer.PlayingState ? true : false
             icon_default: status ? "qrc:/Apps/MusicPlayer/images/pause.png"
@@ -378,7 +380,7 @@ Item {
             anchors {
                 left: mediaControl.left
                 leftMargin: 150
-                verticalCenter: mediaControl.verticalCenter
+                verticalCenter: playButton.verticalCenter
             }
 
             onStatusChanged: {
@@ -395,7 +397,7 @@ Item {
             anchors {
                 right: mediaControl.right
                 rightMargin: 150
-                verticalCenter: mediaControl.verticalCenter
+                verticalCenter: playButton.verticalCenter
             }
 
             onStatusChanged: {

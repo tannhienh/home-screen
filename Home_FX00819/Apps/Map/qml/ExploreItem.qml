@@ -1,7 +1,7 @@
 import QtQuick 2.0
 
 Rectangle {
-    id: rectItem1
+    id: rectItem
 
     property string src: ""
     property string title: ""

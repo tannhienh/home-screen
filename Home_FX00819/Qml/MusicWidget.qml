@@ -21,7 +21,7 @@ Item {
     FastBlur {
         anchors.fill: albumArtBg
         source: albumArtBg
-        radius: 10
+        radius: 15
     }
 
     // Song title and single name

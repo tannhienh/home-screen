@@ -31,6 +31,7 @@ MouseArea {
         text: "1"
         font.family: helvetica.name
         font.pixelSize: 30
+        color: "#000000"    // black color
         visible: loopButton.status === loopButton.currentLoop
                  ? true : false
         anchors {

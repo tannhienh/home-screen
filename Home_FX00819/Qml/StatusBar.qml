@@ -79,7 +79,7 @@ Item {
         visible: isShowBackButton
         anchors {
             left: parent.left
-            leftMargin: 17.5
+            leftMargin: 18
             verticalCenter: parent.verticalCenter
         }
 
@@ -210,7 +210,7 @@ Item {
     Row {
         layoutDirection: Qt.RightToLeft
         spacing: 10
-        rightPadding: 17.5
+        rightPadding: 18
         anchors.right: parent.right
         anchors.verticalCenter: parent.verticalCenter
 

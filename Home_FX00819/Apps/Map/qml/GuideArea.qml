@@ -13,12 +13,12 @@ Item {
         anchors.fill: parent
     }
 
-    //--------------------------------------------------------------------//
+    //------------------------------------------------------------------------//
     // Begin Choose place location
-    //--------------------------------------------------------------------//
+    //------------------------------------------------------------------------//
     Item {
-        id: placeChooseItem
-        height: parent.height * 0.2
+        id: inputPlaceItem
+        height: 200
         anchors {
             top: parent.top
             left: parent.left
@@ -26,7 +26,7 @@ Item {
         }
 
         Rectangle {
-            id: placeChooseBg
+            id: inputPlaceBg
             color: "#6065EE"
             anchors.fill: parent
         }
@@ -45,7 +45,7 @@ Item {
 
         // Text input start location
         TextField {
-            id: currentText
+            id: startAddress
             placeholderText: qsTr("Choose starting location")
             font.pixelSize: 20
             color: "#515356"
@@ -60,7 +60,6 @@ Item {
 
             background: Rectangle {
                 color: "#FFFFFF"
-                border.color: "#D6D6D6"
                 radius: 4
             }
         }
@@ -78,7 +77,7 @@ Item {
 
         // Text input destination location
         TextField {
-            id: destinationText
+            id: destinationAddress
             placeholderText: qsTr("Choose destination")
             font.pixelSize: 20
             color: "#515356"
@@ -93,7 +92,6 @@ Item {
 
             background: Rectangle {
                 color: "#FFFFFF"
-                border.color: "#D6D6D6"
                 radius: 4
             }
         }
@@ -101,7 +99,7 @@ Item {
         Column {
             id: dotColumn
             width: 5
-            spacing: height / 5
+            spacing: 10 // height / 5
             anchors {
                 top: startLocationButton.bottom
                 topMargin: dotColumn.width
@@ -160,17 +158,17 @@ Item {
                 anchors.fill: parent
                 onPressed:{
                     parent.source = parent.src + "_2.png"
-                    temp = currentText.text
-                    currentText.text = destinationText.text
-                    destinationText.text = temp
+                    temp = startAddress.text
+                    startAddress.text = destinationAddress.text
+                    destinationAddress.text = temp
                 }
                 onReleased: parent.source = parent.src + "_1.png"
             }
         }
     }
-    //--------------------------------------------------------------------//
+    //------------------------------------------------------------------------//
     // End Choode place location
-    //--------------------------------------------------------------------//
+    //------------------------------------------------------------------------//
 
     // Shadown for guide area on right edge
     DropShadow {
@@ -182,8 +180,8 @@ Item {
     }
 
     DropShadow {
-        anchors.fill: placeChooseItem
-        source: placeChooseItem
+        anchors.fill: inputPlaceItem
+        source: inputPlaceItem
         color: "#aa000000"
         radius: 20
         samples: 31
@@ -192,7 +190,7 @@ Item {
     // Locations near here
     Item {
         id: nearHereItem
-        height: parent.height * 0.2
+        height: 200
         anchors {
             left: parent.left
             leftMargin: 10
@@ -205,7 +203,7 @@ Item {
         Rectangle {
             id: nearHereBg
             color: "#FFFFFF"
-            anchors.fill: parent
+            anchors.fill: nearHereItem
             border.width: 1
             border.color: "#d3d3d3"
             radius: 5
@@ -283,7 +281,7 @@ Item {
 
             // First page of swipe explore
             Item {
-                id: page1
+                id: page0
                 width: swipeExplore.width
                 height: swipeExplore.height
 
@@ -313,7 +311,7 @@ Item {
 
             // Second page of swipe explore
             Item {
-                id: page2
+                id: page1
                 width: swipeExplore.width
                 height: swipeExplore.height
 
@@ -343,7 +341,7 @@ Item {
 
             // Third page of swipe explore
             Item {
-                id: page3
+                id: page2
                 width: swipeExplore.width
                 height: swipeExplore.height
 
@@ -422,7 +420,7 @@ Item {
     Text {
         id: textDefault
         text: qsTr("Where will you go today?")
-        color: "#778899"
+        color: "#8A8A8A"
         font.pixelSize: 20
         anchors.centerIn: guideItem
     }

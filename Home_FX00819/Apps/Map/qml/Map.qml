@@ -55,7 +55,7 @@ Item {
             id: locateButton
             width: 50
             height: 50
-            color: "#FFFFFF"
+            color: "#80FFFFFF"
             radius: 50
 
             anchors {
@@ -67,12 +67,13 @@ Item {
             Image {
                 source: "qrc:/Apps/Map/images/current_location.png"
                 anchors.centerIn: locateButton
+                opacity: 0.5
             }
 
             MouseArea {
                 anchors.fill: parent
-                onPressed: locateButton.color = "#d3d3d3"
-                onReleased: locateButton.color = "#FFFFFF"
+                onPressed: locateButton.color = "#80d3d3d3"
+                onReleased: locateButton.color = "#80FFFFFF"
             }
         }
 
@@ -85,6 +86,7 @@ Item {
 
             background: Rectangle {
                 color: zoomIn.down ? "#d3d3d3" : "#FFFFFF"
+                opacity: 0.5
             }
 
             anchors {
@@ -105,6 +107,7 @@ Item {
 
             background: Rectangle {
                 color: zoomOut.down ? "#d3d3d3" : "#FFFFFF"
+                opacity: 0.5
             }
 
             anchors {
@@ -163,7 +166,7 @@ Item {
 
     GuideArea {
         id: guideItem
-        width: parent.width / 3.5
+        width: 550
         anchors {
             top: parent.top
             left: parent.left

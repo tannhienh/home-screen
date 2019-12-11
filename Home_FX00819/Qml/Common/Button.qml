@@ -1,12 +1,12 @@
 import QtQuick 2.13
 
 /*
-** Mouse area for buttons:
-** - Edit Button
-** - Done Button
-** - Back Button
-** - Apps Button in menu
-**/
+ * Mouse area for buttons:
+ * - Edit Button
+ * - Done Button
+ * - Back Button
+ * - Apps Button in menu
+ */
 MouseArea {
     id: button
 
@@ -34,10 +34,12 @@ MouseArea {
         id: buttonTitle
         text: button_title
         color: "White"
+
         font {
             pixelSize: 40
             family: cantarell.name
         }
+
         anchors {
             bottom: buttonIcon.bottom
             bottomMargin: 90
