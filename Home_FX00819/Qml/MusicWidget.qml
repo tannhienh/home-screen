@@ -131,7 +131,7 @@ Item {
             PathAttribute { name: "iconScale"; value: 0.5 }
 
             PathLine {
-                x: albumArtInner.width * 0.4
+                x: albumArtInner.width / 2
                 y: albumArtInner.height / 2
             }
             PathAttribute { name: "iconScale"; value: 1.0 }

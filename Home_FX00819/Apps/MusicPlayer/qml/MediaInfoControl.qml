@@ -105,7 +105,7 @@ Item {
             bottom: progressBarItem.top
         }
 
-        Component.onCompleted: console.log(height)
+        Component.onCompleted: console.log("height Album art: " + height)
 
         // Delegate for album art view
         Component {
@@ -115,7 +115,7 @@ Item {
 
                 property variant getData: model
 
-                width: albumArtItem.height * 0.65
+                width: 354
                 height: width
                 scale:  PathView.iconScale === undefined ? 0 : PathView.iconScale
                 opacity: PathView.isCurrentItem ? 1 : 0.8
@@ -127,6 +127,10 @@ Item {
                     anchors.centerIn: parent
                     anchors.horizontalCenter: parent.horizontalCenter
                     source: album_art
+
+                    Component.onCompleted: {
+                        console.log(albumPicture.width + " x " + albumPicture.height)
+                    }
                 }
 
                 MouseArea {
@@ -159,10 +163,6 @@ Item {
 
             property int playingIndex
 
-
-            anchors.fill: albumArtItem
-            anchors.leftMargin: (albumArtItem.width -
-                                 (albumArtItem.height * 1.8)) / 2
             preferredHighlightBegin: 0.5
             preferredHighlightEnd: 0.5
             focus: true
@@ -170,16 +170,21 @@ Item {
             delegate: albumArtDelegate
             pathItemCount: 3
             currentIndex: playlist.currentIndex
+            anchors.fill: albumArtItem
+            anchors.leftMargin: (albumArtItem.width -
+                                 (albumArtItem.height * 1.8)) / 2
 
             path: Path {
                 startX: 0
                 startY: albumArtItem.height * 0.45
                 PathAttribute { name: "iconScale"; value: 0.5 }
+
                 PathLine {
                     x: albumArtItem.height * 0.9
                     y: albumArtItem.height * 0.45
                 }
                 PathAttribute { name: "iconScale"; value: 1.0 }
+
                 PathLine {
                     x: albumArtItem.height * 1.8
                     y: albumArtItem.height * 0.45

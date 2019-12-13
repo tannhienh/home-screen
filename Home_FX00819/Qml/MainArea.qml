@@ -37,7 +37,7 @@ Item {
                 height: parent.height
                 anchors {
                     right: climateWidget.left
-                    rightMargin: 22
+                    rightMargin: 20
                     verticalCenter: parent.verticalCenter
                 }
 
@@ -83,7 +83,7 @@ Item {
                 height: parent.height
                 anchors {
                     left: climateWidget.right
-                    leftMargin: 22
+                    leftMargin: 20
                     verticalCenter: parent.verticalCenter
                 }
 
