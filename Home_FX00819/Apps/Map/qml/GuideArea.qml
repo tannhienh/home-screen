@@ -1,6 +1,7 @@
 import QtQuick 2.13
 import QtQuick.Controls 2.13
 import QtGraphicalEffects 1.13
+import QtQuick.VirtualKeyboard 2.13
 
 // Guide Area
 Item {
@@ -9,8 +10,22 @@ Item {
     // Guide background area
     Rectangle {
         id: guideBg
-        color: "#FFFFFF"
         anchors.fill: parent
+        gradient: Gradient {
+            GradientStop { position: 0; color: "#2E2E2E" }
+            GradientStop { position: 0.2; color: "#4A4A4A" }
+            GradientStop { position: 1; color: "#2B2E30" }
+        }
+
+        // Hide virtual Keyboard
+        MouseArea {
+            anchors.fill: parent
+
+            // Hide virtual Keyboard
+            onClicked: {
+                focus = true
+            }
+        }
     }
 
     //------------------------------------------------------------------------//
@@ -29,6 +44,10 @@ Item {
             id: inputPlaceBg
             color: "#6065EE"
             anchors.fill: parent
+            gradient: Gradient {
+                GradientStop { position: 0; color: "#4A4A4A" }
+                GradientStop { position: 1; color: "#2E2E2E" }
+            }
         }
 
         // current location icon
@@ -50,6 +69,10 @@ Item {
             font.pixelSize: 20
             color: "#515356"
             height: 50
+            selectByMouse: true
+            selectedTextColor: color
+            selectionColor: "#503498DB"
+
             anchors {
                 left: parent.left
                 leftMargin: 70
@@ -61,6 +84,8 @@ Item {
             background: Rectangle {
                 color: "#FFFFFF"
                 radius: 4
+                border.width: 2
+                border.color: startAddress.activeFocus ? "#5DADE2" : "#6065EE"
             }
         }
 
@@ -82,6 +107,10 @@ Item {
             font.pixelSize: 20
             color: "#515356"
             height: 50
+            selectByMouse: true
+            selectedTextColor: color
+            selectionColor: "#503498DB"
+
             anchors {
                 left: parent.left
                 leftMargin: 70
@@ -93,6 +122,8 @@ Item {
             background: Rectangle {
                 color: "#FFFFFF"
                 radius: 4
+                border.width: 2
+                border.color: destinationAddress.activeFocus ? "#5DADE2" : "#6065EE"
             }
         }
 
@@ -167,8 +198,22 @@ Item {
         }
     }
     //------------------------------------------------------------------------//
-    // End Choode place location
+    // End Choose place location
     //------------------------------------------------------------------------//
+
+
+//    Rectangle {
+//        id: line
+//        height: 2
+//        anchors {
+//            top: inputPlaceItem.bottom
+//            left: parent.left
+//            leftMargin: 10
+//            right: parent.right
+//            rightMargin: 10
+//        }
+//        color: "White"
+//    }
 
     // Shadown for guide area on right edge
     DropShadow {
@@ -202,17 +247,20 @@ Item {
 
         Rectangle {
             id: nearHereBg
-            color: "#FFFFFF"
             anchors.fill: nearHereItem
             border.width: 1
-            border.color: "#d3d3d3"
+            border.color: "#797979"
             radius: 5
+            gradient: Gradient {
+                GradientStop { position: 0; color: "#4A4A4A" }
+                GradientStop { position: 1; color: "#2E2E2E" }
+            }
         }
 
         Text {
             id: titleText
             text: qsTr("Explore near here")
-            color: "#515356"
+            color: "#FFFFFF"
             font.pixelSize: 20
             font.bold: true
             anchors {
@@ -262,7 +310,7 @@ Item {
             }
         }
 
-        // List view explore near here
+        // Swipe view explore near here
         SwipeView {
             id: swipeExplore
             currentIndex: 1
