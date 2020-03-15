@@ -68,11 +68,12 @@ Item {
     // height: 870
     MediaInfoControl {
         id: mainMedia
-        anchors.top: header.bottom
-        anchors.right: parent.right
-        anchors.bottom: parent.bottom
-        anchors.leftMargin: 0
         width: parent.width - (playlistView.position * playlistView.width)
+        anchors {
+            top: header.bottom
+            bottom: parent.bottom
+            right: parent.right
+        }
     }
 
     Connections {

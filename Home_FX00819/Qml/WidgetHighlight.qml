@@ -12,7 +12,9 @@ MouseArea {
     }
 
     onPressed: {
-        if (disable == false)
+        if (disable)
+            rootWidgetHighlight.state = "Focus"
+        else
             rootWidgetHighlight.state = "Pressed"
     }
 

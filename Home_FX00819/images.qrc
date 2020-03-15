@@ -118,5 +118,20 @@
         <file>Apps/Map/images/start_location.png</file>
         <file>Apps/Map/images/supermarket.png</file>
         <file>Apps/Map/images/up_arrow.png</file>
+        <file>Images/WidgetCommon/bg_widget_eco_f.png</file>
+        <file>Images/WidgetCommon/bg_widget_eco_p.png</file>
+        <file>Images/WidgetCommon/bg_widget_sport_f.png</file>
+        <file>Images/WidgetCommon/bg_widget_sport_p.png</file>
+        <file>Images/Climate/ico_arrow_down_big.png</file>
+        <file>Images/Climate/ico_arrow_left_big.png</file>
+        <file>Images/Climate/ico_arrow_right_big.png</file>
+        <file>Images/Climate/ico_arrow_up_big.png</file>
+        <file>Images/Climate/ico_arrow_down_small.png</file>
+        <file>Images/Climate/ico_arrow_left_small.png</file>
+        <file>Images/Climate/ico_arrow_right_small.png</file>
+        <file>Images/Climate/ico_arrow_up_small.png</file>
+        <file>Apps/Map/images/map_type_satellite.png</file>
+        <file>Apps/Map/images/map_type_light.png</file>
+        <file>Apps/Map/images/map_type_dark.png</file>
     </qresource>
 </RCC>

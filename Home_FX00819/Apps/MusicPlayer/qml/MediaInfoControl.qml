@@ -105,8 +105,6 @@ Item {
             bottom: progressBarItem.top
         }
 
-        Component.onCompleted: console.log("height Album art: " + height)
-
         // Delegate for album art view
         Component {
             id: albumArtDelegate
@@ -127,10 +125,6 @@ Item {
                     anchors.centerIn: parent
                     anchors.horizontalCenter: parent.horizontalCenter
                     source: album_art
-
-                    Component.onCompleted: {
-                        console.log(albumPicture.width + " x " + albumPicture.height)
-                    }
                 }
 
                 MouseArea {

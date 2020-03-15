@@ -30,6 +30,12 @@ Item {
         anchors.fill: parent
         color: "#000000" // Black color
         opacity: 0.3
+
+        // Hide virtual keyboard
+        MouseArea {
+            anchors.fill: parent
+            onClicked: focus = true
+        }
     }
 
     // Edit button

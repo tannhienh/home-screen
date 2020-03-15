@@ -1,5 +1,4 @@
-<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN"
-"http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN" "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
 <node>
   <interface name="local.Climate">
     <signal name="dataChanged">
@@ -7,44 +6,62 @@
     <method name="get_driver_wind_face">
       <arg type="i" direction="out"/>
     </method>
+    <method name="set_driver_wind_face">
+      <arg name="driver_wind_face" type="i" direction="in"/>
+    </method>
     <method name="get_driver_wind_foot">
       <arg type="i" direction="out"/>
     </method>
+    <method name="set_driver_wind_foot">
+      <arg name="driver_wind_foot" type="i" direction="in"/>
+    </method>
     <method name="get_driver_temp">
-      <arg type="d" direction="out"/>
+      <arg type="i" direction="out"/>
+    </method>
+    <method name="set_driver_temp">
+      <arg name="driver_temp" type="i" direction="in"/>
     </method>
     <method name="get_fan_level">
       <arg type="i" direction="out"/>
     </method>
+    <method name="set_fan_level">
+      <arg name="fan_level" type="i" direction="in"/>
+    </method>
     <method name="get_passenger_wind_face">
       <arg type="i" direction="out"/>
+    </method>
+    <method name="set_passenger_wind_face">
+      <arg name="passenger_wind_face" type="i" direction="in"/>
     </method>
     <method name="get_passenger_wind_foot">
       <arg type="i" direction="out"/>
     </method>
+    <method name="set_passenger_wind_foot">
+      <arg name="passenger_wind_foot" type="i" direction="in"/>
+    </method>
     <method name="get_passenger_temp">
-      <arg type="d" direction="out"/>
+      <arg type="i" direction="out"/>
+    </method>
+    <method name="set_passenger_temp">
+      <arg name="passenger_temp" type="i" direction="in"/>
     </method>
     <method name="get_auto_mode">
       <arg type="b" direction="out"/>
     </method>
+    <method name="set_auto_mode">
+      <arg name="auto_mode" type="b" direction="in"/>
+    </method>
     <method name="get_sync_mode">
       <arg type="b" direction="out"/>
     </method>
-    <method name="get_outside_temp">
-      <arg type="d" direction="out"/>
-    </method>
-    <method name="set_data">
-      <arg name="driver_wind_face" type="i" direction="in"/>
-      <arg name="driver_wind_foot" type="i" direction="in"/>
-      <arg name="driver_temp" type="d" direction="in"/>
-      <arg name="fan_level" type="i" direction="in"/>
-      <arg name="passenger_wind_face" type="i" direction="in"/>
-      <arg name="passenger_wind_foot" type="i" direction="in"/>
-      <arg name="passenger_temp" type="d" direction="in"/>
-      <arg name="auto_mode" type="b" direction="in"/>
+    <method name="set_sync_mode">
       <arg name="sync_mode" type="b" direction="in"/>
-      <arg name="outside_temp" type="d" direction="in"/>
+    </method>
+    <method name="get_outside_temp">
+      <arg type="i" direction="out"/>
+    </method>
+    <method name="set_outside_temp">
+      <arg name="outside_temp" type="i" direction="in"/>
     </method>
   </interface>
 </node>

@@ -13,48 +13,92 @@ public:
     explicit Climate(QObject *parent = nullptr);
 
 public slots:
+
+    //------------------------------------------------------------------------//
+    // Get Driver wind face
     int get_driver_wind_face();
 
+    // Set Driver wind face
+    void set_driver_wind_face(int driver_wind_face);
+    //------------------------------------------------------------------------//
+
+    //------------------------------------------------------------------------//
+    // Get Driver wind foot
     int get_driver_wind_foot();
 
-    double get_driver_temp();
+    // Set Driver wind foot
+    void set_driver_wind_foot(int driver_wind_foot);
+    //------------------------------------------------------------------------//
 
+    //------------------------------------------------------------------------//
+    // Get Driver temperature
+    int get_driver_temp();
+
+    // Set Driver teperature
+    void set_driver_temp(int driver_temp);
+    //------------------------------------------------------------------------//
+
+    //------------------------------------------------------------------------//
+    // Get Fan level
     int get_fan_level();
 
+    // Set Fan level
+    void set_fan_level(int fan_level);
+    //------------------------------------------------------------------------//
+
+    //------------------------------------------------------------------------//
+    // Passenger wind face
     int get_passenger_wind_face();
 
+    void set_passenger_wind_face(int passenger_wind_face);
+    //------------------------------------------------------------------------//
+
+    //------------------------------------------------------------------------//
+    // Passenger wind foot
     int get_passenger_wind_foot();
 
-    double get_passenger_temp();
+    void set_passenger_wind_foot(int passenger_wind_foot);
+    //------------------------------------------------------------------------//
 
+    //------------------------------------------------------------------------//
+    // Passenger temperature
+    int get_passenger_temp();
+
+    void set_passenger_temp(int passenger_temp);
+    //------------------------------------------------------------------------//
+
+    //------------------------------------------------------------------------//
+    // Auto mode
     bool get_auto_mode();
 
+    void set_auto_mode(bool auto_mode);
+    //------------------------------------------------------------------------//
+
+    //------------------------------------------------------------------------//
+    // Sync mode
     bool get_sync_mode();
 
-    double get_outside_temp();
+    void set_sync_mode(bool sync_mode);
+    //------------------------------------------------------------------------//
 
-    void set_data(int driver_wind_face,
-                  int driver_wind_foot,
-                  double driver_temp,
-                  int fan_level,
-                  int passenger_wind_face,
-                  int passenger_wind_foot,
-                  double passenger_temp,
-                  bool auto_mode,
-                  bool sync_mode,
-                  double outside_temp);
+    //------------------------------------------------------------------------//
+    // Outside temperature
+    int get_outside_temp();
+
+    void set_outside_temp(int outside_temp);
+    //------------------------------------------------------------------------//
 
 private:
     int m_driver_wind_face;
     int m_driver_wind_foot;
-    double m_driver_temp;
+    int m_driver_temp;
     int m_fan_level;
     int m_passenger_wind_face;
     int m_passenger_wind_foot;
-    double m_passenger_temp;
+    int m_passenger_temp;
     bool m_auto_mode;
     bool m_sync_mode;
-    double m_outside_temp;
+    int m_outside_temp;
 
     ClimateAdaptor *m_climateAdaptor;
 

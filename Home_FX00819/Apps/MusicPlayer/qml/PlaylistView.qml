@@ -44,13 +44,6 @@ Drawer {
                 width: mediaPlaylist.width
                 height: (mediaPlaylist.height - (mediaPlaylist.spacing * 5)) / 6
                 opacity: 0.5
-
-                Component.onCompleted: {
-                    console.log("playlistItem.implicitWidth: " + playlistItem.implicitWidth)
-                    console.log("playlistItem.implicitHeight: " + playlistItem.implicitHeight)
-                    console.log("playlistItem.width: " + playlistItem.width)
-                    console.log("playlistItem.height: " + playlistItem.height)
-                }
             }
 
             // Speaker image for items in playlist
@@ -156,12 +149,6 @@ Drawer {
         currentIndex: playlist.currentIndex
         snapMode: ListView.SnapToItem
         delegate: playlistDelegate
-
-        Component.onCompleted: {
-            console.log("Playlist.Width: " + mediaPlaylist.width)
-            console.log("playlist height: " + mediaPlaylist.height)
-        }
-
 
         // Background image for current item song in playlist
         highlight: Image {

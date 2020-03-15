@@ -5,9 +5,9 @@
   <ICON_PATH>qrc:/Images/Menu/btn_menu_map</ICON_PATH>
  </APP>
  <APP ID="002">
-  <TITLE>Music</TITLE>
-  <URL>qrc:/Apps/MusicPlayer/qml/MusicPlayer.qml</URL>
-  <ICON_PATH>qrc:/Images/Menu/btn_menu_music</ICON_PATH>
+  <TITLE>Radio</TITLE>
+  <URL>qrc:/Apps/Radio/qml/Radio.qml</URL>
+  <ICON_PATH>qrc:/Images/Menu/btn_menu_radio</ICON_PATH>
  </APP>
  <APP ID="003">
   <TITLE>Phone</TITLE>
@@ -15,14 +15,14 @@
   <ICON_PATH>qrc:/Images/Menu/btn_menu_phone</ICON_PATH>
  </APP>
  <APP ID="004">
+  <TITLE>Music</TITLE>
+  <URL>qrc:/Apps/MusicPlayer/qml/MusicPlayer.qml</URL>
+  <ICON_PATH>qrc:/Images/Menu/btn_menu_music</ICON_PATH>
+ </APP>
+ <APP ID="005">
   <TITLE>Videos</TITLE>
   <URL>qrc:/Apps/Videos/qml/Videos.qml</URL>
   <ICON_PATH>qrc:/Images/Menu/btn_menu_videos</ICON_PATH>
- </APP>
- <APP ID="005">
-  <TITLE>Radio</TITLE>
-  <URL>qrc:/Apps/Radio/qml/Radio.qml</URL>
-  <ICON_PATH>qrc:/Images/Menu/btn_menu_radio</ICON_PATH>
  </APP>
  <APP ID="006">
   <TITLE>Settings</TITLE>
@@ -30,9 +30,9 @@
   <ICON_PATH>qrc:/Images/Menu/btn_menu_settings</ICON_PATH>
  </APP>
  <APP ID="007">
-  <TITLE>Map</TITLE>
-  <URL>qrc:/Apps/Map/qml/Map.qml</URL>
-  <ICON_PATH>qrc:/Images/Menu/btn_menu_map</ICON_PATH>
+  <TITLE>Phone</TITLE>
+  <URL>qrc:/Apps/Phone/qml/Phone.qml</URL>
+  <ICON_PATH>qrc:/Images/Menu/btn_menu_phone</ICON_PATH>
  </APP>
  <APP ID="008">
   <TITLE>Music</TITLE>
@@ -40,9 +40,9 @@
   <ICON_PATH>qrc:/Images/Menu/btn_menu_music</ICON_PATH>
  </APP>
  <APP ID="009">
-  <TITLE>Phone</TITLE>
-  <URL>qrc:/Apps/Phone/qml/Phone.qml</URL>
-  <ICON_PATH>qrc:/Images/Menu/btn_menu_phone</ICON_PATH>
+  <TITLE>Map</TITLE>
+  <URL>qrc:/Apps/Map/qml/Map.qml</URL>
+  <ICON_PATH>qrc:/Images/Menu/btn_menu_map</ICON_PATH>
  </APP>
  <APP ID="010">
   <TITLE>Videos</TITLE>

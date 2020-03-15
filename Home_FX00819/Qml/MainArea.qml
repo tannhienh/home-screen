@@ -65,12 +65,6 @@ Item {
                 height: parent.height
                 anchors.centerIn: parent
 
-                WidgetHighlight {
-                    id: climateHighlight
-                    anchors.fill: parent
-                    disable: true
-                }
-
                 // Key navigation
                 Keys.onLeftPressed: mapWidget
                 Keys.onRightPressed: musicHighlight

@@ -36,7 +36,7 @@ Item {
 
         // Title of song
         Text {
-            id: songTitle
+            id: songName
 
             text: PlayerInfo.getSongTitle()
 
@@ -59,13 +59,13 @@ Item {
             font.family: cantarell.name
             anchors {
                 horizontalCenter: parent.horizontalCenter
-                top: songTitle.bottom
+                top: songName.bottom
             }
         }
 
         DropShadow {
-            anchors.fill: songTitle
-            source: songTitle
+            anchors.fill: songName
+            source: songName
             color: "#aa000000"
             radius: 7
             samples: 15

@@ -8,19 +8,6 @@ ApplicationWindow {
     height: 600
     title: qsTr("Simulator - Home Screen")
 
-    function saveData() {
-        climate.set_data(driverWindFace.currentIndex,
-                         driverWindFoot.currentIndex,
-                         driverTemper.realValue,
-                         fanLevel.value,
-                         passengerWindFace.currentIndex,
-                         passengerWindFoot.currentIndex,
-                         passengerTemper.realValue,
-                         autoMode.position,
-                         syncMode.position,
-                         outsideTemper.realValue)
-    }
-
     ListModel {
         id: windModeModel
         ListElement { key: "Off"; value: 0 }
@@ -48,6 +35,7 @@ ApplicationWindow {
     ComboBox {
         id: driverWindFace
         textRole: "key"
+        currentIndex: climate.get_driver_wind_face()
         model: windModeModel
         anchors {
             top: parent.top
@@ -57,7 +45,7 @@ ApplicationWindow {
         }
 
         onCurrentIndexChanged: {
-            saveData()
+            climate.set_driver_wind_face(driverWindFace.currentIndex)
             console.log("Driver Wind On Face: " + driverWindFace.currentIndex)
         }
     }
@@ -77,6 +65,7 @@ ApplicationWindow {
     ComboBox {
         id: driverWindFoot
         textRole: "key"
+        currentIndex: climate.get_driver_wind_foot()
         model: windModeModel
         anchors {
             top: driverWindFace.bottom
@@ -86,7 +75,7 @@ ApplicationWindow {
         }
 
         onCurrentIndexChanged: {
-            saveData()
+            climate.set_driver_wind_foot(driverWindFoot.currentIndex)
             console.log("Driver Wind On Foot: " + driverWindFoot.currentIndex)
         }
     }
@@ -105,10 +94,10 @@ ApplicationWindow {
 
     SpinBox {
         id: driverTemper
-        from: 165
-        to: 315
-        stepSize: 5
-        value: 250
+        from: 16
+        to: 32
+        stepSize: 1
+        value: climate.get_driver_temp()
         anchors {
             top: driverWindFoot.bottom
             topMargin: 10
@@ -116,26 +105,9 @@ ApplicationWindow {
             leftMargin: parent.width / 2
         }
 
-        property int decimals: 1
-        property real realValue: value / 10
-
-        validator: DoubleValidator {
-            bottom: Math.min(driverTemper.from, driverTemper.to)
-            top:  Math.max(driverTemper.from, driverTemper.to)
-        }
-
-        textFromValue: function(value, locale) {
-            return Number(value / 10).toLocaleString(locale, 'f',
-                                                     driverTemper.decimals)
-        }
-
-        valueFromText: function(text, locale) {
-            return Number.fromLocaleString(locale, text)
-        }
-
-        onRealValueChanged: {
-            saveData()
-            console.log("Temperature driver: " + driverTemper.realValue)
+        onValueChanged: {
+            climate.set_driver_temp(driverTemper.value)
+            console.log("Temperature driver: " + driverTemper.value)
         }
     }
     //------------------------------------------------------------------------//
@@ -166,7 +138,7 @@ ApplicationWindow {
         from: 0
         to: 10
         stepSize: 1
-        value: 5
+        value: climate.get_fan_level()
         anchors {
             top: driverTemper.bottom
             topMargin: 20
@@ -175,7 +147,7 @@ ApplicationWindow {
         }
 
         onValueChanged: {
-            saveData()
+            climate.set_fan_level(fanLevel.value)
             console.log("Fan Level: " + fanLevel.value)
         }
     }
@@ -196,6 +168,7 @@ ApplicationWindow {
     ComboBox {
         id: passengerWindFace
         textRole: "key"
+        currentIndex: climate.get_passenger_wind_face()
         model: windModeModel
         anchors {
             top: fanLevel.bottom
@@ -205,7 +178,7 @@ ApplicationWindow {
         }
 
         onCurrentIndexChanged: {
-            saveData()
+            climate.set_passenger_wind_face(passengerWindFace.currentIndex)
             console.log("Passenger Wind On Face: " + passengerWindFace.currentIndex)
         }
     }
@@ -225,6 +198,7 @@ ApplicationWindow {
     ComboBox {
         id: passengerWindFoot
         textRole: "key"
+        currentIndex: climate.get_passenger_wind_foot()
         model: windModeModel
         anchors {
             top: passengerWindFace.bottom
@@ -234,7 +208,7 @@ ApplicationWindow {
         }
 
         onCurrentIndexChanged: {
-            saveData()
+            climate.set_passenger_wind_foot(passengerWindFoot.currentIndex)
             console.log("Passenger Wind On Foot: " + passengerWindFoot.currentIndex)
         }
     }
@@ -253,10 +227,10 @@ ApplicationWindow {
 
     SpinBox {
         id: passengerTemper
-        from: 165
-        to: 315
-        stepSize: 5
-        value: 250
+        from: 16
+        to: 32
+        stepSize: 1
+        value: climate.get_passenger_temp()
         anchors {
             top: passengerWindFoot.bottom
             topMargin: 10
@@ -264,26 +238,9 @@ ApplicationWindow {
             leftMargin: parent.width / 2
         }
 
-        property int decimals: 1
-        property real realValue: value / 10
-
-        validator: DoubleValidator {
-            bottom: Math.min(passengerTemper.from, passengerTemper.to)
-            top:  Math.max(passengerTemper.from, passengerTemper.to)
-        }
-
-        textFromValue: function(value, locale) {
-            return Number(value / 10).toLocaleString(locale, 'f',
-                                                     passengerTemper.decimals)
-        }
-
-        valueFromText: function(text, locale) {
-            return Number.fromLocaleString(locale, text)
-        }
-
-        onRealValueChanged: {
-            saveData()
-            console.log("Temperature Passenger: " + passengerTemper.realValue)
+        onValueChanged: {
+            climate.set_passenger_temp(passengerTemper.value)
+            console.log("Temperature Passenger: " + passengerTemper.value)
         }
     }
     //------------------------------------------------------------------------//
@@ -307,11 +264,13 @@ ApplicationWindow {
             left: parent.left
             leftMargin: parent.width / 2
         }
-        text: position == 1.0 ? "ON" : "OFF"
+        checked: climate.get_auto_mode()
+        text: checked ? "ON" : "OFF"
 
-        onPositionChanged: {
-            saveData()
-            console.log("Auto Mode: " + autoMode.position)
+        onCheckedChanged: {
+            climate.set_auto_mode(autoMode.checked)
+
+            console.log("Auto Mode: " + autoMode.checked)
         }
     }
 
@@ -336,11 +295,13 @@ ApplicationWindow {
             left: parent.left
             leftMargin: parent.width / 2
         }
-        text: position == 1.0 ? "ON" : "OFF"
+        checked: climate.get_sync_mode()
+        text: checked ? "ON" : "OFF"
 
         onPositionChanged: {
-            saveData()
-            console.log("Sync Mode: " + syncMode.position)
+            climate.set_sync_mode(syncMode.checked)
+
+            console.log("Sync Mode: " + syncMode.checked)
         }
     }
     //------------------------------------------------------------------------//
@@ -358,10 +319,10 @@ ApplicationWindow {
 
     SpinBox {
         id: outsideTemper
-        from: -100
-        to: 500
-        stepSize: 5
-        value: 270
+        from: -50
+        to: 80
+        stepSize: 1
+        value: climate.get_outside_temp()
         anchors {
             top: syncMode.bottom
             topMargin: 20
@@ -369,27 +330,26 @@ ApplicationWindow {
             leftMargin: parent.width / 2
         }
 
-        property int decimals: 1
-        property real realValue: value / 10
-
-        validator: DoubleValidator {
-            bottom: Math.min(outsideTemper.from, outsideTemper.to)
-            top:  Math.max(outsideTemper.from, outsideTemper.to)
-        }
-
-        textFromValue: function(value, locale) {
-            return Number(value / 10).toLocaleString(locale, 'f',
-                                                     outsideTemper.decimals)
-        }
-
-        valueFromText: function(text, locale) {
-            return Number.fromLocaleString(locale, text)
-        }
-
-        onRealValueChanged: {
-            saveData()
-            console.log("Outside Temp: " + outsideTemper.realValue)
+        onValueChanged: {
+            climate.set_outside_temp(outsideTemper.value)
+            console.log("Outside Temp: " + outsideTemper.value)
         }
     }
     //------------------------------------------------------------------------//
+
+    Connections {
+        target: climate
+        onDataChanged: {
+            driverWindFace.currentIndex = climate.get_driver_wind_face()
+            driverWindFoot.currentIndex = climate.get_driver_wind_foot()
+            driverTemper.value = climate.get_driver_temp()
+            fanLevel.value = climate.get_fan_level()
+            passengerWindFace.currentIndex = climate.get_passenger_wind_face()
+            passengerWindFoot.currentIndex = climate.get_passenger_wind_foot()
+            passengerTemper.value = climate.get_passenger_temp()
+            autoMode.checked = climate.get_auto_mode()
+            syncMode.checked = climate.get_sync_mode()
+            outsideTemper.value = climate.get_outside_temp()
+        }
+    }
 }
