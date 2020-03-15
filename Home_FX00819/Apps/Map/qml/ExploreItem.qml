@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.13
 
 Rectangle {
     id: rectItem
@@ -9,11 +9,6 @@ Rectangle {
     width: (parent.width - (20 * 2)) / 3
     height: parent.height
     radius: 4
-
-    Component.onCompleted: {
-        console.log("Width: " + rectItem.width)
-        console.log("Height: " + rectItem.height)
-    }
 
     Image {
         source: src
