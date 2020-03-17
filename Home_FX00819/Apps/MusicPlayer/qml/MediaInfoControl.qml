@@ -3,8 +3,7 @@ import QtQuick.Controls 2.13
 import QtMultimedia 5.13
 import QtGraphicalEffects 1.13
 
-import "../../../Js/PlayerControl.js" as PlayerControl
-import "../../../Js/PlayerInfo.js" as PlayerInfo
+import "../../../Js/Player.js" as Player
 
 Item {
 
@@ -42,7 +41,7 @@ Item {
             font.pixelSize: 33
             font.family: cantarell.name
 
-            text: PlayerInfo.getSongTitle()
+            text: Player.getSongTitle()
 
             anchors {
                 top: parent.top
@@ -60,7 +59,7 @@ Item {
             font.pixelSize: 28
             font.family: cantarell.name
 
-            text: PlayerInfo.getSingleName()
+            text: Player.getSingleName()
 
             anchors {
                 top: songTitle.bottom
@@ -320,7 +319,7 @@ Item {
             icon_pressed: "qrc:/Apps/MusicPlayer/images/prev_hold.png"
             icon_released: "qrc:/Apps/MusicPlayer/images/prev.png"
 
-            onClicked: PlayerControl.previousPlayer()
+            onClicked: Player.previousPlayer()
         }
 
         // Play/Pause button
@@ -366,7 +365,7 @@ Item {
             icon_pressed: "qrc:/Apps/MusicPlayer/images/next_hold.png"
             icon_released: "qrc:/Apps/MusicPlayer/images/next.png"
 
-            onClicked: PlayerControl.nextPlayer()
+            onClicked: Player.nextPlayer()
         }
 
         // Shuffle button

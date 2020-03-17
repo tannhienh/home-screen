@@ -1,6 +1,6 @@
 <RCC>
     <qresource prefix="/">
-        <file>Js/PlayerControl.js</file>
-        <file>Js/PlayerInfo.js</file>
+        <file>Js/Player.js</file>
+        <file>Js/Common.js</file>
     </qresource>
 </RCC>
