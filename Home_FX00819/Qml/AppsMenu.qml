@@ -2,21 +2,14 @@ import QtQuick 2.13
 import QtQuick.Controls 2.13
 import QtQml.Models 2.13
 
+// Button.qml
 import "Common"
 
-Item {
-    id: appsMenuItem
+// Javascript common function
+import "../Js/Common.js" as Common
 
-    // Determine animation scroll bar to left or right
-    function determineAnimation()
-    {
-        if (menuArea.moveRight
-                && (scrollBar.visualPosition + scrollBar.visualSize) < 1)
-            increasePosition.restart()
-        else if (!menuArea.moveRight
-                 && (scrollBar.visualPosition >= scrollBar.stepValue))
-            decreasePosition.restart()
-    }
+FocusScope {
+    id: appsMenuItem
 
     //------------------------------------------------------------------------//
     // Begin Component Delegate
@@ -265,6 +258,6 @@ Item {
         interval: 600
         repeat: true
         running: false
-        onTriggered: determineAnimation()
+        onTriggered: Common.determineAnimation()
     }
 }
