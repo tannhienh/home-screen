@@ -1,33 +1,45 @@
 import QtQuick 2.13
 
 MouseArea {
-    id: rootWidgetHighlight
+    id: root
+    focus: parent.focus
+    state: activeFocus ? "Focus" : "Normal"
 
-    property bool disable: false
+    // Disable Pressed state for climate widget
+    property bool disablePressed: false
 
     Image {
-        id: iconApp
+        id: highLightImage
         source: ""
         anchors.fill: parent
     }
 
+
+    /**
+     * - If widget is climate then no change to state Pressed
+     * - Focus Climate widget when change focus from Map or Music widget
+     * to Climate widget,
+     * Else change state to Pressed with Map or Music widget
+     */
     onPressed: {
-        if (disable)
-            rootWidgetHighlight.state = "Focus"
-        else
-            rootWidgetHighlight.state = "Pressed"
+        if (disablePressed) {
+            if (!focus)
+                parent.focus = true
+        } else {
+            parent.focus = true
+            state = "Pressed"
+        }
     }
 
     onReleased: {
-        rootWidgetHighlight.focus = true
-        rootWidgetHighlight.state = "Focus"
+        state = activeFocus ? "Focus" : "Normal"
     }
 
     onFocusChanged: {
-        if (rootWidgetHighlight.focus)
-            rootWidgetHighlight.state = "Focus"
+        if (focus)
+            state = "Focus"
         else
-            rootWidgetHighlight.state = "Normal"
+            state = "Normal"
     }
 
     // States: Normal, Focus, and Pressed
@@ -36,7 +48,7 @@ MouseArea {
             name: "Normal"
 
             PropertyChanges {
-                target: iconApp
+                target: highLightImage
                 source: ""
             }
         },
@@ -45,7 +57,7 @@ MouseArea {
             name: "Focus"
 
             PropertyChanges {
-                target: iconApp
+                target: highLightImage
                 source: "qrc:/Images/WidgetCommon/bg_widget_f.png"
             }
         },
@@ -54,7 +66,7 @@ MouseArea {
             name: "Pressed"
 
             PropertyChanges {
-                target: iconApp
+                target: highLightImage
                 source: "qrc:/Images/WidgetCommon/bg_widget_p.png"
             }
         }

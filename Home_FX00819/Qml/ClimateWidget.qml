@@ -1,13 +1,21 @@
 import QtQuick 2.13
 
-Item {
+FocusScope {
     id: climate
 
+    // Minimum teperature
     readonly property int min_temperature: 16
+
+    // Maximum teperature
     readonly property int max_temperature: 32
+
+    // Minimum fan level
     readonly property int min_fan_level: 0
+
+    // Maximum fan level
     readonly property int max_fan_level: 10
 
+    // Enumeration arrow mode for climate
     QtObject {
         id: arrowMode
 
@@ -16,6 +24,7 @@ Item {
         property int warm: 2
     }
 
+    // Background color for climate widget area
     Rectangle {
         id: climateBg
         color: "#1B1B1B"
@@ -23,11 +32,7 @@ Item {
         anchors.fill: parent
     }
 
-    //    Rectangle {
-    //        color: "#d5dbdb"
-    //        anchors.fill: parent
-    //    }
-
+    // Title climate widget
     Item {
         id: climateTitle
         anchors.top: parent.top
@@ -42,19 +47,9 @@ Item {
             font.family: firaSans.name
             anchors.centerIn: parent
         }
-
-//                Rectangle {
-//                    color: "#aed6f1"
-//                    anchors.fill: parent
-
-//                    Text {
-//                        text: "Climate Title"
-//                        font.pointSize: 25
-//                        anchors.centerIn: parent
-//                    }
-//                }
     }
 
+    // Position title: Driver and Passenger
     Item {
         id: position
         anchors.top: climateTitle.bottom
@@ -62,6 +57,7 @@ Item {
         anchors.right: parent.right
         height: 66
 
+        // Driver title
         Item {
             id: driverTextItem
             width: 215
@@ -77,6 +73,7 @@ Item {
                 anchors.centerIn: parent
             }
 
+            // Line under Driver title
             Image {
                 id: lineDriver
                 source: "qrc:/Images/Climate/widget_climate_line.png"
@@ -86,6 +83,7 @@ Item {
             }
         }
 
+        // Passenger title
         Item {
             id: passengerTextItem
             width: 215
@@ -101,6 +99,7 @@ Item {
                 anchors.centerIn: parent
             }
 
+            // Line under Passenger title
             Image {
                 id: linePassenger
                 source: "qrc:/Images/Climate/widget_climate_line.png"
@@ -109,33 +108,16 @@ Item {
                 anchors.horizontalCenter: passengerText.horizontalCenter
             }
         }
-
-//                Rectangle {
-//                    color: "#daf7a6"
-//                    anchors.fill: parent
-
-//                    Text {
-//                        text: "Position Title"
-//                        font.pointSize: 25
-//                        anchors.centerIn: parent
-//                    }
-//                }
     }
 
-//        Text {
-//            text: "Climate Widget area"
-//            font.pointSize: 25
-//            anchors.centerIn: parent
-//            anchors.bottomMargin: 100
-//        }
-
-
+    // Background wind level = 0
     Image {
         id: windBg
         source: "qrc:/Images/Climate/widget_climate_wind_level_0.png"
         anchors.centerIn: parent
     }
 
+    // Image win level corresponding fan level
     Image {
         id: fanLevel
 
@@ -146,6 +128,7 @@ Item {
         anchors.centerIn: parent
     }
 
+    // Seat driver icon
     Image {
         id: seatDriver
         source: "qrc:/Images/Climate/widget_climate_arrow_seat.png"
@@ -153,16 +136,29 @@ Item {
         y: 215
     }
 
+    // Seat passenger icon
+    Image {
+        id: seatPassenger
+        source: "qrc:/Images/Climate/widget_climate_arrow_seat.png"
+        x: 490
+        y: 215
+    }
+
+    // Highlight climate widget
     WidgetHighlight {
         id: climateHighlight
         anchors.fill: parent
-        disable: true
+        disablePressed: true
     }
 
+    // Arrow on face for Driver
     Image {
         id: faceArrowDriver
 
+        // Path common of arrow face
         property var path: "qrc:/Images/Climate/widget_climate_arrow_face_"
+
+        // Hold the value mode wind on face of driver
         property int currentArrowMode: climateModel.driver_wind_face
 
         x: 60
@@ -176,6 +172,8 @@ Item {
                 return (path + "warm.png")
         }
 
+        // Change arrow mode when choose arrow icon
+        // follow order: off, cold, warm
         MouseArea {
             anchors.fill: faceArrowDriver
             onClicked: {
@@ -189,6 +187,7 @@ Item {
         }
     }
 
+    // Arrow on foot for Driver
     Image {
         id: footArrowDriver
 
@@ -219,13 +218,7 @@ Item {
         }
     }
 
-    Image {
-        id: seatPassenger
-        source: "qrc:/Images/Climate/widget_climate_arrow_seat.png"
-        x: 490
-        y: 215
-    }
-
+    // Arrow on face for Passenger
     Image {
         id: faceArrowPassenger
 
@@ -256,6 +249,7 @@ Item {
         }
     }
 
+    // Arrow on foot for Passenger
     Image {
         id: footArrowPassenger
 
@@ -286,33 +280,18 @@ Item {
         }
     }
 
+    //
     Item {
         id: temperItem
 
         property string src_arrow: "qrc:/Images/Climate/ico_arrow_"
 
-//        height: 105
         anchors {
             left: parent.left
             right: parent.right
             top: fanLevel.bottom
             bottom: modeItem.top
         }
-
-//        Rectangle {
-//            color: "#f8c471"
-//            anchors.fill: parent
-
-////            Text {
-////                text: "Temperature area"
-////                font.pointSize: 25
-////                anchors.centerIn: parent
-////            }
-
-//            Component.onCompleted: {
-//                console.log("Height temperItem: " + height)
-//            }
-//        }
 
         Item {
             width: 215
@@ -386,11 +365,13 @@ Item {
             }
         }
 
+        // Fan icon
         Image {
             id: fanIcon
             source: "qrc:/Images/Climate/widget_climate_ico_fan.png"
             anchors.centerIn: temperItem
 
+            // Left arrow icon for decrease temperature
             Image {
                 id: leftArrow
                 source: temperItem.src_arrow + "left_small.png"
@@ -400,6 +381,7 @@ Item {
 
                 MouseArea {
                     anchors.fill: leftArrow
+
                     onPressed: {
                         if (climateModel.fan_level > climate.min_fan_level) {
                             arrowAnimation.target = leftArrow
@@ -408,6 +390,7 @@ Item {
                             climateModel.setFanLevel(climateModel.fan_level - 1)
                         }
                     }
+
                     onReleased: {
                         arrowAnimation.target = leftArrow
                         arrowAnimation.to = temperItem.src_arrow + "left_small.png"
@@ -416,6 +399,7 @@ Item {
                 }
             }
 
+            // Right arrow icon for increase temperature
             Image {
                 id: rightArrow
                 source: temperItem.src_arrow + "right_small.png"
@@ -512,6 +496,7 @@ Item {
             }
         }
 
+        // Animation for increase and decrease arrow when pressed and released
         PropertyAnimation  {
             id: arrowAnimation
             property: "source"
@@ -519,6 +504,7 @@ Item {
         }
     }
 
+    // Climate mode: Auto, Sync
     Item {
         id: modeItem
         height: 120 // 148
@@ -596,16 +582,5 @@ Item {
                 }
             }
         }
-
-//                Rectangle {
-//                    color: "LightSalmon"
-//                    anchors.fill: parent
-
-//                    Text {
-//                        text: "Mode area"
-//                        font.pointSize: 25
-//                        anchors.centerIn: parent
-//                    }
-//                }
     }
 }

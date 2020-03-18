@@ -3,18 +3,23 @@ import QtQuick.Controls 2.13
 import QtGraphicalEffects 1.13
 import QtMultimedia 5.13
 
+// Components for Music player app
 import "../Apps/MusicPlayer/qml"
-import "../Js/PlayerControl.js" as PlayerControl
-import "../Js/PlayerInfo.js" as PlayerInfo
 
-Item {
+// Javascript functions controls and get info Music player
+import "../Js/Player.js" as Player
+
+// Javascript common function
+import "../Js/Common.js" as Common
+
+FocusScope {
     id: musicPlayerItem
 
     // Album art background
     Image {
         id: albumArtBg
         anchors.fill: parent
-        source: PlayerInfo.getAlbumArt()
+        source: Player.getAlbumArt()
     }
 
     // Blue effect for album art background
@@ -38,7 +43,7 @@ Item {
         Text {
             id: songName
 
-            text: PlayerInfo.getSongTitle()
+            text: Player.getSongTitle()
 
             color: "#FFFFFF"
             font.pixelSize: 40
@@ -53,7 +58,7 @@ Item {
         // Name of single
         Text {
             id: singleName
-            text: PlayerInfo.getSingleName()
+            text: Player.getSingleName()
             color: "#FFFFFF"
             font.pixelSize: 30
             font.family: cantarell.name
@@ -89,7 +94,6 @@ Item {
         id: albumArtDelegate
 
         Item {
-            id: test
 
             property variant getData: model
 
@@ -148,12 +152,9 @@ Item {
     WidgetHighlight {
         id: musicHighlight
         anchors.fill: parent
-        onClicked: {
-            if (statusBar.editting === false) {
-                statusBar.isShowEditButton = false
-                openApplication("qrc:/Apps/MusicPlayer/qml/MusicPlayer.qml")
-            }
-        }
+
+        // Open Music application
+        onClicked: Common.openApp("qrc:/Apps/MusicPlayer/qml/MusicPlayer.qml")
     }
 
     // Previous button on Music widget
@@ -168,7 +169,7 @@ Item {
         icon_pressed: "qrc:/Apps/MusicPlayer/images/prev_hold.png"
         icon_released: "qrc:/Apps/MusicPlayer/images/prev.png"
 
-        onClicked: PlayerControl.previousPlayer()
+        onClicked: Player.previousPlayer()
     }
 
     // Play/Pause button on Music widget
@@ -221,7 +222,7 @@ Item {
         icon_pressed: "qrc:/Apps/MusicPlayer/images/next_hold.png"
         icon_released: "qrc:/Apps/MusicPlayer/images/next.png"
 
-        onClicked: PlayerControl.nextPlayer()
+        onClicked: Player.nextPlayer()
     }
 
     // Shuffle button on Music widget
@@ -241,7 +242,7 @@ Item {
         onStatusChanged: {
             shuffleGlobal = shuffleButton.status
             utility.setPlayerMode(player, shuffleButton.status,
-                                               loopButton.status)
+                                  loopButton.status)
         }
     }
 
@@ -260,7 +261,7 @@ Item {
         onStatusChanged: {
             loopGlobal = loopButton.status
             utility.setPlayerMode(player, shuffleButton.status,
-                                               loopButton.status)
+                                  loopButton.status)
         }
     }
 

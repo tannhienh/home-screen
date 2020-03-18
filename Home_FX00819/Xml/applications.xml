@@ -5,14 +5,14 @@
   <ICON_PATH>qrc:/Images/Menu/btn_menu_map</ICON_PATH>
  </APP>
  <APP ID="002">
-  <TITLE>Radio</TITLE>
-  <URL>qrc:/Apps/Radio/qml/Radio.qml</URL>
-  <ICON_PATH>qrc:/Images/Menu/btn_menu_radio</ICON_PATH>
- </APP>
- <APP ID="003">
   <TITLE>Phone</TITLE>
   <URL>qrc:/Apps/Phone/qml/Phone.qml</URL>
   <ICON_PATH>qrc:/Images/Menu/btn_menu_phone</ICON_PATH>
+ </APP>
+ <APP ID="003">
+  <TITLE>Radio</TITLE>
+  <URL>qrc:/Apps/Radio/qml/Radio.qml</URL>
+  <ICON_PATH>qrc:/Images/Menu/btn_menu_radio</ICON_PATH>
  </APP>
  <APP ID="004">
   <TITLE>Music</TITLE>
