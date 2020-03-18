@@ -1,8 +1,6 @@
 import QtQuick 2.13
 import QtQuick.Controls 2.13
 
-import "../Apps/MusicPlayer/qml/"
-
 ApplicationWindow {
     id: root
 
@@ -61,15 +59,17 @@ ApplicationWindow {
         isShowBackButton: mainAreaStackView.depth == 1 ? false : true
     }
 
-    // Stack view Main Area
-    // Main area: include Widgets area and Menu area
-    // also Application area
-    //
-    // When open an application, corresponding application
-    // was push into main area
-    //
-    // with: 1920
-    // height: 995
+    /**
+    * Stack view Main Area
+    * Main area: include Widgets area and Menu area
+    * also Application area
+    *
+    * When open an application, corresponding application
+    * was push into main area
+    *
+    * with: 1920
+    * height: 995
+    */
     StackView {
         id: mainAreaStackView
         initialItem: MainArea {}
