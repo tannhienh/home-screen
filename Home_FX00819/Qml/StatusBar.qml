@@ -1,6 +1,8 @@
 ﻿import QtQuick 2.13
 import QtQuick.Controls 2.13
-import "Common" // Button
+
+// Button.qml
+import "Common"
 
 // Status Bar
 // width: 1920
