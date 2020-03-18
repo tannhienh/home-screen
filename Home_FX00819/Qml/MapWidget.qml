@@ -8,6 +8,8 @@ import "../Js/Common.js" as Common
 FocusScope {
     id: map
 
+    property alias stateHighLight: mapHighlight.state
+
     Rectangle {
         color: "transparent"
         anchors.fill: parent

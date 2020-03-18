@@ -3,6 +3,8 @@ import QtQuick 2.13
 FocusScope {
     id: climate
 
+    property alias stateHighLight: climateHighlight.state
+
     // Minimum teperature
     readonly property int min_temperature: 16
 

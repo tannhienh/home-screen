@@ -15,6 +15,8 @@ import "../Js/Common.js" as Common
 FocusScope {
     id: musicPlayerItem
 
+    property alias stateHighLight: musicHighlight.state
+
     // Album art background
     Image {
         id: albumArtBg

@@ -56,10 +56,22 @@ FocusScope {
                     verticalCenter: parent.verticalCenter
                 }
 
-                // Key navigation
+                // Key navigation for Map widget
                 KeyNavigation.right: climateWidget
                 KeyNavigation.down: menuArea
-                Keys.onEnterPressed: Common.openApp("qrc:/Apps/Map/qml/Map.qml")
+
+                /**
+                  * When Enter key released:
+                  * - Change state Map widget to "Focus"
+                  * - and open Map application
+                  */
+                Keys.onReleased: {
+                    if (event.key === Qt.Key_Enter) {
+                        stateHighLight = "Focus"
+                        event.accepted = true
+                        Common.openApp("qrc:/Apps/Map/qml/Map.qml")
+                    }
+                }
             }
 
             /**
@@ -74,7 +86,7 @@ FocusScope {
                 anchors.centerIn: parent
                 focus: true
 
-                // Key navigation
+                // Key navigation for Climate widget
                 KeyNavigation.left: mapWidget
                 KeyNavigation.right: musicWidget
                 KeyNavigation.down: menuArea
@@ -95,11 +107,23 @@ FocusScope {
                     verticalCenter: parent.verticalCenter
                 }
 
-                // Key navigation
+                // Key navigation or Music widget
                 KeyNavigation.left: climateWidget
                 KeyNavigation.down: menuArea
                 Keys.onEnterPressed: {
-                    Common.openApp("qrc:/Apps/MusicPlayer/qml/MusicPlayer.qml")
+                }
+
+                /**
+                  * When Enter key released:
+                  * - Change state Music widget to "Focus"
+                  * - and open Music application
+                  */
+                Keys.onReleased: {
+                    if (event.key === Qt.Key_Enter) {
+                        stateHighLight = "Focus"
+                        event.accepted = true
+                        Common.openApp("qrc:/Apps/MusicPlayer/qml/MusicPlayer.qml")
+                    }
                 }
             }
         }
