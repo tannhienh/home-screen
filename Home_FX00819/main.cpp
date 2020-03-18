@@ -15,6 +15,9 @@ int main(int argc, char *argv[])
 {
     qputenv("QT_IM_MODULE", QByteArray("qtvirtualkeyboard"));
 
+    // Set serial port for QT_NMEA_SERIAL_PORT
+    qputenv("QT_NMEA_SERIAL_PORT", QByteArray("ttyS0"));
+
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
     QGuiApplication app(argc, argv);
