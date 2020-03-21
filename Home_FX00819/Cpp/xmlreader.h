@@ -5,23 +5,43 @@
 #include <QDomDocument>
 #include "applicationsmodel.h"
 
-class XmlReader
+class XmlReader : public QObject
 {
+    Q_OBJECT
+
 public:
+
     // Constructor XmlReader function
-    XmlReader(QString filePath, ApplicationsModel &appsModel);
+    XmlReader(QString filePath, ApplicationsModel *appsModel);
+
+public slots:
+
+    // Reload apps from xml file to model
+    void reloadModel();
 
 private:
+
     //The QDomDocument class represents an XML document
     QDomDocument xmlDocument;
 
-    // Check xml file and set content for xmlDocument
-    // Return true if read xml file successfull
-    // Return false if read xml file failed
-    bool ReadXmlFile(QString filePath);
+    // Load apps from xml file to model
+    void loadModel();
+
+    /**
+      * Check xml file and set content for xmlDocument
+      * Return true if read xml file successfull
+      * Return false if read xml file failed
+      */
+    bool readXmlFile(QString filePath);
 
     // Parse xml file
-    void ParseXmlFile(ApplicationsModel &appsModel);
+    void parseXmlFile(ApplicationsModel *appsModel);
+
+    // Path of file xml
+    QString m_filePath;
+
+    // Apps Model
+    ApplicationsModel *m_appsModel = nullptr;
 };
 
 #endif // XMLREADER_H

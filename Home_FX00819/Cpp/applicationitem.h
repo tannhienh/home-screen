@@ -23,7 +23,8 @@ public:
     QString iconPath() const;
 
 private:
-    QString m_id;
+
+    QString m_id;           // id for application
     QString m_title;        // title application
     QString m_url;          // url application
     QString m_iconPath;     // icon path application

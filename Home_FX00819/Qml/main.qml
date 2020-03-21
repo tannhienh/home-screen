@@ -7,8 +7,11 @@ ApplicationWindow {
     // Screen Full HD 1920x1080 pixel
     visible: true
     visibility: "FullScreen"
-    //    width: 1920
-    //    height: 700
+
+    // Display demension for debug
+//            width: 1920
+//            height: 779
+
     title: qsTr("Home Screen")
 
     property bool shuffleGlobal: false
@@ -50,77 +53,106 @@ ApplicationWindow {
         anchors.fill: parent
     }
 
-    // Status bar
-    // width: 1920
-    // height: 85
-    StatusBar {
-        id: statusBar
-        onBackButtonClicked: mainAreaStackView.pop()
-        isShowBackButton: mainAreaStackView.depth == 1 ? false : true
-    }
 
-    /**
-    * Stack view Main Area
-    * Main area: include Widgets area and Menu area
-    * also Application area
-    *
-    * When open an application, corresponding application
-    * was push into main area
-    *
-    * with: 1920
-    * height: 995
-    */
-    StackView {
-        id: mainAreaStackView
-        initialItem: MainArea {}
-        anchors {
-            top: statusBar.bottom
-            left: parent.left
-            right: parent.right
-            bottom: parent.bottom
-        }
+    FocusScope {
 
-        onCurrentItemChanged: {
-            currentItem.forceActiveFocus()
-        }
+        anchors.fill: parent
 
-        pushExit: Transition {
-            PropertyAnimation {
-                property: "x"
-                from: 0
-                to: -1920
-                duration: 500
-                easing.type: Easing.OutQuad
+        // Status bar
+        // width: 1920
+        // height: 85
+        StatusBar {
+            id: statusBar
+
+            height: 85
+            anchors {
+                top: parent.top
+                left: parent.left
+                right: parent.right
+            }
+
+            // Click Back button to go Home screen when opening an application
+            onBackButtonClicked: mainAreaStackView.pop()
+
+            // Show back button when open an application on status bar
+            isShowBackButton: mainAreaStackView.depth == 1 ? false : true
+
+            KeyNavigation.down: mainAreaStackView
+
+            onFocusChanged: {
+                console.log("statusBar.focus changed: " + statusBar.focus)
             }
         }
 
-        pushEnter: Transition {
-            PropertyAnimation {
-                property: "x"
-                from: 1920
-                to: 0
-                duration: 500
-                easing.type: Easing.OutQuad
+        /**
+        * Stack view Main Area
+        * Main area: include Widgets area and Menu area
+        * also Application area
+        *
+        * When open an application, corresponding application
+        * was push into main area
+        *
+        * with: 1920
+        * height: 995
+        */
+        StackView {
+            id: mainAreaStackView
+            initialItem: MainArea {}
+            anchors {
+                top: statusBar.bottom
+                left: parent.left
+                right: parent.right
+                bottom: parent.bottom
             }
-        }
 
-        popExit: Transition {
-            PropertyAnimation {
-                property: "x"
-                from: 0
-                to: 1920
-                duration: 500
-                easing.type: Easing.OutQuad
+            onFocusChanged: {
+                console.log("mainAreaStackView.focus changed: " + mainAreaStackView.focus)
             }
-        }
 
-        popEnter: Transition {
-            PropertyAnimation {
-                property: "x"
-                from: -1920
-                to: 0
-                duration: 500
-                easing.type: Easing.OutQuad
+            KeyNavigation.up: statusBar
+
+            onCurrentItemChanged: {
+                currentItem.forceActiveFocus()
+            }
+
+            pushExit: Transition {
+                PropertyAnimation {
+                    property: "x"
+                    from: 0
+                    to: -1920
+                    duration: 500
+                    easing.type: Easing.OutQuad
+                }
+            }
+
+            pushEnter: Transition {
+                PropertyAnimation {
+                    property: "x"
+                    from: 1920
+                    to: 0
+                    duration: 500
+                    easing.type: Easing.OutQuad
+                }
+            }
+
+            popExit: Transition {
+                PropertyAnimation {
+                    property: "x"
+                    from: 0
+                    to: 1920
+                    duration: 500
+                    easing.type: Easing.OutQuad
+                }
+            }
+
+            popEnter: Transition {
+                PropertyAnimation {
+                    property: "x"
+                    from: -1920
+                    to: 0
+                    duration: 500
+                    easing.type: Easing.OutQuad
+                }
             }
         }
     }

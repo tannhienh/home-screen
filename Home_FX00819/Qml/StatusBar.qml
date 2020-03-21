@@ -1,30 +1,34 @@
 ﻿import QtQuick 2.13
 import QtQuick.Controls 2.13
 
-// Button.qml
+// Using Button.qml
 import "Common"
 
-// Status Bar
-// width: 1920
-// height: 85
-
-Item {
+/**
+ * Status Bar
+ * width: 1920
+ * height: 85
+ */
+FocusScope {
     id: statusBarItem
 
+    // This property holds whether the Back button is visible or not
     property bool isShowBackButton: false
+
+    // This property holds whether the Edit button is visible or not
     property bool isShowEditButton: false
+
+    // This alias hold visible property of Done button
     property alias editting: doneButton.visible
 
+    // This signal will be emited when the Back button is clicked
     signal backButtonClicked
-    signal editButtonClicked
-    signal doneButtonClicked
 
-    height: 85
-    anchors {
-        top: parent.top
-        left: parent.left
-        right: parent.right
-    }
+    // This signal will be emited when the Edit button is released
+    signal editButtonClicked
+
+    // This signal will be emited when the Done button is released
+    signal doneButtonClicked
 
     // Background status bar
     Rectangle {
@@ -45,19 +49,51 @@ Item {
         id: editButton
         icon_src: "qrc:/Images/StatusBar/btn_edit"
         visible: isShowEditButton
-        anchors {
-            left: parent.left
-            leftMargin: 22
-            verticalCenter: parent.verticalCenter
-        }
+        focus: visible ? statusBar.focus : false
 
+        // Change state to Pressed when Edit button is pressed
+        onPressed: state = "Pressed"
+
+        // Change state to Normal when Edit button is Released
+        onReleased: state = "Normal"
+
+        /**
+          * When Edit button is clicked:
+          * - Change focus status bar to false for do not focus Done button
+          * - Emit signal editButtonClicked
+          * - Hide Edit button
+          * - Show Done button
+          */
         onClicked: {
+            statusBar.focus = false
             editButtonClicked()
             isShowEditButton = false
             doneButton.visible = true
         }
 
-        onReleased: focus = false
+        // When focus changed
+        // If which button not focusing, change state to Normal
+        onFocusChanged: {
+            if (editButton.focus)
+                editButton.state = "Focus"
+            else
+                editButton.state = "Normal"
+        }
+
+        /**
+         * When Enter key was pressed:
+         * - Change state to "Pressed" if are Map or Music widget
+         * - Nothing if is Climate widget
+         */
+        Keys.onReturnPressed: {
+            if (event.key === Qt.Key_Return) {
+                state = "Pressed"
+                statusBar.focus = false
+                editButtonClicked()
+                isShowEditButton = false
+                doneButton.visible = true
+            }
+        }
     }
 
     // Done button
@@ -65,19 +101,57 @@ Item {
         id: doneButton
         icon_src: "qrc:/Images/StatusBar/btn_done"
         visible: false
+        focus: visible ? statusBar.focus : false
         anchors {
             left: parent.left
             leftMargin: 22
             verticalCenter: parent.verticalCenter
         }
 
+        onPressed: state = "Pressed"
+
+        onReleased: state = "Normal"
+
+        /**
+          * When Done button is clicked:
+          * - Change focus mainAreStackView from false to true
+          * - Emit signal doneButtonClicked
+          * - Write apps model to file after change order apps in menu
+          * -
+          * - Hide Done button
+          */
         onClicked: {
+            mainAreaStackView.focus = true
             doneButtonClicked()
-            doneButton.visible = false
             xmlWriter.writeToFile()
+            xmlReader.reloadModel()
+            doneButton.visible = false
         }
 
-        onReleased: focus = false
+
+
+        // When focus changed
+        // If which button not focusing, change state to Normal
+        onFocusChanged: {
+            if (doneButton.focus)
+                doneButton.state = "Focus"
+            else
+                doneButton.state = "Normal"
+        }
+
+        /**
+         * When Enter key was pressed:
+         * - Change state to "Pressed" if are Map or Music widget
+         * - Nothing if is Climate widget
+         */
+        Keys.onReturnPressed: {
+            if (event.key === Qt.Key_Return) {
+                state = "Pressed"
+                doneButtonClicked()
+                xmlWriter.writeToFile()
+                doneButton.visible = false
+            }
+        }
     }
 
     // Back button
@@ -85,13 +159,50 @@ Item {
         id: backButton
         icon_src: "qrc:/Images/StatusBar/btn_back"
         visible: isShowBackButton
+        focus: visible ? statusBar.focus : false
         anchors {
             left: parent.left
             leftMargin: 18
             verticalCenter: parent.verticalCenter
         }
 
-        onClicked: backButtonClicked()
+        onPressed: state = "Pressed"
+
+        onReleased: state = "Normal"
+
+        onClicked: {
+            backButtonClicked()
+            focus = false
+        }
+
+        Keys.onReturnPressed: state = "Pressed"
+
+        Keys.onReleased: {
+            if (event.key === Qt.Key_Return) {
+                backButtonClicked()
+                focus = false
+                event.accepted = true
+            }
+        }
+
+        // When focus changed
+        // If which button not focusing, change state to Normal
+        onFocusChanged: {
+            if (backButton.focus)
+                backButton.state = "Focus"
+            else
+                backButton.state = "Normal"
+        }
+
+        Connections {
+            target: statusBar
+            onFocusChanged: {
+                if (isShowBackButton && statusBar.focus)
+                    backButton.focus = true
+                else
+                    backButton.focus = false
+            }
+        }
     }
 
     // Time and Date area
@@ -207,9 +318,15 @@ Item {
             running: true
             onTriggered: {
                 var currentTime = new Date()
-                timeArea.hour = currentTime.toLocaleTimeString(Qt.locale("en_US"), "hh");
-                timeArea.minute = currentTime.toLocaleTimeString(Qt.locale("en_US"), "mm");
-                dateArea.date = currentTime.toLocaleDateString(Qt.locale("en_US"), "MMM. dd");
+
+                timeArea.hour =
+                        currentTime.toLocaleTimeString(Qt.locale("en_US"), "hh");
+
+                timeArea.minute =
+                        currentTime.toLocaleTimeString(Qt.locale("en_US"), "mm");
+
+                dateArea.date =
+                        currentTime.toLocaleDateString(Qt.locale("en_US"), "MMM. dd");
             }
         }
     }

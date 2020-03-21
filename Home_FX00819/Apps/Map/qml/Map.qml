@@ -20,7 +20,7 @@ Item {
     readonly property int satelliteMap: 5
     readonly property int darkMap: 7
 
-    // Settings for map
+    // Storage settings for map application
     Settings {
         id: mapSettings
         property int mapType: 7

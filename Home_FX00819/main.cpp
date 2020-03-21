@@ -32,7 +32,8 @@ int main(int argc, char *argv[])
     ApplicationsModel appsModel;
 
     // XML Reader
-    XmlReader xmlReader(XML_APPS_FILE_PATH, appsModel);
+    XmlReader xmlReader(XML_APPS_FILE_PATH, &appsModel);
+    engine.rootContext()->setContextProperty("xmlReader", &xmlReader);
 
     // XML Writer
     XmlWriter xmlWriter(XML_APPS_FILE_PATH, &appsModel);

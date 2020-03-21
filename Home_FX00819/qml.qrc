@@ -23,5 +23,7 @@
         <file>Apps/Map/qml/ExploreItem.qml</file>
         <file>Apps/Map/qml/GuideArea.qml</file>
         <file>Apps/Map/qml/Map.qml</file>
+        <file>Qml/Common/ButtonNormalMode.qml</file>
+        <file>Qml/Common/ButtonEditMode.qml</file>
     </qresource>
 </RCC>

@@ -44,7 +44,7 @@ MouseArea {
      * - Change state to "Pressed" if are Map or Music widget
      * - Nothing if is Climate widget
      */
-    Keys.onEnterPressed: {
+    Keys.onReturnPressed: {
         if (!disablePressed) {
             state = "Pressed"
             event.accepted = true

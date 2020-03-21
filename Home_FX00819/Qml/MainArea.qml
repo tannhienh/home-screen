@@ -39,7 +39,7 @@ FocusScope {
             anchors.left: parent.left
             anchors.right: parent.right
             height: 550
-            focus: true
+            focus: menuArea.focus ? false : true
 
             /**
              * Map Navigation Widget
@@ -56,6 +56,15 @@ FocusScope {
                     verticalCenter: parent.verticalCenter
                 }
 
+                // Focus navigation to status bar if Edit button and Done button
+                // visible
+                KeyNavigation.up: {
+                    if (statusBar.isShowEditButton || statusBar.editting)
+                        return statusBar
+                    else
+                        return mapWidget
+                }
+
                 // Key navigation for Map widget
                 KeyNavigation.right: climateWidget
                 KeyNavigation.down: menuArea
@@ -66,12 +75,15 @@ FocusScope {
                   * - and open Map application
                   */
                 Keys.onReleased: {
-                    if (event.key === Qt.Key_Enter) {
+                    if (event.key === Qt.Key_Return) {
                         stateHighLight = "Focus"
                         event.accepted = true
                         Common.openApp("qrc:/Apps/Map/qml/Map.qml")
                     }
                 }
+
+                onFocusChanged: if (focus)
+                        parent.focus = true
             }
 
             /**
@@ -86,10 +98,21 @@ FocusScope {
                 anchors.centerIn: parent
                 focus: true
 
-                // Key navigation for Climate widget
+                // Focus navigation to status bar if Edit button and Done button
+                // visible
+                KeyNavigation.up: {
+                    if (statusBar.isShowEditButton || statusBar.editting)
+                        return statusBar
+                    else
+                        return climateWidget
+                }
+
                 KeyNavigation.left: mapWidget
                 KeyNavigation.right: musicWidget
                 KeyNavigation.down: menuArea
+
+                onFocusChanged:  if (focus)
+                                     parent.focus = true
             }
 
             /**
@@ -107,11 +130,18 @@ FocusScope {
                     verticalCenter: parent.verticalCenter
                 }
 
+                // Focus navigation to status bar if Edit button and Done button
+                // visible
+                KeyNavigation.up: {
+                    if (statusBar.isShowEditButton || statusBar.editting)
+                        return statusBar
+                    else
+                        return musicWidget
+                }
+
                 // Key navigation or Music widget
                 KeyNavigation.left: climateWidget
                 KeyNavigation.down: menuArea
-                Keys.onEnterPressed: {
-                }
 
                 /**
                   * When Enter key released:
@@ -119,11 +149,47 @@ FocusScope {
                   * - and open Music application
                   */
                 Keys.onReleased: {
-                    if (event.key === Qt.Key_Enter) {
+                    if (event.key === Qt.Key_Return) {
                         stateHighLight = "Focus"
                         event.accepted = true
                         Common.openApp("qrc:/Apps/MusicPlayer/qml/MusicPlayer.qml")
                     }
+                }
+
+                onFocusChanged: if (focus)
+                                    parent.focus = true
+            }
+
+            /**
+              * - If change focus from status bar or apps menu to widgets area
+              * then Climate widget will be focus
+              * - If change focus from widgets area to status bar or apps menu
+              * then Map widget, Climate widget and Music widget focus change to
+              * false
+              */
+            onFocusChanged: {
+                if (focus) {
+                    if (menuArea.focus)
+                        menuArea.focus = false
+                    if (!mapWidget.focus && !climateWidget.focus
+                            && !musicWidget.focus)
+                        climateWidget.focus = true
+
+                } else {
+                    mapWidget.focus = false
+                    climateWidget.focus = false
+                    musicWidget.focus = false
+                }
+            }
+
+            Connections {
+                target: mainAreaStackView
+                onFocusChanged: {
+                    if (!mainAreaStackView.focus && widgetsArea.focus)
+                        widgetsArea.focus = false
+
+                    if (mainAreaStackView.focus)
+                        climateWidget.focus = true
                 }
             }
         }

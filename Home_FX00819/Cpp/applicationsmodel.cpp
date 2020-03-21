@@ -35,16 +35,22 @@ QVariant ApplicationsModel::data(const QModelIndex &index, int role) const
     }
 }
 
+// Add an application item into list model
+void ApplicationsModel::addApplication(ApplicationItem &item)
+{
+    m_data.append(item);
+}
+
 // Swap position 2 apps icon
 void ApplicationsModel::swap(int index1, int index2)
 {
     m_data.swapItemsAt(index1, index2);
 }
 
-// Add an application item into list model
-void ApplicationsModel::addApplication(ApplicationItem &item)
+// Reset model
+void ApplicationsModel::endReloadModel()
 {
-    m_data.append(item);
+    this->endResetModel();
 }
 
 // Create hash table for roles an application

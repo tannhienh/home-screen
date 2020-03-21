@@ -9,7 +9,7 @@ import "Common"
 import "../Js/Common.js" as Common
 
 FocusScope {
-    id: appsMenuItem
+    id: appsMenuScope
 
     //------------------------------------------------------------------------//
     // Begin Component Delegate
@@ -17,140 +17,23 @@ FocusScope {
     Component {
         id: appsDelegate
 
-        DropArea {
-            id: dropArea
+        Loader {
+            id: buttonLoader
 
             property int visualIndex: DelegateModel.itemsIndex
 
-            width: (appsMenu.width - (appsMenu.spacing * 5)) / 6
-            height: appsMenu.height
-            keys: "AppButton"
-            anchors.verticalCenter: parent.verticalCenter
-
-            onEntered: {
-                if (drag.source.visualIndex !== appItem.visualIndex) {
-                    // Swap 2 apps icon in appsModel when drag
-                    appsModel.swap(drag.source.visualIndex,
-                                   appItem.visualIndex)
-
-                    // Move app icon to new position in visual listview
-                    visualModel.items.move(drag.source.visualIndex,
-                                           appItem.visualIndex)
-                }
-            }
-
-            // Binding property visualIndex of appItem
-            // when visualIndex value of Delegate changed
-            Binding {
-                target: appItem
-                property: "visualIndex"
-                value: visualIndex
-            }
-
-            // App item include button, is object can drag
-            Item {
-                id: appItem
-
-                property int visualIndex: 0
-
-                property var iconSrc:
-                    appsModel.data(appsModel.index(visualIndex, 0), 260)
-
-                property var appName:
-                    appsModel.data(appsModel.index(visualIndex, 0), 258)
-
-                property var appUrl:
-                    appsModel.data(appsModel.index(visualIndex, 0), 259)
-
-                anchors.fill: dropArea
-
-                Drag.active: appButton.held
-                Drag.source: dropArea
-                Drag.keys: "AppButton"
-                Drag.hotSpot.x: appButton.width / 2
-                Drag.hotSpot.y: appButton.height / 2
-
-                // Determine the direction of movement for scroll bar
-                onXChanged: {
-                    if (x < 0) {
-                        menuArea.moveRight = false
-                        scrollTimer.running = true
-                    } else if ((x + appItem.width) > 1920) {
-                        menuArea.moveRight = true
-                        scrollTimer.running = true
-                    } else
-                        scrollTimer.running = false
-                }
-
-                Button {
-                    id: appButton
-
-                    property bool held: false
-
-                    icon_src: appItem.iconSrc
-                    button_title: appItem.appName
-                    editting: statusBar.editting
-                    anchors.verticalCenter: parent.verticalCenter
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    pressAndHoldInterval: statusBar.editting ? 500 : 1000
-
-                    drag.target: held ? appItem : undefined
-                    drag.axis: Drag.XAxis
-
-                    onClicked: {
-                        if (statusBar.editting === false) {
-                            statusBar.isShowEditButton = false
-                            openApplication(appItem.appUrl)
-                        }
-                    }
-
-                    onPressAndHold: {
-                        if (statusBar.editting === false)
-                            statusBar.isShowEditButton = true
-
-                        if (statusBar.editting) {
-                            appButton.focus = false
-                            appItem.scale = 0.9
-                            appButton.held = true
-                            appsMenu.snapMode = ListView.NoSnap
-                        }
-                    }
-
-                    onReleased: {
-                        if (statusBar.editting) {
-                            appItem.scale = 1.0
-                            appButton.held = false
-                            appsMenu.snapMode = ListView.SnapToItem
-                        }
-                    }
-
-                    Connections {
-                        target: statusBar
-                        onEditButtonClicked: appButton.state = "Normal"
-                        onDoneButtonClicked: appButton.held = false
-                    }
-                }
-
-                states: State {
-                    when: appButton.held
-
-                    ParentChange {
-                        target: appItem
-                        parent: menuArea
-                    }
-
-                    AnchorChanges {
-                        target: appItem
-                        anchors.horizontalCenter: undefined
-                        anchors.verticalCenter: undefined
-                    }
-                }
+            source: {
+                if (statusBar.editting)
+                    return "qrc:/Qml/Common/ButtonEditMode.qml"
+                else
+                    return "qrc:/Qml/Common/ButtonNormalMode.qml"
             }
         }
     }
     //------------------------------------------------------------------------//
     // End Component Delegate
     //------------------------------------------------------------------------//
+
 
     // Delegate Model for apps menu
     DelegateModel {
@@ -169,7 +52,11 @@ FocusScope {
         model: visualModel
         orientation: ListView.Horizontal
         snapMode: ListView.SnapToItem
-        cacheBuffer: 295 * 2
+        anchors.fill: parent
+        focus: true
+
+        // Key navigation for apps menu
+        KeyNavigation.up: statusBar.editting ? appsMenu : widgetsArea
 
         anchors {
             fill: parent
@@ -228,23 +115,27 @@ FocusScope {
             color: "#7deef8"
         }
 
+        // Animation for increase position of scroll bar when change order apps
+        // in menu
         PropertyAnimation {
             id: increasePosition
             target: scrollBar
             property: "position"
             from: scrollBar.visualPosition
             to: scrollBar.visualPosition + scrollBar.stepValue
-            duration: 400
+            duration: 300
             easing.type: Easing.Linear
         }
 
+        // Animation for decrease position of scroll bar when change order apps
+        // in menu
         PropertyAnimation {
             id: decreasePosition
             target: scrollBar
             property: "position"
             from: scrollBar.visualPosition
             to: scrollBar.visualPosition - scrollBar.stepValue
-            duration: 400
+            duration: 300
             easing.type: Easing.Linear
         }
     }

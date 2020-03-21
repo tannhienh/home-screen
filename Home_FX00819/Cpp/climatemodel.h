@@ -30,9 +30,11 @@ class ClimateModel : public QObject
     Q_PROPERTY(int outside_temp READ GetOutsideTemp WRITE setOutsideTemp NOTIFY dataChanged)
 
 public:
+
     explicit ClimateModel(QObject *parent = nullptr);
 
 public slots:
+
     void setDriverWindFace(int driverWindFace);
 
     void setDriverWindFoot(int driverWindFoot);
@@ -54,6 +56,7 @@ public slots:
     void setOutsideTemp(int outsideTemp);
 
 private:
+
     int GetDriverWindFace();
 
     int GetDriverWindFoot();
@@ -77,6 +80,7 @@ private:
     local::Climate *m_climate;
 
 signals:
+
     void dataChanged();
 };
 

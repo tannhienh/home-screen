@@ -10,6 +10,7 @@ class ApplicationsModel : public QAbstractListModel
     Q_OBJECT
 
 public:
+
     // Constructor function
     ApplicationsModel();
 
@@ -32,14 +33,20 @@ public:
     };
 
 public slots:
+
     // Swap position 2 apps icon
     void swap(int index1, int index2);
 
+    // Reset model
+    void endReloadModel();
+
 protected:
+
     // Create hash table for roles an application
     QHash<int, QByteArray> roleNames() const override;
 
 private:
+
     // Store list applications
     QList<ApplicationItem> m_data;
 };

@@ -11,12 +11,12 @@ MouseArea {
     id: button
 
     // Source icon for button
-    property string icon_src
+    property var icon_src
 
     // Title for button with apps button in menu
-    property string button_title
+    property var button_title
 
-    // This property hold whether editting
+    // This property holds whether editting order apps in menu
     property bool editting: false
 
     // Mouse area on button icon
@@ -26,13 +26,13 @@ MouseArea {
     // Button icon normal default
     Image {
         id: buttonIcon
-        source: icon_src + "_n.png"
+        source: icon_src === undefined ? "" : icon_src + "_n.png"
     }
 
     // Title for Application button
     Text {
         id: buttonTitle
-        text: button_title
+        text: button_title === undefined ? "" : button_title
         color: "White"
 
         font {
@@ -47,38 +47,9 @@ MouseArea {
         }
     }
 
-    // Change state to Pressed when pressed behavior
-    onPressed: {
-        if (editting == false) {
-            button.focus = true
-            button.state = "Pressed"
-        }
-    }
-
-    // Change state to Pressed when focus behavior
-    onReleased: {
-        if (editting == false) {
-            button.focus = true
-            button.state = "Focus"
-        }
-    }
-
-    //
-    onCanceled: {
-        if (editting == false) {
-            button.focus = true
-            button.state = "Focus"
-        }
-    }
-
-    // When focus changed
-    // If which button not focusing, change state to Normal
-    onFocusChanged: {
-        if (button.focus == true )
-            button.state = "Focus"
-        else
-            button.state = "Normal"
-    }
+    // Change state Pressed to Focus if cancel when swip apps list
+    onCanceled: if (!statusBar.editting)
+                    state = "Focus"
 
     // States for behavior on button
     states: [
@@ -89,7 +60,7 @@ MouseArea {
             // Change source buttonIcon to normal icon
             PropertyChanges {
                 target: buttonIcon
-                source: icon_src + "_n.png"
+                source: icon_src === undefined ? "" : icon_src + "_n.png"
             }
         },
 
@@ -100,7 +71,7 @@ MouseArea {
             // Change source buttonIcon focus icon
             PropertyChanges {
                 target: buttonIcon
-                source: icon_src + "_f.png"
+                source: icon_src === undefined ? "" : icon_src + "_f.png"
             }
         },
 

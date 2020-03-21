@@ -2,16 +2,30 @@
 #include <QDebug>
 
 // Constructor XmlReader function
-XmlReader::XmlReader(QString filePath, ApplicationsModel &appsModel)
+XmlReader::XmlReader(QString filePath, ApplicationsModel *appsModel)
 {
-    if (ReadXmlFile(filePath))
-        ParseXmlFile(appsModel);
+    m_filePath = filePath;
+    m_appsModel = appsModel;
+    loadModel();
+}
+
+// Load apps from xml file to model
+void XmlReader::loadModel()
+{
+    if (readXmlFile(m_filePath))
+        parseXmlFile(m_appsModel);
+}
+
+// Reload apps from xml file to model
+void XmlReader::reloadModel()
+{
+    m_appsModel->endReloadModel();
 }
 
 // Check xml file and set content for xmlDocument
 // Return true if read xml file successfull
 // Return false if read xml file failed
-bool XmlReader::ReadXmlFile(QString filePath)
+bool XmlReader::readXmlFile(QString filePath)
 {
     // Load xml file as raw data
     QFile xmlFile(filePath);
@@ -29,7 +43,7 @@ bool XmlReader::ReadXmlFile(QString filePath)
 }
 
 // Parse xml file
-void XmlReader::ParseXmlFile(ApplicationsModel &appsModel)
+void XmlReader::parseXmlFile(ApplicationsModel *appsModel)
 {
     // Extract the root markup
     QDomElement root = xmlDocument.documentElement();
@@ -72,7 +86,7 @@ void XmlReader::ParseXmlFile(ApplicationsModel &appsModel)
             ApplicationItem item(id, title, url, iconPath);
 
             // Add application item into apps model
-            appsModel.addApplication(item);
+            appsModel->addApplication(item);
         }
 
         // Next component
