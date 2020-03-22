@@ -1,12 +1,14 @@
 #include "xmlwriter.h"
 #include <QDebug>
 
+// Constructor XmlWriter
 XmlWriter::XmlWriter(QString filePath, ApplicationsModel *appsModel)
 {
     m_filePath = filePath;
     m_appsModel = appsModel;
 }
 
+// Read model function
 void XmlWriter::readModel(QDomDocument &doc, ApplicationsModel *appsModel)
 {
     QDomElement root = doc.createElement("APPLICATIONS");
@@ -53,6 +55,7 @@ void XmlWriter::readModel(QDomDocument &doc, ApplicationsModel *appsModel)
     }
 }
 
+// Write model to xml file
 void XmlWriter::writeToFile()
 {
     QFile file(m_filePath);

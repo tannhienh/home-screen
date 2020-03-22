@@ -334,7 +334,7 @@ FocusScope {
     // System icons area
     Row {
         layoutDirection: Qt.RightToLeft
-        spacing: 10
+        spacing: 17
         rightPadding: 18
         anchors.right: parent.right
         anchors.verticalCenter: parent.verticalCenter

@@ -5,7 +5,7 @@
 #include <QMediaPlaylist>
 
 //----------------------------------------------------------------------------//
-// Song class
+// Begin Song class
 //
 // Assign songs info
 Song::Song(const QString &title, const QString &singer, const QString &source,
@@ -40,11 +40,13 @@ QString Song::album_art() const
 {
     return m_albumArt;
 }
+// End song class
 //----------------------------------------------------------------------------//
 
 //----------------------------------------------------------------------------//
-// PlaylistModel class
+// Begin PlaylistModel class
 //
+// Concstructor function
 PlaylistModel::PlaylistModel(QObject *parent) : QAbstractListModel(parent)
 {
 }

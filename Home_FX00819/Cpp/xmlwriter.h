@@ -13,15 +13,23 @@ class XmlWriter : public QObject
 
 public:
 
+    // Constructor
     XmlWriter(QString filePath, ApplicationsModel *appsModel);
 
+    // Read model function
     void readModel(QDomDocument &doc, ApplicationsModel *appsModel);
 
 public slots:
+
+    // Write model to xml file
     void writeToFile();
 
 private:
+
+    // path xml file
     QString m_filePath;
+
+    // Apps model
     ApplicationsModel *m_appsModel = nullptr;
 };
 

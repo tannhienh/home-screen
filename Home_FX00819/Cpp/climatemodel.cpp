@@ -1,5 +1,6 @@
 #include "climatemodel.h"
 
+// Constructor for ClimateModel
 ClimateModel::ClimateModel(QObject *parent) : QObject(parent)
 {
     m_climate = new local::Climate("local.Climate", "/Climate",
@@ -15,40 +16,34 @@ ClimateModel::ClimateModel(QObject *parent) : QObject(parent)
 }
 
 //----------------------------------------------------------------------------//
-// Get Driver wind face
-int ClimateModel::GetDriverWindFace()
-{
-    return m_climate->get_driver_wind_face();
-}
-
-// Set Driver wind face
+// Set air mode on face of driver
 void ClimateModel::setDriverWindFace(int driverWindFace)
 {
     m_climate->set_driver_wind_face(driverWindFace);
 }
-//----------------------------------------------------------------------------//
 
-//----------------------------------------------------------------------------//
-// Get Driver wind foot
-int ClimateModel::GetDriverWindFoot()
+// Get air mode on face of driver
+int ClimateModel::GetDriverWindFace()
 {
-    return m_climate->get_driver_wind_foot();
+    return m_climate->get_driver_wind_face();
 }
+//----------------------------------------------------------------------------//
 
-// Set Driver wind foot
+//----------------------------------------------------------------------------//
+// Set air mode on foot of driver
 void ClimateModel::setDriverWindFoot(int driverWindFoot)
 {
     m_climate->set_driver_wind_foot(driverWindFoot);
 }
-//----------------------------------------------------------------------------//
 
-//----------------------------------------------------------------------------//
-// Get Driver temperature
-int ClimateModel::GetDriverTemp()
+// Get air mode on foot of driver
+int ClimateModel::GetDriverWindFoot()
 {
-    return m_climate->get_driver_temp();
+    return m_climate->get_driver_wind_foot();
 }
+//----------------------------------------------------------------------------//
 
+//----------------------------------------------------------------------------//
 // Set Driver teperature
 void ClimateModel::setDriverTemp(int driverTemp)
 {
@@ -56,57 +51,57 @@ void ClimateModel::setDriverTemp(int driverTemp)
     if (GetSyncMode())
         m_climate->set_passenger_temp(driverTemp);
 }
-//----------------------------------------------------------------------------//
 
-//----------------------------------------------------------------------------//
-// Get Fan level
-int ClimateModel::GetFanLevel()
+// Get Driver temperature
+int ClimateModel::GetDriverTemp()
 {
-    return m_climate->get_fan_level();
+    return m_climate->get_driver_temp();
 }
+//----------------------------------------------------------------------------//
 
-// Set Fan level
+//----------------------------------------------------------------------------//
+// Set fan level of climate
 void ClimateModel::setFanLevel(int fanLevel)
 {
     m_climate->set_fan_level(fanLevel);
 }
-//----------------------------------------------------------------------------//
 
-//----------------------------------------------------------------------------//
-// Get Passenger wind face
-int ClimateModel::GetPassengerWindFace()
+// Get fan level of climate
+int ClimateModel::GetFanLevel()
 {
-    return m_climate->get_passenger_wind_face();
+    return m_climate->get_fan_level();
 }
+//----------------------------------------------------------------------------//
 
-// Set Passenger wind face
+//----------------------------------------------------------------------------//
+// Set air mode on face of passenger
 void ClimateModel::setPassengerWindFace(int passengerWindFace)
 {
     m_climate->set_passenger_wind_face(passengerWindFace);
 }
-//----------------------------------------------------------------------------//
 
-//----------------------------------------------------------------------------//
-// Get Passenger wind foot
-int ClimateModel::GetPassengerWindFoot()
+// Get air mode on face of passenger
+int ClimateModel::GetPassengerWindFace()
 {
-    return m_climate->get_passenger_wind_foot();
+    return m_climate->get_passenger_wind_face();
 }
+//----------------------------------------------------------------------------//
 
-// Set Passenger wind foot
+//----------------------------------------------------------------------------//
+// Set air mode on foot of passenger
 void ClimateModel::setPassengerWindFoot(int passengerWindFoot)
 {
     m_climate->set_passenger_wind_foot(passengerWindFoot);
 }
-//----------------------------------------------------------------------------//
 
-//----------------------------------------------------------------------------//
-// Get Passenger teperature
-int ClimateModel::GetPassengerTemp()
+// Get air mode on foot of passenger
+int ClimateModel::GetPassengerWindFoot()
 {
-    return m_climate->get_passenger_temp();
+    return m_climate->get_passenger_wind_foot();
 }
+//----------------------------------------------------------------------------//
 
+//----------------------------------------------------------------------------//
 // Set Passenger temperature
 void ClimateModel::setPassengerTemp(int passengerTemp)
 {
@@ -114,31 +109,31 @@ void ClimateModel::setPassengerTemp(int passengerTemp)
     if (GetSyncMode())
         m_climate->set_driver_temp(passengerTemp);
 }
-//----------------------------------------------------------------------------//
 
-//----------------------------------------------------------------------------//
-// Get Auto mode
-bool ClimateModel::GetAutoMode()
+// Get Passenger teperature
+int ClimateModel::GetPassengerTemp()
 {
-    return m_climate->get_auto_mode();
+    return m_climate->get_passenger_temp();
 }
+//----------------------------------------------------------------------------//
 
-// Set Auto mode
+//----------------------------------------------------------------------------//
+// Set Auto mode of climate
 void ClimateModel::setAutoMode(bool autoMode)
 {
     m_climate->set_auto_mode(autoMode);
 
 }
-//----------------------------------------------------------------------------//
 
-//----------------------------------------------------------------------------//
-// Get Sync mode
-bool ClimateModel::GetSyncMode()
+// Get Auto mode of climate
+bool ClimateModel::GetAutoMode()
 {
-    return m_climate->get_sync_mode();
+    return m_climate->get_auto_mode();
 }
+//----------------------------------------------------------------------------//
 
-// Set Sync mode
+//----------------------------------------------------------------------------//
+// Set Sync mode of climate
 void ClimateModel::setSyncMode(bool syncMode)
 {
     m_climate->set_sync_mode(syncMode);
@@ -149,18 +144,24 @@ void ClimateModel::setSyncMode(bool syncMode)
             m_climate->set_passenger_temp(GetDriverTemp());
     }
 }
-//----------------------------------------------------------------------------//
 
-//----------------------------------------------------------------------------//
-// Get outside temperature
-int ClimateModel::GetOutsideTemp()
+// Get Sync mode of climate
+bool ClimateModel::GetSyncMode()
 {
-    return m_climate->get_outside_temp();
+    return m_climate->get_sync_mode();
 }
+//----------------------------------------------------------------------------//
 
+//----------------------------------------------------------------------------//
 // Set Outside temperature
 void ClimateModel::setOutsideTemp(int outsideTemp)
 {
     m_climate->set_outside_temp(outsideTemp);
+}
+
+// Get outside temperature
+int ClimateModel::GetOutsideTemp()
+{
+    return m_climate->get_outside_temp();
 }
 //----------------------------------------------------------------------------//

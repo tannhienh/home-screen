@@ -13,15 +13,21 @@
 
 int main(int argc, char *argv[])
 {
+    // Set Qt virtual keyboard for QT_IM_MODULE environment variable
     qputenv("QT_IM_MODULE", QByteArray("qtvirtualkeyboard"));
 
-    // Set serial port for QT_NMEA_SERIAL_PORT
-    qputenv("QT_NMEA_SERIAL_PORT", QByteArray("ttyS0"));
+    /**
+     * Set serial port for QT_NMEA_SERIAL_PORT
+     * on Linux is ttyS
+     * on Windows is COM
+     */
+//    qputenv("QT_NMEA_SERIAL_PORT", QByteArray("ttyS0"));
 
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
     QGuiApplication app(argc, argv);
 
+    // Set Organization Name and Domain for QSettings
     app.setOrganizationName("Automotive - Funix");
     app.setOrganizationDomain("tannhienh.github.com");
 
@@ -43,7 +49,7 @@ int main(int argc, char *argv[])
     //------------------------------------------------------------------------//
 
     //------------------------------------------------------------------------//
-    // Applications model
+    // Climate model
     ClimateModel climateModel;
     engine.rootContext()->setContextProperty("climateModel", &climateModel);
     //------------------------------------------------------------------------//

@@ -18,12 +18,16 @@ public:
     Song(const QString &title, const QString &singer, const QString &source,
          const QString &albumArt);
 
+    // Get song title
     QString title() const;      // Get title of song
 
+    // Get song single
     QString singer() const;     // Get singer of song
 
+    // Get sonng source
     QString source() const;     // Get source path of song
 
+    // Get song album art
     QString album_art() const;  // Get album art of song
 
 private:
@@ -32,10 +36,11 @@ private:
     QString m_source;   // source path of song
     QString m_albumArt; // album art of song
 };
+// End song class
 //----------------------------------------------------------------------------//
 
 //----------------------------------------------------------------------------//
-// PlaylistModel class
+// Begin PlaylistModel class
 //
 class PlaylistModel : public QAbstractListModel
 {

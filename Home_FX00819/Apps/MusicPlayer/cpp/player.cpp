@@ -24,24 +24,6 @@ Player::Player(QObject *parent) : QObject(parent)
         m_playlist->setCurrentIndex(0);
 }
 
-// Load audios from default location of Music directory which are mp3 file
-// get path for add to playlist
-void Player::open()
-{
-    QDir directory(QStandardPaths::standardLocations
-                   (QStandardPaths::MusicLocation)[0]);
-
-    QFileInfoList musics = directory.entryInfoList(QStringList() << "*.mp3",
-                                                   QDir::Files);
-    QList<QUrl> urls;
-
-    for (int i = 0; i < musics.length(); i++){
-        urls.append(QUrl::fromLocalFile(musics[i].absoluteFilePath()));
-    }
-
-    addToPlaylist(urls);    // Add list audios to playlist
-}
-
 // add list of audios to playlist model
 void Player::addToPlaylist(const QList<QUrl> &urls)
 {
@@ -58,6 +40,24 @@ void Player::addToPlaylist(const QList<QUrl> &urls)
 
         m_playlistModel->addSong(song);
     }
+}
+
+// Load audios from default location of Music directory which are mp3 file
+// get path for add to playlist
+void Player::open()
+{
+    QDir directory(QStandardPaths::standardLocations
+                   (QStandardPaths::MusicLocation)[0]);
+
+    QFileInfoList musics = directory.entryInfoList(QStringList() << "*.mp3",
+                                                   QDir::Files);
+    QList<QUrl> urls;
+
+    for (int i = 0; i < musics.length(); i++){
+        urls.append(QUrl::fromLocalFile(musics[i].absoluteFilePath()));
+    }
+
+    addToPlaylist(urls);    // Add list audios to playlist
 }
 
 // Get current time and total time

@@ -9,6 +9,12 @@ XmlReader::XmlReader(QString filePath, ApplicationsModel *appsModel)
     loadModel();
 }
 
+// Reload apps from xml file to model
+void XmlReader::reloadModel()
+{
+    m_appsModel->endReloadModel();
+}
+
 // Load apps from xml file to model
 void XmlReader::loadModel()
 {
@@ -16,15 +22,11 @@ void XmlReader::loadModel()
         parseXmlFile(m_appsModel);
 }
 
-// Reload apps from xml file to model
-void XmlReader::reloadModel()
-{
-    m_appsModel->endReloadModel();
-}
-
-// Check xml file and set content for xmlDocument
-// Return true if read xml file successfull
-// Return false if read xml file failed
+/**
+ * Check xml file and set content for xmlDocument
+ * Return true if read xml file successfull
+ * Return false if read xml file failed
+ */
 bool XmlReader::readXmlFile(QString filePath)
 {
     // Load xml file as raw data

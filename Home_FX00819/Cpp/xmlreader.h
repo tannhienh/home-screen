@@ -37,7 +37,7 @@ private:
     // Parse xml file
     void parseXmlFile(ApplicationsModel *appsModel);
 
-    // Path of file xml
+    // Path of xml xml
     QString m_filePath;
 
     // Apps Model
