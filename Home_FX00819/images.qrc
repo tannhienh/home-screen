@@ -108,7 +108,6 @@
         <file>Apps/Map/images/coffee.png</file>
         <file>Apps/Map/images/current_location.png</file>
         <file>Apps/Map/images/destination_location.png</file>
-        <file>Apps/Map/images/down_arrow.png</file>
         <file>Apps/Map/images/gas_station.png</file>
         <file>Apps/Map/images/holtel.png</file>
         <file>Apps/Map/images/hospital.png</file>
@@ -117,7 +116,6 @@
         <file>Apps/Map/images/restaurant.png</file>
         <file>Apps/Map/images/start_location.png</file>
         <file>Apps/Map/images/supermarket.png</file>
-        <file>Apps/Map/images/up_arrow.png</file>
         <file>Images/WidgetCommon/bg_widget_eco_f.png</file>
         <file>Images/WidgetCommon/bg_widget_eco_p.png</file>
         <file>Images/WidgetCommon/bg_widget_sport_f.png</file>
@@ -133,5 +131,7 @@
         <file>Apps/Map/images/map_type_satellite.png</file>
         <file>Apps/Map/images/map_type_light.png</file>
         <file>Apps/Map/images/map_type_dark.png</file>
+        <file>Apps/Map/images/down_arrow.png</file>
+        <file>Apps/Map/images/up_arrow.png</file>
     </qresource>
 </RCC>
