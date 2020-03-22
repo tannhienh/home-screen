@@ -153,42 +153,6 @@ FocusScope {
         disablePressed: true
     }
 
-    // Arrow on face for Driver
-    Image {
-        id: faceArrowDriver
-
-        // Path common of arrow face
-        property var path: "qrc:/Images/Climate/widget_climate_arrow_face_"
-
-        // Hold the value mode wind on face of driver
-        property int currentArrowMode: climateModel.driver_wind_face
-
-        x: 60
-        y: 238
-        source: {
-            if (currentArrowMode == arrowMode.off)
-                return (path + "off.png")
-            else if (currentArrowMode == arrowMode.cold)
-                return (path + "cold.png")
-            else if (currentArrowMode == arrowMode.warm)
-                return (path + "warm.png")
-        }
-
-        // Change arrow mode when choose arrow icon
-        // follow order: off, cold, warm
-        MouseArea {
-            anchors.fill: faceArrowDriver
-            onClicked: {
-                if (faceArrowDriver.currentArrowMode == arrowMode.off)
-                    climateModel.setDriverWindFace(arrowMode.cold)
-                else if (faceArrowDriver.currentArrowMode == arrowMode.cold)
-                    climateModel.setDriverWindFace(arrowMode.warm)
-                else if (faceArrowDriver.currentArrowMode == arrowMode.warm)
-                    climateModel.setDriverWindFace(arrowMode.off)
-            }
-        }
-    }
-
     // Arrow on foot for Driver
     Image {
         id: footArrowDriver
@@ -220,33 +184,38 @@ FocusScope {
         }
     }
 
-    // Arrow on face for Passenger
+    // Arrow on face for Driver
     Image {
-        id: faceArrowPassenger
+        id: faceArrowDriver
 
+        // Path common of arrow face
         property var path: "qrc:/Images/Climate/widget_climate_arrow_face_"
-        property int currentArrowMode: climateModel.passenger_wind_face
 
-        x: 458
-        y: 238
+        // Hold the value mode wind on face of driver
+        property int currentArrowMode: climateModel.driver_wind_face
+
+        x: 75
+        y: 230
         source: {
-            if (climateModel.passenger_wind_face == 0)
+            if (currentArrowMode == arrowMode.off)
                 return (path + "off.png")
-            else if (climateModel.passenger_wind_face == 1)
+            else if (currentArrowMode == arrowMode.cold)
                 return (path + "cold.png")
-            else if (climateModel.passenger_wind_face == 2)
+            else if (currentArrowMode == arrowMode.warm)
                 return (path + "warm.png")
         }
 
+        // Change arrow mode when choose arrow icon
+        // follow order: off, cold, warm
         MouseArea {
-            anchors.fill: faceArrowPassenger
+            anchors.fill: faceArrowDriver
             onClicked: {
-                if (faceArrowPassenger.currentArrowMode == arrowMode.off)
-                    climateModel.setPassengerWindFace(arrowMode.cold)
-                else if (faceArrowPassenger.currentArrowMode == arrowMode.cold)
-                    climateModel.setPassengerWindFace(arrowMode.warm)
-                else if (faceArrowPassenger.currentArrowMode == arrowMode.warm)
-                    climateModel.setPassengerWindFace(arrowMode.off)
+                if (faceArrowDriver.currentArrowMode == arrowMode.off)
+                    climateModel.setDriverWindFace(arrowMode.cold)
+                else if (faceArrowDriver.currentArrowMode == arrowMode.cold)
+                    climateModel.setDriverWindFace(arrowMode.warm)
+                else if (faceArrowDriver.currentArrowMode == arrowMode.warm)
+                    climateModel.setDriverWindFace(arrowMode.off)
             }
         }
     }
@@ -278,6 +247,37 @@ FocusScope {
                     climateModel.setPassengerWindFoot(arrowMode.warm)
                 else if (footArrowPassenger.currentArrowMode == arrowMode.warm)
                     climateModel.setPassengerWindFoot(arrowMode.off)
+            }
+        }
+    }
+
+    // Arrow on face for Passenger
+    Image {
+        id: faceArrowPassenger
+
+        property var path: "qrc:/Images/Climate/widget_climate_arrow_face_"
+        property int currentArrowMode: climateModel.passenger_wind_face
+
+        x: 473
+        y: 230
+        source: {
+            if (climateModel.passenger_wind_face == 0)
+                return (path + "off.png")
+            else if (climateModel.passenger_wind_face == 1)
+                return (path + "cold.png")
+            else if (climateModel.passenger_wind_face == 2)
+                return (path + "warm.png")
+        }
+
+        MouseArea {
+            anchors.fill: faceArrowPassenger
+            onClicked: {
+                if (faceArrowPassenger.currentArrowMode == arrowMode.off)
+                    climateModel.setPassengerWindFace(arrowMode.cold)
+                else if (faceArrowPassenger.currentArrowMode == arrowMode.cold)
+                    climateModel.setPassengerWindFace(arrowMode.warm)
+                else if (faceArrowPassenger.currentArrowMode == arrowMode.warm)
+                    climateModel.setPassengerWindFace(arrowMode.off)
             }
         }
     }
