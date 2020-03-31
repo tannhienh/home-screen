@@ -40,9 +40,6 @@
         <file>Images/Menu/btn_menu_videos_n.png</file>
         <file>Images/Menu/btn_menu_videos_p.png</file>
         <file>Images/MusicPlayer/cover_art.png</file>
-        <file>Images/StatusBar/btn_back_f.png</file>
-        <file>Images/StatusBar/btn_back_n.png</file>
-        <file>Images/StatusBar/btn_back_p.png</file>
         <file>Images/StatusBar/divider.png</file>
         <file>Images/StatusBar/indi_audio_off.png</file>
         <file>Images/StatusBar/indi_battery_0.png</file>
@@ -90,12 +87,6 @@
         <file>Apps/MusicPlayer/images/repeat_hold.png</file>
         <file>Apps/MusicPlayer/images/shuffle.png</file>
         <file>Apps/MusicPlayer/images/shuffle_hold.png</file>
-        <file>Images/StatusBar/btn_edit_f.png</file>
-        <file>Images/StatusBar/btn_edit_n.png</file>
-        <file>Images/StatusBar/btn_edit_p.png</file>
-        <file>Images/StatusBar/btn_done_f.png</file>
-        <file>Images/StatusBar/btn_done_n.png</file>
-        <file>Images/StatusBar/btn_done_p.png</file>
         <file>Apps/MusicPlayer/images/default_cover_art.jpg</file>
         <file>Images/Map/place_holder.png</file>
         <file>Images/Map/car_icon.png</file>
@@ -120,18 +111,42 @@
         <file>Images/WidgetCommon/bg_widget_eco_p.png</file>
         <file>Images/WidgetCommon/bg_widget_sport_f.png</file>
         <file>Images/WidgetCommon/bg_widget_sport_p.png</file>
-        <file>Images/Climate/ico_arrow_down_big.png</file>
-        <file>Images/Climate/ico_arrow_left_big.png</file>
-        <file>Images/Climate/ico_arrow_right_big.png</file>
-        <file>Images/Climate/ico_arrow_up_big.png</file>
-        <file>Images/Climate/ico_arrow_down_small.png</file>
-        <file>Images/Climate/ico_arrow_left_small.png</file>
-        <file>Images/Climate/ico_arrow_right_small.png</file>
-        <file>Images/Climate/ico_arrow_up_small.png</file>
         <file>Apps/Map/images/map_type_satellite.png</file>
         <file>Apps/Map/images/map_type_light.png</file>
         <file>Apps/Map/images/map_type_dark.png</file>
         <file>Apps/Map/images/down_arrow.png</file>
         <file>Apps/Map/images/up_arrow.png</file>
+        <file>Images/Climate/air_car_off.png</file>
+        <file>Images/Climate/air_in_car.png</file>
+        <file>Images/Climate/air_out_car.png</file>
+        <file>Images/Climate/arrow_down_normal.png</file>
+        <file>Images/Climate/arrow_down_pressed.png</file>
+        <file>Images/Climate/arrow_left_normal.png</file>
+        <file>Images/Climate/arrow_left_pressed.png</file>
+        <file>Images/Climate/arrow_right_normal.png</file>
+        <file>Images/Climate/arrow_right_pressed.png</file>
+        <file>Images/Climate/arrow_up_normal.png</file>
+        <file>Images/Climate/arrow_up_pressed.png</file>
+        <file>Images/Climate/driver_seat_cold.png</file>
+        <file>Images/Climate/driver_seat_off.png</file>
+        <file>Images/Climate/driver_seat_warm.png</file>
+        <file>Images/Climate/head_defog_cold.png</file>
+        <file>Images/Climate/head_defog_off.png</file>
+        <file>Images/Climate/head_defog_warm.png</file>
+        <file>Images/Climate/passenger_seat_cold.png</file>
+        <file>Images/Climate/passenger_seat_off.png</file>
+        <file>Images/Climate/passenger_seat_warm.png</file>
+        <file>Images/Climate/rear_defog_cold.png</file>
+        <file>Images/Climate/rear_defog_off.png</file>
+        <file>Images/Climate/rear_defog_warm.png</file>
+        <file>Images/StatusBar/btn_back_f.png</file>
+        <file>Images/StatusBar/btn_back_n.png</file>
+        <file>Images/StatusBar/btn_back_p.png</file>
+        <file>Images/StatusBar/btn_done_f.png</file>
+        <file>Images/StatusBar/btn_done_n.png</file>
+        <file>Images/StatusBar/btn_done_p.png</file>
+        <file>Images/StatusBar/btn_edit_f.png</file>
+        <file>Images/StatusBar/btn_edit_n.png</file>
+        <file>Images/StatusBar/btn_edit_p.png</file>
     </qresource>
 </RCC>

@@ -122,7 +122,6 @@ int ClimateModel::GetPassengerTemp()
 void ClimateModel::setAutoMode(bool autoMode)
 {
     m_climate->set_auto_mode(autoMode);
-
 }
 
 // Get Auto mode of climate
@@ -163,5 +162,75 @@ void ClimateModel::setOutsideTemp(int outsideTemp)
 int ClimateModel::GetOutsideTemp()
 {
     return m_climate->get_outside_temp();
+}
+//----------------------------------------------------------------------------//
+
+//----------------------------------------------------------------------------//
+// Set Driver heated seat
+void ClimateModel::setDriverHeatedSeat(int driverHeatedSeat)
+{
+    m_climate->set_driver_heated_seat(driverHeatedSeat);
+}
+
+// Get Driver heated seat
+int ClimateModel::GetDriverHeatedSeat()
+{
+    return m_climate->get_driver_heated_seat();
+}
+//----------------------------------------------------------------------------//
+
+//----------------------------------------------------------------------------//
+// Set Head defog
+void ClimateModel::setHeadDefog(int headDefog)
+{
+    m_climate->set_head_defog(headDefog);
+}
+
+// Get Head defog
+int ClimateModel::GetHeadDefog()
+{
+    return m_climate->get_head_defog();
+}
+//----------------------------------------------------------------------------//
+
+//----------------------------------------------------------------------------//
+// Set Air in car
+void ClimateModel::setAirInCar(int airInCar)
+{
+    m_climate->set_air_in_car(airInCar);
+}
+
+// Get Air in car
+int ClimateModel::GetAirInCar()
+{
+    return m_climate->get_air_in_car();
+}
+//----------------------------------------------------------------------------//
+
+//----------------------------------------------------------------------------//
+// Set Rear defog
+void ClimateModel::setRearDefog(int rearDefog)
+{
+    m_climate->set_rear_defog(rearDefog);
+}
+
+// Get Rear defog
+int ClimateModel::GetRearDefog()
+{
+    return m_climate->get_rear_defog();
+}
+//----------------------------------------------------------------------------//
+
+//----------------------------------------------------------------------------//
+// Set Passenger heated seat
+void ClimateModel::setPassengerHeatedSeat(int passengerHeatedSeat)
+{
+    m_climate->set_passenger_heated_seat(passengerHeatedSeat);
+}
+
+// Get Passenger heated seat
+int ClimateModel::GetPassengerHeatedSeat()
+{
+    return m_climate->get_passenger_heated_seat();
 }
 //----------------------------------------------------------------------------//

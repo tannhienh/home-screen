@@ -50,6 +50,11 @@ FocusScope {
         icon_src: "qrc:/Images/StatusBar/btn_edit"
         visible: isShowEditButton
         focus: visible ? statusBar.focus : false
+        anchors {
+            left: parent.left
+            leftMargin: 20
+            verticalCenter: parent.verticalCenter
+        }
 
         // Change state to Pressed when Edit button is pressed
         onPressed: state = "Pressed"
@@ -104,7 +109,7 @@ FocusScope {
         focus: visible ? statusBar.focus : false
         anchors {
             left: parent.left
-            leftMargin: 22
+            leftMargin: 20
             verticalCenter: parent.verticalCenter
         }
 
@@ -162,7 +167,7 @@ FocusScope {
         focus: visible ? statusBar.focus : false
         anchors {
             left: parent.left
-            leftMargin: 18
+            leftMargin: 20
             verticalCenter: parent.verticalCenter
         }
 
@@ -334,7 +339,7 @@ FocusScope {
     // System icons area
     Row {
         layoutDirection: Qt.RightToLeft
-        spacing: 17
+        spacing: 0
         rightPadding: 18
         anchors.right: parent.right
         anchors.verticalCenter: parent.verticalCenter

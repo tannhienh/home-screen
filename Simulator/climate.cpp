@@ -2,10 +2,10 @@
 
 Climate::Climate(QObject *parent) : QObject(parent)
 {
-    // Create instance object DBus
+//     Create instance object DBus
     m_climateAdaptor = new ClimateAdaptor(this);
 
-    // connect to D-Bus and register as an object
+//     connect to D-Bus and register as an object
     QDBusConnection::sessionBus().registerObject("/Climate", this);
     QDBusConnection::sessionBus().registerService("local.Climate");
 
@@ -19,6 +19,11 @@ Climate::Climate(QObject *parent) : QObject(parent)
     m_auto_mode = false;
     m_sync_mode = false;
     m_outside_temp = 27;
+    m_driver_heated_seat = 0;
+    m_head_defog = 0;
+    m_air_in_car = 0;
+    m_rear_defog = 0;
+    m_passenger_heated_seat = 0;
 }
 
 //----------------------------------------------------------------------------//
@@ -200,3 +205,88 @@ void Climate::set_outside_temp(int outside_temp)
     }
 }
 //----------------------------------------------------------------------------//
+
+//------------------------------------------------------------------------//
+// Get Heated seat driver
+int Climate::get_driver_heated_seat()
+{
+    return m_driver_heated_seat;
+}
+
+// Set Heated seat driver
+void Climate::set_driver_heated_seat(int driver_heated_seat)
+{
+    if (driver_heated_seat != m_driver_heated_seat) {
+        m_driver_heated_seat = driver_heated_seat;
+        emit dataChanged();
+    }
+}
+//------------------------------------------------------------------------//
+
+//------------------------------------------------------------------------//
+// Get Head defog
+int Climate::get_head_defog()
+{
+    return m_head_defog;
+}
+
+// Set Head defog
+void Climate::set_head_defog(int head_defog)
+{
+    if (head_defog != m_head_defog) {
+        m_head_defog = head_defog;
+        emit dataChanged();
+    }
+}
+//------------------------------------------------------------------------//
+
+//------------------------------------------------------------------------//
+// Get air in car
+int Climate::get_air_in_car()
+{
+    return m_air_in_car;
+}
+
+// Set air in car
+void Climate::set_air_in_car(int air_in_car)
+{
+    if (air_in_car != m_air_in_car) {
+        m_air_in_car = air_in_car;
+        emit dataChanged();
+    }
+}
+//------------------------------------------------------------------------//
+
+//------------------------------------------------------------------------//
+// Get rear defog
+int Climate::get_rear_defog()
+{
+    return m_rear_defog;
+}
+
+// Set rear defog
+void Climate::set_rear_defog(int rear_defog)
+{
+    if (rear_defog != m_rear_defog) {
+        m_rear_defog = rear_defog;
+        emit dataChanged();
+    }
+}
+//------------------------------------------------------------------------//
+
+//------------------------------------------------------------------------//
+// Get heated seat passenger
+int Climate::get_passenger_heated_seat()
+{
+    return m_passenger_heated_seat;
+}
+
+// Set heated seat passenger
+void Climate::set_passenger_heated_seat(int passenger_heated_seat)
+{
+    if (passenger_heated_seat != m_passenger_heated_seat) {
+        m_passenger_heated_seat = passenger_heated_seat;
+        emit dataChanged();
+    }
+}
+//------------------------------------------------------------------------//

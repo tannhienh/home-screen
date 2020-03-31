@@ -5,14 +5,21 @@ ApplicationWindow {
     id: rootWindow
     visible: true
     width: 450
-    height: 600
+    height: 800
     title: qsTr("Simulator - Home Screen")
 
     ListModel {
-        id: windModeModel
+        id: modeModel
         ListElement { key: "Off"; value: 0 }
         ListElement { key: "Cold"; value: 1 }
         ListElement { key: "Warm"; value: 2 }
+    }
+
+    ListModel {
+        id: airCarModel
+        ListElement { key: "Off"; value: 0 }
+        ListElement { key: "In"; value: 1 }
+        ListElement { key: "Out"; value: 2 }
     }
 
     ListModel {
@@ -36,7 +43,7 @@ ApplicationWindow {
         id: driverWindFace
         textRole: "key"
         currentIndex: climate.get_driver_wind_face()
-        model: windModeModel
+        model: modeModel
         anchors {
             top: parent.top
             topMargin: 10
@@ -66,7 +73,7 @@ ApplicationWindow {
         id: driverWindFoot
         textRole: "key"
         currentIndex: climate.get_driver_wind_foot()
-        model: windModeModel
+        model: modeModel
         anchors {
             top: driverWindFace.bottom
             topMargin: 10
@@ -84,7 +91,7 @@ ApplicationWindow {
     //------------------------------------------------------------------------//
     Text {
         id: driverTemperText
-        text: "Temperature driver"
+        text: "Temperature Driver"
         anchors {
             left: parent.left
             leftMargin: 20
@@ -169,7 +176,7 @@ ApplicationWindow {
         id: passengerWindFace
         textRole: "key"
         currentIndex: climate.get_passenger_wind_face()
-        model: windModeModel
+        model: modeModel
         anchors {
             top: fanLevel.bottom
             topMargin: 20
@@ -199,7 +206,7 @@ ApplicationWindow {
         id: passengerWindFoot
         textRole: "key"
         currentIndex: climate.get_passenger_wind_foot()
-        model: windModeModel
+        model: modeModel
         anchors {
             top: passengerWindFace.bottom
             topMargin: 10
@@ -337,6 +344,163 @@ ApplicationWindow {
     }
     //------------------------------------------------------------------------//
 
+    //------------------------------------------------------------------------//
+    Text {
+        id: driverHeatedSeatText
+        text: "Driver Heated Seat"
+        anchors {
+            left: parent.left
+            leftMargin: 20
+            verticalCenter: driverHeatedSeat.verticalCenter
+        }
+    }
+
+    ComboBox {
+        id: driverHeatedSeat
+        textRole: "key"
+        currentIndex: climate.get_driver_heated_seat()
+        model: modeModel
+        anchors {
+            top: outsideTemper.bottom
+            topMargin: 10
+            left: parent.left
+            leftMargin: parent.width / 2
+        }
+
+        onCurrentIndexChanged: {
+            climate.set_driver_heated_seat(driverHeatedSeat.currentIndex)
+            console.log("Driver heated seat: " + driverHeatedSeat.currentIndex)
+        }
+    }
+
+    //------------------------------------------------------------------------//
+
+    //------------------------------------------------------------------------//
+    Text {
+        id: headDefogText
+        text: "Head Defog"
+        anchors {
+            left: parent.left
+            leftMargin: 20
+            verticalCenter: headDefog.verticalCenter
+        }
+    }
+
+    ComboBox {
+        id: headDefog
+        textRole: "key"
+        currentIndex: climate.get_head_defog()
+        model: modeModel
+        anchors {
+            top: driverHeatedSeat.bottom
+            topMargin: 10
+            left: parent.left
+            leftMargin: parent.width / 2
+        }
+
+        onCurrentIndexChanged: {
+            climate.set_head_defog(headDefog.currentIndex)
+            console.log("Head Defog: " + headDefog.currentIndex)
+        }
+    }
+
+    //------------------------------------------------------------------------//
+
+    //------------------------------------------------------------------------//
+    Text {
+        id: airInCarText
+        text: "Air in Car"
+        anchors {
+            left: parent.left
+            leftMargin: 20
+            verticalCenter: airInCar.verticalCenter
+        }
+    }
+
+    ComboBox {
+        id: airInCar
+        textRole: "key"
+        currentIndex: climate.get_air_in_car()
+        model: airCarModel
+        anchors {
+            top: headDefog.bottom
+            topMargin: 10
+            left: parent.left
+            leftMargin: parent.width / 2
+        }
+
+        onCurrentIndexChanged: {
+            climate.set_air_in_car(airInCar.currentIndex)
+            console.log("Air in Car: " + airInCar.currentIndex)
+        }
+    }
+
+    //------------------------------------------------------------------------//
+
+    //------------------------------------------------------------------------//
+    Text {
+        id: rearDefogText
+        text: "Rear Defog"
+        anchors {
+            left: parent.left
+            leftMargin: 20
+            verticalCenter: rearDefog.verticalCenter
+        }
+    }
+
+    ComboBox {
+        id: rearDefog
+        textRole: "key"
+        currentIndex: climate.get_rear_defog()
+        model: modeModel
+        anchors {
+            top: airInCar.bottom
+            topMargin: 10
+            left: parent.left
+            leftMargin: parent.width / 2
+        }
+
+        onCurrentIndexChanged: {
+            climate.set_rear_defog(rearDefog.currentIndex)
+            console.log("Rear defog: " + rearDefog.currentIndex)
+        }
+    }
+
+    //------------------------------------------------------------------------//
+
+    //------------------------------------------------------------------------//
+    Text {
+        id: passengerHeatedSeatText
+        text: "Passenger Heated Seat"
+        anchors {
+            left: parent.left
+            leftMargin: 20
+            verticalCenter: passengerHeatedSeat.verticalCenter
+        }
+    }
+
+    ComboBox {
+        id: passengerHeatedSeat
+        textRole: "key"
+        currentIndex: climate.get_passenger_heated_seat()
+        model: modeModel
+        anchors {
+            top: rearDefog.bottom
+            topMargin: 10
+            left: parent.left
+            leftMargin: parent.width / 2
+        }
+
+        onCurrentIndexChanged: {
+            climate.set_passenger_heated_seat(passengerHeatedSeat.currentIndex)
+            console.log("Passenger Heated Seat: " + passengerHeatedSeat.currentIndex)
+        }
+    }
+
+    //------------------------------------------------------------------------//
+
+    //------------------------------------------------------------------------//
+
     Connections {
         target: climate
         onDataChanged: {
@@ -350,6 +514,11 @@ ApplicationWindow {
             autoMode.checked = climate.get_auto_mode()
             syncMode.checked = climate.get_sync_mode()
             outsideTemper.value = climate.get_outside_temp()
+            driverHeatedSeat.currentIndex = climate.get_driver_heated_seat()
+            headDefog.currentIndex = climate.get_head_defog()
+            airInCar.currentIndex = climate.get_air_in_car()
+            rearDefog.currentIndex = climate.get_rear_defog()
+            passengerHeatedSeat.currentIndex = climate.get_passenger_heated_seat()
         }
     }
 }
