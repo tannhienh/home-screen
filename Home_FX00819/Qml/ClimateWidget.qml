@@ -1,4 +1,5 @@
 import QtQuick 2.13
+import QtPositioning 5.13
 
 FocusScope {
     id: climate
@@ -6,10 +7,10 @@ FocusScope {
     property alias stateHighLight: climateHighlight.state
 
     // Minimum teperature
-    readonly property int min_temperature: 16
+    readonly property int min_temperature: mainSettings.tempUnit == "C" ? 16 : 61
 
     // Maximum teperature
-    readonly property int max_temperature: 32
+    readonly property int max_temperature: mainSettings.tempUnit == "C" ? 32 : 90
 
     // Minimum fan level
     readonly property int min_fan_level: 0
@@ -349,6 +350,7 @@ FocusScope {
 
             Text {
                 id: driverTemp
+                property int temp
                 color: "#FFFFFF"
                 font.pixelSize: 55
                 font.family: ubuntu.name
@@ -360,8 +362,11 @@ FocusScope {
                         return "LOW"
                     else if (climateModel.driver_temp == climate.max_temperature)
                         return "HIGH"
-                    else
+                    else if (mainSettings.tempUnit == "C")
                         return (climateModel.driver_temp + "\xB0C")
+                    else if (mainSettings.tempUnit == "F") {
+                        return (climateModel.driver_temp + "\xB0F")
+                    }
                 }
             }
 
@@ -495,12 +500,15 @@ FocusScope {
                 font.family: ubuntu.name
                 anchors.centerIn: parent
                 text: {
-                    if (climateModel.passenger_temp == 16)
+                    if (climateModel.passenger_temp == climate.min_temperature)
                         return "LOW"
-                    else if (climateModel.passenger_temp == 32)
+                    else if (climateModel.passenger_temp == climate.max_temperature)
                         return "HIGH"
-                    else
+                    else if (mainSettings.tempUnit == "C")
                         return (climateModel.passenger_temp + "\xB0C")
+                    else if (mainSettings.tempUnit == "F") {
+                        return (climateModel.passenger_temp + "\xB0F")
+                    }
                 }
             }
 
@@ -538,6 +546,7 @@ FocusScope {
 
                 MouseArea {
                     anchors.fill: parent
+
                     onPressed: {
                         if (climateModel.passenger_temp > climate.min_temperature) {
                             arrowAnimation.target = downArrowPassengerTemp
@@ -546,6 +555,7 @@ FocusScope {
                             climateModel.setPassengerTemp(climateModel.passenger_temp - 1)
                         }
                     }
+
                     onReleased: {
                         arrowAnimation.target = downArrowPassengerTemp
                         arrowAnimation.to = temperItem.src_arrow + "down_normal.png"
@@ -567,6 +577,8 @@ FocusScope {
     Item {
         id: modeItem
         height: 80
+
+        property bool checkTempRespone: false
 
         anchors {
             top: temperItem.bottom
@@ -642,7 +654,9 @@ FocusScope {
                     color: "#FFFFFF"
                     font.pixelSize: 38
                     font.family: ubuntu.name
-                    text: (climateModel.outside_temp + "\xB0C")
+                    text: modeItem.checkTempRespone ? (mainSettings.outsideTemp
+                            + "\xB0" + mainSettings.tempUnit) : "--"
+                            + "\xB0" + mainSettings.tempUnit
                     anchors.centerIn: parent
                 }
             }
@@ -691,7 +705,7 @@ FocusScope {
 
         Row {
 
-            spacing: 50
+            spacing: 35
             anchors.centerIn: parent
 
             Image {
@@ -749,6 +763,28 @@ FocusScope {
                             climateModel.setHeadDefog(mode.warm)
                         else if (parent.currentHeadDefog == mode.warm)
                             climateModel.setHeadDefog(mode.off)
+                    }
+                }
+            }
+
+            // AC mode
+            Text {
+                id: acModeText
+                property bool acMode: true
+                text: "A/C"
+                color: climateModel.ac_mode ? "#FFFFFF" : "#7A7A7A"
+                font.pixelSize: 48
+                font.family: cantarell.name
+                verticalAlignment: Text.AlignHCenter
+                anchors.verticalCenter: parent.verticalCenter
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        if (climateModel.ac_mode)
+                            climateModel.setACMode(false)
+                        else
+                            climateModel.setACMode(true)
                     }
                 }
             }
@@ -843,5 +879,42 @@ FocusScope {
                 }
             }
         }
+    }
+
+    // Get current coordinate latitude and longitude
+    PositionSource {
+        id: positionSource
+        property double latitude: position.coordinate.latitude
+        property double longitude: position.coordinate.longitude
+    }
+
+    // Timer for call API get current temperature with latitude and longitude
+    // call interval is each 90 seconds
+    Timer {
+        interval: 90000
+        running: true
+        repeat: true
+        triggeredOnStart: true
+        onTriggered: weather.get(positionSource.latitude, positionSource.longitude);
+    }
+
+    // Handle signal when temperature changed then set again currentTemp
+    Connections {
+        target: weather
+        onTempChanged: {
+            if (!modeItem.checkTempRespone)
+                modeItem.checkTempRespone = true
+
+            if (mainSettings.tempUnit == "C")
+                mainSettings.outsideTemp = weather.temp - 273.15
+            else if (mainSettings.tempUnit == "F")
+                mainSettings.outsideTemp = (weather.temp - 273.15) * 1.8 + 32
+        }
+    }
+
+    // Set temperature unit for simulator when start app
+    Component.onCompleted: {
+        var tempUnit = mainSettings.tempUnit === "F" ? true : false
+        climateModel.setTempUnit(tempUnit)
     }
 }
