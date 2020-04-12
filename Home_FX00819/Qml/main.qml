@@ -1,5 +1,6 @@
 import QtQuick 2.13
 import QtQuick.Controls 2.13
+import Qt.labs.settings 1.1
 
 ApplicationWindow {
     id: root
@@ -45,6 +46,12 @@ ApplicationWindow {
     }
     //------------------------------------------------------------------------//
 
+    Settings {
+        id: mainSettings
+        property string tempUnit: "F"
+        property int outsideTemp
+    }
+
     // Background Image
     // 1920x1080
     Image {
@@ -52,7 +59,6 @@ ApplicationWindow {
         source: "qrc:/Images/Home/home_bg.png"
         anchors.fill: parent
     }
-
 
     FocusScope {
 
