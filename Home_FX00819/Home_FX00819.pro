@@ -16,6 +16,7 @@ SOURCES += \
         Cpp/applicationitem.cpp \
         Cpp/applicationsmodel.cpp \
         Cpp/climatemodel.cpp \
+        Cpp/weather.cpp \
         Cpp/xmlreader.cpp \
         Cpp/xmlwriter.cpp \
         main.cpp
@@ -37,6 +38,7 @@ HEADERS += \
     Cpp/applicationitem.h \
     Cpp/applicationsmodel.h \
     Cpp/climatemodel.h \
+    Cpp/weather.h \
     Cpp/xmlreader.h \ \
     Cpp/xmlwriter.h
 
