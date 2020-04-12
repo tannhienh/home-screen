@@ -17,17 +17,16 @@ Item {
             bottom: parent.bottom
         }
         gradient: Gradient {
-            GradientStop { position: 0; color: "#121213" }
-            GradientStop { position: 0.2; color: "#2B2E30" }
-            GradientStop { position: 1; color: "#000000" }
+            orientation: Gradient.Horizontal
+            GradientStop { position: 0; color: "#2B2E30" }
+            GradientStop { position: 1; color: "#4A4A4A" }
         }
     }
 
     Rectangle {
         id: line
-        width: 2
+        width: 3
         color: "#5D6164"
-        opacity: 0.8
         anchors {
             top: parent.top
             left: listContacts.right
