@@ -36,14 +36,14 @@ class ClimateModel : public QObject
     // Sync mode of climate
     Q_PROPERTY(bool sync_mode READ GetSyncMode WRITE setSyncMode NOTIFY dataChanged)
 
-    // Outside temperature
-    Q_PROPERTY(int outside_temp READ GetOutsideTemp WRITE setOutsideTemp NOTIFY dataChanged)
-
     // Driver heated seat
     Q_PROPERTY(int driver_heated_seat READ GetDriverHeatedSeat WRITE setDriverHeatedSeat NOTIFY dataChanged)
 
     // Head Defog
     Q_PROPERTY(int head_defog READ GetHeadDefog WRITE setHeadDefog NOTIFY dataChanged)
+
+    // AC mode
+    Q_PROPERTY(bool ac_mode READ GetACMode WRITE setACMode NOTIFY dataChanged)
 
     // Air in car
     Q_PROPERTY(int air_in_car READ GetAirInCar WRITE setAirInCar NOTIFY dataChanged)
@@ -88,14 +88,14 @@ public slots:
     // Set Sync mode of climate
     void setSyncMode(bool syncMode);
 
-    // Set outside temperature
-    void setOutsideTemp(int outsideTemp);
-
     // Set Driver heated seat
     void setDriverHeatedSeat(int driverHeatedSeat);
 
     // Set Head defog
     void setHeadDefog(int headDefog);
+
+    // Set AC mode
+    void setACMode(bool acMode);
 
     // Set Air in car
     void setAirInCar(int airInCar);
@@ -105,6 +105,9 @@ public slots:
 
     // Set Passenger heated seat
     void setPassengerHeatedSeat(int passengerHeatedSeat);
+
+    // Set temperature unit
+    void setTempUnit(bool tempUnit);
 
 private:
 
@@ -135,14 +138,13 @@ private:
     // Get sync mode of climate
     bool GetSyncMode();
 
-    // Get outside temperature
-    int GetOutsideTemp();
-
     // Get Driver heated seat
     int GetDriverHeatedSeat();
 
     // Get Head defog
     int GetHeadDefog();
+
+    bool GetACMode();
 
     // Get Air in car
     int GetAirInCar();

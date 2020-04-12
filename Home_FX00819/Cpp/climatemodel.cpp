@@ -152,20 +152,6 @@ bool ClimateModel::GetSyncMode()
 //----------------------------------------------------------------------------//
 
 //----------------------------------------------------------------------------//
-// Set Outside temperature
-void ClimateModel::setOutsideTemp(int outsideTemp)
-{
-    m_climate->set_outside_temp(outsideTemp);
-}
-
-// Get outside temperature
-int ClimateModel::GetOutsideTemp()
-{
-    return m_climate->get_outside_temp();
-}
-//----------------------------------------------------------------------------//
-
-//----------------------------------------------------------------------------//
 // Set Driver heated seat
 void ClimateModel::setDriverHeatedSeat(int driverHeatedSeat)
 {
@@ -190,6 +176,20 @@ void ClimateModel::setHeadDefog(int headDefog)
 int ClimateModel::GetHeadDefog()
 {
     return m_climate->get_head_defog();
+}
+//----------------------------------------------------------------------------//
+
+//----------------------------------------------------------------------------//
+// Set AC mode of climate
+void ClimateModel::setACMode(bool acMode)
+{
+    m_climate->set_ac_mode(acMode);
+}
+
+// Get Auto mode of climate
+bool ClimateModel::GetACMode()
+{
+    return m_climate->get_ac_mode();
 }
 //----------------------------------------------------------------------------//
 
@@ -234,3 +234,10 @@ int ClimateModel::GetPassengerHeatedSeat()
     return m_climate->get_passenger_heated_seat();
 }
 //----------------------------------------------------------------------------//
+
+//----------------------------------------------------------------------------//
+// Set temperature unit
+void ClimateModel::setTempUnit(bool tempUnit)
+{
+    m_climate->set_temp_unit(tempUnit);
+}
