@@ -87,14 +87,6 @@ public slots:
     //------------------------------------------------------------------------//
 
     //------------------------------------------------------------------------//
-    // Get Outside temperature
-    int get_outside_temp();
-
-    // Set Outside temperature
-    void set_outside_temp(int outside_temp);
-    //------------------------------------------------------------------------//
-
-    //------------------------------------------------------------------------//
     // Get Heated seat driver
     int get_driver_heated_seat();
 
@@ -108,6 +100,14 @@ public slots:
 
     // Set Head defog
     void set_head_defog(int head_defog);
+    //------------------------------------------------------------------------//
+
+    //------------------------------------------------------------------------//
+    // Get AC mode
+    bool get_ac_mode();
+
+    // Set Head defog
+    void set_ac_mode(bool ac_mode);
     //------------------------------------------------------------------------//
 
     //------------------------------------------------------------------------//
@@ -134,6 +134,14 @@ public slots:
     void set_passenger_heated_seat(int passenger_heated_seat);
     //------------------------------------------------------------------------//
 
+    //------------------------------------------------------------------------//
+    // Get temperature unit
+    bool get_temp_unit();
+
+    // Set temperature unit
+    void set_temp_unit(bool temp_unit);
+    //------------------------------------------------------------------------//
+
 private:
     int m_driver_wind_face;
     int m_driver_wind_foot;
@@ -144,17 +152,20 @@ private:
     int m_passenger_temp;
     bool m_auto_mode;
     bool m_sync_mode;
-    int m_outside_temp;
     int m_driver_heated_seat;
     int m_head_defog;
+    bool m_ac_mode;
     int m_air_in_car;
     int m_rear_defog;
     int m_passenger_heated_seat;
+    bool m_temp_unit;
 
     ClimateAdaptor *m_climateAdaptor;
 
 signals:
     void dataChanged();
+    void tempUnitChangedToF();
+    void tempUnitChangedToC();
 };
 
 #endif // CLIMATE_H

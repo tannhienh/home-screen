@@ -3,6 +3,10 @@
   <interface name="local.Climate">
     <signal name="dataChanged">
     </signal>
+    <signal name="tempUnitChangedToF">
+    </signal>
+    <signal name="tempUnitChangedToC">
+    </signal>
     <method name="get_driver_wind_face">
       <arg type="i" direction="out"/>
     </method>
@@ -57,12 +61,6 @@
     <method name="set_sync_mode">
       <arg name="sync_mode" type="b" direction="in"/>
     </method>
-    <method name="get_outside_temp">
-      <arg type="i" direction="out"/>
-    </method>
-    <method name="set_outside_temp">
-      <arg name="outside_temp" type="i" direction="in"/>
-    </method>
     <method name="get_driver_heated_seat">
       <arg type="i" direction="out"/>
     </method>
@@ -74,6 +72,12 @@
     </method>
     <method name="set_head_defog">
       <arg name="head_defog" type="i" direction="in"/>
+    </method>
+    <method name="get_ac_mode">
+      <arg type="b" direction="out"/>
+    </method>
+    <method name="set_ac_mode">
+      <arg name="ac_mode" type="b" direction="in"/>
     </method>
     <method name="get_air_in_car">
       <arg type="i" direction="out"/>
@@ -92,6 +96,12 @@
     </method>
     <method name="set_passenger_heated_seat">
       <arg name="passenger_heated_seat" type="i" direction="in"/>
+    </method>
+    <method name="get_temp_unit">
+      <arg type="b" direction="out"/>
+    </method>
+    <method name="set_temp_unit">
+      <arg name="temp_unit" type="b" direction="in"/>
     </method>
   </interface>
 </node>

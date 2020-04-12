@@ -234,8 +234,8 @@ ApplicationWindow {
 
     SpinBox {
         id: passengerTemper
-        from: 16
-        to: 32
+        from: climate.get_temp_unit() ? 61 : 16
+        to: climate.get_temp_unit() ? 90 : 32
         stepSize: 1
         value: climate.get_passenger_temp()
         anchors {
@@ -315,37 +315,6 @@ ApplicationWindow {
 
     //------------------------------------------------------------------------//
     Text {
-        id: outsideText
-        text: "Outside Temp: "
-        anchors {
-            left: parent.left
-            leftMargin: 20
-            verticalCenter: outsideTemper.verticalCenter
-        }
-    }
-
-    SpinBox {
-        id: outsideTemper
-        from: -50
-        to: 80
-        stepSize: 1
-        value: climate.get_outside_temp()
-        anchors {
-            top: syncMode.bottom
-            topMargin: 20
-            left: parent.left
-            leftMargin: parent.width / 2
-        }
-
-        onValueChanged: {
-            climate.set_outside_temp(outsideTemper.value)
-            console.log("Outside Temp: " + outsideTemper.value)
-        }
-    }
-    //------------------------------------------------------------------------//
-
-    //------------------------------------------------------------------------//
-    Text {
         id: driverHeatedSeatText
         text: "Driver Heated Seat"
         anchors {
@@ -361,7 +330,7 @@ ApplicationWindow {
         currentIndex: climate.get_driver_heated_seat()
         model: modeModel
         anchors {
-            top: outsideTemper.bottom
+            top: syncMode.bottom
             topMargin: 10
             left: parent.left
             leftMargin: parent.width / 2
@@ -408,6 +377,37 @@ ApplicationWindow {
 
     //------------------------------------------------------------------------//
     Text {
+        id: acModeText
+        text: "Auto Mode"
+        anchors {
+            left: parent.left
+            leftMargin: 20
+            verticalCenter: acMode.verticalCenter
+        }
+    }
+
+    Switch {
+        id: acMode
+        anchors {
+            top: headDefog.bottom
+            topMargin: 20
+            left: parent.left
+            leftMargin: parent.width / 2
+        }
+        checked: climate.get_ac_mode()
+        text: checked ? "ON" : "OFF"
+
+        onCheckedChanged: {
+            climate.set_ac_mode(acMode.checked)
+
+            console.log("AC Mode: " + acMode.checked)
+        }
+    }
+
+    //------------------------------------------------------------------------//
+
+    //------------------------------------------------------------------------//
+    Text {
         id: airInCarText
         text: "Air in Car"
         anchors {
@@ -423,7 +423,7 @@ ApplicationWindow {
         currentIndex: climate.get_air_in_car()
         model: airCarModel
         anchors {
-            top: headDefog.bottom
+            top: acMode.bottom
             topMargin: 10
             left: parent.left
             leftMargin: parent.width / 2
@@ -513,12 +513,36 @@ ApplicationWindow {
             passengerTemper.value = climate.get_passenger_temp()
             autoMode.checked = climate.get_auto_mode()
             syncMode.checked = climate.get_sync_mode()
-            outsideTemper.value = climate.get_outside_temp()
             driverHeatedSeat.currentIndex = climate.get_driver_heated_seat()
             headDefog.currentIndex = climate.get_head_defog()
+            acMode.checked = climate.get_ac_mode()
             airInCar.currentIndex = climate.get_air_in_car()
             rearDefog.currentIndex = climate.get_rear_defog()
             passengerHeatedSeat.currentIndex = climate.get_passenger_heated_seat()
+        }
+
+        onTempUnitChangedToF: {
+            console.log(driverTemper.value)
+            driverTemper.to = 90
+            driverTemper.value = climate.get_driver_temp()
+            driverTemper.from = 61
+
+            console.log(passengerTemper.value)
+            passengerTemper.to = 90
+            passengerTemper.value = climate.get_passenger_temp()
+            passengerTemper.from = 61
+        }
+
+        onTempUnitChangedToC: {
+            console.log(driverTemper.value)
+            driverTemper.from = 16
+            driverTemper.value = climate.get_driver_temp()
+            driverTemper.to = 32
+
+            console.log(passengerTemper.value)
+            passengerTemper.from = 16
+            passengerTemper.value = climate.get_passenger_temp()
+            passengerTemper.to = 32
         }
     }
 }
