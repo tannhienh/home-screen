@@ -40,16 +40,18 @@ Item {
         active: carMoving
         updateInterval: 1000
         onPositionChanged:  {
-            var currentPosition = positionSource.position.coordinate
-            mapView.center = currentPosition
-            marker.coordinate = currentPosition
+            var currentCoordinate = positionSource.position.coordinate
+            mapView.center = currentCoordinate
+            marker.coordinate = currentCoordinate
         }
     }
 
     // Area display map view
     Item {
         id: mapViewItem
+
         width: parent.width - guideItem.width
+
         anchors {
             top: parent.top
             bottom: parent.bottom
@@ -86,6 +88,8 @@ Item {
             width: 75
             height: 75
             font.pixelSize: 30
+            layer.enabled: true
+            layer.effect: dropShadow
 
             anchors {
                 left: parent.left
@@ -135,15 +139,16 @@ Item {
                                                : hideMenuMapType.restart()
 
             // Hide menu types of map if focus to other
-            onFocusChanged: if (focus === false)
+            onFocusChanged: if (!focus)
                                 hideMenuMapType.restart()
         }
 
         // Menu map type
         Rectangle {
             id: menuMapType
-            height: 150
-            opacity: 0.8
+            height: 180
+            layer.enabled: true
+            layer.effect: dropShadow
 
             anchors {
                 top: parent.top
@@ -157,15 +162,36 @@ Item {
 
                 // Dark type map
                 Button {
-                    id: darkLabel
-                    text: "Dark"
-                    font.bold: true
-                    font.pixelSize: 20
+                    id: darkButton
                     width: parent.width
-                    height: parent.height / 3
+                    height: (parent.height - 2) / 3
 
                     // Save map type darkMap to mapSettings
                     onClicked: mapSettings.mapType = darkMap
+
+                    // Map type icon
+                   Image {
+                        id: darkMapIcon
+                        source: "qrc:/Apps/Map/images/map_type_dark.png"
+                        width: parent.width / 3
+                        anchors {
+                            top: parent.top
+                            left: parent.left
+                            bottom: parent.bottom
+                        }
+                    }
+
+                   // Label dark button
+                   Text {
+                       text: "Dark"
+                       font.bold: true
+                       font.pixelSize: 20
+                       anchors {
+                           left: darkMapIcon.right
+                           leftMargin: 10
+                           verticalCenter: parent.verticalCenter
+                       }
+                   }
                 }
 
                 // Line
@@ -178,15 +204,36 @@ Item {
 
                 // Light type map
                 Button {
-                    id: lightLabel
-                    text: "Light"
-                    font.bold: true
-                    font.pixelSize: 20
+                    id: lightButton
                     width: parent.width
-                    height: parent.height / 3
+                    height: (parent.height - 2) / 3
 
                     // Save map type lightMap to mapSettings
                     onClicked: mapSettings.mapType = lightMap
+
+                    // Map type icon
+                   Image {
+                        id: lightMapIcon
+                        source: "qrc:/Apps/Map/images/map_type_light.png"
+                        width: parent.width / 3
+                        anchors {
+                            top: parent.top
+                            left: parent.left
+                            bottom: parent.bottom
+                        }
+                    }
+
+                   // Label light button
+                   Text {
+                       text: "Light"
+                       font.bold: true
+                       font.pixelSize: 20
+                       anchors {
+                           left: lightMapIcon.right
+                           leftMargin: 10
+                           verticalCenter: parent.verticalCenter
+                       }
+                   }
                 }
 
                 // Line
@@ -199,15 +246,36 @@ Item {
 
                 // Satellite type map
                 Button {
-                    id: satelliteLabel
-                    text: "Satellite"
-                    font.bold: true
-                    font.pixelSize: 20
+                    id: satelliteButton
                     width: parent.width
-                    height: parent.height / 3
+                    height: (parent.height - 2) / 3
 
                     // Save map type satelliteMap to mapSettings
                     onClicked: mapSettings.mapType = satelliteMap
+
+                    // Map type icon
+                   Image {
+                        id: satelliteMapIcon
+                        source: "qrc:/Apps/Map/images/map_type_satellite.png"
+                        width: parent.width / 3
+                        anchors {
+                            top: parent.top
+                            left: parent.left
+                            bottom: parent.bottom
+                        }
+                    }
+
+                   // Label dark button
+                   Text {
+                       text: "Satellite"
+                       font.bold: true
+                       font.pixelSize: 20
+                       anchors {
+                           left: satelliteMapIcon.right
+                           leftMargin: 10
+                           verticalCenter: parent.verticalCenter
+                       }
+                   }
                 }
             }
         }
@@ -220,6 +288,8 @@ Item {
             from: mapView.minimumTilt
             to: mapView.maximumTilt
             value: mapSettings.tilt
+            layer.enabled: true
+            layer.effect: dropShadow
 
             // Save value tilt of map to map Settings
             onValueChanged: mapSettings.tilt = value
@@ -259,6 +329,8 @@ Item {
             font.bold: true
             font.pixelSize: 20
             color: "#7DEEF8"
+            layer.enabled: true
+            layer.effect: dropShadow
             anchors {
                 top: tiltSlider.bottom
                 topMargin: 10
@@ -272,6 +344,8 @@ Item {
             anchorPoint.x: placeHolder.width / 2
             anchorPoint.y: placeHolder.height / 2
             coordinate: locationDefault
+//            layer.enabled: true
+//            layer.effect: dropShadow
             sourceItem: Image {
                 id: placeHolder
                 source: "qrc:/Apps/Map/images/place_holder.png"
@@ -287,8 +361,10 @@ Item {
             id: locateButton
             width: 50
             height: 50
-            color: "#80FFFFFF"
+            color: "#FFFFFF"
             radius: 50
+            layer.enabled: true
+            layer.effect: dropShadow
 
             anchors {
                 bottom: zoomIn.top
@@ -299,15 +375,14 @@ Item {
             Image {
                 source: "qrc:/Apps/Map/images/current_location.png"
                 anchors.centerIn: locateButton
-                opacity: 0.5
                 width: implicitWidth * 0.7
                 height: implicitHeight * 0.7
             }
 
             MouseArea {
                 anchors.fill: parent
-                onPressed: locateButton.color = "#80d3d3d3"
-                onReleased: locateButton.color = "#80FFFFFF"
+                onPressed: locateButton.color = "#d3d3d3"
+                onReleased: locateButton.color = "#FFFFFF"
                 onClicked: locateAnimation.restart()
             }
         }
@@ -318,10 +393,11 @@ Item {
             height: 50
             text: "+" // color: #292A2F
             font.pixelSize: 30
+            layer.enabled: true
+            layer.effect: dropShadow
 
             background: Rectangle {
                 color: zoomIn.down ? "#d3d3d3" : "#FFFFFF"
-                opacity: 0.5
             }
 
             anchors {
@@ -339,10 +415,11 @@ Item {
             height: 50
             text: "-" // color: #292A2F
             font.pixelSize: 30
+            layer.enabled: true
+            layer.effect: dropShadow
 
             background: Rectangle {
                 color: zoomOut.down ? "#d3d3d3" : "#FFFFFF"
-                opacity: 0.5
             }
 
             anchors {
@@ -355,60 +432,14 @@ Item {
             onClicked: zoomOutAnimation.restart()
         }
 
-        DropShadow {
-            anchors.fill: menuMapType
-            source: menuMapType
-            color: "#aa000000"
-            radius: 20
-            samples: 31
-        }
-
-        DropShadow {
-            anchors.fill: mapTypeButton
-            source: mapTypeButton
-            color: "#aa000000"
-            radius: 20
-            samples: 31
-        }
-
-        DropShadow {
-            anchors.fill: tiltSlider
-            source: tiltSlider
-            color: "#aa000000"
-            radius: 20
-            samples: 31
-        }
-
-        DropShadow {
-            anchors.fill: tiltLabel
-            source: tiltLabel
-            color: "#aa000000"
-            radius: 10
-            samples: 31
-        }
-
-        DropShadow {
-            anchors.fill: locateButton
-            source: locateButton
-            color: "#aa000000"
-            radius: 20
-            samples: 31
-        }
-
-        DropShadow {
-            anchors.fill: zoomIn
-            source: zoomIn
-            color: "#aa000000"
-            radius: 20
-            samples: 31
-        }
-
-        DropShadow {
-            anchors.fill: zoomOut
-            source: zoomOut
-            color: "#aa000000"
-            radius: 20
-            samples: 31
+        // Drop shadow for items
+        Component {
+            id: dropShadow
+            DropShadow {
+                color: "#aa000000"
+                radius: 10
+                samples: 21
+            }
         }
 
         // Animation display center for current location
@@ -446,7 +477,7 @@ Item {
             property: "width"
             duration: 400
             from: 0
-            to: 150
+            to: 180
             easing.type: Easing.InOutQuad
         }
 
