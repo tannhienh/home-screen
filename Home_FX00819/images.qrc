@@ -95,7 +95,6 @@
         <file>Apps/Map/images/arrow_2.png</file>
         <file>Apps/Map/images/bank.png</file>
         <file>Apps/Map/images/bar.png</file>
-        <file>Apps/Map/images/car_icon.png</file>
         <file>Apps/Map/images/coffee.png</file>
         <file>Apps/Map/images/current_location.png</file>
         <file>Apps/Map/images/destination_location.png</file>
@@ -130,9 +129,6 @@
         <file>Images/Climate/driver_seat_cold.png</file>
         <file>Images/Climate/driver_seat_off.png</file>
         <file>Images/Climate/driver_seat_warm.png</file>
-        <file>Images/Climate/head_defog_cold.png</file>
-        <file>Images/Climate/head_defog_off.png</file>
-        <file>Images/Climate/head_defog_warm.png</file>
         <file>Images/Climate/passenger_seat_cold.png</file>
         <file>Images/Climate/passenger_seat_off.png</file>
         <file>Images/Climate/passenger_seat_warm.png</file>
@@ -148,5 +144,9 @@
         <file>Images/StatusBar/btn_edit_f.png</file>
         <file>Images/StatusBar/btn_edit_n.png</file>
         <file>Images/StatusBar/btn_edit_p.png</file>
+        <file>Images/Climate/head_defog_cold.png</file>
+        <file>Images/Climate/head_defog_off.png</file>
+        <file>Images/Climate/head_defog_warm.png</file>
+        <file>Apps/Map/images/car_icon.png</file>
     </qresource>
 </RCC>
