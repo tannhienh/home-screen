@@ -8,8 +8,16 @@
 #include "Cpp/xmlreader.h"
 #include "Cpp/xmlwriter.h"
 #include "Cpp/climatemodel.h"
+#include "Cpp/weather.h"
 
+// Path Xml file contains applications info
 #define XML_APPS_FILE_PATH "../Home_FX00819/Xml/applications.xml"
+
+// API url get weather
+#define API_URL "https://api.openweathermap.org/data/2.5/weather"
+
+// App id for api get weather
+#define API_APP_ID "3c30b7bd4e796effef3b4bb535b659ac"
 
 int main(int argc, char *argv[])
 {
@@ -65,6 +73,13 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("player", player.m_player);
     engine.rootContext()->setContextProperty("playlist", player.m_playlist);
     engine.rootContext()->setContextProperty("utility", &player);
+    //------------------------------------------------------------------------//
+
+    //------------------------------------------------------------------------//
+    // Weather API
+    Weather weather(API_URL, API_APP_ID);
+
+    engine.rootContext()->setContextProperty("weather", &weather);
     //------------------------------------------------------------------------//
 
     const QUrl url(QStringLiteral("qrc:/Qml/main.qml"));
