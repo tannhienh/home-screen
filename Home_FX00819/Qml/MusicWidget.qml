@@ -162,8 +162,8 @@ FocusScope {
     // Previous button on Music widget
     ButtonControl {
         id: prevButton
-        image.width: image.implicitWidth * 0.6
-        image.height: image.implicitHeight * 0.6
+        image.width: image.implicitWidth * 0.7
+        image.height: image.implicitHeight * 0.7
         anchors.verticalCenter: playButton.verticalCenter
         anchors.right: playButton.left
         anchors.rightMargin: 20
@@ -177,8 +177,8 @@ FocusScope {
     // Play/Pause button on Music widget
     ButtonControl {
         id: playButton
-        image.width: image.implicitWidth * 0.5
-        image.height: image.implicitHeight * 0.5
+        image.width: image.implicitWidth * 0.6
+        image.height: image.implicitHeight * 0.6
         anchors.bottom: musicHighlight.bottom
         anchors.bottomMargin: 60
         anchors.horizontalCenter: musicHighlight.horizontalCenter
@@ -215,8 +215,8 @@ FocusScope {
     // Next button on Music widget
     ButtonControl {
         id: nextButton
-        image.width: image.implicitWidth * 0.6
-        image.height: image.implicitHeight * 0.6
+        image.width: image.implicitWidth * 0.7
+        image.height: image.implicitHeight * 0.7
         anchors.verticalCenter: playButton.verticalCenter
         anchors.left: playButton.right
         anchors.leftMargin: 20
@@ -230,8 +230,8 @@ FocusScope {
     // Shuffle button on Music widget
     SwitchButton {
         id: shuffleButton
-        image.width: image.implicitWidth * 0.6
-        image.height: image.implicitHeight * 0.6
+        image.width: image.implicitWidth * 0.7
+        image.height: image.implicitHeight * 0.7
         icon_on: "qrc:/Apps/MusicPlayer/images/shuffle_hold.png"
         icon_off: "qrc:/Apps/MusicPlayer/images/shuffle.png"
         status: shuffleGlobal
@@ -250,8 +250,8 @@ FocusScope {
 
     LoopButton {
         id: loopButton
-        image.width: image.implicitWidth * 0.6
-        image.height: image.implicitHeight * 0.6
+        image.width: image.implicitWidth * 0.7
+        image.height: image.implicitHeight * 0.7
         sizeNumber: 20
         status: loopGlobal
 
@@ -270,7 +270,7 @@ FocusScope {
     ProgressBar {
         id: progressBar
         width: 500
-        height: 6
+        height: 7
         from: 0.0
         to: player.duration
         value: player.position
@@ -278,14 +278,14 @@ FocusScope {
         background: Rectangle {
             anchors.fill: parent
             color: "#808080"
-            radius: 6
+            radius: 7
         }
 
         contentItem: Rectangle {
             width: progressBar.visualPosition * parent.width
             height: parent.height
             color: "#7DEEF8"
-            radius: 6
+            radius: 7
         }
 
         anchors {

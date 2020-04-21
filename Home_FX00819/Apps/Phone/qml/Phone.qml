@@ -3,6 +3,7 @@ import QtQuick.Controls 2.13
 import QtQuick.VirtualKeyboard 2.13
 import QtQuick.VirtualKeyboard.Styles 2.13
 import QtGraphicalEffects 1.13
+import QtQuick.VirtualKeyboard.Settings 2.13
 
 Item {
     id: phoneItem
@@ -44,10 +45,10 @@ Item {
             margins: 40
         }
 
-//        Item {
-//            id: keyboardArea
-//            anchors.fill: parent
-//        }
+        //        Item {
+        //            id: keyboardArea
+        //            anchors.fill: parent
+        //        }
 
         Rectangle {
             id: keyboardArea
@@ -60,61 +61,53 @@ Item {
             }
         }
 
-//        FastBlur {
-//            anchors.fill: keyboardArea
-//            source: keyboardArea
-//            radius: 32
-//        }
-
-        Item {
-            id: inputItem
-            height: parent.height / 8
+        TextField {
+            id: phoneNumberInput
+            width: 400
+            height: 70
+            color: "#2B2C2E"
+            selectionColor: Qt.rgba(0.0, 0.0, 0.0, 0.15)
+            selectedTextColor: color
+            selectByMouse: true
+            font.pixelSize: 40
+            placeholderText: "Enter phone number"
+            horizontalAlignment: Text.AlignHCenter
+            focus: true
+            inputMethodHints: Qt.ImhDialableCharactersOnly
 
             anchors {
                 top: parent.top
-                topMargin: parent.height / 20
-                left: parent.left
-                right: parent.right
+                topMargin: parent.height / 10
+                horizontalCenter: parent.horizontalCenter
             }
-
-            TextField {
-                id: phoneNumberInput
-                width: 400
-                height: 70
-                color: "#2B2C2E"
-                selectionColor: Qt.rgba(0.0, 0.0, 0.0, 0.15)
-                selectedTextColor: color
-                font.pixelSize: 40
-                placeholderText: "Enter phone number"
-                horizontalAlignment: Text.AlignHCenter
-                inputMethodHints: Qt.ImhDialableCharactersOnly
-                anchors.centerIn: parent
-                selectByMouse: true
-            }
+            validator: RegExpValidator { regExp: /^[0-9\+\-\#\*\ ]{6,}$/ }
         }
 
-        Item {
-            id: keyboardItem
+        InputPanel {
+            id: keyboardPhoneNumber
+            width: phoneNumberInput.width * 5
+            active: true
+            visible: true
 
             anchors {
-                top: inputItem.bottom
-                left: parent.left
-                right: parent.right
-                bottom: parent.bottom
+                top: phoneNumberInput.bottom
+                horizontalCenter: parent.horizontalCenter
+                topMargin: parent.height / 10
             }
 
-            InputPanel {
-                id: keyboardPhoneNumber
-                width: phoneNumberInput.width * 5
-                anchors.centerIn: parent
+            Component.onCompleted: {
+                // the keyboard background
+                keyboard.style.keyboardBackground = null
 
-                Component.onCompleted: {
-                    // the keyboard background
-                    keyboard.style.keyboardBackground = null
+                // the horizontal bar at the top of the keyboard
+                keyboard.style.selectionListBackground = null
+            }
 
-                    // the horizontal bar at the top of the keyboard
-                    keyboard.style.selectionListBackground = null
-                }
+        }
+
+        KeyboardLayout {
+            SpaceKey {
+                visible: false
             }
         }
     }

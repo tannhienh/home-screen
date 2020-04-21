@@ -501,13 +501,37 @@ Item {
             left: parent.left
             bottom: parent.bottom
         }
+    }
 
-        // Keyboard for input address
-        InputPanel {
-            id: keyboardMap
-            y: Qt.inputMethod.visible ? parent.height + 50 - keyboardMap.height
-                                      : parent.height
-            width: mapItem.width
+    // Keyboard for input address
+    InputPanel {
+        id: keyboardMap
+        y: parent.height
+//        y: Qt.inputMethod.visible ? parent.height - keyboardMap.height
+//                                  : parent.height
+        width: parent.width
+//        visible: Qt.inputMethod.visible
+
+        states: State {
+            name: "ShowKeyboard"
+            when: Qt.inputMethod.visible
+            PropertyChanges {
+                target: keyboardMap
+                y: parent.height - keyboardMap.height
+            }
         }
+
+        transitions: Transition {
+            from: ""
+            to: "ShowKeyboard"
+            reversible: true
+            NumberAnimation {
+                property: "y"
+                duration: 400
+                easing.type: Easing.InOutQuad
+            }
+        }
+
+        Component.onCompleted: console.log(keyboardMap.keyboard.children)
     }
 }
