@@ -79,11 +79,11 @@
     <method name="set_ac_mode">
       <arg name="ac_mode" type="b" direction="in"/>
     </method>
-    <method name="get_air_in_car">
+    <method name="get_air_quality">
       <arg type="i" direction="out"/>
     </method>
-    <method name="set_air_in_car">
-      <arg name="air_in_car" type="i" direction="in"/>
+    <method name="set_air_quality">
+      <arg name="air_quality" type="i" direction="in"/>
     </method>
     <method name="get_rear_defog">
       <arg type="i" direction="out"/>

@@ -18,13 +18,22 @@ FocusScope {
     // Maximum fan level
     readonly property int max_fan_level: 10
 
-    // Enumeration arrow mode for climate
+    // Enumeration climate mode
     QtObject {
-        id: mode
+        id: climateMode
 
         property int off: 0
         property int cold: 1
         property int warm: 2
+    }
+
+    // Enumeration air quality mode
+    QtObject {
+        id: airQualityMode
+
+        property int automatic: 0
+        property int recirculation: 1
+        property int fresh: 2
     }
 
     // Background color for climate widget area
@@ -191,11 +200,11 @@ FocusScope {
             y: 40
 
             source: {
-                if (currentArrowMode == mode.off)
+                if (currentArrowMode == climateMode.off)
                     return (path + "off.png")
-                else if (currentArrowMode == mode.cold)
+                else if (currentArrowMode == climateMode.cold)
                     return (path + "cold.png")
-                else if (currentArrowMode == mode.warm)
+                else if (currentArrowMode == climateMode.warm)
                     return (path + "warm.png")
             }
 
@@ -204,12 +213,12 @@ FocusScope {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    if (parent.currentArrowMode == mode.off)
-                        climateModel.setDriverWindFoot(mode.cold)
-                    else if (parent.currentArrowMode == mode.cold)
-                        climateModel.setDriverWindFoot(mode.warm)
-                    else if (parent.currentArrowMode == mode.warm)
-                        climateModel.setDriverWindFoot(mode.off)
+                    if (parent.currentArrowMode == climateMode.off)
+                        climateModel.setDriverWindFoot(climateMode.cold)
+                    else if (parent.currentArrowMode == climateMode.cold)
+                        climateModel.setDriverWindFoot(climateMode.warm)
+                    else if (parent.currentArrowMode == climateMode.warm)
+                        climateModel.setDriverWindFoot(climateMode.off)
                 }
             }
         }
@@ -228,11 +237,11 @@ FocusScope {
             y: 25
 
             source: {
-                if (currentArrowMode == mode.off)
+                if (currentArrowMode == climateMode.off)
                     return (path + "off.png")
-                else if (currentArrowMode == mode.cold)
+                else if (currentArrowMode == climateMode.cold)
                     return (path + "cold.png")
-                else if (currentArrowMode == mode.warm)
+                else if (currentArrowMode == climateMode.warm)
                     return (path + "warm.png")
             }
 
@@ -241,12 +250,12 @@ FocusScope {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    if (parent.currentArrowMode == mode.off)
-                        climateModel.setDriverWindFace(mode.cold)
-                    else if (parent.currentArrowMode == mode.cold)
-                        climateModel.setDriverWindFace(mode.warm)
-                    else if (parent.currentArrowMode == mode.warm)
-                        climateModel.setDriverWindFace(mode.off)
+                    if (parent.currentArrowMode == climateMode.off)
+                        climateModel.setDriverWindFace(climateMode.cold)
+                    else if (parent.currentArrowMode == climateMode.cold)
+                        climateModel.setDriverWindFace(climateMode.warm)
+                    else if (parent.currentArrowMode == climateMode.warm)
+                        climateModel.setDriverWindFace(climateMode.off)
                 }
             }
         }
@@ -262,11 +271,11 @@ FocusScope {
             y: 40
 
             source: {
-                if (currentArrowMode == mode.off)
+                if (currentArrowMode == climateMode.off)
                     return (path + "off.png")
-                else if (currentArrowMode == mode.cold)
+                else if (currentArrowMode == climateMode.cold)
                     return (path + "cold.png")
-                else if (currentArrowMode == mode.warm)
+                else if (currentArrowMode == climateMode.warm)
                     return (path + "warm.png")
             }
 
@@ -275,12 +284,12 @@ FocusScope {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    if (parent.currentArrowMode == mode.off)
-                        climateModel.setPassengerWindFoot(mode.cold)
-                    else if (parent.currentArrowMode == mode.cold)
-                        climateModel.setPassengerWindFoot(mode.warm)
-                    else if (parent.currentArrowMode == mode.warm)
-                        climateModel.setPassengerWindFoot(mode.off)
+                    if (parent.currentArrowMode == climateMode.off)
+                        climateModel.setPassengerWindFoot(climateMode.cold)
+                    else if (parent.currentArrowMode == climateMode.cold)
+                        climateModel.setPassengerWindFoot(climateMode.warm)
+                    else if (parent.currentArrowMode == climateMode.warm)
+                        climateModel.setPassengerWindFoot(climateMode.off)
                 }
             }
         }
@@ -296,11 +305,11 @@ FocusScope {
             y: 25
 
             source: {
-                if (currentArrowMode == mode.off)
+                if (currentArrowMode == climateMode.off)
                     return (path + "off.png")
-                else if (currentArrowMode == mode.cold)
+                else if (currentArrowMode == climateMode.cold)
                     return (path + "cold.png")
-                else if (currentArrowMode == mode.warm)
+                else if (currentArrowMode == climateMode.warm)
                     return (path + "warm.png")
             }
 
@@ -309,12 +318,12 @@ FocusScope {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    if (parent.currentArrowMode == mode.off)
-                        climateModel.setPassengerWindFace(mode.cold)
-                    else if (parent.currentArrowMode == mode.cold)
-                        climateModel.setPassengerWindFace(mode.warm)
-                    else if (parent.currentArrowMode == mode.warm)
-                        climateModel.setPassengerWindFace(mode.off)
+                    if (parent.currentArrowMode == climateMode.off)
+                        climateModel.setPassengerWindFace(climateMode.cold)
+                    else if (parent.currentArrowMode == climateMode.cold)
+                        climateModel.setPassengerWindFace(climateMode.warm)
+                    else if (parent.currentArrowMode == climateMode.warm)
+                        climateModel.setPassengerWindFace(climateMode.off)
                 }
             }
         }
@@ -716,23 +725,23 @@ FocusScope {
                 anchors.verticalCenter: parent.verticalCenter
 
                 source: {
-                    if (currentHeatedSeat == mode.off)
+                    if (currentHeatedSeat == climateMode.off)
                         return (heatWindMode.path + "driver_seat_off.png")
-                    else if (currentHeatedSeat == mode.cold)
+                    else if (currentHeatedSeat == climateMode.cold)
                         return (heatWindMode.path + "driver_seat_cold.png")
-                    else if (currentHeatedSeat == mode.warm)
+                    else if (currentHeatedSeat == climateMode.warm)
                         return (heatWindMode.path + "driver_seat_warm.png")
                 }
 
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
-                        if (parent.currentHeatedSeat == mode.off)
-                            climateModel.setDriverHeatedSeat(mode.cold)
-                        else if (parent.currentHeatedSeat == mode.cold)
-                            climateModel.setDriverHeatedSeat(mode.warm)
-                        else if (parent.currentHeatedSeat == mode.warm)
-                            climateModel.setDriverHeatedSeat(mode.off)
+                        if (parent.currentHeatedSeat == climateMode.off)
+                            climateModel.setDriverHeatedSeat(climateMode.cold)
+                        else if (parent.currentHeatedSeat == climateMode.cold)
+                            climateModel.setDriverHeatedSeat(climateMode.warm)
+                        else if (parent.currentHeatedSeat == climateMode.warm)
+                            climateModel.setDriverHeatedSeat(climateMode.off)
                     }
                 }
             }
@@ -745,11 +754,11 @@ FocusScope {
                 anchors.verticalCenter: parent.verticalCenter
 
                 source: {
-                    if (currentHeadDefog == mode.off)
+                    if (currentHeadDefog == climateMode.off)
                         return (heatWindMode.path + "head_defog_off.png")
-                    else if (currentHeadDefog == mode.cold)
+                    else if (currentHeadDefog == climateMode.cold)
                         return (heatWindMode.path + "head_defog_cold.png")
-                    else if (currentHeadDefog == mode.warm)
+                    else if (currentHeadDefog == climateMode.warm)
                         return (heatWindMode.path + "head_defog_warm.png")
                 }
 
@@ -757,12 +766,12 @@ FocusScope {
                     anchors.fill: parent
 
                     onClicked: {
-                        if (parent.currentHeadDefog == mode.off)
-                            climateModel.setHeadDefog(mode.cold)
-                        else if (parent.currentHeadDefog == mode.cold)
-                            climateModel.setHeadDefog(mode.warm)
-                        else if (parent.currentHeadDefog == mode.warm)
-                            climateModel.setHeadDefog(mode.off)
+                        if (parent.currentHeadDefog == climateMode.off)
+                            climateModel.setHeadDefog(climateMode.cold)
+                        else if (parent.currentHeadDefog == climateMode.cold)
+                            climateModel.setHeadDefog(climateMode.warm)
+                        else if (parent.currentHeadDefog == climateMode.warm)
+                            climateModel.setHeadDefog(climateMode.off)
                     }
                 }
             }
@@ -790,31 +799,31 @@ FocusScope {
             }
 
             Image {
-                id: airInCar
+                id: airQuality
 
-                property int currentAirInCar: climateModel.air_in_car
+                property int currentAirQuality: climateModel.air_quality
 
                 anchors.verticalCenter: parent.verticalCenter
 
                 source: {
-                    if (currentAirInCar == mode.off)
-                        return (heatWindMode.path + "air_car_off.png")
-                    else if (currentAirInCar == mode.cold)
-                        return (heatWindMode.path + "air_in_car.png")
-                    else if (currentAirInCar == mode.warm)
-                        return (heatWindMode.path + "air_out_car.png")
+                    if (currentAirQuality == airQualityMode.automatic)
+                        return (heatWindMode.path + "air_quality_automatic.png")
+                    else if (currentAirQuality == airQualityMode.recirculation)
+                        return (heatWindMode.path + "air_quality_recirculation.png")
+                    else if (currentAirQuality == airQualityMode.fresh)
+                        return (heatWindMode.path + "air_quality_fresh.png")
                 }
 
                 MouseArea {
                     anchors.fill: parent
 
                     onClicked: {
-                        if (parent.currentAirInCar == mode.off)
-                            climateModel.setAirInCar(mode.cold)
-                        else if (parent.currentAirInCar == mode.cold)
-                            climateModel.setAirInCar(mode.warm)
-                        else if (parent.currentAirInCar == mode.warm)
-                            climateModel.setAirInCar(mode.off)
+                        if (parent.currentAirQuality == airQualityMode.automatic)
+                            climateModel.setAirQuality(airQualityMode.recirculation)
+                        else if (parent.currentAirQuality == airQualityMode.recirculation)
+                            climateModel.setAirQuality(airQualityMode.fresh)
+                        else if (parent.currentAirQuality == airQualityMode.fresh)
+                            climateModel.setAirQuality(airQualityMode.automatic)
                     }
                 }
             }
@@ -827,11 +836,11 @@ FocusScope {
                 anchors.verticalCenter: parent.verticalCenter
 
                 source: {
-                    if (currentRearDefog == mode.off)
+                    if (currentRearDefog == climateMode.off)
                         return (heatWindMode.path + "rear_defog_off.png")
-                    else if (currentRearDefog == mode.cold)
+                    else if (currentRearDefog == climateMode.cold)
                         return (heatWindMode.path + "rear_defog_cold.png")
-                    else if (currentRearDefog == mode.warm)
+                    else if (currentRearDefog == climateMode.warm)
                         return (heatWindMode.path + "rear_defog_warm.png")
                 }
 
@@ -839,12 +848,12 @@ FocusScope {
                     anchors.fill: parent
 
                     onClicked: {
-                        if (parent.currentRearDefog == mode.off)
-                            climateModel.setRearDefog(mode.cold)
-                        else if (parent.currentRearDefog == mode.cold)
-                            climateModel.setRearDefog(mode.warm)
-                        else if (parent.currentRearDefog == mode.warm)
-                            climateModel.setRearDefog(mode.off)
+                        if (parent.currentRearDefog == climateMode.off)
+                            climateModel.setRearDefog(climateMode.cold)
+                        else if (parent.currentRearDefog == climateMode.cold)
+                            climateModel.setRearDefog(climateMode.warm)
+                        else if (parent.currentRearDefog == climateMode.warm)
+                            climateModel.setRearDefog(climateMode.off)
                     }
                 }
             }
@@ -857,11 +866,11 @@ FocusScope {
                 anchors.verticalCenter: parent.verticalCenter
 
                 source: {
-                    if (currentHeatedSeat == mode.off)
+                    if (currentHeatedSeat == climateMode.off)
                         return (heatWindMode.path + "passenger_seat_off.png")
-                    else if (currentHeatedSeat == mode.cold)
+                    else if (currentHeatedSeat == climateMode.cold)
                         return (heatWindMode.path + "passenger_seat_cold.png")
-                    else if (currentHeatedSeat == mode.warm)
+                    else if (currentHeatedSeat == climateMode.warm)
                         return (heatWindMode.path + "passenger_seat_warm.png")
                 }
 
@@ -869,12 +878,12 @@ FocusScope {
                     anchors.fill: parent
 
                     onClicked: {
-                        if (parent.currentHeatedSeat == mode.off)
-                            climateModel.setPassengerHeatedSeat(mode.cold)
-                        else if (parent.currentHeatedSeat == mode.cold)
-                            climateModel.setPassengerHeatedSeat(mode.warm)
-                        else if (parent.currentHeatedSeat == mode.warm)
-                            climateModel.setPassengerHeatedSeat(mode.off)
+                        if (parent.currentHeatedSeat == climateMode.off)
+                            climateModel.setPassengerHeatedSeat(climateMode.cold)
+                        else if (parent.currentHeatedSeat == climateMode.cold)
+                            climateModel.setPassengerHeatedSeat(climateMode.warm)
+                        else if (parent.currentHeatedSeat == climateMode.warm)
+                            climateModel.setPassengerHeatedSeat(climateMode.off)
                     }
                 }
             }

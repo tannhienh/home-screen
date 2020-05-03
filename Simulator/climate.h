@@ -111,11 +111,11 @@ public slots:
     //------------------------------------------------------------------------//
 
     //------------------------------------------------------------------------//
-    // Get air in car
-    int get_air_in_car();
+    // Get air quality
+    int get_air_quality();
 
-    // Set air in car
-    void set_air_in_car(int air_in_car);
+    // Set air quality
+    void set_air_quality(int air_quality);
     //------------------------------------------------------------------------//
 
     //------------------------------------------------------------------------//
@@ -155,7 +155,7 @@ private:
     int m_driver_heated_seat;
     int m_head_defog;
     bool m_ac_mode;
-    int m_air_in_car;
+    int m_air_quality;
     int m_rear_defog;
     int m_passenger_heated_seat;
     bool m_temp_unit;

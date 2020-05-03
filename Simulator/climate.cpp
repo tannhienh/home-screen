@@ -22,7 +22,7 @@ Climate::Climate(QObject *parent) : QObject(parent)
     m_driver_heated_seat = 0;
     m_head_defog = 0;
     m_ac_mode = false;
-    m_air_in_car = 0;
+    m_air_quality = 0;
     m_rear_defog = 0;
     m_passenger_heated_seat = 0;
     qDebug() << "Completed constructor" << endl;
@@ -245,16 +245,16 @@ void Climate::set_ac_mode(bool ac_mode)
 
 //----------------------------------------------------------------------------//
 // Get air in car
-int Climate::get_air_in_car()
+int Climate::get_air_quality()
 {
-    return m_air_in_car;
+    return m_air_quality;
 }
 
 // Set air in car
-void Climate::set_air_in_car(int air_in_car)
+void Climate::set_air_quality(int air_quality)
 {
-    if (air_in_car != m_air_in_car) {
-        m_air_in_car = air_in_car;
+    if (air_quality != m_air_quality) {
+        m_air_quality = air_quality;
         emit dataChanged();
     }
 }

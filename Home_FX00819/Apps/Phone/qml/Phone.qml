@@ -104,12 +104,6 @@ Item {
             }
 
         }
-
-        KeyboardLayout {
-            SpaceKey {
-                visible: false
-            }
-        }
     }
 
     Component.onCompleted: phoneNumberInput.focus = true

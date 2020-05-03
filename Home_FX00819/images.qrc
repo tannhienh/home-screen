@@ -115,9 +115,6 @@
         <file>Apps/Map/images/map_type_dark.png</file>
         <file>Apps/Map/images/down_arrow.png</file>
         <file>Apps/Map/images/up_arrow.png</file>
-        <file>Images/Climate/air_car_off.png</file>
-        <file>Images/Climate/air_in_car.png</file>
-        <file>Images/Climate/air_out_car.png</file>
         <file>Images/Climate/arrow_down_normal.png</file>
         <file>Images/Climate/arrow_down_pressed.png</file>
         <file>Images/Climate/arrow_left_normal.png</file>
@@ -148,5 +145,8 @@
         <file>Images/Climate/head_defog_off.png</file>
         <file>Images/Climate/head_defog_warm.png</file>
         <file>Apps/Map/images/car_icon.png</file>
+        <file>Images/Climate/air_quality_fresh.png</file>
+        <file>Images/Climate/air_quality_recirculation.png</file>
+        <file>Images/Climate/air_quality_automatic.png</file>
     </qresource>
 </RCC>

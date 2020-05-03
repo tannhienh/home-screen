@@ -194,16 +194,16 @@ bool ClimateModel::GetACMode()
 //----------------------------------------------------------------------------//
 
 //----------------------------------------------------------------------------//
-// Set Air in car
-void ClimateModel::setAirInCar(int airInCar)
+// Set Air quality
+void ClimateModel::setAirQuality(int airQuality)
 {
-    m_climate->set_air_in_car(airInCar);
+    m_climate->set_air_quality(airQuality);
 }
 
 // Get Air in car
-int ClimateModel::GetAirInCar()
+int ClimateModel::GetAirQuality()
 {
-    return m_climate->get_air_in_car();
+    return m_climate->get_air_quality();
 }
 //----------------------------------------------------------------------------//
 

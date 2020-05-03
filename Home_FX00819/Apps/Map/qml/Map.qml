@@ -507,10 +507,8 @@ Item {
     InputPanel {
         id: keyboardMap
         y: parent.height
-//        y: Qt.inputMethod.visible ? parent.height - keyboardMap.height
-//                                  : parent.height
-        width: parent.width
-//        visible: Qt.inputMethod.visible
+        anchors.left: parent.left
+        anchors.right: parent.right
 
         states: State {
             name: "ShowKeyboard"

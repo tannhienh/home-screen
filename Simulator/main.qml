@@ -9,17 +9,17 @@ ApplicationWindow {
     title: qsTr("Simulator - Home Screen")
 
     ListModel {
-        id: modeModel
+        id: climateModeModel
         ListElement { key: "Off"; value: 0 }
         ListElement { key: "Cold"; value: 1 }
         ListElement { key: "Warm"; value: 2 }
     }
 
     ListModel {
-        id: airCarModel
-        ListElement { key: "Off"; value: 0 }
-        ListElement { key: "In"; value: 1 }
-        ListElement { key: "Out"; value: 2 }
+        id: airQualityModel
+        ListElement { key: "Automatic"; value: 0 }
+        ListElement { key: "Recirculation"; value: 1 }
+        ListElement { key: "Fresh air"; value: 2 }
     }
 
     ListModel {
@@ -43,7 +43,7 @@ ApplicationWindow {
         id: driverWindFace
         textRole: "key"
         currentIndex: climate.get_driver_wind_face()
-        model: modeModel
+        model: climateModeModel
         anchors {
             top: parent.top
             topMargin: 10
@@ -73,7 +73,7 @@ ApplicationWindow {
         id: driverWindFoot
         textRole: "key"
         currentIndex: climate.get_driver_wind_foot()
-        model: modeModel
+        model: climateModeModel
         anchors {
             top: driverWindFace.bottom
             topMargin: 10
@@ -176,7 +176,7 @@ ApplicationWindow {
         id: passengerWindFace
         textRole: "key"
         currentIndex: climate.get_passenger_wind_face()
-        model: modeModel
+        model: climateModeModel
         anchors {
             top: fanLevel.bottom
             topMargin: 20
@@ -206,7 +206,7 @@ ApplicationWindow {
         id: passengerWindFoot
         textRole: "key"
         currentIndex: climate.get_passenger_wind_foot()
-        model: modeModel
+        model: climateModeModel
         anchors {
             top: passengerWindFace.bottom
             topMargin: 10
@@ -276,6 +276,8 @@ ApplicationWindow {
 
         onCheckedChanged: {
             climate.set_auto_mode(autoMode.checked)
+            if (autoMode.checked && !climate.get_ac_mode())
+                climate.set_ac_mode(true)
 
             console.log("Auto Mode: " + autoMode.checked)
         }
@@ -328,7 +330,7 @@ ApplicationWindow {
         id: driverHeatedSeat
         textRole: "key"
         currentIndex: climate.get_driver_heated_seat()
-        model: modeModel
+        model: climateModeModel
         anchors {
             top: syncMode.bottom
             topMargin: 10
@@ -359,7 +361,7 @@ ApplicationWindow {
         id: headDefog
         textRole: "key"
         currentIndex: climate.get_head_defog()
-        model: modeModel
+        model: climateModeModel
         anchors {
             top: driverHeatedSeat.bottom
             topMargin: 10
@@ -408,20 +410,20 @@ ApplicationWindow {
 
     //------------------------------------------------------------------------//
     Text {
-        id: airInCarText
-        text: "Air in Car"
+        id: airQualityText
+        text: "Air Quality"
         anchors {
             left: parent.left
             leftMargin: 20
-            verticalCenter: airInCar.verticalCenter
+            verticalCenter: airQuality.verticalCenter
         }
     }
 
     ComboBox {
-        id: airInCar
+        id: airQuality
         textRole: "key"
-        currentIndex: climate.get_air_in_car()
-        model: airCarModel
+        currentIndex: climate.get_air_quality()
+        model: airQualityModel
         anchors {
             top: acMode.bottom
             topMargin: 10
@@ -430,8 +432,8 @@ ApplicationWindow {
         }
 
         onCurrentIndexChanged: {
-            climate.set_air_in_car(airInCar.currentIndex)
-            console.log("Air in Car: " + airInCar.currentIndex)
+            climate.set_air_quality(airQuality.currentIndex)
+            console.log("Air Quality: " + airQuality.currentIndex)
         }
     }
 
@@ -452,9 +454,9 @@ ApplicationWindow {
         id: rearDefog
         textRole: "key"
         currentIndex: climate.get_rear_defog()
-        model: modeModel
+        model: climateModeModel
         anchors {
-            top: airInCar.bottom
+            top: airQuality.bottom
             topMargin: 10
             left: parent.left
             leftMargin: parent.width / 2
@@ -483,7 +485,7 @@ ApplicationWindow {
         id: passengerHeatedSeat
         textRole: "key"
         currentIndex: climate.get_passenger_heated_seat()
-        model: modeModel
+        model: climateModeModel
         anchors {
             top: rearDefog.bottom
             topMargin: 10
@@ -500,7 +502,6 @@ ApplicationWindow {
     //------------------------------------------------------------------------//
 
     //------------------------------------------------------------------------//
-
     Connections {
         target: climate
         onDataChanged: {
@@ -516,7 +517,7 @@ ApplicationWindow {
             driverHeatedSeat.currentIndex = climate.get_driver_heated_seat()
             headDefog.currentIndex = climate.get_head_defog()
             acMode.checked = climate.get_ac_mode()
-            airInCar.currentIndex = climate.get_air_in_car()
+            airQuality.currentIndex = climate.get_air_quality()
             rearDefog.currentIndex = climate.get_rear_defog()
             passengerHeatedSeat.currentIndex = climate.get_passenger_heated_seat()
         }

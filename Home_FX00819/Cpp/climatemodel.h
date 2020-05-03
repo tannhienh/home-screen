@@ -45,8 +45,8 @@ class ClimateModel : public QObject
     // AC mode
     Q_PROPERTY(bool ac_mode READ GetACMode WRITE setACMode NOTIFY dataChanged)
 
-    // Air in car
-    Q_PROPERTY(int air_in_car READ GetAirInCar WRITE setAirInCar NOTIFY dataChanged)
+    // Air Quality
+    Q_PROPERTY(int air_quality READ GetAirQuality WRITE setAirQuality NOTIFY dataChanged)
 
     // Rear defog
     Q_PROPERTY(int rear_defog READ GetRearDefog WRITE setRearDefog NOTIFY dataChanged)
@@ -97,8 +97,8 @@ public slots:
     // Set AC mode
     void setACMode(bool acMode);
 
-    // Set Air in car
-    void setAirInCar(int airInCar);
+    // Set Air quality
+    void setAirQuality(int airQuality);
 
     // Set Rear defog
     void setRearDefog(int rearDefog);
@@ -144,10 +144,11 @@ private:
     // Get Head defog
     int GetHeadDefog();
 
+    // Get AC mode
     bool GetACMode();
 
-    // Get Air in car
-    int GetAirInCar();
+    // Get Air quality
+    int GetAirQuality();
 
     // Get Rear Defog()
     int GetRearDefog();

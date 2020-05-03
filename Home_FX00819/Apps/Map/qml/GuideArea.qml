@@ -220,16 +220,16 @@ Item {
         anchors.fill: guideBg
         source: guideBg
         color: "#aa000000"
-        radius: 20
-        samples: 31
+        radius: 30
+        samples: 61
     }
 
     DropShadow {
         anchors.fill: inputPlaceItem
         source: inputPlaceItem
         color: "#aa000000"
-        radius: 20
-        samples: 31
+        radius: 30
+        samples: 61
     }
 
     // Locations near here
@@ -463,6 +463,14 @@ Item {
             anchors.top: swipeExplore.bottom
             anchors.horizontalCenter: swipeExplore.horizontalCenter
         }
+    }
+
+    DropShadow {
+        anchors.fill: nearHereItem
+        source: nearHereItem
+        color: "#aa000000"
+        radius: 30
+        samples: 61
     }
 
     Text {
