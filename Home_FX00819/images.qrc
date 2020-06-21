@@ -1,25 +1,5 @@
 <RCC>
     <qresource prefix="/">
-        <file>Images/Climate/widget_climate_arrow_face_cold.png</file>
-        <file>Images/Climate/widget_climate_arrow_face_off.png</file>
-        <file>Images/Climate/widget_climate_arrow_face_warm.png</file>
-        <file>Images/Climate/widget_climate_arrow_foot_cold.png</file>
-        <file>Images/Climate/widget_climate_arrow_foot_off.png</file>
-        <file>Images/Climate/widget_climate_arrow_foot_warm.png</file>
-        <file>Images/Climate/widget_climate_arrow_seat.png</file>
-        <file>Images/Climate/widget_climate_ico_fan.png</file>
-        <file>Images/Climate/widget_climate_line.png</file>
-        <file>Images/Climate/widget_climate_wind_level_0.png</file>
-        <file>Images/Climate/widget_climate_wind_level_1.png</file>
-        <file>Images/Climate/widget_climate_wind_level_10.png</file>
-        <file>Images/Climate/widget_climate_wind_level_2.png</file>
-        <file>Images/Climate/widget_climate_wind_level_3.png</file>
-        <file>Images/Climate/widget_climate_wind_level_4.png</file>
-        <file>Images/Climate/widget_climate_wind_level_5.png</file>
-        <file>Images/Climate/widget_climate_wind_level_6.png</file>
-        <file>Images/Climate/widget_climate_wind_level_7.png</file>
-        <file>Images/Climate/widget_climate_wind_level_8.png</file>
-        <file>Images/Climate/widget_climate_wind_level_9.png</file>
         <file>Images/Home/home_bg.png</file>
         <file>Images/Menu/btn_menu_map_f.png</file>
         <file>Images/Menu/btn_menu_map_n.png</file>
@@ -115,23 +95,6 @@
         <file>Apps/Map/images/map_type_dark.png</file>
         <file>Apps/Map/images/down_arrow.png</file>
         <file>Apps/Map/images/up_arrow.png</file>
-        <file>Images/Climate/arrow_down_normal.png</file>
-        <file>Images/Climate/arrow_down_pressed.png</file>
-        <file>Images/Climate/arrow_left_normal.png</file>
-        <file>Images/Climate/arrow_left_pressed.png</file>
-        <file>Images/Climate/arrow_right_normal.png</file>
-        <file>Images/Climate/arrow_right_pressed.png</file>
-        <file>Images/Climate/arrow_up_normal.png</file>
-        <file>Images/Climate/arrow_up_pressed.png</file>
-        <file>Images/Climate/driver_seat_cold.png</file>
-        <file>Images/Climate/driver_seat_off.png</file>
-        <file>Images/Climate/driver_seat_warm.png</file>
-        <file>Images/Climate/passenger_seat_cold.png</file>
-        <file>Images/Climate/passenger_seat_off.png</file>
-        <file>Images/Climate/passenger_seat_warm.png</file>
-        <file>Images/Climate/rear_defog_cold.png</file>
-        <file>Images/Climate/rear_defog_off.png</file>
-        <file>Images/Climate/rear_defog_warm.png</file>
         <file>Images/StatusBar/btn_back_f.png</file>
         <file>Images/StatusBar/btn_back_n.png</file>
         <file>Images/StatusBar/btn_back_p.png</file>
@@ -141,12 +104,66 @@
         <file>Images/StatusBar/btn_edit_f.png</file>
         <file>Images/StatusBar/btn_edit_n.png</file>
         <file>Images/StatusBar/btn_edit_p.png</file>
+        <file>Apps/Map/images/car_icon.png</file>
+        <file>Images/Climate/arrow_down_normal.png</file>
+        <file>Images/Climate/arrow_down_pressed.png</file>
+        <file>Images/Climate/arrow_left_normal.png</file>
+        <file>Images/Climate/arrow_left_pressed.png</file>
+        <file>Images/Climate/arrow_right_normal.png</file>
+        <file>Images/Climate/arrow_right_pressed.png</file>
+        <file>Images/Climate/arrow_up_normal.png</file>
+        <file>Images/Climate/arrow_up_pressed.png</file>
+        <file>Images/Climate/climate_arrow_driver_face_cold.png</file>
+        <file>Images/Climate/climate_arrow_driver_face_off.png</file>
+        <file>Images/Climate/climate_arrow_driver_face_warm.png</file>
+        <file>Images/Climate/climate_arrow_driver_foot_cold.png</file>
+        <file>Images/Climate/climate_arrow_driver_foot_off.png</file>
+        <file>Images/Climate/climate_arrow_driver_foot_warm.png</file>
+        <file>Images/Climate/climate_arrow_passenger_face_cold.png</file>
+        <file>Images/Climate/climate_arrow_passenger_face_off.png</file>
+        <file>Images/Climate/climate_arrow_passenger_face_warm.png</file>
+        <file>Images/Climate/climate_arrow_passenger_foot_off.png</file>
+        <file>Images/Climate/climate_arrow_passenger_foot_warm.png</file>
         <file>Images/Climate/head_defog_cold.png</file>
         <file>Images/Climate/head_defog_off.png</file>
         <file>Images/Climate/head_defog_warm.png</file>
-        <file>Apps/Map/images/car_icon.png</file>
+        <file>Images/Climate/heat_seat_driver_cold.png</file>
+        <file>Images/Climate/heat_seat_driver_warm.png</file>
+        <file>Images/Climate/heat_seat_passenger_cold.png</file>
+        <file>Images/Climate/heat_seat_passenger_warm.png</file>
+        <file>Images/Climate/highlight_widget_focus.png</file>
+        <file>Images/Climate/highlight_widget_pressed.png</file>
+        <file>Images/Climate/rear_defog_cold.png</file>
+        <file>Images/Climate/rear_defog_off.png</file>
+        <file>Images/Climate/rear_defog_warm.png</file>
+        <file>Images/Climate/widget_climate_driver_icon.png</file>
+        <file>Images/Climate/widget_climate_ico_fan.png</file>
+        <file>Images/Climate/widget_climate_line.png</file>
+        <file>Images/Climate/widget_climate_passenger_icon.png</file>
+        <file>Images/Climate/widget_climate_wind_level_0.png</file>
+        <file>Images/Climate/widget_climate_wind_level_1.png</file>
+        <file>Images/Climate/widget_climate_wind_level_10.png</file>
+        <file>Images/Climate/widget_climate_wind_level_2.png</file>
+        <file>Images/Climate/widget_climate_wind_level_3.png</file>
+        <file>Images/Climate/widget_climate_wind_level_4.png</file>
+        <file>Images/Climate/widget_climate_wind_level_5.png</file>
+        <file>Images/Climate/widget_climate_wind_level_6.png</file>
+        <file>Images/Climate/widget_climate_wind_level_7.png</file>
+        <file>Images/Climate/widget_climate_wind_level_8.png</file>
+        <file>Images/Climate/widget_climate_wind_level_9.png</file>
+        <file>Images/Climate/climate_arrow_passenger_foot_cold.png</file>
+        <file>Images/Climate/heat_seat_driver_off.png</file>
+        <file>Images/Climate/heat_seat_passenger_off.png</file>
+        <file>Images/Climate/air_quality_auto.png</file>
         <file>Images/Climate/air_quality_fresh.png</file>
         <file>Images/Climate/air_quality_recirculation.png</file>
-        <file>Images/Climate/air_quality_automatic.png</file>
+        <file>Apps/Phone/images/contacts.png</file>
+        <file>Apps/Phone/images/recents.png</file>
+        <file>Apps/Phone/images/search_icon.png</file>
+        <file>Apps/Phone/images/call_made.png</file>
+        <file>Apps/Phone/images/call_missed.png</file>
+        <file>Apps/Phone/images/call_missed_outgoing.png</file>
+        <file>Apps/Phone/images/call_received.png</file>
+        <file>Apps/Phone/images/call_icon.png</file>
     </qresource>
 </RCC>

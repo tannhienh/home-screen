@@ -29,7 +29,7 @@ Image {
         id: playlistTextButton
         text: qsTr("Playlist")
         color: "White"
-        font.pixelSize: 29
+        font.pixelSize: 40
         font.family: cantarell.name
         anchors.left: playlistButton.right
         anchors.leftMargin: 7
@@ -40,7 +40,7 @@ Image {
     Text {
         id: headerText
         text: qsTr("Media Player")
-        font.pixelSize: 44
+        font.pixelSize: 48
         font.family: cantarell.name
         color: "White"
         anchors.centerIn: parent

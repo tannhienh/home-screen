@@ -58,6 +58,14 @@ ApplicationWindow {
         id: bgImage
         source: "qrc:/Images/Home/home_bg.png"
         anchors.fill: parent
+
+        // Hide virtual Keyboard
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                focus = true
+            }
+        }
     }
 
     FocusScope {
@@ -84,10 +92,6 @@ ApplicationWindow {
             isShowBackButton: mainAreaStackView.depth == 1 ? false : true
 
             KeyNavigation.down: mainAreaStackView
-
-            onFocusChanged: {
-                console.log("statusBar.focus changed: " + statusBar.focus)
-            }
         }
 
         /**

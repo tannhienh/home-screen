@@ -14,6 +14,7 @@ FocusScope {
         color: "transparent"
         anchors.fill: parent
 
+        // Cordinate location default when load map
         property var locationDefault: QtPositioning.coordinate(10.78, 106.703)
 
         Plugin {
@@ -21,6 +22,8 @@ FocusScope {
             name: "mapboxgl"
         }
 
+        // Getting current Position of device
+        // Update interval 1 second
         PositionSource {
             id: positionSource
             active: true

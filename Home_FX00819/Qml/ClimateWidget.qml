@@ -176,51 +176,17 @@ FocusScope {
         // Seat driver icon
         Image {
             id: seatDriver
-            source: "qrc:/Images/Climate/widget_climate_arrow_seat.png"
-            x: 91
+            source: "qrc:/Images/Climate/widget_climate_driver_icon.png"
+            x: 50
             anchors.verticalCenter: parent.verticalCenter
         }
 
         // Seat passenger icon
         Image {
             id: seatPassenger
-            source: "qrc:/Images/Climate/widget_climate_arrow_seat.png"
-            x: 490
+            source: "qrc:/Images/Climate/widget_climate_passenger_icon.png"
+            x: 481
             anchors.verticalCenter: parent.verticalCenter
-        }
-
-        // Arrow on foot for Driver
-        Image {
-            id: footArrowDriver
-
-            property string path: "qrc:/Images/Climate/widget_climate_arrow_foot_"
-            property int currentArrowMode: climateModel.driver_wind_foot
-
-            x: 35
-            y: 40
-
-            source: {
-                if (currentArrowMode == climateMode.off)
-                    return (path + "off.png")
-                else if (currentArrowMode == climateMode.cold)
-                    return (path + "cold.png")
-                else if (currentArrowMode == climateMode.warm)
-                    return (path + "warm.png")
-            }
-
-            // Change arrow mode when choose arrow icon
-            // In order: off, cold, warm
-            MouseArea {
-                anchors.fill: parent
-                onClicked: {
-                    if (parent.currentArrowMode == climateMode.off)
-                        climateModel.setDriverWindFoot(climateMode.cold)
-                    else if (parent.currentArrowMode == climateMode.cold)
-                        climateModel.setDriverWindFoot(climateMode.warm)
-                    else if (parent.currentArrowMode == climateMode.warm)
-                        climateModel.setDriverWindFoot(climateMode.off)
-                }
-            }
         }
 
         // Arrow on face for Driver
@@ -228,12 +194,12 @@ FocusScope {
             id: faceArrowDriver
 
             // Path common of arrow face
-            property string path: "qrc:/Images/Climate/widget_climate_arrow_face_"
+            property string path: "qrc:/Images/Climate/climate_arrow_driver_face_"
 
             // Hold the value mode wind on face of driver
             property int currentArrowMode: climateModel.driver_wind_face
 
-            x: 75
+            x: 89
             y: 25
 
             source: {
@@ -260,15 +226,15 @@ FocusScope {
             }
         }
 
-        // Arrow on foot for Passenger
+        // Arrow on foot for Driver
         Image {
-            id: footArrowPassenger
+            id: footArrowDriver
 
-            property string path: "qrc:/Images/Climate/widget_climate_arrow_foot_"
-            property int currentArrowMode: climateModel.passenger_wind_foot
+            property string path: "qrc:/Images/Climate/climate_arrow_driver_foot_"
+            property int currentArrowMode: climateModel.driver_wind_foot
 
-            x: 433
-            y: 40
+            x: 145
+            y: 45
 
             source: {
                 if (currentArrowMode == climateMode.off)
@@ -285,11 +251,11 @@ FocusScope {
                 anchors.fill: parent
                 onClicked: {
                     if (parent.currentArrowMode == climateMode.off)
-                        climateModel.setPassengerWindFoot(climateMode.cold)
+                        climateModel.setDriverWindFoot(climateMode.cold)
                     else if (parent.currentArrowMode == climateMode.cold)
-                        climateModel.setPassengerWindFoot(climateMode.warm)
+                        climateModel.setDriverWindFoot(climateMode.warm)
                     else if (parent.currentArrowMode == climateMode.warm)
-                        climateModel.setPassengerWindFoot(climateMode.off)
+                        climateModel.setDriverWindFoot(climateMode.off)
                 }
             }
         }
@@ -298,10 +264,10 @@ FocusScope {
         Image {
             id: faceArrowPassenger
 
-            property string path: "qrc:/Images/Climate/widget_climate_arrow_face_"
+            property string path: "qrc:/Images/Climate/climate_arrow_passenger_face_"
             property int currentArrowMode: climateModel.passenger_wind_face
 
-            x: 473
+            x: 468
             y: 25
 
             source: {
@@ -324,6 +290,40 @@ FocusScope {
                         climateModel.setPassengerWindFace(climateMode.warm)
                     else if (parent.currentArrowMode == climateMode.warm)
                         climateModel.setPassengerWindFace(climateMode.off)
+                }
+            }
+        }
+
+        // Arrow on foot for Passenger
+        Image {
+            id: footArrowPassenger
+
+            property string path: "qrc:/Images/Climate/climate_arrow_passenger_foot_"
+            property int currentArrowMode: climateModel.passenger_wind_foot
+
+            x: 426
+            y: 45
+
+            source: {
+                if (currentArrowMode == climateMode.off)
+                    return (path + "off.png")
+                else if (currentArrowMode == climateMode.cold)
+                    return (path + "cold.png")
+                else if (currentArrowMode == climateMode.warm)
+                    return (path + "warm.png")
+            }
+
+            // Change arrow mode when choose arrow icon
+            // In order: off, cold, warm
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    if (parent.currentArrowMode == climateMode.off)
+                        climateModel.setPassengerWindFoot(climateMode.cold)
+                    else if (parent.currentArrowMode == climateMode.cold)
+                        climateModel.setPassengerWindFoot(climateMode.warm)
+                    else if (parent.currentArrowMode == climateMode.warm)
+                        climateModel.setPassengerWindFoot(climateMode.off)
                 }
             }
         }
@@ -726,11 +726,11 @@ FocusScope {
 
                 source: {
                     if (currentHeatedSeat == climateMode.off)
-                        return (heatWindMode.path + "driver_seat_off.png")
+                        return (heatWindMode.path + "heat_seat_driver_off.png")
                     else if (currentHeatedSeat == climateMode.cold)
-                        return (heatWindMode.path + "driver_seat_cold.png")
+                        return (heatWindMode.path + "heat_seat_driver_cold.png")
                     else if (currentHeatedSeat == climateMode.warm)
-                        return (heatWindMode.path + "driver_seat_warm.png")
+                        return (heatWindMode.path + "heat_seat_driver_warm.png")
                 }
 
                 MouseArea {
@@ -807,7 +807,7 @@ FocusScope {
 
                 source: {
                     if (currentAirQuality == airQualityMode.automatic)
-                        return (heatWindMode.path + "air_quality_automatic.png")
+                        return (heatWindMode.path + "air_quality_auto.png")
                     else if (currentAirQuality == airQualityMode.recirculation)
                         return (heatWindMode.path + "air_quality_recirculation.png")
                     else if (currentAirQuality == airQualityMode.fresh)
@@ -867,11 +867,11 @@ FocusScope {
 
                 source: {
                     if (currentHeatedSeat == climateMode.off)
-                        return (heatWindMode.path + "passenger_seat_off.png")
+                        return (heatWindMode.path + "heat_seat_passenger_off.png")
                     else if (currentHeatedSeat == climateMode.cold)
-                        return (heatWindMode.path + "passenger_seat_cold.png")
+                        return (heatWindMode.path + "heat_seat_passenger_cold.png")
                     else if (currentHeatedSeat == climateMode.warm)
-                        return (heatWindMode.path + "passenger_seat_warm.png")
+                        return (heatWindMode.path + "heat_seat_passenger_warm.png")
                 }
 
                 MouseArea {

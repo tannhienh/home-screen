@@ -65,8 +65,8 @@ Drawer {
             Text {
                 id: songTitle
                 text: title == "" ? "Unknown" : title
-                color: "#FFFFFF"    // White
-                font.pixelSize: playlistItem.height * 0.2
+                color: "#FFFFFF"
+                font.pixelSize: 36
                 font.family: cantarell.name
                 opacity: mouseAreaItem.ListView.isCurrentItem ? 1 : 0.5
                 anchors {
@@ -80,8 +80,8 @@ Drawer {
             Text {
                 id: singleName
                 text: singer == "" ? "Unknow" : singer
-                color: "#FFFFFF"    // White
-                font.pixelSize: playlistItem.height * 0.15
+                color: "#FFFFFF"
+                font.pixelSize: 28
                 font.family: cantarell.name
                 opacity: mouseAreaItem.ListView.isCurrentItem ? 1 : 0.5
                 anchors {

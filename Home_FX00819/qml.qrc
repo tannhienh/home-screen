@@ -7,7 +7,6 @@
         <file>Apps/MusicPlayer/qml/MusicPlayer.qml</file>
         <file>Apps/MusicPlayer/qml/PlaylistView.qml</file>
         <file>Apps/MusicPlayer/qml/SwitchButton.qml</file>
-        <file>Apps/Phone/qml/Phone.qml</file>
         <file>Apps/Radio/qml/Radio.qml</file>
         <file>Apps/Settings/qml/Settings.qml</file>
         <file>Apps/Videos/qml/Videos.qml</file>
@@ -25,5 +24,10 @@
         <file>Apps/Map/qml/Map.qml</file>
         <file>Qml/Common/ButtonNormalMode.qml</file>
         <file>Qml/Common/ButtonEditMode.qml</file>
+        <file>Apps/Phone/qml/PhoneContacts.qml</file>
+        <file>Apps/Phone/qml/Phone.qml</file>
+        <file>Apps/Phone/qml/PhoneInputArea.qml</file>
+        <file>Apps/Phone/qml/ListRecents.qml</file>
+        <file>Apps/Phone/qml/ListContacts.qml</file>
     </qresource>
 </RCC>

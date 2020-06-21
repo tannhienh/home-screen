@@ -12,9 +12,9 @@ Item {
         id: guideBg
         anchors.fill: parent
         gradient: Gradient {
-            GradientStop { position: 0; color: "#2E2E2E" }
-            GradientStop { position: 0.2; color: "#4A4A4A" }
-            GradientStop { position: 1; color: "#2B2E30" }
+            GradientStop { position: 0; color: "#502E2E2E" }
+            GradientStop { position: 0.2; color: "#504A4A4A" }
+            GradientStop { position: 1; color: "#502B2E30" }
         }
 
         // Hide virtual Keyboard
@@ -66,7 +66,7 @@ Item {
         TextField {
             id: startAddress
             placeholderText: qsTr("Choose starting location")
-            font.pixelSize: 20
+            font.pixelSize: 30
             color: "#515356"
             height: 50
             selectByMouse: true
@@ -104,7 +104,7 @@ Item {
         TextField {
             id: destinationAddress
             placeholderText: qsTr("Choose destination")
-            font.pixelSize: 20
+            font.pixelSize: 30
             color: "#515356"
             height: 50
             selectByMouse: true
@@ -261,7 +261,7 @@ Item {
             id: titleText
             text: qsTr("Explore near here")
             color: "#FFFFFF"
-            font.pixelSize: 20
+            font.pixelSize: 24
             font.bold: true
             anchors {
                 top: parent.top
@@ -321,9 +321,7 @@ Item {
                 left: nearHereItem.left
                 right: nearHereItem.right
                 bottom: nearHereItem.bottom
-                topMargin: 10
-                leftMargin: 20
-                rightMargin: 20
+                topMargin: 5
                 bottomMargin: 20
             }
 
@@ -334,23 +332,23 @@ Item {
                 height: swipeExplore.height
 
                 Row {
-                    spacing: 20
-                    anchors.fill: parent
+                    spacing: (nearHereItem.width - 100 * 3) / 4
+                    anchors.horizontalCenter: parent.horizontalCenter
 
                     ExploreItem {
-                        color: "#ABB2B9"
+                        colorItem: "#ABB2B9"
                         src: "qrc:/Apps/Map/images/holtel.png"
                         title: "Holtels"
                     }
 
                     ExploreItem {
-                        color: "#A3E4D7"
+                        colorItem: "#A3E4D7"
                         src: "qrc:/Apps/Map/images/supermarket.png"
                         title: "Supermarkets"
                     }
 
                     ExploreItem {
-                        color: "#D2B4DE"
+                        colorItem: "#D2B4DE"
                         src: "qrc:/Apps/Map/images/hospital.png"
                         title: "Hopitals"
                     }
@@ -363,24 +361,30 @@ Item {
                 width: swipeExplore.width
                 height: swipeExplore.height
 
+//                Rectangle {
+//                    anchors.fill: parent
+//                    color: "LightBlue"
+//                    Component.onCompleted: console.log("Height: " + height)
+//                }
+
                 Row {
-                    spacing: 20
-                    anchors.fill: parent
+                    spacing: (nearHereItem.width - 100 * 3) / 4
+                    anchors.horizontalCenter: parent.horizontalCenter
 
                     ExploreItem {
-                        color: "#FAD7A0"
+                        colorItem: "#FAD7A0"
                         src: "qrc:/Apps/Map/images/restaurant.png"
                         title: "Restaurants"
                     }
 
                     ExploreItem {
-                        color: "#AED6F1"
+                        colorItem: "#AED6F1"
                         src: "qrc:/Apps/Map/images/parking.png"
                         title: "Parking Lots"
                     }
 
                     ExploreItem {
-                        color: "#ABEBC6"
+                        colorItem: "#ABEBC6"
                         src: "qrc:/Apps/Map/images/gas_station.png"
                         title: "Gas Station"
                     }
@@ -394,23 +398,23 @@ Item {
                 height: swipeExplore.height
 
                 Row {
-                    spacing: 20
-                    anchors.fill: parent
+                    spacing: (nearHereItem.width - 100 * 3) / 4
+                    anchors.horizontalCenter: parent.horizontalCenter
 
                     ExploreItem {
-                        color: "#EDBB99"
+                        colorItem: "#EDBB99"
                         src: "qrc:/Apps/Map/images/coffee.png"
                         title: "Coffee"
                     }
 
                     ExploreItem {
-                        color: "#F5B7B1"
+                        colorItem: "#F5B7B1"
                         src: "qrc:/Apps/Map/images/bar.png"
                         title: "Bars"
                     }
 
                     ExploreItem {
-                        color: "#F0B27A"
+                        colorItem: "#F0B27A"
                         src: "qrc:/Apps/Map/images/bank.png"
                         title: "Banks"
                     }
@@ -460,8 +464,17 @@ Item {
             id: indicatorExplore
             count: swipeExplore.count
             currentIndex: swipeExplore.currentIndex
-            anchors.top: swipeExplore.bottom
+            anchors.bottom: nearHereItem.bottom
             anchors.horizontalCenter: swipeExplore.horizontalCenter
+
+            delegate: Rectangle {
+                implicitWidth: 10
+                implicitHeight: 10
+                radius: width
+                color: "#b7b7b7"
+                opacity: index === swipeExplore.currentIndex ? 1.0 : 0.5
+
+            }
         }
     }
 
@@ -477,7 +490,7 @@ Item {
         id: textDefault
         text: qsTr("Where will you go today?")
         color: "#8A8A8A"
-        font.pixelSize: 20
+        font.pixelSize: 30
         anchors.centerIn: guideItem
     }
 }

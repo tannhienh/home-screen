@@ -38,7 +38,7 @@ Item {
         Text {
             id: songTitle
             color: "#FFFFFF"
-            font.pixelSize: 33
+            font.pixelSize: 40
             font.family: cantarell.name
 
             text: Player.getSongTitle()
@@ -56,7 +56,7 @@ Item {
             id: singleName
 
             color: "#D3D3D3"
-            font.pixelSize: 28
+            font.pixelSize: 30
             font.family: cantarell.name
 
             text: Player.getSingleName()

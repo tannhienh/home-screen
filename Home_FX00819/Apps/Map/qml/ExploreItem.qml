@@ -1,39 +1,47 @@
 import QtQuick 2.13
 
-Rectangle {
-    id: rectItem
+Item {
+    id: itemRoot
 
     property string src: ""
     property string title: ""
+    property string colorItem: ""
 
-    width: (parent.width - (20 * 2)) / 3
-    height: parent.height
-    radius: 4
+    width: 100
+    height: 133
 
-    Image {
-        source: src
-        anchors.centerIn: parent
+    Rectangle {
+        id: rectItem
+
+        width: 100
+        height: 100
+        color: parent.colorItem
+        radius: width
+
+        Image {
+            source: itemRoot.src
+            anchors.centerIn: parent
+        }
+
+        MouseArea {
+            anchors.fill: parent
+
+            onPressed: {
+                parent.opacity = 0.6
+            }
+
+            onReleased: parent.opacity = 1.0
+            onCanceled: parent.opacity = 1.0
+        }
     }
 
     Text {
-        text: title
-        color: "#515356"
-        font.pixelSize: 20
+        text: itemRoot.title
+        color: "#FFF"
+        font.pixelSize: 24
         anchors {
-            bottom: parent.bottom
-            bottomMargin: 5
-            horizontalCenter: parent.horizontalCenter
+            top: rectItem.bottom
+            horizontalCenter: rectItem.horizontalCenter
         }
-    }
-
-    MouseArea {
-        anchors.fill: parent
-
-        onPressed: {
-           parent.opacity = 0.6
-        }
-
-        onReleased: parent.opacity = 1.0
-        onCanceled: parent.opacity = 1.0
     }
 }

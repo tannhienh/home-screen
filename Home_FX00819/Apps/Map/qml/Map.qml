@@ -529,7 +529,5 @@ Item {
                 easing.type: Easing.InOutQuad
             }
         }
-
-        Component.onCompleted: console.log(keyboardMap.keyboard.children)
     }
 }
