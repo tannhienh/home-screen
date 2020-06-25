@@ -111,6 +111,7 @@ Drawer {
             // current index
             onClicked: {
                 if (mediaPlaylist.currentIndex != index) {
+
                     player.playlist.currentIndex = index
                     changeTitle.restart()
                     showSpeaker.restart()

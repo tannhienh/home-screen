@@ -138,7 +138,9 @@ Drawer {
         Component {
             id: settingsMenuDelegate
 
-            Item {
+            MouseArea {
+                id: mouseAreaItem
+
                 width: parent.width
                 height: 112
 
@@ -170,13 +172,82 @@ Drawer {
                 Rectangle {
                     id: lineBottomItem
                     width: parent.width
-                    height: 2
+                    height: 3
                     anchors.bottom: parent.bottom
                     gradient: Gradient {
                         orientation: Gradient.Horizontal
-                        GradientStop { position: 0.0; color: "#00474747" }
-                        GradientStop { position: 0.5; color: "#a4a4a4" }
-                        GradientStop { position: 1.0; color: "#00474747" }
+                        GradientStop {
+                            position: 0.0;
+                            color: "#00474747"
+                        }
+                        GradientStop {
+                            position: 0.5;
+                            color: "#a4a4a4"
+                        }
+                        GradientStop {
+                            position: 1.0;
+                            color: "#00474747"
+                        }
+                    }
+                }
+
+                // change current index in playlist of player when playlist change
+                // current index
+                onClicked: {
+                    if (listViewSettingsMenu.currentIndex != index) {
+                        listViewSettingsMenu.currentIndex = index
+                    }
+                }
+            }
+        }
+
+        Component {
+            id: highlightItem
+
+            Item {
+                z: 1000
+                height: parent.height
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                }
+
+                Rectangle {
+                    id: lineHighlightTop
+                    width: parent.width
+                    height: 3
+                    anchors.top: parent.top
+                    gradient: Gradient {
+                        orientation: Gradient.Horizontal
+                        GradientStop { position: 0.0; color: "#007deef8" }
+                        GradientStop { position: 0.5; color: "#7deef8" }
+                        GradientStop { position: 1.0; color: "#007deef8" }
+                    }
+                }
+
+                Rectangle {
+                    width: parent.width
+                    anchors.top: lineHighlightTop.bottom
+                    anchors.bottom: lineHighlightBottom.top
+                    gradient: Gradient {
+                        orientation: Gradient.Vertical
+                        GradientStop { position: 0.0; color: "#5000eaff" }
+                        GradientStop { position: 0.3; color: "#007deef8" }
+                        GradientStop { position: 0.85; color: "#007deef8" }
+                        GradientStop { position: 1.0; color: "#5000eaff" }
+                    }
+                }
+
+                Rectangle {
+                    id: lineHighlightBottom
+                    width: parent.width
+                    height: 3
+                    anchors.bottom: parent.bottom
+                    gradient: Gradient {
+                        orientation: Gradient.Horizontal
+                        GradientStop { position: 0.0; color: "#007deef8" }
+                        GradientStop { position: 0.5; color: "#7deef8" }
+                        GradientStop { position: 1.0; color: "#007deef8" }
                     }
                 }
             }
@@ -194,7 +265,9 @@ Drawer {
             delegate: settingsMenuDelegate
             clip: true
             snapMode: ListView.SnapToItem
-
+//            highlightMoveDuration: 900
+            highlightMoveVelocity: 1000
+            highlight: highlightItem
             // Scrollbar for list view settings menu
             ScrollBar.vertical: ScrollBar {
                 parent: listViewSettingsMenu.parent
