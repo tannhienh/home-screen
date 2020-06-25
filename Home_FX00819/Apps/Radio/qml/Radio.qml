@@ -1,33 +1,39 @@
 import QtQuick 2.13
+import QtQuick.Controls 2.13
 
 Item {
-    id: settingsId
+    id: radioApp
 
-   Rectangle {
-       id: menuSettings
-       width: parent.width / 3
-       opacity: 0.8
-       anchors {
-           top: parent.top
-           left: parent.left
-           bottom: parent.bottom
-       }
-
-       gradient: Gradient {
-           orientation: Gradient.Horizontal
-           GradientStop { position: 0; color: "#2B2E30" }
-           GradientStop { position: 1; color: "#4A4A4A" }
-       }
+    // Font Ubuntu
+    FontLoader {
+        id: ubuntu
+        source: "qrc:/Fonts/Ubuntu-Regular.ttf"
     }
 
-   Rectangle {
-       id: line
-       width: 3
-       color: "#5D6164"
-       anchors {
-           top: parent.top
-           left: menuSettings.right
-           bottom: parent.bottom
-       }
-   }
+    // 4 = width vertical line on right side phone contacts area
+    WishlistChanel {
+        id: wishlistChanel
+        width: (parent.width / 3) + 4
+        topMargin: 85
+        visible: true
+        height: parent.height - 85
+    }
+
+    // Radio player area
+    RadioPlayer {
+        width: parent.width - wishlistChanel.width - 80
+        anchors {
+            top: parent.top
+            right: parent.right
+            bottom: parent.bottom
+            margins: 40
+        }
+    }
+
+    Connections {
+        target: statusBar
+        onBackButtonClicked: {
+            wishlistChanel.close()
+        }
+    }
 }

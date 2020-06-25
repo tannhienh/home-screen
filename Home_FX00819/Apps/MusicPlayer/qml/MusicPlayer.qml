@@ -3,7 +3,7 @@ import QtQuick.Controls 2.13
 import Qt.labs.settings 1.1
 
 Item {
-    id: playerItem
+    id: musicPlayerApp
 
     implicitHeight: 995
 
@@ -60,7 +60,7 @@ Item {
         id: playlistView
         topMargin: 85 + header.height
         width: 672
-        height: playerItem.height - header.height
+        height: musicPlayerApp.height - header.height
     }
 
     // Main Media

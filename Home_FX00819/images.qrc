@@ -165,5 +165,39 @@
         <file>Apps/Phone/images/call_missed_outgoing.png</file>
         <file>Apps/Phone/images/call_received.png</file>
         <file>Apps/Phone/images/call_icon.png</file>
+        <file>Apps/Radio/images/arrow_left.png</file>
+        <file>Apps/Radio/images/arrow_right.png</file>
+        <file>Apps/Radio/images/delete.png</file>
+        <file>Apps/Radio/images/favorite.png</file>
+        <file>Apps/Radio/images/favorited.png</file>
+        <file>Apps/Radio/images/pause_circle.png</file>
+        <file>Apps/Radio/images/play_circle.png</file>
+        <file>Apps/Radio/images/radio.png</file>
+        <file>Apps/Radio/images/scan_fm.png</file>
+        <file>Apps/Radio/images/wishlist.png</file>
+        <file>Apps/Radio/images/arrow_current_chanel.png</file>
+        <file>Apps/Videos/images/center_point.png</file>
+        <file>Apps/Videos/images/fullscreen_exit.png</file>
+        <file>Apps/Videos/images/next.png</file>
+        <file>Apps/Videos/images/next_hold.png</file>
+        <file>Apps/Videos/images/pause.png</file>
+        <file>Apps/Videos/images/pause_hold.png</file>
+        <file>Apps/Videos/images/play.png</file>
+        <file>Apps/Videos/images/play_hold.png</file>
+        <file>Apps/Videos/images/point.png</file>
+        <file>Apps/Videos/images/prev.png</file>
+        <file>Apps/Videos/images/prev_hold.png</file>
+        <file>Apps/Videos/images/video_icon.png</file>
+        <file>Apps/Videos/images/search_icon.png</file>
+        <file>Apps/Videos/images/full_screen.png</file>
+        <file>Apps/Settings/images/display.png</file>
+        <file>Apps/Settings/images/driver_assistance.png</file>
+        <file>Apps/Settings/images/driving_mode.png</file>
+        <file>Apps/Settings/images/general_settings.png</file>
+        <file>Apps/Settings/images/settings.png</file>
+        <file>Apps/Settings/images/lighting.png</file>
+        <file>Apps/Settings/images/key_button_assignment.png</file>
+        <file>Apps/Settings/images/vehicle_status.png</file>
+        <file>Apps/Settings/images/door_vehicle_access.png</file>
     </qresource>
 </RCC>

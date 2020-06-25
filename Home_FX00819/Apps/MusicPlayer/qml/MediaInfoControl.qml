@@ -235,6 +235,7 @@ Item {
             }
         }
 
+        // Progress bar
         Slider{
             id: progressBar
             from: 0.0

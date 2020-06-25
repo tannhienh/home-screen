@@ -1,7 +1,6 @@
 import QtQuick 2.13
 import QtQuick.Controls 2.13
 import QtGraphicalEffects 1.13
-import QtQuick.VirtualKeyboard 2.13
 
 // Guide Area
 Item {
@@ -84,8 +83,8 @@ Item {
             background: Rectangle {
                 color: "#FFFFFF"
                 radius: 4
-                border.width: 2
-                border.color: startAddress.activeFocus ? "#5DADE2" : "#6065EE"
+                border.width: startAddress.activeFocus ? 3 : 0
+                border.color: startAddress.activeFocus ? "#5DADE2" : "#FFFFFF"
             }
         }
 
@@ -122,8 +121,8 @@ Item {
             background: Rectangle {
                 color: "#FFFFFF"
                 radius: 4
-                border.width: 2
-                border.color: destinationAddress.activeFocus ? "#5DADE2" : "#6065EE"
+                border.width: destinationAddress.activeFocus ? 3 : 0
+                border.color: destinationAddress.activeFocus ? "#5DADE2" : "#FFFFFF"
             }
         }
 
@@ -234,8 +233,9 @@ Item {
 
     // Locations near here
     Item {
-        id: nearHereItem
-        height: 200
+        id: locationsNearHereItem
+        state: mapSettings.showExploreLocations ? "showExploreLocations"
+                                            : "hideExploreLocations"
         anchors {
             left: parent.left
             leftMargin: 10
@@ -246,8 +246,8 @@ Item {
         }
 
         Rectangle {
-            id: nearHereBg
-            anchors.fill: nearHereItem
+            id: locationsNearHereBg
+            anchors.fill: locationsNearHereItem
             border.width: 1
             border.color: "#797979"
             radius: 5
@@ -258,8 +258,8 @@ Item {
         }
 
         Text {
-            id: titleText
-            text: qsTr("Explore near here")
+            id: locationsNearHereTitle
+            text: qsTr("Explore locations near here")
             color: "#FFFFFF"
             font.pixelSize: 24
             font.bold: true
@@ -271,9 +271,10 @@ Item {
             }
         }
 
+        // Arrow for show/hide Explore locations near here item
         Image {
-            id: arrowImage
-            property bool status: true
+            id: arrowIcon
+            property bool status: mapSettings.showExploreLocations
             property string down_arrow: "qrc:/Apps/Map/images/down_arrow.png"
             property string up_arrow: "qrc:/Apps/Map/images/up_arrow.png"
 
@@ -286,53 +287,45 @@ Item {
             }
 
             MouseArea {
-                anchors.fill: arrowImage
+                anchors.fill: arrowIcon
                 onPressed: parent.opacity = 0.6
                 onReleased: parent.opacity = 1.0
                 onClicked: {
-                    if (arrowImage.status) {
-                        arrowImage.status = false
-
-                        // Hide explore
-                        nearHereHide.restart()
-                        swipeExploreHide.targets = [swipeExplore, indicatorExplore]
-                        swipeExploreHide.restart()
+                    if (arrowIcon.status) {
+                        mapSettings.showExploreLocations = false
+                        arrowIcon.status = false
                     }
                     else {
-                        arrowImage.status = true
-
-                        // Show explore
-                        nearHereShow.restart()
-                        swipeExploreShow.targets = [swipeExplore, indicatorExplore]
-                        swipeExploreShow.restart()
+                        mapSettings.showExploreLocations = true
+                        arrowIcon.status = true
                     }
                 }
             }
         }
 
-        // Swipe view explore near here
+        // Swipe view explore location near here
         SwipeView {
             id: swipeExplore
             currentIndex: 1
             clip: true
             spacing: 20
             anchors {
-                top: titleText.bottom
-                left: nearHereItem.left
-                right: nearHereItem.right
-                bottom: nearHereItem.bottom
+                top: locationsNearHereTitle.bottom
+                left: locationsNearHereItem.left
+                right: locationsNearHereItem.right
+                bottom: locationsNearHereItem.bottom
                 topMargin: 5
                 bottomMargin: 20
             }
 
-            // First page of swipe explore
+            // First page of swipe explore location near here
             Item {
                 id: page0
                 width: swipeExplore.width
                 height: swipeExplore.height
 
                 Row {
-                    spacing: (nearHereItem.width - 100 * 3) / 4
+                    spacing: (locationsNearHereItem.width - 100 * 3) / 4
                     anchors.horizontalCenter: parent.horizontalCenter
 
                     ExploreItem {
@@ -355,20 +348,14 @@ Item {
                 }
             }
 
-            // Second page of swipe explore
+            // Second page of swipe explore location near here
             Item {
                 id: page1
                 width: swipeExplore.width
                 height: swipeExplore.height
 
-//                Rectangle {
-//                    anchors.fill: parent
-//                    color: "LightBlue"
-//                    Component.onCompleted: console.log("Height: " + height)
-//                }
-
                 Row {
-                    spacing: (nearHereItem.width - 100 * 3) / 4
+                    spacing: (locationsNearHereItem.width - 100 * 3) / 4
                     anchors.horizontalCenter: parent.horizontalCenter
 
                     ExploreItem {
@@ -391,14 +378,14 @@ Item {
                 }
             }
 
-            // Third page of swipe explore
+            // Third page of swipe explore location near here
             Item {
                 id: page2
                 width: swipeExplore.width
                 height: swipeExplore.height
 
                 Row {
-                    spacing: (nearHereItem.width - 100 * 3) / 4
+                    spacing: (locationsNearHereItem.width - 100 * 3) / 4
                     anchors.horizontalCenter: parent.horizontalCenter
 
                     ExploreItem {
@@ -420,51 +407,14 @@ Item {
                     }
                 }
             }
-
-            PropertyAnimation {
-                id: nearHereHide
-                target: nearHereItem
-                property: "height"
-                from: nearHereItem.height
-                to: titleText.height + 20
-                duration: 500
-                easing.type: Easing.InOutQuad
-            }
-
-            PropertyAnimation {
-                id: nearHereShow
-                target: nearHereItem
-                property: "height"
-                from: titleText.height + 20
-                to: guideItem.height * 0.2
-                duration: 500
-                easing.type: Easing.InOutQuad
-            }
-
-            PropertyAnimation {
-                id: swipeExploreHide
-                property: "opacity"
-                from: 1
-                to: 0
-                duration: 500
-                easing.type: Easing.InOutQuad
-            }
-
-            PropertyAnimation {
-                id: swipeExploreShow
-                property: "opacity"
-                from: 0
-                to: 1
-                duration: 500
-                easing.type: Easing.InOutQuad
-            }
         }
 
+        // Page indicator for swipe view explore near here
         PageIndicator {
             id: indicatorExplore
             count: swipeExplore.count
             currentIndex: swipeExplore.currentIndex
-            anchors.bottom: nearHereItem.bottom
+            anchors.bottom: locationsNearHereItem.bottom
             anchors.horizontalCenter: swipeExplore.horizontalCenter
 
             delegate: Rectangle {
@@ -476,11 +426,65 @@ Item {
 
             }
         }
+
+        states: [
+            State {
+                name: "hideExploreLocations"
+                PropertyChanges {
+                    target: locationsNearHereItem
+                    height: locationsNearHereTitle.height + 20
+                }
+                PropertyChanges {
+                    target: swipeExplore
+                    opacity: 0
+                }
+                PropertyChanges {
+                    target: indicatorExplore
+                    opacity: 0
+                }
+            },
+
+            State {
+                name: "showExploreLocations"
+                PropertyChanges {
+                    target: locationsNearHereItem
+                    height: guideItem.height * 0.2
+                }
+                PropertyChanges {
+                    target: swipeExplore
+                    opacity: 1
+                }
+                PropertyChanges {
+                    target: indicatorExplore
+                    opacity: 1
+                }
+            }
+        ]
+
+        transitions: Transition {
+            from: "hideExploreLocations"
+            to: "showExploreLocations"
+            reversible: true
+
+            PropertyAnimation {
+                target: locationsNearHereItem
+                property: "height"
+                duration: 400
+                easing.type: Easing.InOutQuad
+            }
+
+            PropertyAnimation {
+                targets: [swipeExplore, indicatorExplore]
+                property: "opacity"
+                duration: 400
+                easing.type: Easing.InOutQuad
+            }
+        }
     }
 
     DropShadow {
-        anchors.fill: nearHereItem
-        source: nearHereItem
+        anchors.fill: locationsNearHereItem
+        source: locationsNearHereItem
         color: "#aa000000"
         radius: 30
         samples: 61

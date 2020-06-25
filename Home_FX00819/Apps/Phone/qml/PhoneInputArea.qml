@@ -6,11 +6,6 @@ import QtQuick.VirtualKeyboard 2.13
 
 Item {
 
-    //        Item {
-    //            id: keyboardArea
-    //            anchors.fill: parent
-    //        }
-
     Rectangle {
         id: keyboardArea
         opacity: 0.5
@@ -33,12 +28,13 @@ Item {
     TextField {
         id: phoneNumberInput
         width: 400
-        height: 70
+        height: 80
         color: "#2B2C2E"
         selectionColor: Qt.rgba(0.0, 0.0, 0.0, 0.15)
         selectedTextColor: color
         selectByMouse: true
         font.pixelSize: 40
+        font.family: ubuntu.name
         placeholderText: "Enter phone number"
         horizontalAlignment: Text.AlignHCenter
         focus: true
@@ -46,7 +42,7 @@ Item {
 
         anchors {
             top: parent.top
-            topMargin: parent.height / 10
+            topMargin: 60 // parent.height / 10
             horizontalCenter: parent.horizontalCenter
         }
         validator: RegExpValidator { regExp: /^[0-9\+\-\#\*\ ]{6,}$/ }
@@ -70,6 +66,8 @@ Item {
 
             // horizontal bar at the top of the keyboard
             keyboard.style.selectionListBackground = null
+
+//            keyboard.style.keyboardDesignWidth = 1000
         }
     }
 

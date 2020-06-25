@@ -1,6 +1,7 @@
 import QtQuick 2.13
 import QtQuick.Controls 2.13
 import Qt.labs.settings 1.1
+import QtQuick.VirtualKeyboard 2.13
 
 ApplicationWindow {
     id: root
@@ -9,11 +10,7 @@ ApplicationWindow {
     visible: true
     visibility: "FullScreen"
 
-    // Display demension for debug
-//            width: 1920
-//            height: 779
-
-    title: qsTr("Home Screen")
+    title: "Home Screen"
 
     property bool shuffleGlobal: false
     property int loopGlobal: 0
@@ -115,10 +112,6 @@ ApplicationWindow {
                 bottom: parent.bottom
             }
 
-            onFocusChanged: {
-                console.log("mainAreaStackView.focus changed: " + mainAreaStackView.focus)
-            }
-
             KeyNavigation.up: statusBar
 
             onCurrentItemChanged: {
@@ -162,6 +155,34 @@ ApplicationWindow {
                     to: 0
                     duration: 500
                     easing.type: Easing.OutQuad
+                }
+            }
+        }
+
+        // Virtual Keyboard
+        InputPanel {
+            id: keyboardMap
+            y: parent.height
+            anchors.left: parent.left
+            anchors.right: parent.right
+
+            states: State {
+                name: "ShowKeyboard"
+                when: Qt.inputMethod.visible
+                PropertyChanges {
+                    target: keyboardMap
+                    y: parent.height - keyboardMap.height
+                }
+            }
+
+            transitions: Transition {
+                from: ""
+                to: "ShowKeyboard"
+                reversible: true
+                NumberAnimation {
+                    property: "y"
+                    duration: 400
+                    easing.type: Easing.InOutQuad
                 }
             }
         }

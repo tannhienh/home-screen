@@ -2,11 +2,9 @@ import QtQuick 2.13
 import QtQuick.Layouts 1.13
 import QtQuick.Controls 2.13
 import QtGraphicalEffects 1.13
-import QtQuick.VirtualKeyboard 2.13
-
 
 Drawer {
-    id: phoneContacts
+    id: phoneDrawer
     interactive: false
     modal: false
 
@@ -14,13 +12,7 @@ Drawer {
     enter: Transition { SmoothedAnimation { velocity: 2 } }
     exit: Transition { SmoothedAnimation { velocity: 2 } }
 
-    // Font Ubuntu
-    FontLoader {
-        id: ubuntu
-        source: "qrc:/Fonts/Ubuntu-Regular.ttf"
-    }
-
-    // background
+    // background phone contacts area
     background: Rectangle {
         width: parent.width - 4
         gradient: Gradient {
@@ -38,17 +30,20 @@ Drawer {
         }
     }
 
+    // Phone contacts container
     Item {
         id: drawerItem
         width: parent.width - 4
         height: parent.height
 
+        // Tab bar contain Recents and Contacts button
         TabBar {
             id: phoneTab
             width: parent.width
             height: 117
             spacing: 0
 
+            // Recents tab button
             TabButton {
                 id: recentsTab
                 height: 117
@@ -56,6 +51,8 @@ Drawer {
 
                 contentItem:  Item {
                     opacity: phoneTab.currentIndex == 0 ? 1 : 0.5
+
+                    // Recents icon
                     Item {
                         id: recentsIcon
                         width: 100
@@ -67,6 +64,7 @@ Drawer {
                         }
                     }
 
+                    // Recents label
                     Text {
                         text: "Recents"
                         color: "#FFFFFF"
@@ -80,6 +78,8 @@ Drawer {
                     }
                 }
 
+                // Background for button
+                // Highlight when it is current tab
                 background: Rectangle {
                     gradient: Gradient {
                         orientation: Gradient.Vertical
@@ -89,6 +89,7 @@ Drawer {
                 }
             }
 
+            // Contacts tab button
             TabButton {
                 id: contactsTab
                 height: 117
@@ -96,6 +97,8 @@ Drawer {
 
                 contentItem:  Item {
                     opacity: phoneTab.currentIndex == 1 ? 1 : 0.5
+
+                    // Contacts icon
                     Item {
                         id: contactsIcon
                         width: 100
@@ -107,6 +110,7 @@ Drawer {
                         }
                     }
 
+                    // Contacts label
                     Text {
                         text: "Contacts"
                         color: "#FFFFFF"
@@ -120,6 +124,8 @@ Drawer {
                     }
                 }
 
+                // Background for button
+                // Highlight when it is current tab
                 background: Rectangle {
                     gradient: Gradient {
                         orientation: Gradient.Vertical
@@ -130,6 +136,7 @@ Drawer {
             }
         }
 
+        // Horizontal line at the bottom Tab Buttons
         Rectangle {
             id: lineBottomTab
             width: parent.width
@@ -138,12 +145,14 @@ Drawer {
             anchors.top: phoneTab.bottom
         }
 
+        // Search contacts item
         Item {
             id: searchItem
             width: parent.width
             height: 90
             anchors.top: lineBottomTab.bottom
 
+            // Search icon
             Item {
                 id: searchIcon
                 width: 100
@@ -153,6 +162,7 @@ Drawer {
                     anchors.centerIn: parent
                 }
 
+                // Vertical line seperate search icon and search input field
                 Rectangle {
                     width: 3
                     height: 48
@@ -164,6 +174,7 @@ Drawer {
                 }
             }
 
+            // Search input field
             TextField {
                 id: searchField
                 height: parent.height
@@ -171,6 +182,9 @@ Drawer {
                 placeholderText: qsTr("Search...")
                 font.pixelSize: 36
                 font.family: ubuntu.name
+                selectByMouse: true
+                selectedTextColor: color
+                selectionColor: "#503498DB"
                 background: Rectangle {
                     opacity: 0
                 }
@@ -183,6 +197,7 @@ Drawer {
                 }
             }
 
+            // Horizontal line at the bottom search item
             Rectangle {
                 id: lineBottomSearch
                 width: parent.width
@@ -197,6 +212,7 @@ Drawer {
             }
         }
 
+        // List recents and list contacts area
         StackLayout {
             id: tabContents
             width: parent.width
@@ -215,6 +231,7 @@ Drawer {
             }
         }
 
+        // Drop shadow for horizontal line bottom Tab Buttons
         DropShadow {
             anchors.fill: lineBottomTab
             source: lineBottomTab
@@ -225,6 +242,7 @@ Drawer {
         }
     }
 
+    // Line right side phone contacts area
     Rectangle {
         id: line
         width: 4

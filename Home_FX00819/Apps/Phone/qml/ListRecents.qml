@@ -2,10 +2,38 @@ import QtQuick 2.13
 import QtQuick.Controls 2.13
 
 Item {
-    id: listContacts
+    id: listRecents
 
     ListModel {
-        id: listContactsModel
+        id: listRecentsModel
+
+        ListElement {
+            ContactName: "Daniel Nguyen"
+            ContactNumber: "+84345657328"
+            CallStatus: "Call Received"
+            Time: "09:20 May 30"
+        }
+
+        ListElement {
+            ContactName: "Paul Dao"
+            ContactNumber: "+84345657324"
+            CallStatus: "Call Made"
+            Time: "20:30 Jun 20"
+        }
+
+        ListElement {
+            ContactName: "Jonh Wick"
+            ContactNumber: "+84345657323"
+            CallStatus: "Call Missed"
+            Time: "08:45 Jun 06"
+        }
+
+        ListElement {
+            ContactName: "Michael Tran"
+            ContactNumber: "+84345657329"
+            CallStatus: "Call Missed Outgoing"
+            Time: "23:05 Mar 02"
+        }
 
         ListElement {
             ContactName: "Daniel Nguyen"
@@ -37,7 +65,7 @@ Item {
     }
 
     Component {
-        id: listContactsDelegate
+        id: listRecentsDelegate
 
         Item {
             width: parent.width
@@ -63,9 +91,8 @@ Item {
                 property var srcIcon: "qrc:/Apps/Phone/images/"
 
                 anchors {
-                    top: contactName.bottom
-                    topMargin: 20
                     left: contactName.left
+                    verticalCenter: contactNumber.verticalCenter
                 }
 
                 source: if (CallStatus === "Call Received")
@@ -85,9 +112,10 @@ Item {
                 font.pixelSize: 30
                 font.family: ubuntu.name
                 anchors {
+                    top: contactName.bottom
+                    topMargin: 16
                     left: callStatusIcon.right
                     leftMargin: 20
-                    verticalCenter: callStatusIcon.verticalCenter
                 }
             }
 
@@ -100,7 +128,7 @@ Item {
                 anchors {
                     left: parent.left
                     leftMargin: parent.width / 2
-                    verticalCenter: callStatusIcon.verticalCenter
+                    verticalCenter: contactNumber.verticalCenter
                 }
             }
 
@@ -130,11 +158,24 @@ Item {
     }
 
     ListView {
-        id: listViewContacts
-        model: listContactsModel
-        delegate: listContactsDelegate
+        id: listViewRecents
         anchors.fill: parent
+        model: listRecentsModel
+        delegate: listRecentsDelegate
         clip: true
         snapMode: ListView.SnapToItem
+
+        // Scrollbar for list recents
+        ScrollBar.vertical: ScrollBar {
+            parent: listViewRecents.parent
+            width: 10
+            snapMode: ScrollBar.SnapOnRelease
+            anchors {
+                top: listViewRecents.top
+                left: listViewRecents.right
+                leftMargin: 4
+                bottom: listViewRecents.bottom
+            }
+        }
     }
 }
