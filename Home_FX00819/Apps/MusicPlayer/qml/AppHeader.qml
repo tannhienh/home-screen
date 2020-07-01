@@ -28,7 +28,7 @@ Image {
     Text {
         id: playlistTextButton
         text: qsTr("Playlist")
-        color: "White"
+        color: "#FFFFFF"
         font.pixelSize: 40
         font.family: cantarell.name
         anchors.left: playlistButton.right
@@ -42,7 +42,7 @@ Image {
         text: qsTr("Media Player")
         font.pixelSize: 48
         font.family: cantarell.name
-        color: "White"
+        color: "#FFFFFF"
         anchors.centerIn: parent
     }
 }

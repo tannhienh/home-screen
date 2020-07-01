@@ -4,6 +4,12 @@ import QtQuick.Controls 2.13
 Item {
     id: radioApp
 
+    // Font Cantarell
+    FontLoader {
+        id: cantarell
+        source: "qrc:/Fonts/Cantarell-Regular.ttf"
+    }
+
     // Font Ubuntu
     FontLoader {
         id: ubuntu

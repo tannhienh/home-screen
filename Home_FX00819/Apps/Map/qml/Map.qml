@@ -24,6 +24,12 @@ Item {
         property bool showExploreLocations: true
     }
 
+    // Font Cantarell
+    FontLoader {
+        id: cantarell
+        source: "qrc:/Fonts/Cantarell-Regular.ttf"
+    }
+
     // Area display map view
     MapView {
         id: mapView

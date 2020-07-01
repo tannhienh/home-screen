@@ -9,57 +9,57 @@ Item {
 
         ListElement {
             ContactName: "Daniel Nguyen"
-            ContactNumber: "+84345657328"
-            CallStatus: "Call Received"
+            ContactNumber: "+84345657312"
+            CallStatus: "call_received"
             Time: "09:20 May 30"
         }
 
         ListElement {
             ContactName: "Paul Dao"
             ContactNumber: "+84345657324"
-            CallStatus: "Call Made"
+            CallStatus: "call_made"
             Time: "20:30 Jun 20"
         }
 
         ListElement {
             ContactName: "Jonh Wick"
             ContactNumber: "+84345657323"
-            CallStatus: "Call Missed"
+            CallStatus: "call_missed"
             Time: "08:45 Jun 06"
         }
 
         ListElement {
             ContactName: "Michael Tran"
             ContactNumber: "+84345657329"
-            CallStatus: "Call Missed Outgoing"
+            CallStatus: "call_missed_outgoing"
             Time: "23:05 Mar 02"
         }
 
         ListElement {
             ContactName: "Daniel Nguyen"
             ContactNumber: "+84345657328"
-            CallStatus: "Call Received"
+            CallStatus: "call_received"
             Time: "09:20 May 30"
         }
 
         ListElement {
             ContactName: "Paul Dao"
             ContactNumber: "+84345657324"
-            CallStatus: "Call Made"
+            CallStatus: "call_made"
             Time: "20:30 Jun 20"
         }
 
         ListElement {
             ContactName: "Jonh Wick"
             ContactNumber: "+84345657323"
-            CallStatus: "Call Missed"
+            CallStatus: "call_missed"
             Time: "08:45 Jun 06"
         }
 
         ListElement {
             ContactName: "Michael Tran"
             ContactNumber: "+84345657329"
-            CallStatus: "Call Missed Outgoing"
+            CallStatus: "call_missed_outgoing"
             Time: "23:05 Mar 02"
         }
     }
@@ -69,17 +69,17 @@ Item {
 
         Item {
             width: parent.width
-            height: 147
+            height: 130
 
             Text {
                 id: contactName
                 text: ContactName
                 color: "#FFFFFF"
                 font.pixelSize: 36
-                font.family: ubuntu.name
+                font.family: cantarell.name
                 anchors {
                     top: parent.top
-                    topMargin: 30
+                    topMargin: 20
                     left: parent.left
                     leftMargin: 40
                 }
@@ -95,14 +95,7 @@ Item {
                     verticalCenter: contactNumber.verticalCenter
                 }
 
-                source: if (CallStatus === "Call Received")
-                            return srcIcon + "call_received.png"
-                        else if (CallStatus === "Call Made")
-                            return srcIcon + "call_made.png"
-                        else if (CallStatus === "Call Missed")
-                            return srcIcon + "call_missed"
-                        else if (CallStatus === "Call Missed Outgoing")
-                            return srcIcon + "call_missed_outgoing"
+                source: srcIcon + CallStatus + ".png"
             }
 
             Text {
@@ -113,7 +106,7 @@ Item {
                 font.family: ubuntu.name
                 anchors {
                     top: contactName.bottom
-                    topMargin: 16
+                    topMargin: 10
                     left: callStatusIcon.right
                     leftMargin: 20
                 }
@@ -145,7 +138,7 @@ Item {
             Rectangle {
                 id: lineBottomItem
                 width: parent.width
-                height: 2
+                height: 3
                 anchors.bottom: parent.bottom
                 gradient: Gradient {
                     orientation: Gradient.Horizontal

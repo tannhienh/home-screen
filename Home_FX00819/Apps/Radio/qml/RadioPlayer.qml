@@ -45,7 +45,7 @@ Item {
             id: radioTitle
             text: "Radio FM"
             font.pixelSize: 40
-            font.family: ubuntu.name
+            font.family: cantarell.name
             color: "#FFFFFF"
             anchors {
                 left: radioIcon.right
@@ -67,7 +67,7 @@ Item {
             text: "Xone FM"
             color: "#FFFFFF"
             font.pixelSize: 72
-            font.family: ubuntu.name
+            font.family: cantarell.name
             anchors.centerIn: parent
         }
     }
@@ -93,7 +93,7 @@ Item {
             text: "Scan FM"
             color: "#FFFFFF"
             font.pixelSize: 36
-            font.family: ubuntu.name
+            font.family: cantarell.name
             anchors {
                 left: scanIcon.right
                 leftMargin: 20
@@ -106,7 +106,7 @@ Item {
             text: "98.0" + " "
             color: "#FFFFFF"
             font.pixelSize: 72
-            font.family: ubuntu.name
+            font.family: cantarell.name
             anchors.centerIn: parent
         }
 
@@ -115,7 +115,7 @@ Item {
             text: "Mhz"
             color: "#bebebe"
             font.pixelSize: 48
-            font.family: ubuntu.name
+            font.family: cantarell.name
             anchors {
                 left: currentFrequency.right
                 bottom: currentFrequency.bottom
@@ -136,7 +136,7 @@ Item {
     }
 
     Item {
-        id: rangeChanels
+        id: rangeChanelsContainer
         width: parent.width
         height: 340
         anchors.top: frequencyItem.bottom
@@ -147,47 +147,36 @@ Item {
             anchors.horizontalCenter: parent.horizontalCenter
         }
 
-        Component {
-            id: chanelsLine
-
-            Rectangle {
-                width: 200
-                height: 4
-                color: "#FFFFFF"
-            }
-        }
-
-        Loader {
-            id: chanelsLineTop
-            sourceComponent: chanelsLine
-        }
-
-
-
-        Rectangle {
-            id: lineCurrentChanel
-            width: 4
+        Item {
+            id: rangeChanelsItem
+            width: parent.width
             anchors {
                 top: arrowCurrentChanel.bottom
                 bottom: parent.bottom
-                horizontalCenter: parent.horizontalCenter
             }
 
-            gradient: Gradient {
-                orientation: Gradient.Vertical
-                GradientStop { position: 0.0; color: "#007deef8" }
-                GradientStop { position: 0.5; color: "#7deef8" }
-                GradientStop { position: 1.0; color: "#007deef8" }
+            Rectangle {
+                id: lineCurrentChanel
+                width: 4
+                height: parent.height
+                z: 1
+                anchors.centerIn: parent
+
+                gradient: Gradient {
+                    orientation: Gradient.Vertical
+                    GradientStop { position: 0.0; color: "#007deef8" }
+                    GradientStop { position: 0.5; color: "#7deef8" }
+                    GradientStop { position: 1.0; color: "#007deef8" }
+                }
             }
         }
     }
 
     Item {
         id: controlButton
+        width: parent.width
         anchors {
-            top: rangeChanels.bottom
-            left: parent.left
-            right: parent.right
+            top: rangeChanelsContainer.bottom
             bottom: parent.bottom
         }
 

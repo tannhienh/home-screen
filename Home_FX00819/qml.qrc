@@ -38,6 +38,13 @@
         <file>Apps/Videos/qml/LoopButton.qml</file>
         <file>Apps/Videos/qml/SwitchButton.qml</file>
         <file>Apps/Settings/qml/SettingsMenu.qml</file>
-        <file>Apps/Settings/qml/SettingsDetail.qml</file>
+        <file>Apps/Settings/qml/GeneralSettings.qml</file>
+        <file>Apps/Settings/qml/DrivingMode.qml</file>
+        <file>Apps/Settings/qml/Lighting.qml</file>
+        <file>Apps/Settings/qml/DriverAssistance.qml</file>
+        <file>Apps/Settings/qml/Display.qml</file>
+        <file>Apps/Settings/qml/DoorVehicleAccess.qml</file>
+        <file>Apps/Settings/qml/KeyButtonAssignment.qml</file>
+        <file>Apps/Settings/qml/VehicleStatus.qml</file>
     </qresource>
 </RCC>

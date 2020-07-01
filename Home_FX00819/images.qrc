@@ -71,8 +71,6 @@
         <file>Images/Map/place_holder.png</file>
         <file>Images/Map/car_icon.png</file>
         <file>Images/MusicPlayer/album_art_borders.png</file>
-        <file>Apps/Map/images/arrow_1.png</file>
-        <file>Apps/Map/images/arrow_2.png</file>
         <file>Apps/Map/images/bank.png</file>
         <file>Apps/Map/images/bar.png</file>
         <file>Apps/Map/images/coffee.png</file>
@@ -199,5 +197,7 @@
         <file>Apps/Settings/images/key_button_assignment.png</file>
         <file>Apps/Settings/images/vehicle_status.png</file>
         <file>Apps/Settings/images/door_vehicle_access.png</file>
+        <file>Apps/Map/images/arrow_normal.png</file>
+        <file>Apps/Map/images/arrow_press.png</file>
     </qresource>
 </RCC>

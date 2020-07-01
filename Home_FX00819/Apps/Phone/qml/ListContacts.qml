@@ -9,7 +9,7 @@ Item {
 
         ListElement {
             ContactName: "Daniel Nguyen"
-            ContactNumber: "+84345657328"
+            ContactNumber: "+84345657312"
         }
 
         ListElement {
@@ -53,17 +53,17 @@ Item {
 
         Item {
             width: parent.width
-            height: 147
+            height: 130
 
             Text {
                 id: contactName
                 text: ContactName
                 color: "#FFFFFF"
                 font.pixelSize: 36
-                font.family: ubuntu.name
+                font.family: cantarell.name
                 anchors {
                     top: parent.top
-                    topMargin: 30
+                    topMargin: 20
                     left: parent.left
                     leftMargin: 40
                 }
@@ -78,7 +78,7 @@ Item {
                 anchors {
                     left: contactName.left
                     top: contactName.bottom
-                    topMargin: 16
+                    topMargin: 10
                 }
             }
 
@@ -95,7 +95,7 @@ Item {
             Rectangle {
                 id: lineBottomItem
                 width: parent.width
-                height: 2
+                height: 3
                 anchors.bottom: parent.bottom
                 gradient: Gradient {
                     orientation: Gradient.Horizontal

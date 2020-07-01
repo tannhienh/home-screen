@@ -38,7 +38,7 @@ FocusScope {
             top: parent.top
             left: parent.left
             right: parent.right
-            bottom: albumArtInner.top
+            bottom: albumArt.top
         }
 
         // Title of song
@@ -121,7 +121,7 @@ FocusScope {
 
     // AlbumArt View
     PathView {
-        id: albumArtInner
+        id: albumArt
         anchors.fill: parent
         preferredHighlightBegin: 0.5
         preferredHighlightEnd: 0.5
@@ -133,18 +133,18 @@ FocusScope {
         path: Path {
 
             startX: 0
-            startY: albumArtInner.height / 2
+            startY: albumArt.height / 2
             PathAttribute { name: "iconScale"; value: 0.5 }
 
             PathLine {
-                x: albumArtInner.width / 2
-                y: albumArtInner.height / 2
+                x: albumArt.width / 2
+                y: albumArt.height / 2
             }
             PathAttribute { name: "iconScale"; value: 1.0 }
 
             PathLine {
-                x: albumArtInner.width
-                y: albumArtInner.height / 2
+                x: albumArt.width
+                y: albumArt.height / 2
             }
             PathAttribute { name: "iconScale"; value: 0.5 }
         }

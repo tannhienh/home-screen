@@ -118,6 +118,16 @@ ApplicationWindow {
                 currentItem.forceActiveFocus()
             }
 
+            pushEnter: Transition {
+                PropertyAnimation {
+                    property: "x"
+                    from: 1920
+                    to: 0
+                    duration: 500
+                    easing.type: Easing.OutQuad
+                }
+            }
+
             pushExit: Transition {
                 PropertyAnimation {
                     property: "x"
@@ -128,10 +138,10 @@ ApplicationWindow {
                 }
             }
 
-            pushEnter: Transition {
+            popEnter: Transition {
                 PropertyAnimation {
                     property: "x"
-                    from: 1920
+                    from: -1920
                     to: 0
                     duration: 500
                     easing.type: Easing.OutQuad
@@ -143,16 +153,6 @@ ApplicationWindow {
                     property: "x"
                     from: 0
                     to: 1920
-                    duration: 500
-                    easing.type: Easing.OutQuad
-                }
-            }
-
-            popEnter: Transition {
-                PropertyAnimation {
-                    property: "x"
-                    from: -1920
-                    to: 0
                     duration: 500
                     easing.type: Easing.OutQuad
                 }

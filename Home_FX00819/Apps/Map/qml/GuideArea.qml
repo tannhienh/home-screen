@@ -129,7 +129,7 @@ Item {
         Column {
             id: dotColumn
             width: 5
-            spacing: 10 // height / 5
+            spacing: 10
             anchors {
                 top: startLocationIcon.bottom
                 topMargin: dotColumn.width
@@ -174,9 +174,9 @@ Item {
         Image {
             id: arrowReverse
 
-            property string src: "qrc:/Apps/Map/images/arrow"
+            property string src: "qrc:/Apps/Map/images/arrow_"
 
-            source: src + "_1.png"
+            source: src + "normal.png"
             anchors {
                 right: parent.right
                 rightMargin: 5
@@ -187,32 +187,18 @@ Item {
                 property string temp: ""
                 anchors.fill: parent
                 onPressed:{
-                    parent.source = parent.src + "_2.png"
+                    parent.source = parent.src + "press.png"
                     temp = startAddress.text
                     startAddress.text = destinationAddress.text
                     destinationAddress.text = temp
                 }
-                onReleased: parent.source = parent.src + "_1.png"
+                onReleased: parent.source = parent.src + "normal.png"
             }
         }
     }
     //------------------------------------------------------------------------//
     // End Choose place location
     //------------------------------------------------------------------------//
-
-
-//    Rectangle {
-//        id: line
-//        height: 2
-//        anchors {
-//            top: inputPlaceItem.bottom
-//            left: parent.left
-//            leftMargin: 10
-//            right: parent.right
-//            rightMargin: 10
-//        }
-//        color: "White"
-//    }
 
     // Shadown for guide area on right edge
     DropShadow {

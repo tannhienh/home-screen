@@ -33,7 +33,7 @@ MouseArea {
     Text {
         id: buttonTitle
         text: button_title === undefined ? "" : button_title
-        color: "White"
+        color: "#FFFFFF"
 
         font {
             pixelSize: 40

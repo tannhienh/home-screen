@@ -5,6 +5,12 @@ import QtQuick.VirtualKeyboard 2.13
 Item {
     id: phoneApp
 
+    // Font Cantarell
+    FontLoader {
+        id: cantarell
+        source: "qrc:/Fonts/Cantarell-Regular.ttf"
+    }
+
     // Font Ubuntu
     FontLoader {
         id: ubuntu

@@ -37,8 +37,9 @@ Item {
 
     Text {
         text: itemRoot.title
-        color: "#FFF"
+        color: "#FFFFFF"
         font.pixelSize: 24
+        font.family: cantarell.name
         anchors {
             top: rectItem.bottom
             horizontalCenter: rectItem.horizontalCenter

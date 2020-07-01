@@ -12,6 +12,13 @@ import "Common"
 FocusScope {
     id: statusBarItem
 
+    function showButton(target) {
+        showButtonOpacity.target = target
+        showButtonX.target = target
+        showButtonOpacity.restart()
+        showButtonX.restart()
+    }
+
     // This property holds whether the Back button is visible or not
     property bool isShowBackButton: false
 
@@ -34,7 +41,7 @@ FocusScope {
     Rectangle {
         id: statusBarBg
         anchors.fill: parent
-        color: "#000000" // Black color
+        color: "#000000"
         opacity: 0.3
 
         // Hide virtual keyboard
@@ -50,11 +57,7 @@ FocusScope {
         icon_src: "qrc:/Images/StatusBar/btn_edit"
         visible: isShowEditButton
         focus: visible ? statusBar.focus : false
-        anchors {
-            left: parent.left
-            leftMargin: 20
-            verticalCenter: parent.verticalCenter
-        }
+        anchors.verticalCenter: parent.verticalCenter
 
         // Change state to Pressed when Edit button is pressed
         onPressed: state = "Pressed"
@@ -85,6 +88,10 @@ FocusScope {
                 editButton.state = "Normal"
         }
 
+        // Run animation for button when visible button is true
+        onVisibleChanged: if (this.visible)
+                              showButton(this)
+
         /**
          * When Enter key was pressed:
          * - Change state to "Pressed" if are Map or Music widget
@@ -107,11 +114,7 @@ FocusScope {
         icon_src: "qrc:/Images/StatusBar/btn_done"
         visible: false
         focus: visible ? statusBar.focus : false
-        anchors {
-            left: parent.left
-            leftMargin: 20
-            verticalCenter: parent.verticalCenter
-        }
+        anchors.verticalCenter: parent.verticalCenter
 
         onPressed: state = "Pressed"
 
@@ -133,8 +136,6 @@ FocusScope {
             doneButton.visible = false
         }
 
-
-
         // When focus changed
         // If which button not focusing, change state to Normal
         onFocusChanged: {
@@ -143,6 +144,10 @@ FocusScope {
             else
                 doneButton.state = "Normal"
         }
+
+        // Run animation for button when visible button is true
+        onVisibleChanged: if (this.visible)
+                              showButton(this)
 
         /**
          * When Enter key was pressed:
@@ -165,11 +170,7 @@ FocusScope {
         icon_src: "qrc:/Images/StatusBar/btn_back"
         visible: isShowBackButton
         focus: visible ? statusBar.focus : false
-        anchors {
-            left: parent.left
-            leftMargin: 20
-            verticalCenter: parent.verticalCenter
-        }
+        anchors.verticalCenter: parent.verticalCenter
 
         onPressed: state = "Pressed"
 
@@ -199,6 +200,10 @@ FocusScope {
                 backButton.state = "Normal"
         }
 
+        // Run animation for button when visible button is true
+        onVisibleChanged: if (this.visible)
+                              showButton(this)
+
         Connections {
             target: statusBar
             onFocusChanged: {
@@ -208,6 +213,24 @@ FocusScope {
                     backButton.focus = false
             }
         }
+    }
+
+    PropertyAnimation {
+        id: showButtonX
+        property: "x"
+        from: 40
+        to: 20
+        duration: 400
+        easing.type: Easing.OutQuad
+    }
+
+    PropertyAnimation {
+        id: showButtonOpacity
+        property: "opacity"
+        from: 0
+        to: 1
+        duration: 400
+        easing.type: Easing.OutQuad
     }
 
     // Time and Date area
@@ -252,7 +275,7 @@ FocusScope {
             // Hour text
             Text {
                 id: hour
-                color: "#FFFFFF"    // White
+                color: "#FFFFFF"
                 font.pixelSize: 60
                 font.family: helvetica.name
                 anchors.right: colon.left
@@ -263,7 +286,7 @@ FocusScope {
             Text {
                 id: colon
                 text: ":"
-                color: "#FFFFFF"    // White
+                color: "#FFFFFF"
                 font.pixelSize: 60
                 font.family: helvetica.name
                 anchors.centerIn: parent
@@ -282,7 +305,7 @@ FocusScope {
             // Minute text
             Text {
                 id: minute
-                color: "#FFFFFF"    // White
+                color: "#FFFFFF"
                 font.pixelSize: 60
                 font.family: helvetica.name
                 anchors.left: colon.right
@@ -306,7 +329,7 @@ FocusScope {
             // Date text
             Text {
                 id: date
-                color: "#FFFFFF"    // White
+                color: "#FFFFFF"
                 font.pixelSize: 60
                 font.family: helvetica.name
                 anchors.centerIn: parent

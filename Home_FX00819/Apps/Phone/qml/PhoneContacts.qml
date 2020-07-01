@@ -69,6 +69,7 @@ Drawer {
                         text: "Recents"
                         color: "#FFFFFF"
                         font.pixelSize: 48
+                        font.family: cantarell.name
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment: Text.AlignVCenter
                         anchors {
@@ -115,6 +116,7 @@ Drawer {
                         text: "Contacts"
                         color: "#FFFFFF"
                         font.pixelSize: 48
+                        font.family: cantarell.name
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment: Text.AlignVCenter
                         anchors {
@@ -149,7 +151,7 @@ Drawer {
         Item {
             id: searchItem
             width: parent.width
-            height: 90
+            height: 95
             anchors.top: lineBottomTab.bottom
 
             // Search icon
@@ -181,7 +183,7 @@ Drawer {
                 color: "#FFFFFF"
                 placeholderText: qsTr("Search...")
                 font.pixelSize: 36
-                font.family: ubuntu.name
+                font.family: cantarell.name
                 selectByMouse: true
                 selectedTextColor: color
                 selectionColor: "#503498DB"
@@ -201,7 +203,7 @@ Drawer {
             Rectangle {
                 id: lineBottomSearch
                 width: parent.width
-                height: 2
+                height: 3
                 anchors.bottom: parent.bottom
                 gradient: Gradient {
                     orientation: Gradient.Horizontal
@@ -229,6 +231,8 @@ Drawer {
             ListContacts {
                 id: listContacts
             }
+
+            Component.onCompleted: console.log("Height: " + height)
         }
 
         // Drop shadow for horizontal line bottom Tab Buttons

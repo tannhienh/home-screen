@@ -62,9 +62,9 @@ Drawer {
             // Settings menu title
             Text {
                 text: qsTr("Settings")
-                font.pixelSize: 48
-                font.family: ubuntu.name
                 color: "#FFFFFF"
+                font.pixelSize: 48
+                font.family: cantarell.name
                 anchors {
                     left: settingsTitleIcon.right
                     verticalCenter: parent.verticalCenter
@@ -97,41 +97,49 @@ Drawer {
             ListElement {
                 SettingTitle: "General settings"
                 SettingIcon: "general_settings.png"
+                SettingDetailUrl: "GeneralSettings.qml"
             }
 
             ListElement {
                 SettingTitle: "Driving mode"
                 SettingIcon: "driving_mode.png"
+                SettingDetailUrl: "DrivingMode.qml"
             }
 
             ListElement {
                 SettingTitle: "Lighting"
                 SettingIcon: "lighting.png"
+                SettingDetailUrl: "Lighting.qml"
             }
 
             ListElement {
                 SettingTitle: "Driver assistance"
                 SettingIcon: "driver_assistance.png"
+                SettingDetailUrl: "DriverAssistance.qml"
             }
 
             ListElement {
                 SettingTitle: "Display"
                 SettingIcon: "display.png"
+                SettingDetailUrl: "Display.qml"
             }
 
             ListElement {
                 SettingTitle: "Door/Vehicle access"
                 SettingIcon: "door_vehicle_access.png"
+                SettingDetailUrl: "DoorVehicleAccess.qml"
             }
 
             ListElement {
                 SettingTitle: "Key button assignment"
                 SettingIcon: "key_button_assignment.png"
+                SettingDetailUrl: "KeyButtonAssignment.qml"
             }
 
             ListElement {
                 SettingTitle: "Vehicle status"
                 SettingIcon: "vehicle_status.png"
+                SettingDetailUrl: "VehicleStatus.qml"
             }
         }
 
@@ -142,7 +150,7 @@ Drawer {
                 id: mouseAreaItem
 
                 width: parent.width
-                height: 112
+                height: 109
 
 
                 // Icon for each setting category
@@ -160,9 +168,9 @@ Drawer {
                 Text {
                     id: settingCategoryTitle
                     text: SettingTitle
-                    color: "#FFFFFF"
-                    font.pixelSize: 40
-                    font.family: ubuntu.name
+                    color: listViewSettingsMenu.currentIndex == index ? "#7deef8" : "#FFFFFF"
+                    font.pixelSize: 42
+                    font.family: cantarell.name
                     anchors {
                         left: settingCategoryIcon.right
                         verticalCenter: parent.verticalCenter
@@ -183,6 +191,7 @@ Drawer {
                         GradientStop {
                             position: 0.5;
                             color: "#a4a4a4"
+//                            color: listViewSettingsMenu.currentIndex == (index + 1) ? "#00a4a4a4" : "#a4a4a4"
                         }
                         GradientStop {
                             position: 1.0;
@@ -196,6 +205,8 @@ Drawer {
                 onClicked: {
                     if (listViewSettingsMenu.currentIndex != index) {
                         listViewSettingsMenu.currentIndex = index
+                        settingDetailStackView.pop()
+                        settingDetailStackView.push(SettingDetailUrl)
                     }
                 }
             }
@@ -205,7 +216,7 @@ Drawer {
             id: highlightItem
 
             Item {
-                z: 1000
+                z: 99
                 height: parent.height
                 anchors {
                     left: parent.left
@@ -219,9 +230,9 @@ Drawer {
                     anchors.top: parent.top
                     gradient: Gradient {
                         orientation: Gradient.Horizontal
-                        GradientStop { position: 0.0; color: "#007deef8" }
+                        GradientStop { position: 0.0; color: "#7deef8" }
                         GradientStop { position: 0.5; color: "#7deef8" }
-                        GradientStop { position: 1.0; color: "#007deef8" }
+                        GradientStop { position: 1.0; color: "#7deef8" }
                     }
                 }
 
@@ -245,9 +256,9 @@ Drawer {
                     anchors.bottom: parent.bottom
                     gradient: Gradient {
                         orientation: Gradient.Horizontal
-                        GradientStop { position: 0.0; color: "#007deef8" }
+                        GradientStop { position: 0.0; color: "#707deef8" }
                         GradientStop { position: 0.5; color: "#7deef8" }
-                        GradientStop { position: 1.0; color: "#007deef8" }
+                        GradientStop { position: 1.0; color: "#707deef8" }
                     }
                 }
             }
@@ -265,9 +276,9 @@ Drawer {
             delegate: settingsMenuDelegate
             clip: true
             snapMode: ListView.SnapToItem
-//            highlightMoveDuration: 900
-            highlightMoveVelocity: 1000
             highlight: highlightItem
+            highlightMoveDuration: 300
+
             // Scrollbar for list view settings menu
             ScrollBar.vertical: ScrollBar {
                 parent: listViewSettingsMenu.parent

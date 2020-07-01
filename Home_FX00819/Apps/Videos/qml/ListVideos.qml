@@ -85,7 +85,7 @@ Drawer {
         Item {
             id: searchItem
             width: parent.width
-            height: 90
+            height: 95
             anchors.top: lineBottomMyVideos.bottom
 
             // Search icon
@@ -137,7 +137,7 @@ Drawer {
             Rectangle {
                 id: lineBottomSearch
                 width: parent.width
-                height: 2
+                height: 3
                 anchors.bottom: parent.bottom
                 gradient: Gradient {
                     orientation: Gradient.Horizontal
@@ -199,7 +199,7 @@ Drawer {
 
             Item {
                 width: parent.width
-                height: 147
+                height: 130
 
                 // Video thumbnail
                 Item {
@@ -261,7 +261,7 @@ Drawer {
                 Rectangle {
                     id: lineBottomItem
                     width: parent.width
-                    height: 2
+                    height: 3
                     anchors.bottom: parent.bottom
                     gradient: Gradient {
                         orientation: Gradient.Horizontal

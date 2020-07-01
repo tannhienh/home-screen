@@ -1,8 +1,6 @@
 import QtQuick 2.13
 import QtQuick.Controls 2.13
 import QtQuick.VirtualKeyboard 2.13
-//import QtQuick.VirtualKeyboard.Styles 2.13
-//import QtQuick.VirtualKeyboard.Settings 2.13
 
 Item {
 
@@ -42,7 +40,7 @@ Item {
 
         anchors {
             top: parent.top
-            topMargin: 60 // parent.height / 10
+            topMargin: 60
             horizontalCenter: parent.horizontalCenter
         }
         validator: RegExpValidator { regExp: /^[0-9\+\-\#\*\ ]{6,}$/ }

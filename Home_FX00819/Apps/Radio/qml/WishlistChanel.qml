@@ -63,7 +63,7 @@ Drawer {
             Text {
                 text: qsTr("Wishlist chanels")
                 font.pixelSize: 48
-                font.family: ubuntu.name
+                font.family: cantarell.name
                 color: "#FFFFFF"
                 anchors {
                     left: wishlistIcon.right
@@ -110,14 +110,14 @@ Drawer {
 
             Item {
                 width: parent.width
-                height: 147
+                height: 130
 
                 Text {
                     id: chanelName
                     text: ChanelName
                     color: "#FFFFFF"
                     font.pixelSize: 48
-                    font.family: ubuntu.name
+                    font.family: cantarell.name
                     anchors {
                         left: parent.left
                         leftMargin: 20
@@ -130,7 +130,7 @@ Drawer {
                     text: Frequency
                     color: "#bebebe"
                     font.pixelSize: 45
-                    font.family: ubuntu.name
+                    font.family: cantarell.name
                     anchors {
                         left: parent.left
                         leftMargin: parent.width * 0.6
@@ -143,7 +143,7 @@ Drawer {
                     text: " Mhz"
                     color: "#bebebe"
                     font.pixelSize: 30
-                    font.family: ubuntu.name
+                    font.family: cantarell.name
                     anchors {
                         left: frequency.right
                         bottom: frequency.bottom
